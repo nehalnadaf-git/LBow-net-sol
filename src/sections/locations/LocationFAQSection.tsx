@@ -26,15 +26,15 @@ const LocationFAQSection = ({ faqs, locationName }: LocationFAQSectionProps) => 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         sectionRef.current,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.42,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 80%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         }

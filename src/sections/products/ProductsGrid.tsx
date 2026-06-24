@@ -20,17 +20,17 @@ const ProductsGrid = () => {
 
     gsap.fromTo(
       cards,
-      { opacity: 0, y: 50, scale: 0.95 },
+      { opacity: 0, y: 28, scale: 0.97 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.42,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

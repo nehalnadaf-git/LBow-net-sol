@@ -24,16 +24,16 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.product-content-block',
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.42,
+          stagger: 0.06,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: contentRef.current,
-            start: 'top 80%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         }

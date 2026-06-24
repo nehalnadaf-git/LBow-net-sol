@@ -19,11 +19,11 @@ const MapSection = () => {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 1,
+        duration: 0.38,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

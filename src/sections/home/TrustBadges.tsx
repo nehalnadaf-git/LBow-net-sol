@@ -33,27 +33,27 @@ const TrustBadges = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 78%',
+        start: 'top 88%',
         toggleActions: 'play none none none',
       },
     });
 
     // Divider line swipes in first
     if (line) {
-      tl.to(line, { scaleX: 1, duration: 0.6, ease: 'power3.out' }, 0);
+      tl.to(line, { scaleX: 1, duration: 0.38, ease: 'power3.out' }, 0);
     }
 
     // Cards stagger up
     tl.to(cards, {
       opacity: 1,
       y: 0,
-      duration: 0.85,
+      duration: 0.42,
       stagger: {
-        amount: 0.55,
+        amount: 0.25,
         ease: 'power2.inOut',
       },
       ease: 'power3.out',
-    }, 0.1);
+    }, 0.06);
 
     // Parallax ambient float on icons
     section.querySelectorAll('.badge-icon').forEach((icon) => {

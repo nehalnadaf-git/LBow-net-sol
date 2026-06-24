@@ -34,7 +34,7 @@ const CTABanner = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 75%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       });
@@ -43,50 +43,50 @@ const CTABanner = () => {
       if (glowOrb) {
         tl.to(glowOrb, {
           scale: 1, opacity: 1,
-          duration: 1.2, ease: 'power2.out',
+          duration: 0.52, ease: 'power2.out',
         }, 0);
       }
 
       tl.to(eyebrow, {
         opacity: 1, y: 0,
-        duration: 0.55, ease: 'power3.out',
-      }, 0.1)
+        duration: 0.38, ease: 'power3.out',
+      }, 0.05)
       .to(heading, {
         opacity: 1, y: 0,
         clipPath: 'inset(0 0 0% 0)',
-        duration: 1.0, ease: 'power4.out',
-      }, 0.22)
+        duration: 0.52, ease: 'power4.out',
+      }, 0.12)
       .to(subtext, {
         opacity: 1, y: 0,
-        duration: 0.65, ease: 'power3.out',
-      }, 0.5)
+        duration: 0.38, ease: 'power3.out',
+      }, 0.28)
       .to(buttons, {
         opacity: 1, y: 0,
-        duration: 0.6, ease: 'back.out(1.2)',
-      }, 0.68);
+        duration: 0.38, ease: 'back.out(1.6)',
+      }, 0.38);
 
       // Heading subtle parallax drift
       gsap.to(heading, {
-        y: -20,
+        y: -14,
         ease: 'none',
         scrollTrigger: {
           trigger: section,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1.5,
+          scrub: 0.45,
         },
       });
 
       // Glow orb parallax
       if (glowOrb) {
         gsap.to(glowOrb, {
-          y: -40,
+          y: -28,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 2,
+            scrub: 0.45,
           },
         });
       }

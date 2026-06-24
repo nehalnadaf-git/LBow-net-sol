@@ -26,15 +26,15 @@ const OurStory = () => {
 
     gsap.fromTo(
       leftImage,
-      { opacity: 0, x: -40 },
+      { opacity: 0, x: -20 },
       {
         opacity: 1,
         x: 0,
-        duration: 1,
+        duration: 0.52,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }
@@ -42,16 +42,16 @@ const OurStory = () => {
 
     gsap.fromTo(
       rightElements,
-      { opacity: 0, x: 40 },
+      { opacity: 0, x: 20 },
       {
         opacity: 1,
         x: 0,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.42,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

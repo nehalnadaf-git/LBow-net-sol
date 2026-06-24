@@ -28,16 +28,16 @@ const BusinessDetails = () => {
 
     gsap.fromTo(
       cards,
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 28 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        stagger: 0.1,
+        duration: 0.42,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 75%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

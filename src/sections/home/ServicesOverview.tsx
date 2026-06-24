@@ -35,30 +35,30 @@ const ServicesOverview = () => {
 
       // Header entrance
       if (header) {
-        gsap.set(header, { opacity: 0, y: 40, clipPath: 'inset(0 0 60% 0)' });
+        gsap.set(header, { opacity: 0, y: 28, clipPath: 'inset(0 0 60% 0)' });
         gsap.to(header, {
           opacity: 1, y: 0,
           clipPath: 'inset(0 0 0% 0)',
-          duration: 0.9, ease: 'power4.out',
-          scrollTrigger: { trigger: header, start: 'top 82%', toggleActions: 'play none none none' },
+          duration: 0.52, ease: 'power4.out',
+          scrollTrigger: { trigger: header, start: 'top 88%', toggleActions: 'play none none none' },
         });
       }
 
       // Cards stagger reveal
       gsap.set(cards, {
         opacity: 0,
-        y: 60,
+        y: 30,
         scale: 0.97,
       });
 
       gsap.to(cards, {
         opacity: 1, y: 0, scale: 1,
-        duration: 0.9,
-        stagger: { amount: 0.7, from: 'start', ease: 'power2.inOut' },
+        duration: 0.52,
+        stagger: { amount: 0.30, from: 'start', ease: 'power2.inOut' },
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section.querySelector('.services-grid'),
-          start: 'top 80%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       });
@@ -68,13 +68,13 @@ const ServicesOverview = () => {
         const img = card.querySelector('.card-visual-inner');
         if (!img) return;
         gsap.to(img, {
-          yPercent: -12,
+          yPercent: -8,
           ease: 'none',
           scrollTrigger: {
             trigger: card,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1.4,
+            scrub: 0.45,
           },
         });
       });

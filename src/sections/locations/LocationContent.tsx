@@ -31,16 +31,16 @@ const LocationContent = ({ location }: LocationContentProps) => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.loc-animate',
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.12,
+          duration: 0.42,
+          stagger: 0.06,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: contentRef.current,
-            start: 'top 80%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         }

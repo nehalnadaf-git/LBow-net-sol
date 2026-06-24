@@ -34,15 +34,15 @@ const ServiceArea = () => {
 
     gsap.fromTo(
       mapEl,
-      { opacity: 0, scale: 0.95 },
+      { opacity: 0, scale: 0.97 },
       {
         opacity: 1,
         scale: 1,
-        duration: 0.8,
+        duration: 0.42,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }
@@ -50,17 +50,17 @@ const ServiceArea = () => {
 
     gsap.fromTo(
       pills,
-      { opacity: 0, scale: 0.9 },
+      { opacity: 0, scale: 0.93 },
       {
         opacity: 1,
         scale: 1,
-        duration: 0.5,
-        stagger: 0.05,
-        delay: 0.3,
+        duration: 0.35,
+        stagger: 0.04,
+        delay: 0.12,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

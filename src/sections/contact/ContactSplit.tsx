@@ -94,16 +94,16 @@ const ContactSplit = () => {
 
     gsap.fromTo(
       leftItems,
-      { opacity: 0, x: -30 },
+      { opacity: 0, x: -18 },
       {
         opacity: 1,
         x: 0,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.42,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }
@@ -111,16 +111,16 @@ const ContactSplit = () => {
 
     gsap.fromTo(
       rightForm,
-      { opacity: 0, x: 30 },
+      { opacity: 0, x: 18 },
       {
         opacity: 1,
         x: 0,
-        duration: 0.9,
-        delay: 0.2,
+        duration: 0.52,
+        delay: 0.08,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

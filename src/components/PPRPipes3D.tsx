@@ -346,7 +346,7 @@ const PPRPipes3D = () => {
         trigger: document.body,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.2, // Smooth scrubbing to avoid lag/jerks on mobile and web
+        scrub: 0.45,
         invalidateOnRefresh: true,
       }
     });

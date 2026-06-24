@@ -25,16 +25,16 @@ const ProductBanner = () => {
 
     gsap.fromTo(
       elements,
-      { opacity: 0, y: 20 },
+      { opacity: 0, y: 18 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        stagger: 0.15,
+        duration: 0.38,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

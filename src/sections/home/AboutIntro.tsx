@@ -41,61 +41,61 @@ const AboutIntro = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 68%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       });
 
       if (decorator) {
-        tl.to(decorator, { scaleY: 1, duration: 0.7, ease: 'power3.out' }, 0);
+        tl.to(decorator, { scaleY: 1, duration: 0.38, ease: 'power3.out' }, 0);
       }
 
       tl.to(label, {
         opacity: 1, x: 0, y: 0,
-        duration: 0.55, ease: 'power3.out',
-      }, 0.1)
+        duration: 0.38, ease: 'power3.out',
+      }, 0.05)
       .to(heading, {
         opacity: 1, y: 0,
         clipPath: 'inset(0 0 0% 0)',
-        duration: 0.9, ease: 'power4.out',
-      }, 0.2)
+        duration: 0.52, ease: 'power4.out',
+      }, 0.12)
       .to(para1, {
         opacity: 1, y: 0, filter: 'blur(0px)',
-        duration: 0.7, ease: 'power3.out',
-      }, 0.45)
+        duration: 0.42, ease: 'power3.out',
+      }, 0.25)
       .to(para2, {
         opacity: 1, y: 0, filter: 'blur(0px)',
-        duration: 0.7, ease: 'power3.out',
-      }, 0.58)
+        duration: 0.42, ease: 'power3.out',
+      }, 0.33)
       .to(stats, {
         opacity: 1, y: 0, scale: 1,
-        duration: 0.65,
-        stagger: 0.1,
-        ease: 'back.out(1.4)',
-      }, 0.65)
+        duration: 0.42,
+        stagger: 0.06,
+        ease: 'back.out(1.6)',
+      }, 0.38)
       .to(cta, {
         opacity: 1, y: 0, x: 0,
-        duration: 0.55, ease: 'power3.out',
-      }, 0.85)
+        duration: 0.38, ease: 'power3.out',
+      }, 0.52)
 
       // Image slide-in
       .to(imageWrap, {
         opacity: 1, x: 0,
-        duration: 1.1, ease: 'power3.out',
-      }, 0.15);
+        duration: 0.65, ease: 'power3.out',
+      }, 0.08);
 
       // ── Continuous scroll-linked parallax on image ──────────────────
       if (imageEl) {
         gsap.fromTo(imageEl,
-          { yPercent: 6 },
+          { yPercent: 4 },
           {
-            yPercent: -6,
+            yPercent: -4,
             ease: 'none',
             scrollTrigger: {
               trigger: section,
               start: 'top bottom',
               end: 'bottom top',
-              scrub: 1.2,
+              scrub: 0.45,
             },
           }
         );
@@ -104,13 +104,13 @@ const AboutIntro = () => {
       // ── Label parallax (drifts upward slightly faster) ───────────────
       if (label) {
         gsap.to(label, {
-          y: -15,
+          y: -10,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1.5,
+            scrub: 0.45,
           },
         });
       }

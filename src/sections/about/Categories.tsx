@@ -33,16 +33,16 @@ const Categories = () => {
 
     gsap.fromTo(
       pills,
-      { opacity: 0, scale: 0.9 },
+      { opacity: 0, scale: 0.93 },
       {
         opacity: 1,
         scale: 1,
-        duration: 0.5,
-        stagger: 0.05,
+        duration: 0.35,
+        stagger: 0.03,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 75%',
+          start: 'top 88%',
           toggleActions: 'play none none none',
         },
       }

@@ -92,15 +92,15 @@ const ServicesDetail = () => {
 
       gsap.fromTo(
         image,
-        { opacity: 0, x: isLeft ? -40 : 40 },
+        { opacity: 0, x: isLeft ? -20 : 20 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.9,
+          duration: 0.52,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: row,
-            start: 'top 75%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         }
@@ -108,15 +108,15 @@ const ServicesDetail = () => {
 
       gsap.fromTo(
         text,
-        { opacity: 0, x: isLeft ? 30 : -30 },
+        { opacity: 0, x: isLeft ? 18 : -18 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.9,
+          duration: 0.52,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: row,
-            start: 'top 75%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         }
