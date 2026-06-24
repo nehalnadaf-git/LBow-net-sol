@@ -1,99 +1,88 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { PipeFlowBg } from '../../components/backgrounds/PipeFlowBg';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS, PARALLAX_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CTABanner = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useScrollReveal(sectionRef, () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const ctx = gsap.context(() => {
-      const eyebrow  = section.querySelector('.cta-eyebrow');
-      const heading  = section.querySelector('.cta-heading');
-      const subtext  = section.querySelector('.cta-subtext');
-      const buttons  = section.querySelector('.cta-buttons');
-      const glowOrb  = section.querySelector('.cta-glow');
+    const eyebrow  = section.querySelector('.cta-eyebrow');
+    const heading  = section.querySelector('.cta-heading');
+    const subtext  = section.querySelector('.cta-subtext');
+    const buttons  = section.querySelector('.cta-buttons');
+    const glowOrb  = section.querySelector('.cta-glow');
 
-      // Initial hidden states
-      gsap.set([eyebrow, subtext, buttons], { opacity: 0, y: 24 });
-      gsap.set(heading, {
-        opacity: 0, y: 50,
-        clipPath: 'inset(0 0 100% 0)',
-      });
-      if (glowOrb) gsap.set(glowOrb, { scale: 0.4, opacity: 0 });
+    // ── Initial hidden states ─────────────────────────────────────────────
+    // Removed clipPath from heading — slow on Safari mobile, unnecessary here
+    gsap.set([eyebrow, subtext, buttons], { opacity: 0, y: 18 });
+    gsap.set(heading, { opacity: 0, y: 24 });
+    if (glowOrb) gsap.set(glowOrb, { scale: 0.5, opacity: 0 });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-      });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        ...REVEAL_TRIGGER_DEFAULTS,  // start: 'top 85%'
+      },
+    });
 
-      // Glow orb blooms first
-      if (glowOrb) {
-        tl.to(glowOrb, {
-          scale: 1, opacity: 1,
-          duration: 0.52, ease: 'power2.out',
-        }, 0);
-      }
+    // Glow orb blooms first — sets the stage
+    if (glowOrb) {
+      tl.to(glowOrb, {
+        scale: 1, opacity: 1,
+        duration: 0.45, ease: 'power2.out',
+      }, 0);
+    }
 
-      tl.to(eyebrow, {
-        opacity: 1, y: 0,
-        duration: 0.38, ease: 'power3.out',
-      }, 0.05)
-      .to(heading, {
-        opacity: 1, y: 0,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 0.52, ease: 'power4.out',
-      }, 0.12)
-      .to(subtext, {
-        opacity: 1, y: 0,
-        duration: 0.38, ease: 'power3.out',
-      }, 0.28)
-      .to(buttons, {
-        opacity: 1, y: 0,
-        duration: 0.38, ease: 'back.out(1.6)',
-      }, 0.38);
+    tl.to(eyebrow, {
+      opacity: 1, y: 0,
+      duration: 0.34, ease: 'power3.out',
+    }, 0.04)
+    .to(heading, {
+      opacity: 1, y: 0,
+      duration: 0.42, ease: 'power4.out',
+    }, 0.12)
+    .to(subtext, {
+      opacity: 1, y: 0,
+      duration: 0.34, ease: 'power3.out',
+    }, 0.24)
+    .to(buttons, {
+      opacity: 1, y: 0,
+      duration: 0.34, ease: 'back.out(1.4)',
+    }, 0.33);
 
-      // Heading subtle parallax drift
-      gsap.to(heading, {
-        y: -14,
+    // ── Heading parallax — scrub: true = direct 1:1 mapping, zero lag ────
+    gsap.to(heading, {
+      y: -12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        ...PARALLAX_TRIGGER_DEFAULTS,
+      },
+    });
+
+    // ── Glow orb parallax ────────────────────────────────────────────────
+    if (glowOrb) {
+      gsap.to(glowOrb, {
+        y: -22,
         ease: 'none',
         scrollTrigger: {
           trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.45,
+          ...PARALLAX_TRIGGER_DEFAULTS,
         },
       });
-
-      // Glow orb parallax
-      if (glowOrb) {
-        gsap.to(glowOrb, {
-          y: -28,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.45,
-          },
-        });
-      }
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    }
+  });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
@@ -127,6 +116,7 @@ const CTABanner = () => {
             className="inline-flex items-center justify-center bg-transparent border-2 border-[#0A0A0B] text-[#0A0A0B] hover:bg-[#0A0A0B] hover:text-[#EEEEEE] font-body font-semibold rounded-md px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base"
           >
             Send Enquiry
+            <ArrowRight size={14} className="ml-2" />
           </Link>
         </div>
       </div>

@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PipeTopologyBg } from '../../components/backgrounds/PipeTopologyBg';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,56 +80,68 @@ const services = [
 const ServicesDetail = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useScrollReveal(sectionRef, () => {
     const section = sectionRef.current;
     if (!section) return;
 
     const rows = section.querySelectorAll('.service-row');
 
     rows.forEach((row) => {
-      const image = row.querySelector('.service-image');
-      const text = row.querySelector('.service-text');
-      const isLeft = row.getAttribute('data-image-left') === 'true';
+      const image    = row.querySelector('.service-image');
+      const text     = row.querySelector('.service-text');
+      const features = row.querySelectorAll('.service-feature');
 
+      // ── Image reveal — pure y+opacity (no x-shift on mobile = no jank) ──
       gsap.fromTo(
         image,
-        { opacity: 0, x: isLeft ? -20 : 20 },
+        { opacity: 0, y: 24 },
         {
-          opacity: 1,
-          x: 0,
-          duration: 0.52,
+          opacity: 1, y: 0,
+          duration: 0.45,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: row,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
+            ...REVEAL_TRIGGER_DEFAULTS,  // start: 'top 85%'
           },
         }
       );
 
+      // ── Text reveal — slightly delayed from image ─────────────────────
       gsap.fromTo(
         text,
-        { opacity: 0, x: isLeft ? 18 : -18 },
+        { opacity: 0, y: 20 },
         {
-          opacity: 1,
-          x: 0,
-          duration: 0.52,
+          opacity: 1, y: 0,
+          duration: 0.42,
           ease: 'power3.out',
+          delay: 0.06,
           scrollTrigger: {
             trigger: row,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
+            ...REVEAL_TRIGGER_DEFAULTS,
           },
         }
       );
-    });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger && section.contains(t.trigger as Element)) t.kill();
-      });
-    };
-  }, []);
+      // ── Feature bullets stagger in ────────────────────────────────────
+      if (features.length) {
+        gsap.fromTo(
+          features,
+          { opacity: 0, x: -12 },
+          {
+            opacity: 1, x: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: row,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    });
+  });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
@@ -166,7 +179,7 @@ const ServicesDetail = () => {
                 {service.features.map((feature, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2 font-body text-sm text-[#434343]"
+                    className="service-feature flex items-start gap-2 font-body text-sm text-[#434343]"
                   >
                     <span className="text-[#2E7D32] font-bold mt-0.5">&#x2713;</span>
                     {feature}

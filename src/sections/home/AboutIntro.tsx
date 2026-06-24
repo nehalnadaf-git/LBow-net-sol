@@ -1,125 +1,118 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { PipeTopologyBg } from '../../components/backgrounds/PipeTopologyBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS, PARALLAX_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutIntro = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useScrollReveal(sectionRef, () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const ctx = gsap.context(() => {
-      const label     = section.querySelector('.about-label');
-      const heading   = section.querySelector('.about-heading');
-      const para1     = section.querySelector('.about-para-1');
-      const para2     = section.querySelector('.about-para-2');
-      const stats     = section.querySelectorAll('.about-stat');
-      const cta       = section.querySelector('.about-cta');
-      const imageWrap = section.querySelector('.about-image-wrap');
-      const imageEl   = section.querySelector('.about-image');
-      const decorator = section.querySelector('.about-decorator');
+    const label     = section.querySelector('.about-label');
+    const heading   = section.querySelector('.about-heading');
+    const para1     = section.querySelector('.about-para-1');
+    const para2     = section.querySelector('.about-para-2');
+    const stats     = section.querySelectorAll('.about-stat');
+    const cta       = section.querySelector('.about-cta');
+    const imageWrap = section.querySelector('.about-image-wrap');
+    const imageEl   = section.querySelector('.about-image');
+    const decorator = section.querySelector('.about-decorator');
 
-      // ── Initial hidden states ───────────────────────────────────────
-      gsap.set([label, heading, para1, para2, cta], { opacity: 0 });
-      gsap.set(label,   { x: -20, y: 6 });
-      gsap.set(heading, { y: 40, clipPath: 'inset(0 0 100% 0)' });
-      gsap.set([para1, para2], { y: 28, filter: 'blur(4px)' });
-      gsap.set(cta,     { y: 16, x: -10 });
-      gsap.set(stats,   { opacity: 0, y: 30, scale: 0.92 });
-      gsap.set(imageWrap, { opacity: 0, x: 50 });
-      if (decorator) gsap.set(decorator, { scaleY: 0, transformOrigin: 'top center' });
+    // ── Initial hidden states ─────────────────────────────────────────────
+    // No blur() — GPU-expensive on mobile, causes jank.
+    // Tighter y offsets (16–24px vs 28–50px) = faster, snappier reveal.
+    gsap.set([label, heading, para1, para2, cta], { opacity: 0 });
+    gsap.set(label,           { x: -16, y: 4 });
+    gsap.set(heading,         { y: 24 });
+    gsap.set([para1, para2],  { y: 18 });
+    gsap.set(cta,             { y: 14, x: -8 });
+    gsap.set(stats,           { opacity: 0, y: 22, scale: 0.94 });
+    gsap.set(imageWrap,       { opacity: 0, x: 36 });
+    if (decorator) gsap.set(decorator, { scaleY: 0, transformOrigin: 'top center' });
 
-      // ── Main entrance timeline ───────────────────────────────────────
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-      });
+    // ── Main entrance timeline ────────────────────────────────────────────
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        ...REVEAL_TRIGGER_DEFAULTS,  // start: 'top 85%'
+      },
+    });
 
-      if (decorator) {
-        tl.to(decorator, { scaleY: 1, duration: 0.38, ease: 'power3.out' }, 0);
-      }
+    if (decorator) {
+      tl.to(decorator, { scaleY: 1, duration: 0.32, ease: 'power3.out' }, 0);
+    }
 
-      tl.to(label, {
-        opacity: 1, x: 0, y: 0,
-        duration: 0.38, ease: 'power3.out',
-      }, 0.05)
-      .to(heading, {
-        opacity: 1, y: 0,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 0.52, ease: 'power4.out',
-      }, 0.12)
-      .to(para1, {
-        opacity: 1, y: 0, filter: 'blur(0px)',
-        duration: 0.42, ease: 'power3.out',
-      }, 0.25)
-      .to(para2, {
-        opacity: 1, y: 0, filter: 'blur(0px)',
-        duration: 0.42, ease: 'power3.out',
-      }, 0.33)
-      .to(stats, {
-        opacity: 1, y: 0, scale: 1,
-        duration: 0.42,
-        stagger: 0.06,
-        ease: 'back.out(1.6)',
-      }, 0.38)
-      .to(cta, {
-        opacity: 1, y: 0, x: 0,
-        duration: 0.38, ease: 'power3.out',
-      }, 0.52)
+    tl.to(label, {
+      opacity: 1, x: 0, y: 0,
+      duration: 0.34, ease: 'power3.out',
+    }, 0.04)
+    .to(heading, {
+      opacity: 1, y: 0,
+      duration: 0.45, ease: 'power4.out',
+    }, 0.10)
+    .to(para1, {
+      // No blur() — use pure opacity + y for mobile performance
+      opacity: 1, y: 0,
+      duration: 0.38, ease: 'power3.out',
+    }, 0.22)
+    .to(para2, {
+      opacity: 1, y: 0,
+      duration: 0.38, ease: 'power3.out',
+    }, 0.30)
+    .to(stats, {
+      opacity: 1, y: 0, scale: 1,
+      duration: 0.38,
+      stagger: 0.05,
+      ease: 'back.out(1.5)',
+    }, 0.35)
+    .to(cta, {
+      opacity: 1, y: 0, x: 0,
+      duration: 0.34, ease: 'power3.out',
+    }, 0.48)
+    // Image slides in in parallel
+    .to(imageWrap, {
+      opacity: 1, x: 0,
+      duration: 0.55, ease: 'power3.out',
+    }, 0.06);
 
-      // Image slide-in
-      .to(imageWrap, {
-        opacity: 1, x: 0,
-        duration: 0.65, ease: 'power3.out',
-      }, 0.08);
-
-      // ── Continuous scroll-linked parallax on image ──────────────────
-      if (imageEl) {
-        gsap.fromTo(imageEl,
-          { yPercent: 4 },
-          {
-            yPercent: -4,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 0.45,
-            },
-          }
-        );
-      }
-
-      // ── Label parallax (drifts upward slightly faster) ───────────────
-      if (label) {
-        gsap.to(label, {
-          y: -10,
+    // ── Scroll-linked parallax on image ───────────────────────────────────
+    // scrub: true = direct 1:1 mapping — zero added lag
+    if (imageEl) {
+      gsap.fromTo(imageEl,
+        { yPercent: 3 },
+        {
+          yPercent: -3,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.45,
+            ...PARALLAX_TRIGGER_DEFAULTS,  // scrub: true
           },
-        });
-      }
+        }
+      );
+    }
 
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    // ── Label parallax (drifts upward slightly faster) ────────────────────
+    if (label) {
+      gsap.to(label, {
+        y: -8,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          ...PARALLAX_TRIGGER_DEFAULTS,  // scrub: true
+        },
+      });
+    }
+  });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
@@ -197,7 +190,7 @@ const AboutIntro = () => {
 
             <div className="overflow-hidden rounded-xl">
               <img
-                className="about-image w-full h-auto object-cover scale-[1.15] will-change-transform"
+                className="about-image w-full h-auto object-cover scale-[1.12] will-change-transform"
                 src="/images/service-ppr-installation.webp"
                 alt="Green PPR pipe installations in a Bangalore factory"
                 loading="lazy"

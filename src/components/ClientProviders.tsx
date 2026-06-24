@@ -16,32 +16,31 @@ export default function ClientProviders({ children }: { children: React.ReactNod
   const pathname = usePathname();
 
   useEffect(() => {
+    // ── Reduced-motion preference ─────────────────────────────────────────
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // ── Lenis configuration ───────────────────────────────────────────────
-    // duration: 0.8 — shorter than default (1.2) so Lenis doesn't add
-    // too much extra lag on mobile where native momentum already feels smooth.
-    // Combined with scrub: true in VideoReveal, the curtain animation maps
-    // directly to Lenis's interpolated scroll position with zero double-lag.
+    // lerp: 0.1 — the industry-standard linear interpolation factor used by
+    // premium sites. Each frame advances 10% toward the target, giving an
+    // immediate initial response with a silky natural deceleration.
+    // Far superior to duration-based easing (was 0.9s) — no double-lag on mobile.
     const lenis = new Lenis({
-      duration: 0.9,
-      easing: (t: number) => {
-        // Expo ease-out: fast initial response, slow settle — premium feel
-        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      },
+      lerp: reducedMotion ? 1 : 0.1,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: true,
-      // Touch multiplier: 1.0 keeps 1:1 finger-to-scroll ratio on mobile
-      // Higher values cause the page to overshoot the finger → feels wrong
+      smoothWheel: !reducedMotion,
+      // 1:1 finger-to-scroll on mobile — prevents overshoot
       touchMultiplier: 1.0,
-      wheelMultiplier: 1.0,
+      // Slight wheel resistance for desktop precision
+      wheelMultiplier: 0.85,
       infinite: false,
+      // We drive RAF via GSAP ticker — prevents double rAF loop
+      autoRaf: false,
     });
 
     lenisRef.current = lenis;
 
     // Keep ScrollTrigger in sync with every Lenis frame
-    // This is critical: Lenis updates window.scrollY incrementally, and
-    // ScrollTrigger.update() re-reads it to advance scrub animations.
     lenis.on('scroll', ScrollTrigger.update);
 
     const updateTicker = (time: number) => {
@@ -50,14 +49,20 @@ export default function ClientProviders({ children }: { children: React.ReactNod
 
     // Add Lenis to GSAP ticker so they share the same rAF loop
     gsap.ticker.add(updateTicker);
-    // Disable GSAP's own lag smoothing — Lenis handles it
+    // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
     gsap.ticker.lagSmoothing(0);
+
+    // normalizeScroll: consistent cross-device behavior.
+    // Prevents iOS rubber-band bounce from mis-firing ScrollTrigger.
+    if (!reducedMotion) {
+      ScrollTrigger.normalizeScroll(true);
+    }
 
     // ── Refresh ScrollTrigger after fonts/images/layout settle ─────────────
     ScrollTrigger.refresh();
     const onLoad = () => {
       // Delayed refresh ensures layout is fully settled (fonts painted, etc.)
-      setTimeout(() => ScrollTrigger.refresh(), 300);
+      setTimeout(() => ScrollTrigger.refresh(), 200);
     };
     if (document.readyState === 'complete') {
       onLoad();
@@ -83,6 +88,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       lenis.destroy();
       lenisRef.current = null;
       gsap.ticker.remove(updateTicker);
+      ScrollTrigger.normalizeScroll(false);
     };
   }, []);
 

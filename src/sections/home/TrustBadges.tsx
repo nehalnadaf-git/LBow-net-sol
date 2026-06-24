@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Shield, Truck, Calendar, Phone } from 'lucide-react';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 import { PipeCrossSectionBg } from '../../components/backgrounds/PipeCrossSectionBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,60 +30,43 @@ const badges: BadgeItem[] = [
 const TrustBadges = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useScrollReveal(sectionRef, () => {
     const section = sectionRef.current;
     if (!section) return;
 
     const cards = section.querySelectorAll('.badge-card');
     const line = section.querySelector('.divider-line');
 
-    gsap.set(cards, { opacity: 0, y: 50 });
-
+    // ── Initial states ────────────────────────────────────────────────────
+    // Tighter y offset (18px vs 50px) = snappier, more premium motion
+    gsap.set(cards, { opacity: 0, y: 18, scale: 0.96 });
     if (line) gsap.set(line, { scaleX: 0, transformOrigin: 'left center' });
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 88%',
-        toggleActions: 'play none none none',
+        ...REVEAL_TRIGGER_DEFAULTS,  // start: 'top 85%' — earlier trigger
       },
     });
 
     // Divider line swipes in first
     if (line) {
-      tl.to(line, { scaleX: 1, duration: 0.38, ease: 'power3.out' }, 0);
+      tl.to(line, { scaleX: 1, duration: 0.35, ease: 'power3.out' }, 0);
     }
 
-    // Cards stagger up
+    // Cards stagger pop-in with micro-spring — back.out(1.4) adds premium feel
     tl.to(cards, {
       opacity: 1,
       y: 0,
-      duration: 0.42,
+      scale: 1,
+      duration: 0.4,
       stagger: {
-        amount: 0.25,
+        amount: 0.20,
         ease: 'power2.inOut',
       },
-      ease: 'power3.out',
-    }, 0.06);
-
-    // Parallax ambient float on icons
-    section.querySelectorAll('.badge-icon').forEach((icon) => {
-      gsap.to(icon, {
-        y: -8,
-        duration: 2 + Math.random() * 1.5,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-        delay: Math.random() * 1.5,
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === section) t.kill();
-      });
-    };
-  }, []);
+      ease: 'back.out(1.4)',
+    }, 0.05);
+  });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-14 sm:py-16 lg:py-20">
@@ -101,8 +85,8 @@ const TrustBadges = () => {
                 key={index}
                 className="badge-card group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1 will-change-transform"
               >
-                {/* Icon Wrapper */}
-                <div className="badge-icon w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/25 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#4ADE80]/50 transition-all duration-300 shadow-sm">
+                {/* Icon Wrapper — CSS float animation (lighter than GSAP yoyo) */}
+                <div className="badge-icon-float w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/25 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#4ADE80]/50 transition-all duration-300 shadow-sm">
                   <Icon size={24} className="text-[#4ADE80]" />
                 </div>
 

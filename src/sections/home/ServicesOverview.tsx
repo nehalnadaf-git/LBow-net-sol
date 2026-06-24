@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Wrench, Factory, Wind, Droplets, Shield, Settings, ArrowRight } from 'lucide-react';
 import { PipeFlowBg } from '../../components/backgrounds/PipeFlowBg';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS, PARALLAX_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,63 +26,61 @@ const services = [
 const ServicesOverview = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useScrollReveal(sectionRef, () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const ctx = gsap.context(() => {
-      const header = section.querySelector('.services-header');
-      const cards  = section.querySelectorAll('.service-card');
+    const header = section.querySelector('.services-header');
+    const cards  = section.querySelectorAll('.service-card');
 
-      // Header entrance
-      if (header) {
-        gsap.set(header, { opacity: 0, y: 28, clipPath: 'inset(0 0 60% 0)' });
-        gsap.to(header, {
-          opacity: 1, y: 0,
-          clipPath: 'inset(0 0 0% 0)',
-          duration: 0.52, ease: 'power4.out',
-          scrollTrigger: { trigger: header, start: 'top 88%', toggleActions: 'play none none none' },
-        });
-      }
-
-      // Cards stagger reveal
-      gsap.set(cards, {
-        opacity: 0,
-        y: 30,
-        scale: 0.97,
-      });
-
-      gsap.to(cards, {
-        opacity: 1, y: 0, scale: 1,
-        duration: 0.52,
-        stagger: { amount: 0.30, from: 'start', ease: 'power2.inOut' },
-        ease: 'power3.out',
+    // ── Header entrance ───────────────────────────────────────────────────
+    // Simple y+opacity — no clipPath (expensive on Safari mobile)
+    if (header) {
+      gsap.set(header, { opacity: 0, y: 20 });
+      gsap.to(header, {
+        opacity: 1, y: 0,
+        duration: 0.42, ease: 'power4.out',
         scrollTrigger: {
-          trigger: section.querySelector('.services-grid'),
-          start: 'top 88%',
-          toggleActions: 'play none none none',
+          trigger: header,
+          ...REVEAL_TRIGGER_DEFAULTS,  // start: 'top 85%'
         },
       });
+    }
 
-      // Per-card image parallax on scroll
-      cards.forEach((card) => {
-        const img = card.querySelector('.card-visual-inner');
-        if (!img) return;
-        gsap.to(img, {
-          yPercent: -8,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.45,
-          },
-        });
+    // ── Cards stagger reveal ──────────────────────────────────────────────
+    // y: 16 (was 30), scale: 0.98 (was 0.97) — tighter, snappier
+    // stagger amount: 0.22 (was 0.30) — faster cascade
+    gsap.set(cards, {
+      opacity: 0,
+      y: 16,
+      scale: 0.98,
+    });
+
+    gsap.to(cards, {
+      opacity: 1, y: 0, scale: 1,
+      duration: 0.42,
+      stagger: { amount: 0.22, from: 'start', ease: 'power2.inOut' },
+      ease: 'back.out(1.3)',
+      scrollTrigger: {
+        trigger: section.querySelector('.services-grid'),
+        ...REVEAL_TRIGGER_DEFAULTS,
+      },
+    });
+
+    // ── Per-card image parallax — scrub: true = zero lag ─────────────────
+    cards.forEach((card) => {
+      const img = card.querySelector('.card-visual-inner');
+      if (!img) return;
+      gsap.to(img, {
+        yPercent: -6,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: card,
+          ...PARALLAX_TRIGGER_DEFAULTS,  // scrub: true
+        },
       });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    });
+  });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
@@ -112,7 +111,7 @@ const ServicesOverview = () => {
               >
                 {/* Visual panel — overflow clip for inner parallax */}
                 <div className="relative w-full h-44 sm:h-52 overflow-hidden bg-[#0A0B0D]">
-                  <div className="card-visual-inner absolute inset-0 scale-[1.15] will-change-transform">
+                  <div className="card-visual-inner absolute inset-0 scale-[1.12] will-change-transform">
                     {service.image && (
                       <Image
                         src={service.image}
