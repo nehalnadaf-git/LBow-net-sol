@@ -125,49 +125,91 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col transition-all duration-400 md:hidden ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        <button
-          onClick={() => setMobileMenuOpen(false)}
-          className="absolute top-5 right-5 text-[#EEEEEE] p-2"
-          aria-label="Close menu"
-        >
-          <X size={28} />
-        </button>
-
-
-        <div className="flex flex-col items-center gap-8">
-          {navLinks.map((link, index) => (
-            <Link
-              key={link.path}
-              href={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`font-heading text-3xl transition-all duration-300 ${
-                isActive(link.path) ? 'text-[#EEEEEE]' : 'text-[#A6A6A6] hover:text-[#EEEEEE]'
-              }`}
-              style={{
-                opacity: mobileMenuOpen ? 1 : 0,
-                transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(20px)',
-                transition: `all 0.4s ease ${0.1 + index * 0.1}s`,
-              }}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
+        {/* Top bar — logo + close */}
+        <div className="flex items-center justify-between px-6 h-[64px] border-b border-white/5 flex-shrink-0">
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex flex-col">
+            <span className="font-heading font-bold text-xl text-[#EEEEEE] leading-tight">
+              LBow<span className="text-[#2E7D32]">.</span>
+            </span>
+            <span className="font-body text-[0.58rem] tracking-[0.1em] uppercase -mt-0.5 text-[#A6A6A6]">
+              Network Solutions
+            </span>
+          </Link>
+          <button
             onClick={() => setMobileMenuOpen(false)}
-            className="mt-4 bg-[#EEEEEE] hover:bg-[#434343] hover:text-[#EEEEEE] text-[#0A0A0B] font-body font-semibold text-lg rounded-md px-8 py-3 transition-all duration-300"
+            className="text-[#EEEEEE] p-2 -mr-2"
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Nav links — scrollable so nothing clips on small screens */}
+        <div className="flex-1 overflow-y-auto py-6 px-6">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`font-heading text-2xl py-3 border-b border-white/5 transition-colors duration-200 ${
+                  isActive(link.path)
+                    ? 'text-[#EEEEEE]'
+                    : 'text-[#A6A6A6] hover:text-[#EEEEEE]'
+                }`}
+                style={{
+                  opacity: mobileMenuOpen ? 1 : 0,
+                  transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(16px)',
+                  transition: `opacity 0.3s ease ${0.05 + index * 0.05}s, transform 0.3s ease ${0.05 + index * 0.05}s`,
+                }}
+              >
+                <span className="flex items-center justify-between">
+                  {link.name}
+                  {isActive(link.path) && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2E7D32] flex-shrink-0" />
+                  )}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div
+            className="mt-6"
             style={{
               opacity: mobileMenuOpen ? 1 : 0,
-              transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(20px)',
-              transition: `all 0.4s ease ${0.6}s`,
+              transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(16px)',
+              transition: `opacity 0.3s ease 0.55s, transform 0.3s ease 0.55s`,
             }}
           >
-            Get Quote
-          </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-center bg-[#2E7D32] hover:bg-[#256428] text-white font-body font-semibold text-base rounded-lg px-6 py-3.5 transition-all duration-200 active:scale-[0.98]"
+            >
+              Get a Free Quote
+            </Link>
+          </div>
+
+          {/* Footer info */}
+          <div
+            className="mt-8 pt-6 border-t border-white/5"
+            style={{
+              opacity: mobileMenuOpen ? 1 : 0,
+              transition: `opacity 0.3s ease 0.65s`,
+            }}
+          >
+            <p className="font-mono text-[0.65rem] uppercase tracking-wider text-[#A6A6A6]/60">
+              T Dasarahalli, Bangalore
+            </p>
+            <a href="tel:+919606419076" className="font-mono text-[0.7rem] text-[#A6A6A6] hover:text-white transition-colors mt-1 block">
+              +91 9606419076
+            </a>
+          </div>
         </div>
       </div>
     </>
