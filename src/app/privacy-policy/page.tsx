@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -115,7 +116,39 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">8. Contact Us</h2>
+              <h2 className="font-heading font-semibold text-xl text-white mb-3">8. Business Authorization</h2>
+              <p>
+                LBow Network Solutions is an officially certified Authorised Dealer of Prince Pipes and Fittings
+                Limited, Bangalore, Karnataka. Our dealership certificate is valid from 2025 to 2027 and is issued
+                by the manufacturer. You may verify our credentials by viewing the certificate below.
+              </p>
+              <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 sm:p-5 border border-white/10 rounded-xl bg-white/3">
+                <div className="w-full sm:w-40 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                  <Image
+                    src="/images/dealer-certificate.jpeg"
+                    alt="Prince Pipes Authorised Dealer Certificate — LBow Network Solutions 2025–2027"
+                    width={400}
+                    height={283}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm mb-1">Prince Pipes Dealership Certificate</p>
+                  <p className="text-[#A6A6A6] text-sm mb-3">
+                    Authorised Dealer · 2025–2027 · Issued by Prince Pipes and Fittings Limited
+                  </p>
+                  <Link
+                    href="/brands"
+                    className="inline-flex items-center gap-1.5 font-body font-semibold text-xs text-[#2E7D32] hover:underline"
+                  >
+                    View Full Certificate on Brands Page →
+                  </Link>
+                </div>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="font-heading font-semibold text-xl text-white mb-3">9. Contact Us</h2>
               <p>
                 If you have any questions about this Privacy Policy, contact us at:
               </p>
