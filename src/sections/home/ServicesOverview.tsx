@@ -88,7 +88,7 @@ const ServicesOverview = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
-        <div className="services-header text-center mb-10 sm:mb-12 lg:mb-16 will-change-transform">
+        <div className="services-header text-center mb-10 sm:mb-12 lg:mb-16">
           <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#434343] mb-3 sm:mb-4">
             What We Offer
           </div>
@@ -107,7 +107,7 @@ const ServicesOverview = () => {
             return (
               <div
                 key={index}
-                className="service-card group bg-white rounded-2xl overflow-hidden border border-[rgba(30,32,33,0.10)] transition-all duration-500 hover:border-[#2E7D32]/40 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(46,125,50,0.12)] will-change-transform"
+                className="service-card group bg-white rounded-2xl overflow-hidden border border-[rgba(30,32,33,0.10)] transition-all duration-500 hover:border-[#2E7D32]/40 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(46,125,50,0.12)]"
               >
                 {/* Visual panel — overflow clip for inner parallax */}
                 <div className="relative w-full h-44 sm:h-52 overflow-hidden bg-[#0A0B0D]">

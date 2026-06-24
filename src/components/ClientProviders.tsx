@@ -52,11 +52,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
     gsap.ticker.lagSmoothing(0);
 
-    // normalizeScroll: consistent cross-device behavior.
-    // Prevents iOS rubber-band bounce from mis-firing ScrollTrigger.
-    if (!reducedMotion) {
-      ScrollTrigger.normalizeScroll(true);
-    }
+
 
     // ── Refresh ScrollTrigger after fonts/images/layout settle ─────────────
     ScrollTrigger.refresh();
@@ -88,7 +84,6 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       lenis.destroy();
       lenisRef.current = null;
       gsap.ticker.remove(updateTicker);
-      ScrollTrigger.normalizeScroll(false);
     };
   }, []);
 

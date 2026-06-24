@@ -51,14 +51,19 @@ export default function VideoReveal() {
           // Mobile: shorter overscroll distance so animation completes within thumb reach
           end: isMobile ? '+=110%' : '+=150%',
           pin: true,
-          // KEY FIX: scrub: true = NO added GSAP lag.
-          // Desktop: Lenis provides the smoothness (its duration: 1.1s).
-          // Mobile:  Native scroll momentum provides the smoothness.
-          // A numeric scrub (e.g. 1.2) adds LAG *on top of* Lenis/native = double lag.
+          // ── PIN TYPE ─────────────────────────────────────────────────────
+          // Mobile: use 'transform' pinning — avoids position:fixed which
+          // causes z-index stacking issues on iOS/Android when neighboring
+          // sections have will-change:transform (new GPU stacking contexts).
+          // Desktop: default (undefined/'fixed') is fine — no z-index issues.
+          pinType: isMobile ? 'transform' : undefined,
+          // pinSpacing: true ensures the pin spacer always reserves the
+          // correct height, preventing the next section from bleeding up.
+          pinSpacing: true,
+          // anticipatePin: prevents the section from jumping before pinning
+          anticipatePin: 1,
           scrub: true,
           invalidateOnRefresh: true,
-          // Omit pinType: 'transform' so ScrollTrigger uses standard 'fixed' positioning,
-          // which is native, hardware-accelerated, and does not jitter on mobile/native scroll.
         },
       })
 
@@ -96,10 +101,11 @@ export default function VideoReveal() {
       }
 
       // ── Text fragments materialize ────────────────────────────────────────
+      // On mobile: no blur (GPU expensive) — use opacity only for snappy feel
       tl.fromTo(
         [frag1Ref.current, frag2Ref.current, frag3Ref.current],
-        { opacity: 0, filter: isMobile ? 'blur(4px)' : 'blur(12px)' },
-        { opacity: 1, filter: 'blur(0px)', stagger: 0.06, ease: 'power2.out' },
+        { opacity: 0, ...(isMobile ? {} : { filter: 'blur(12px)' }) },
+        { opacity: 1, ...(isMobile ? {} : { filter: 'blur(0px)' }), stagger: 0.06, ease: 'power2.out' },
         0.25
       )
 
@@ -131,8 +137,19 @@ export default function VideoReveal() {
     <section
       id="video-reveal"
       ref={sectionRef}
+      // ── z-index: 10 ─────────────────────────────────────────────────────
+      // Ensures VideoReveal always paints above neighboring sections even when
+      // those sections have will-change:transform (which creates new GPU
+      // stacking contexts that can bleed over position:fixed elements on mobile).
       className="relative w-full overflow-hidden bg-[#0A0A0B]"
-      style={{ height: '100dvh', minHeight: '100svh' }}
+      style={{
+        height: '100dvh',
+        minHeight: '100svh',
+        zIndex: 10,
+        // isolation: isolate ensures this element forms its own stacking context
+        // so internal z-indices (z-[1]..z-[5]) are scoped and don't leak out.
+        isolation: 'isolate',
+      }}
     >
       {/* Video background */}
       <video
