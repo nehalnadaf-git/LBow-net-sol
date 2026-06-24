@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { brands, getBrandBySlug } from '@/lib/brands';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 import {
@@ -120,6 +121,28 @@ export default async function BrandPage({ params }: Props) {
 
             {/* Sidebar */}
             <div className="space-y-5">
+              {/* Dealer Certificate — Prince Pipes only */}
+              {brand.slug === 'prince-pipes' && (
+                <div className="rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+                  <div className="relative">
+                    <Image
+                      src="/images/dealer-certificate.jpeg"
+                      alt="Prince Pipes Authorised Dealer Certificate — LBow Network Solutions 2025–2027"
+                      width={800}
+                      height={566}
+                      className="w-full h-auto object-contain"
+                      priority
+                    />
+                  </div>
+                  <div className="bg-[#0A0A0B] px-4 py-3 flex items-center gap-2">
+                    <CheckCircle size={13} className="text-[#2E7D32] flex-shrink-0" />
+                    <span className="font-body text-xs text-[#A6A6A6]">
+                      Verified Authorised Dealer · 2025–2027
+                    </span>
+                  </div>
+                </div>
+              )}
+
               {/* Dealership Certificate Details */}
               <div className="bg-white rounded-xl border border-[rgba(30,32,33,0.12)] p-5">
                 <h3 className="font-heading font-semibold text-base text-[#0A0A0B] mb-4">
