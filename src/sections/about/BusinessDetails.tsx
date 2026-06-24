@@ -5,15 +5,28 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Building2, TrendingUp, Users, FileText, Shield, Briefcase } from 'lucide-react';
 import { HexGridBg } from '../../components/backgrounds/HexGridBg';
+import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const details = [
-  { icon: Building2, value: '2018', label: 'Year Established' },
-  { icon: TrendingUp, value: '\u20B91\u20135 Crores', label: 'Annual Turnover' },
+interface DetailItem {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  value: string;
+  label: string;
+  /** If set, this card renders a counting number animation up to `countTo` */
+  countTo?: number;
+  /** Suffix after the counted number (e.g. ' Years') */
+  countSuffix?: string;
+  /** Animation delay in seconds */
+  countDelay?: number;
+}
+
+const details: DetailItem[] = [
+  { icon: Building2, value: '2018', label: 'Year Established', countTo: 2018, countDelay: 0 },
+  { icon: TrendingUp, value: '₹1–5 Crores', label: 'Annual Turnover' },
   { icon: Users, value: '< 10', label: 'Team Size' },
   { icon: FileText, value: '29AUIPV4726C2ZB', label: 'GST Number' },
-  { icon: Shield, value: '10 Years', label: 'Product Warranty' },
+  { icon: Shield, value: '10 Years', label: 'Product Warranty', countTo: 10, countSuffix: ' Years', countDelay: 0.1 },
   { icon: Briefcase, value: 'Dealers, Manufacturers, Wholesalers', label: 'Business Nature' },
 ];
 
@@ -63,7 +76,16 @@ const BusinessDetails = () => {
               <div key={index} className="detail-card flex flex-col items-center">
                 <Icon size={32} className="text-[#EEEEEE] mb-2 sm:mb-3 sm:w-10 sm:h-10" />
                 <div className="font-heading font-bold text-sm sm:text-lg md:text-xl lg:text-[1.75rem] text-white mb-1 sm:mb-2 leading-tight">
-                  {detail.value}
+                  {detail.countTo !== undefined ? (
+                    <AnimatedCounter
+                      to={detail.countTo}
+                      suffix={detail.countSuffix ?? ''}
+                      delay={detail.countDelay ?? 0}
+                      duration={1.8}
+                    />
+                  ) : (
+                    detail.value
+                  )}
                 </div>
                 <div className="font-body text-xs sm:text-sm text-[#A6A6A6]">{detail.label}</div>
               </div>

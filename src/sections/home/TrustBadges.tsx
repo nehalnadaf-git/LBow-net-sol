@@ -6,14 +6,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Shield, Truck, Calendar, Phone } from 'lucide-react';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 import { PipeCrossSectionBg } from '../../components/backgrounds/PipeCrossSectionBg';
+import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const badges = [
-  { icon: Shield, value: '10 Years', label: 'Product Warranty' },
-  { icon: Truck, value: 'Free Delivery', label: 'Above ₹22,000 within 22km' },
-  { icon: Calendar, value: 'Since 2018', label: 'Serving Bangalore Industries' },
-  { icon: Phone, value: '+91 9606419076', label: 'Call or WhatsApp Now' },
+interface BadgeItem {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  value: string;
+  label: string;
+  countTo?: number;
+  countSuffix?: string;
+  countDelay?: number;
+}
+
+const badges: BadgeItem[] = [
+  { icon: Shield,   value: '10 Years',       label: 'Product Warranty',              countTo: 10,   countSuffix: ' Years', countDelay: 0    },
+  { icon: Truck,    value: 'Free Delivery',  label: 'Above ₹22,000 within 22km' },
+  { icon: Calendar, value: 'Since 2018',     label: 'Serving Bangalore Industries',  countTo: 2018, countSuffix: '',        countDelay: 0.1 },
+  { icon: Phone,    value: '+91 9606419076', label: 'Call or WhatsApp Now' },
 ];
 
 const TrustBadges = () => {
@@ -98,7 +108,16 @@ const TrustBadges = () => {
 
                 {/* Stat/Highlight Value */}
                 <div className="font-heading font-bold text-base sm:text-xl lg:text-2xl text-[#EEEEEE] mb-1.5 sm:mb-2 leading-tight">
-                  {badge.value}
+                  {badge.countTo !== undefined ? (
+                    <AnimatedCounter
+                      to={badge.countTo}
+                      suffix={badge.countSuffix ?? ''}
+                      delay={badge.countDelay ?? 0}
+                      duration={1.8}
+                    />
+                  ) : (
+                    badge.value
+                  )}
                 </div>
 
                 {/* Stat Subtitle */}

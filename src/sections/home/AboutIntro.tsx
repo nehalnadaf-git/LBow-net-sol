@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { PipeTopologyBg } from '../../components/backgrounds/PipeTopologyBg';
+import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -158,13 +159,19 @@ const AboutIntro = () => {
             {/* Stats */}
             <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-6 sm:mt-8">
               {[
-                { value: '8+', label: 'Years of Excellence' },
-                { value: '1000+', label: 'Projects Completed' },
-                { value: '50+', label: 'Industrial Clients' },
+                { to: 8,    suffix: '+', label: 'Years of Excellence',  delay: 0    },
+                { to: 1000, suffix: '+', label: 'Projects Completed',   delay: 0.12 },
+                { to: 50,   suffix: '+', label: 'Industrial Clients',   delay: 0.24 },
               ].map((stat, i) => (
                 <div key={i} className="about-stat will-change-transform">
                   <div className="font-heading font-bold text-2xl">
-                    <span className="metallic-shimmer-text">{stat.value}</span>
+                    <AnimatedCounter
+                      to={stat.to}
+                      suffix={stat.suffix}
+                      delay={stat.delay}
+                      duration={1.8}
+                      className="metallic-shimmer-text"
+                    />
                   </div>
                   <div className="font-body text-sm text-[#434343]">{stat.label}</div>
                 </div>
