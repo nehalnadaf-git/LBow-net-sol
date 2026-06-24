@@ -19,16 +19,25 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     // ── Reduced-motion preference ─────────────────────────────────────────
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // ── Touch device detection ────────────────────────────────────────────
+    // On touch devices, native scroll is already buttery smooth and works
+    // perfectly with ScrollTrigger pin. Lenis smooth scroll on touch adds
+    // a virtual scroll layer that conflicts with ScrollTrigger's pin
+    // position calculations, causing jitter, wrong spacer heights, and
+    // sections bleeding over pinned content.
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     // ── Lenis configuration ───────────────────────────────────────────────
-    // lerp: 0.1 — the industry-standard linear interpolation factor used by
-    // premium sites. Each frame advances 10% toward the target, giving an
-    // immediate initial response with a silky natural deceleration.
-    // Far superior to duration-based easing (was 0.9s) — no double-lag on mobile.
     const lenis = new Lenis({
-      lerp: reducedMotion ? 1 : 0.1,
+      // Desktop: lerp 0.1 = premium smooth scroll
+      // Touch/Mobile: lerp 1 = no smoothing (native scroll pass-through)
+      // Reduced motion: lerp 1 = instant
+      lerp: (reducedMotion || isTouchDevice) ? 1 : 0.1,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: !reducedMotion,
+      // Desktop only: smooth wheel. On touch devices, disable entirely
+      // so native momentum scroll works unimpeded with ScrollTrigger pins.
+      smoothWheel: !(reducedMotion || isTouchDevice),
       // 1:1 finger-to-scroll on mobile — prevents overshoot
       touchMultiplier: 1.0,
       // Slight wheel resistance for desktop precision
@@ -51,8 +60,6 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     gsap.ticker.add(updateTicker);
     // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
     gsap.ticker.lagSmoothing(0);
-
-
 
     // ── Refresh ScrollTrigger after fonts/images/layout settle ─────────────
     ScrollTrigger.refresh();

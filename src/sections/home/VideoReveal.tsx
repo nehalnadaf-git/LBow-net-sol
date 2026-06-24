@@ -48,19 +48,13 @@ export default function VideoReveal() {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          // Mobile: shorter overscroll distance so animation completes within thumb reach
-          end: isMobile ? '+=110%' : '+=150%',
+          // Mobile: shorter scroll distance so curtain opens within thumb reach
+          end: isMobile ? '+=100%' : '+=150%',
           pin: true,
-          // ── PIN TYPE ─────────────────────────────────────────────────────
-          // Mobile: use 'transform' pinning — avoids position:fixed which
-          // causes z-index stacking issues on iOS/Android when neighboring
-          // sections have will-change:transform (new GPU stacking contexts).
-          // Desktop: default (undefined/'fixed') is fine — no z-index issues.
-          pinType: isMobile ? 'transform' : undefined,
-          // pinSpacing: true ensures the pin spacer always reserves the
-          // correct height, preventing the next section from bleeding up.
+          // Default pinType ('fixed') works now because:
+          // 1. Lenis is disabled on touch devices (lerp:1 pass-through)
+          // 2. Native scroll + position:fixed = rock-solid on all browsers
           pinSpacing: true,
-          // anticipatePin: prevents the section from jumping before pinning
           anticipatePin: 1,
           scrub: true,
           invalidateOnRefresh: true,
@@ -85,7 +79,7 @@ export default function VideoReveal() {
       // ── Video slightly de-zooms as curtains open ──────────────────────────
       if (videoRef.current) {
         tl.fromTo(videoRef.current,
-          { scale: isMobile ? 1.06 : 1.12 },
+          { scale: isMobile ? 1.04 : 1.12 },
           { scale: 1, ease: 'power2.out' },
           0
         )
@@ -101,7 +95,7 @@ export default function VideoReveal() {
       }
 
       // ── Text fragments materialize ────────────────────────────────────────
-      // On mobile: no blur (GPU expensive) — use opacity only for snappy feel
+      // Mobile: pure opacity (no blur — avoids expensive GPU filter per frame)
       tl.fromTo(
         [frag1Ref.current, frag2Ref.current, frag3Ref.current],
         { opacity: 0, ...(isMobile ? {} : { filter: 'blur(12px)' }) },
@@ -113,7 +107,7 @@ export default function VideoReveal() {
       tl.fromTo(
         [frag1Ref.current, frag2Ref.current, frag3Ref.current],
         { y: 0 },
-        { y: isMobile ? -20 : -40, ease: 'none' },
+        { y: isMobile ? -16 : -40, ease: 'none' },
         0.35
       )
 
@@ -137,17 +131,13 @@ export default function VideoReveal() {
     <section
       id="video-reveal"
       ref={sectionRef}
-      // ── z-index: 10 ─────────────────────────────────────────────────────
-      // Ensures VideoReveal always paints above neighboring sections even when
-      // those sections have will-change:transform (which creates new GPU
-      // stacking contexts that can bleed over position:fixed elements on mobile).
       className="relative w-full overflow-hidden bg-[#0A0A0B]"
       style={{
         height: '100dvh',
         minHeight: '100svh',
+        // Elevate above neighbors to prevent stacking context bleed
         zIndex: 10,
-        // isolation: isolate ensures this element forms its own stacking context
-        // so internal z-indices (z-[1]..z-[5]) are scoped and don't leak out.
+        // Own stacking context so internal z-[1]..z-[5] don't leak
         isolation: 'isolate',
       }}
     >
@@ -166,12 +156,12 @@ export default function VideoReveal() {
       </video>
 
       {/* Dark overlay */}
-      <div ref={overlayRef} className="absolute inset-0 bg-[#0A0A0B]/70 z-[1] will-change-[opacity]" />
+      <div ref={overlayRef} className="absolute inset-0 bg-[#0A0A0B]/70 z-[1]" />
 
       {/* Green depth glow */}
       <div
         ref={glowRef}
-        className="absolute inset-0 z-[2] pointer-events-none will-change-transform"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{
           background: 'radial-gradient(ellipse 70% 55% at 50% 50%, rgba(46,125,50,0.22) 0%, transparent 70%)',
         }}
