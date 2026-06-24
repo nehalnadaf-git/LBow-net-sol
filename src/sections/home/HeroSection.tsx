@@ -17,49 +17,62 @@ const HeroSection = () => {
   const scrollIndicatorDesktopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    // Set initial states via GSAP (owns the transform stack, prevents CSS conflict)
+    gsap.set([
+      labelRef.current,
+      line1Ref.current,
+      line2Ref.current,
+      line3Ref.current,
+      subtitleRef.current,
+      ctaRef.current,
+      scrollIndicatorRef.current,
+      scrollIndicatorDesktopRef.current,
+    ], { opacity: 0 });
+    gsap.set([labelRef.current, subtitleRef.current, ctaRef.current,
+      scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], { y: 16 });
+    gsap.set([line1Ref.current, line2Ref.current, line3Ref.current], { y: 28 });
+
+    const tl = gsap.timeline({ delay: 0.3 });
 
     tl.to(labelRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
+      opacity: 1, y: 0,
+      duration: 0.4,
       ease: 'power3.out',
-      delay: 0.5,
     })
       .to(
         line1Ref.current,
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        0.7
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+        0.2
       )
       .to(
         line2Ref.current,
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        0.85
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+        0.3
       )
       .to(
         line3Ref.current,
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        1.0
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+        0.4
       )
       .to(
         subtitleRef.current,
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        1.2
+        { opacity: 1, y: 0, duration: 0.38, ease: 'power3.out' },
+        0.55
       )
       .to(
         ctaRef.current,
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        1.4
+        { opacity: 1, y: 0, duration: 0.38, ease: 'power3.out' },
+        0.65
       )
       .to(
         scrollIndicatorRef.current,
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        1.55
+        { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' },
+        0.75
       )
       .to(
         scrollIndicatorDesktopRef.current,
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        1.55
+        { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' },
+        0.75
       );
 
     return () => {

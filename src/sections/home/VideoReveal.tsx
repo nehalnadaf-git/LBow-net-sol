@@ -98,8 +98,8 @@ export default function VideoReveal() {
       // ── Text fragments materialize ────────────────────────────────────────
       tl.fromTo(
         [frag1Ref.current, frag2Ref.current, frag3Ref.current],
-        { opacity: 0, filter: 'blur(12px)' },
-        { opacity: 1, filter: 'blur(0px)', stagger: 0.08, ease: 'power2.out' },
+        { opacity: 0, filter: isMobile ? 'blur(4px)' : 'blur(12px)' },
+        { opacity: 1, filter: 'blur(0px)', stagger: 0.06, ease: 'power2.out' },
         0.25
       )
 
@@ -145,7 +145,7 @@ export default function VideoReveal() {
         preload="auto"
         poster="/images/img-001.webp"
       >
-        <source src="/videos/vid-hero.mp4" type="video/mp4" />
+        <source src="/videos/Video-Hero.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay */}

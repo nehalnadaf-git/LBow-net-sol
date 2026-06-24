@@ -176,13 +176,13 @@ const ProductsPreview = () => {
   useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
-    gsap.set(el, { opacity: 0, y: 30 });
+    gsap.set(el, { opacity: 0, y: 24 });
     const obs = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.42, ease: 'power3.out' });
         obs.disconnect();
       }
-    }, { threshold: 0.15 });
+    }, { threshold: 0.08 });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
