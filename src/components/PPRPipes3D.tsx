@@ -839,12 +839,42 @@ const PPRPipes3D = () => {
     let targetX = 0;
     let targetY = 0;
 
+    // ── Visibility guard — disable mouse tracking when hero is off-screen ──
+    // IntersectionObserver fires when the hero section leaves the viewport.
+    // threshold: 0 → fires as soon as ANY part exits (entering next section).
+    // This stops costly mouse interpolation when the 3D canvas isn't visible.
+    let isHeroVisible = true;
+    const heroSection = container.closest('section') as HTMLElement | null;
+
+    let visibilityObserver: IntersectionObserver | null = null;
+    if (heroSection) {
+      visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          isHeroVisible = entry.isIntersecting;
+          // When hero exits viewport, snap mouse targets to zero so the
+          // next time it re-enters the pipes start from a neutral position.
+          if (!isHeroVisible) {
+            mouseX = 0;
+            mouseY = 0;
+          }
+        },
+        {
+          // 0.0 = fires the moment the hero starts leaving the viewport
+          // We use this so mouse tracking stops as soon as any scroll away begins
+          threshold: 0.0,
+        }
+      );
+      visibilityObserver.observe(heroSection);
+    }
+
     const onMouseMove = (event: MouseEvent) => {
+      if (!isHeroVisible) return;  // Hero is off-screen — ignore all mouse input
       mouseX = (event.clientX / window.innerWidth) - 0.5;
       mouseY = (event.clientY / window.innerHeight) - 0.5;
     };
 
     const onTouchMove = (event: TouchEvent) => {
+      if (!isHeroVisible) return;  // Hero is off-screen — ignore all touch input
       if (event.touches.length > 0) {
         mouseX = (event.touches[0].clientX / window.innerWidth) - 0.5;
         mouseY = (event.touches[0].clientY / window.innerHeight) - 0.5;
@@ -868,8 +898,16 @@ const PPRPipes3D = () => {
       mainGroup.rotation.y = Math.cos(elapsed * 0.2) * 0.04;
 
       // Mouse/Touch Parallax movement (smooth interpolation)
-      targetX += (mouseX - targetX) * 0.04;
-      targetY += (mouseY - targetY) * 0.04;
+      // When hero is off-screen, decay targetX/Y back to zero smoothly
+      // so the pipes return to neutral without a jarring snap.
+      if (isHeroVisible) {
+        targetX += (mouseX - targetX) * 0.04;
+        targetY += (mouseY - targetY) * 0.04;
+      } else {
+        // Gentle decay to zero — pipes settle back to idle rotation
+        targetX *= 0.92;
+        targetY *= 0.92;
+      }
 
       mainGroup.rotation.y += targetX * 0.4;
       mainGroup.rotation.x += targetY * 0.4;
@@ -909,6 +947,8 @@ const PPRPipes3D = () => {
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameRef.current);
+      // Disconnect visibility observer
+      if (visibilityObserver) visibilityObserver.disconnect();
       renderer.dispose();
       
       // Dispose all tracked WebGL resources
