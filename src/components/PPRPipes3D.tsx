@@ -340,13 +340,17 @@ const PPRPipes3D = () => {
     introTl.to(elbowFittingParent.scale, { x: targetElbowScale, y: targetElbowScale, z: targetElbowScale, ease: 'elastic.out(1.0, 0.65)', duration: 1.6 }, 0.4);
     introTl.to(elbowFitting2Parent.scale, { x: targetElbow2Scale, y: targetElbow2Scale, z: targetElbow2Scale, ease: 'elastic.out(1.0, 0.65)', duration: 1.6 }, 0.65);
 
-    // Create scroll-linked timeline
+    // Create scroll-linked timeline.
+    // Mobile: scrub: true = frame-perfect sync, zero GSAP lag buffer.
+    //   Native scroll momentum provides all the smoothness — no double-lag.
+    // Desktop: scrub: 0.45 — Lenis smooth-scroll provides the smoothness.
+    const isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: document.body,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.45,
+        scrub: isMobileDevice ? true : 0.45,
         invalidateOnRefresh: true,
       }
     });
