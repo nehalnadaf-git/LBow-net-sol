@@ -71,7 +71,6 @@ const ContactSplit = () => {
     product: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -81,8 +80,20 @@ const ContactSplit = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+
+    const lines = [
+      'New Inquiry — LBow Network Solutions',
+      '',
+      'Name: ' + formData.name,
+      'Phone: ' + formData.phone,
+      formData.email ? 'Email: ' + formData.email : '',
+      formData.product ? 'Interested In: ' + formData.product : '',
+      '',
+      formData.message ? 'Message:\n' + formData.message : '',
+    ].filter(Boolean).join('\n');
+
+    const encoded = encodeURIComponent(lines);
+    window.open('https://wa.me/918123501407?text=' + encoded, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -202,7 +213,7 @@ const ContactSplit = () => {
                 Call Now
               </a>
               <a
-                href="https://wa.me/919606419076?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
+                href="https://wa.me/918123501407?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
@@ -224,17 +235,7 @@ const ContactSplit = () => {
               Fill in the details below and we&apos;ll get back to you shortly.
             </p>
 
-            {submitted ? (
-              <div className="bg-[rgba(46,125,50,0.06)] border border-[#2E7D32]/20 rounded-lg p-6 sm:p-8 text-center">
-                <div className="font-heading font-semibold text-lg sm:text-xl text-[#0A0A0B] mb-2">
-                  Thank You!
-                </div>
-                <p className="font-body text-sm text-[#434343]">
-                  We have received your enquiry and will get back to you within 2 hours.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
                 <div>
                   <label className={labelClass}>
                     Your Name
@@ -316,14 +317,13 @@ const ContactSplit = () => {
                   type="submit"
                   className="w-full bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-8 py-3.5 transition-all duration-300 text-sm sm:text-base mt-1"
                 >
-                  Send Enquiry
+                  Send Enquiry via WhatsApp
                 </button>
 
                 <p className="font-body text-xs text-[#434343] text-center">
-                  We typically respond within 2 hours during working hours (9 AM – 7 PM).
+                  Your enquiry will open in WhatsApp pre-filled — just hit send.
                 </p>
-              </form>
-            )}
+            </form>
           </div>
         </div>
       </div>
