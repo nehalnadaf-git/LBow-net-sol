@@ -162,7 +162,7 @@ export default function VideoReveal() {
         preload="auto"
         poster="/images/img-001.webp"
       >
-        <source src="/videos/Video-Hero.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/djdzxaenj/video/upload/v1782307818/Video-Hero_hixatu.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay */}
