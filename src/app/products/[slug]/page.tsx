@@ -96,21 +96,19 @@ export default async function ProductDetailPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Breadcrumb */}
-      <div className="absolute top-20 left-0 right-0 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <nav className="font-body text-xs text-white/60 flex gap-2 items-center pt-6">
-          <Link href="/" className="hover:text-white transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/products" className="hover:text-white transition-colors">Products</Link>
-          <span>/</span>
-          <span className="text-white">{product.name}</span>
-        </nav>
-      </div>
-
       <ProductDetailHero
         category={product.category}
         name={product.name}
         tagline={product.tagline}
+        breadcrumb={
+          <nav className="font-body text-xs text-white/60 flex gap-2 items-center">
+            <Link href="/">Home</Link>
+            <span>/</span>
+            <Link href="/products" className="hover:text-white transition-colors">Products</Link>
+            <span>/</span>
+            <span className="text-white">{product.name}</span>
+          </nav>
+        }
       />
       <ProductDetailContent product={product} />
       <ProductFAQSection faqs={product.faqs} productName={product.name} />
