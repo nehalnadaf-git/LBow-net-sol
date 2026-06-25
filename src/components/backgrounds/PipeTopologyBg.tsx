@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 
@@ -9,7 +9,6 @@ interface PipeTopologyBgProps {
 export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false }) => {
   const strokeColor = isLight ? 'rgba(30,32,33,0.06)' : 'rgba(238,238,238,0.04)';
   const nodeColor = isLight ? 'rgba(46, 125, 50, 0.35)' : 'rgba(46, 125, 50, 0.25)';
-  const pulseColor = isLight ? 'rgba(46, 125, 50, 0.65)' : 'rgba(74, 222, 128, 0.55)';
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none">
@@ -20,38 +19,6 @@ export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false 
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <style>{`
-            @keyframes pulse-node-ring {
-              0%, 100% { r: 3px; opacity: 0.3; }
-              50% { r: 8px; opacity: 0.9; }
-            }
-            @keyframes topology-flow {
-              to {
-                stroke-dashoffset: -30;
-              }
-            }
-            .node-pulse-1 {
-              animation: pulse-node-ring 4s infinite ease-in-out;
-              transform-origin: 200px 300px;
-            }
-            .node-pulse-2 {
-              animation: pulse-node-ring 5s infinite ease-in-out;
-              transform-origin: 700px 450px;
-            }
-            .node-pulse-3 {
-              animation: pulse-node-ring 6s infinite ease-in-out;
-              transform-origin: 400px 150px;
-            }
-            .node-pulse-4 {
-              animation: pulse-node-ring 4.5s infinite ease-in-out;
-              transform-origin: 850px 600px;
-            }
-            .topo-flow-line {
-              stroke-dasharray: 5, 15;
-              animation: topology-flow 4s linear infinite;
-            }
-          `}</style>
-
           {/* Edge Fading Linear Gradients for pipelines */}
           <linearGradient id="pipe-fade-h" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="transparent" />
@@ -67,17 +34,18 @@ export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false 
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
 
-          {/* Film Grain Noise filter for high-end textured look */}
-          <filter id="topo-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="matrix" values={`0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 ${isLight ? 0.006 : 0.012} 0`} />
-          </filter>
+          {/* Lightweight static grain pattern */}
+          <pattern id="topo-grain" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
+            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
+            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
+          </pattern>
         </defs>
 
-        {/* Film grain noise rect */}
-        <rect width="100%" height="100%" filter="url(#topo-noise)" className="opacity-70" />
+        {/* Static grain texture */}
+        <rect width="100%" height="100%" fill="url(#topo-grain)" />
 
-        {/* Pipeline network lines */}
+        {/* Pipeline network lines (static) */}
         <g fill="none" strokeLinecap="round" strokeLinejoin="round">
           {/* Main pipeline 1 */}
           <path d="M -50 300 H 200 L 250 350 V 500 H 450 L 500 450 V 200 H 700 L 750 250 V 450 H 1050" stroke="url(#pipe-fade-h)" strokeWidth="1.5" />
@@ -95,13 +63,9 @@ export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false 
 
           {/* Bottom branch */}
           <path d="M 250 850 V 600 L 300 550 H 550" stroke="url(#pipe-fade-v)" strokeWidth="1.25" />
-
-          {/* Glowing Animated Flows (Subtle overlay for premium movement) */}
-          <path d="M -50 300 H 200 L 250 350 V 500 H 450 L 500 450 V 200 H 700 L 750 250 V 450 H 1050" stroke={pulseColor} strokeWidth="0.75" className="topo-flow-line" opacity="0.35" />
-          <path d="M 700 100 H 850 L 900 150 V 600 L 850 650 H 600 L 550 600 V 550" stroke={pulseColor} strokeWidth="0.75" className="topo-flow-line" opacity="0.25" />
         </g>
 
-        {/* Junction Nodes (Precise Engineering Plus Ticks instead of simple dots) */}
+        {/* Junction Nodes (static crosshair ticks) */}
         <path
           d="
             M 196 300 H 204 M 200 296 V 304
@@ -131,15 +95,14 @@ export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false 
           fill="none"
         />
 
-        {/* Animated indicators (Open pulsing rings instead of solid pulsing dots) */}
-        <g stroke={pulseColor} strokeWidth="0.75" fill="none">
-          <circle cx="200" cy="300" className="node-pulse-1" />
-          <circle cx="700" cy="450" className="node-pulse-2" />
-          <circle cx="400" cy="150" className="node-pulse-3" />
-          <circle cx="850" cy="600" className="node-pulse-4" />
+        {/* Static node indicators (no animation) */}
+        <g stroke={nodeColor} strokeWidth="0.75" fill="none" opacity="0.5">
+          <circle cx="200" cy="300" r="4" />
+          <circle cx="700" cy="450" r="4" />
+          <circle cx="400" cy="150" r="4" />
+          <circle cx="850" cy="600" r="4" />
         </g>
       </svg>
     </div>
   );
 };
-

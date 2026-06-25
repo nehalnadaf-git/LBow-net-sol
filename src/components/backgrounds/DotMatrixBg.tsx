@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 
@@ -53,11 +53,12 @@ export const DotMatrixBg: React.FC<DotMatrixBgProps> = ({ isLight = false }) => 
             <rect width="100%" height="100%" fill="url(#grid-vignette-fade)" />
           </mask>
 
-          {/* Film Grain Noise filter for high-end textured look */}
-          <filter id="premium-noise-filter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="matrix" values={`0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 ${isLight ? 0.007 : 0.015} 0`} />
-          </filter>
+          {/* Lightweight static grain pattern */}
+          <pattern id="dotmatrix-grain" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
+            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
+            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
+          </pattern>
 
           {/* Premium Gradient for brackets */}
           <linearGradient id="bracket-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -66,8 +67,8 @@ export const DotMatrixBg: React.FC<DotMatrixBgProps> = ({ isLight = false }) => 
           </linearGradient>
         </defs>
         
-        {/* Film grain noise rect */}
-        <rect width="100%" height="100%" filter="url(#premium-noise-filter)" className="opacity-70" />
+        {/* Static grain texture */}
+        <rect width="100%" height="100%" fill="url(#dotmatrix-grain)" />
 
         {/* Repeating technical grid pattern with vignette fade mask */}
         <rect width="100%" height="100%" fill="url(#technical-grid-pattern)" mask="url(#grid-fade-mask)" />
@@ -114,4 +115,3 @@ export const DotMatrixBg: React.FC<DotMatrixBgProps> = ({ isLight = false }) => 
     </div>
   );
 };
-

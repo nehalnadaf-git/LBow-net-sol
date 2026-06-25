@@ -37,7 +37,7 @@ const Footer = () => {
 
         {/* Center Giant Typographic Title */}
         <div className="mb-12 md:mb-20">
-          <h2 className="font-heading font-black text-[13.5vw] md:text-[9.5rem] lg:text-[11.5rem] xl:text-[13rem] tracking-[-0.05em] leading-none select-none transition-all duration-700 hover:tracking-[-0.03em] cursor-default text-white">
+          <h2 className="font-heading font-black text-[13.5vw] md:text-[9.5rem] lg:text-[11.5rem] xl:text-[13rem] tracking-[-0.05em] leading-none select-none transition-[letter-spacing] duration-700 hover:tracking-[-0.03em] cursor-default text-white">
             lbow network
           </h2>
         </div>

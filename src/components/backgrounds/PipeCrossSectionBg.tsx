@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 
@@ -27,7 +27,7 @@ export const PipeCrossSectionBg: React.FC<PipeCrossSectionBgProps> = ({ isLight 
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke={gridColor} strokeWidth="0.5" />
           </pattern>
 
-          {/* Vignette mask to fade grid towards center to avoid overlapping text layouts */}
+          {/* Vignette mask to fade grid towards center */}
           <radialGradient id="grid-vignette" cx="50%" cy="50%" r="70%">
             <stop offset="0%" stopColor="white" stopOpacity="0.4" />
             <stop offset="60%" stopColor="white" stopOpacity="0.8" />
@@ -37,15 +37,16 @@ export const PipeCrossSectionBg: React.FC<PipeCrossSectionBgProps> = ({ isLight 
             <rect width="100%" height="100%" fill="url(#grid-vignette)" />
           </mask>
 
-          {/* Film Grain Noise filter for high-end textured look */}
-          <filter id="blueprint-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="matrix" values={`0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 ${isLight ? 0.006 : 0.012} 0`} />
-          </filter>
+          {/* Lightweight static grain pattern */}
+          <pattern id="blueprint-grain" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
+            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
+            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
+          </pattern>
         </defs>
 
-        {/* Film grain noise rect */}
-        <rect width="100%" height="100%" filter="url(#blueprint-noise)" className="opacity-70" />
+        {/* Static grain texture */}
+        <rect width="100%" height="100%" fill="url(#blueprint-grain)" />
 
         {/* Technical grid paper backdrop */}
         <rect width="100%" height="100%" fill="url(#technical-grid)" mask="url(#grid-mask)" />
@@ -134,4 +135,3 @@ export const PipeCrossSectionBg: React.FC<PipeCrossSectionBgProps> = ({ isLight 
     </div>
   );
 };
-

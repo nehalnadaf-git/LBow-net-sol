@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 
@@ -20,7 +20,7 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Detailed schematic piping & molecular pattern with ZERO circles/dots */}
+          {/* Detailed schematic piping & molecular pattern */}
           <pattern
             id="hex-pipe-grid"
             width="208"
@@ -58,7 +58,7 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
             <line x1="-6" y1="60" x2="6" y2="60" stroke={strokeColor} strokeWidth="1" />
             <line x1="-6" y1="62" x2="6" y2="62" stroke={strokeColor} strokeWidth="1" />
 
-            {/* Hexagonal Pipe Coupler Joints at major nodes (No circles/dots) */}
+            {/* Hexagonal Pipe Coupler Joints at major nodes */}
             {/* Node 1: (52, 60) */}
             <polygon points="52,48 62,54 62,66 52,72 42,66 42,54" stroke={strokeColor} strokeWidth="0.75" fill="none" />
             <polygon points="52,52 60,56 60,64 52,68 44,64 44,56" stroke={accentColor} strokeWidth="0.5" fill="none" opacity="0.6" />
@@ -78,7 +78,7 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
               <line x1="-4" y1="-7" x2="4" y2="-7" stroke={strokeColor} strokeWidth="0.75" />
             </g>
 
-            {/* Diamond Technical Gauges (No circles/dots) */}
+            {/* Diamond Technical Gauges */}
             {/* Gauge 1: (52, 30) */}
             <g transform="translate(52, 30)" opacity="0.7">
               <polygon points="0,-7 7,0 0,7 -7,0" stroke={strokeColor} strokeWidth="0.75" fill="none" />
@@ -104,7 +104,7 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
               <text x="156" y="108">DIN 8077</text>
               
               {/* Chemical chain details */}
-              <text x="104" y="24" fontSize="5" fill={accentColor} opacity="0.3">-[CHâ‚‚-CH(CHâ‚ƒ)]n-</text>
+              <text x="104" y="24" fontSize="5" fill={accentColor} opacity="0.3">-[CH₂-CH(CH₃)]n-</text>
               <text x="104" y="106" fontSize="5" fill={accentColor} opacity="0.3">SDR 6 / PN20</text>
             </g>
 
@@ -139,18 +139,19 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
             <stop offset="100%" stopColor="white" stopOpacity="0.15" />
           </radialGradient>
           <mask id="hex-mask">
-            <rect width="100%" height="100%" fill="url(#hex-pipe-grid)" mask="url(#hex-mask)" />
+            <rect width="100%" height="100%" fill="url(#hex-vignette)" />
           </mask>
 
-          {/* Film Grain Noise filter for high-end textured look */}
-          <filter id="hex-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="matrix" values={`0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 ${isLight ? 0.007 : 0.015} 0`} />
-          </filter>
+          {/* Lightweight static grain pattern */}
+          <pattern id="hex-grain" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
+            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
+            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
+          </pattern>
         </defs>
 
-        {/* Film grain noise rect */}
-        <rect width="100%" height="100%" filter="url(#hex-noise)" className="opacity-70" />
+        {/* Static grain texture */}
+        <rect width="100%" height="100%" fill="url(#hex-grain)" />
 
         {/* Hex grid with radial vignette mask */}
         <rect width="100%" height="100%" fill="url(#hex-pipe-grid)" mask="url(#hex-mask)" />
@@ -158,4 +159,3 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
     </div>
   );
 };
-
