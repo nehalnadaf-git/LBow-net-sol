@@ -15,7 +15,10 @@ const ScrollToTop = () => {
   }, []);
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // On desktop Lenis intercepts the scroll and applies its own smooth-scroll;
+    // passing behavior:'smooth' here would create a double-smooth conflict.
+    // On touch/mobile Lenis is in pass-through mode, so window.scrollTo is fine.
+    window.scrollTo({ top: 0 });
   };
 
   return (

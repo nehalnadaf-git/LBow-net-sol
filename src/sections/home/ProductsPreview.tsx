@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react';
 import { HexGridBg } from '../../components/backgrounds/HexGridBg';
 
 /* ─────────────────────────────────── data ──────────────────────────────── */
@@ -19,12 +20,14 @@ const products = [
 // Triple the set so the marquee loops seamlessly in both directions
 const loopedProducts = [...products, ...products, ...products];
 
-/* ─────────────────────────────── constants ─────────────────────────────── */
-const GAP          = 16;   // px gap between cards (tighter on mobile)
-const AUTO_SPEED   = 40;   // px / sec — normal auto-slide speed
-const HOVER_FACTOR = 0.3;  // fraction of speed while hovering (desktop)
+/* ───────────────────────────── constants ───────────────────── */
+const GAP            = 16;   // px gap between cards
+const AUTO_SPEED     = 55;   // px/sec — desktop auto-slide speed (raised from 40)
+const MOBILE_SPEED   = 42;   // px/sec — mobile (cards are narrower)
+const HOVER_FACTOR   = 0.15; // fraction of speed while hovering (nearly stopped)
+const SPEED_LERP     = 0.06; // smooth speed transitions on hover/leave
 
-/* ─────────────────────────────── helpers ───────────────────────────────── */
+/* ────────────────────────────── helpers ────────────────────── */
 function calcCardWidth(): number {
   if (typeof window === 'undefined') return 300;
   const vw = window.innerWidth;
@@ -44,20 +47,25 @@ const ProductCard = ({ product, width }: { product: Product; width: number }) =>
   >
     {/* Image area */}
     <div className="h-44 sm:h-52 lg:h-60 overflow-hidden relative pointer-events-none">
-      <img
+      <Image
         src={product.image}
         alt={product.name}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
         draggable={false}
-        loading="lazy"
+        sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 320px"
       />
       {/* Green shimmer accent on hover */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#4ADE80] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      {/* Category badge */}
-      <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
-        <span className="font-body font-medium text-[0.6rem] uppercase text-[#A6A6A6] tracking-[0.06em]">
-          {product.category}
-        </span>
+      {/* Category badge — responsive, overflow-safe, single line guaranteed */}
+      <div className="absolute bottom-3 left-3 right-3 flex">
+        <div className="flex items-center gap-1.5 px-2 py-1 sm:px-2.5 sm:py-1 rounded-full bg-black/80 border border-white/10 max-w-full min-w-0">
+          {/* Green accent dot */}
+          <span className="flex-shrink-0 w-1 h-1 rounded-full bg-[#4ADE80]" />
+          <span className="font-body font-semibold text-[0.58rem] sm:text-[0.62rem] uppercase text-[#CCCCCC] tracking-[0.07em] truncate whitespace-nowrap leading-none">
+            {product.category}
+          </span>
+        </div>
       </div>
     </div>
 
@@ -94,10 +102,10 @@ const ProductsPreview = () => {
   const setW     = useRef(0);    // width of ONE products set
 
   // Live behavior flags (refs so ticker never needs re-registration)
-  const hovered  = useRef(false);
-  const dragging = useRef(false);
-  const momentum = useRef<gsap.core.Tween | null>(null);
-  const tickerAdded = useRef(false);
+  const hovered     = useRef(false);
+  const dragging    = useRef(false);
+  const momentum    = useRef<gsap.core.Tween | null>(null);
+  const currentSpd  = useRef(AUTO_SPEED); // lerped speed for smooth transitions
 
   // Pointer drag tracking
   const ptrX0 = useRef(0);
@@ -125,49 +133,58 @@ const ProductsPreview = () => {
     while (pos.current.x < -(s * 1.5)) pos.current.x += s;
   }, []);
 
-  /* ── Apply current pos to DOM ────────────────────────────────────────── */
+  /* ── Apply current pos to DOM — direct transform3d, no GSAP overhead per frame ── */
   const applyPos = useCallback(() => {
     if (trackRef.current) {
-      gsap.set(trackRef.current, { x: pos.current.x });
+      // transform3d promotes element to GPU compositor layer — zero layout cost
+      trackRef.current.style.transform = `translate3d(${pos.current.x}px,0,0)`;
     }
   }, []);
 
-  /* ── GSAP ticker — uses deltaTime for frame-rate independence ─────────── */
+  /* ── GSAP ticker — frame-rate independent, lag-smoothing disabled ──────── */
   useEffect(() => {
     refreshDimensions();
-
-    // Guard: ensure setW is computed before starting
     if (setW.current === 0) return;
+
+    // Disable GSAP's lag smoothing — prevents the carousel from lurching
+    // when the browser tab regains focus after being backgrounded
+    gsap.ticker.lagSmoothing(0);
 
     // Start in the middle clone set
     pos.current.x = -setW.current;
     applyPos();
 
+    // Determine base speed based on viewport (mobile gets slightly slower)
+    const baseSpeed = () => window.innerWidth < 640 ? MOBILE_SPEED : AUTO_SPEED;
+
     const tick = (_time: number, deltaTime: number) => {
       if (dragging.current) return;
-      // deltaTime is in ms; convert to seconds for px/sec calculation
-      const dtSec = deltaTime / 1000;
-      const spd = hovered.current ? AUTO_SPEED * HOVER_FACTOR : AUTO_SPEED;
-      pos.current.x -= spd * dtSec;
+
+      // deltaTime from GSAP ticker is in milliseconds
+      const dtSec = Math.min(deltaTime / 1000, 0.05); // cap at 50ms to avoid huge jumps on tab restore
+
+      // Lerp current speed towards target — smooth hover slow-down/speed-up
+      const targetSpd = hovered.current
+        ? baseSpeed() * HOVER_FACTOR
+        : baseSpeed();
+      currentSpd.current += (targetSpd - currentSpd.current) * SPEED_LERP;
+
+      pos.current.x -= currentSpd.current * dtSec;
       clamp();
       applyPos();
     };
 
     gsap.ticker.add(tick);
-    tickerAdded.current = true;
 
     const onResize = () => {
       refreshDimensions();
-      // Recalculate setW and clamp position
-      if (setW.current > 0) {
-        clamp();
-        applyPos();
-      }
+      if (setW.current > 0) { clamp(); applyPos(); }
     };
     window.addEventListener('resize', onResize);
 
     return () => {
       gsap.ticker.remove(tick);
+      gsap.ticker.lagSmoothing(500, 33); // restore GSAP default on unmount
       window.removeEventListener('resize', onResize);
     };
   }, [refreshDimensions, clamp, applyPos]);
@@ -187,13 +204,13 @@ const ProductsPreview = () => {
     return () => obs.disconnect();
   }, []);
 
-  /* ── Arrow navigation ─────────────────────────────────────────────────── */
+  /* ── Arrow navigation ───────────────────────────────────────── */
   const arrowSlide = useCallback((dir: 1 | -1) => {
     if (momentum.current) momentum.current.kill();
     const target = pos.current.x + dir * -(cw.current + GAP);
     momentum.current = gsap.to(pos.current, {
       x: target,
-      duration: 0.55,
+      duration: 0.45,
       ease: 'power3.out',
       onUpdate: () => { clamp(); applyPos(); },
     });
@@ -232,11 +249,11 @@ const ProductsPreview = () => {
 
     if (totalMove < 6) return; // plain tap — auto-slide continues
 
-    // Momentum fling
-    const fling = Math.sign(vel.current) * Math.min(Math.abs(vel.current * 600), 480);
+    // Momentum fling — faster cap + higher multiplier for snappier mobile swipe
+    const fling = Math.sign(vel.current) * Math.min(Math.abs(vel.current * 700), 700);
     momentum.current = gsap.to(pos.current, {
       x: pos.current.x + fling,
-      duration: 0.8,
+      duration: 0.75,
       ease: 'power3.out',
       onUpdate: () => { clamp(); applyPos(); },
     });
@@ -283,6 +300,7 @@ const ProductsPreview = () => {
           {/* Draggable overflow viewport */}
           <div
             className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
+            style={{ touchAction: 'pan-y' }}  // iOS: allow vertical page scroll, JS handles horizontal drag
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -298,6 +316,30 @@ const ProductsPreview = () => {
               ))}
             </div>
           </div>
+
+          {/* Arrow navigation — desktop + keyboard */}
+          <button
+            onClick={() => arrowSlide(1)}
+            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10
+                       w-10 h-10 rounded-full bg-[#0A0A0B]/90 border border-white/10
+                       items-center justify-center text-[#EEEEEE]
+                       hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
+                       transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"
+            aria-label="Previous product"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            onClick={() => arrowSlide(-1)}
+            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10
+                       w-10 h-10 rounded-full bg-[#0A0A0B]/90 border border-white/10
+                       items-center justify-center text-[#EEEEEE]
+                       hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
+                       transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"
+            aria-label="Next product"
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
 
         {/* ── Swipe hint — mobile only ───────────────────────────────── */}

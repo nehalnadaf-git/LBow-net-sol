@@ -57,7 +57,7 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-all duration-400 ${
           scrolled
-            ? 'bg-[#0A0A0B]/95 backdrop-blur-md border-b border-white/5'
+            ? 'bg-[#0A0A0B]/98 border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
@@ -116,7 +116,9 @@ const Navbar = () => {
             className={`md:hidden p-2 transition-colors duration-300 ${
               isLightTheme ? 'text-[#0A0A0B]' : 'text-[#EEEEEE]'
             }`}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -125,6 +127,9 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
+        id="mobile-nav"
+        role="navigation"
+        aria-label="Mobile navigation"
         className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col transition-all duration-400 md:hidden ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}

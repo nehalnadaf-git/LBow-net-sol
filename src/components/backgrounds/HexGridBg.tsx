@@ -1,15 +1,24 @@
 'use client'
 
-import React from 'react';
+import React, { useId } from 'react';
 
 interface HexGridBgProps {
   isLight?: boolean;
 }
 
 export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
+  const uid = useId();
   const strokeColor = isLight ? 'rgba(30,32,33,0.06)' : 'rgba(238,238,238,0.045)';
   const accentColor = isLight ? '#2E7D32' : '#4ADE80';
   const labelColor = isLight ? 'rgba(30,32,33,0.25)' : 'rgba(238,238,238,0.18)';
+
+  // Unique IDs per instance to prevent SVG defs collision
+  const ids = {
+    pipeGrid: `${uid}-hex-pipe-grid`,
+    vignette: `${uid}-hex-vignette`,
+    mask: `${uid}-hex-mask`,
+    grain: `${uid}-hex-grain`,
+  };
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none">
@@ -22,7 +31,7 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
         <defs>
           {/* Detailed schematic piping & molecular pattern */}
           <pattern
-            id="hex-pipe-grid"
+            id={ids.pipeGrid}
             width="208"
             height="120"
             patternUnits="userSpaceOnUse"
@@ -133,28 +142,19 @@ export const HexGridBg: React.FC<HexGridBgProps> = ({ isLight = false }) => {
           </pattern>
 
           {/* Vignette mask to fade grid towards screen edges */}
-          <radialGradient id="hex-vignette" cx="50%" cy="50%" r="70%">
+          <radialGradient id={ids.vignette} cx="50%" cy="50%" r="70%">
             <stop offset="0%" stopColor="white" stopOpacity="1" />
             <stop offset="50%" stopColor="white" stopOpacity="0.8" />
             <stop offset="100%" stopColor="white" stopOpacity="0.15" />
           </radialGradient>
-          <mask id="hex-mask">
-            <rect width="100%" height="100%" fill="url(#hex-vignette)" />
+          <mask id={ids.mask}>
+            <rect width="100%" height="100%" fill={`url(#${ids.vignette})`} />
           </mask>
 
-          {/* Lightweight static grain pattern */}
-          <pattern id="hex-grain" width="4" height="4" patternUnits="userSpaceOnUse">
-            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
-            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
-            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
-          </pattern>
         </defs>
 
-        {/* Static grain texture */}
-        <rect width="100%" height="100%" fill="url(#hex-grain)" />
-
         {/* Hex grid with radial vignette mask */}
-        <rect width="100%" height="100%" fill="url(#hex-pipe-grid)" mask="url(#hex-mask)" />
+        <rect width="100%" height="100%" fill={`url(#${ids.pipeGrid})`} mask={`url(#${ids.mask})`} />
       </svg>
     </div>
   );

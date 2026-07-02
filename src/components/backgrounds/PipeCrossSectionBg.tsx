@@ -1,17 +1,25 @@
 'use client'
 
-import React from 'react';
+import React, { useId } from 'react';
 
 interface PipeCrossSectionBgProps {
   isLight?: boolean;
 }
 
 export const PipeCrossSectionBg: React.FC<PipeCrossSectionBgProps> = ({ isLight = false }) => {
+  const uid = useId();
   const strokeColor = isLight ? 'rgba(30,32,33,0.06)' : 'rgba(238,238,238,0.04)';
   const accentStrokeColor = isLight ? 'rgba(46,125,50,0.35)' : 'rgba(74,222,128,0.3)';
   const labelColor = isLight ? 'rgba(30,32,33,0.3)' : 'rgba(238,238,238,0.25)';
   const labelColorActive = isLight ? '#2E7D32' : '#4ADE80';
   const gridColor = isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.015)';
+
+  const ids = {
+    grid: `${uid}-cs-grid`,
+    vignette: `${uid}-cs-vignette`,
+    mask: `${uid}-cs-mask`,
+    grain: `${uid}-cs-grain`,
+  };
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none">
@@ -23,33 +31,24 @@ export const PipeCrossSectionBg: React.FC<PipeCrossSectionBgProps> = ({ isLight 
       >
         <defs>
           {/* Technical grid paper pattern */}
-          <pattern id="technical-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <pattern id={ids.grid} width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke={gridColor} strokeWidth="0.5" />
           </pattern>
 
           {/* Vignette mask to fade grid towards center */}
-          <radialGradient id="grid-vignette" cx="50%" cy="50%" r="70%">
+          <radialGradient id={ids.vignette} cx="50%" cy="50%" r="70%">
             <stop offset="0%" stopColor="white" stopOpacity="0.4" />
             <stop offset="60%" stopColor="white" stopOpacity="0.8" />
             <stop offset="100%" stopColor="white" stopOpacity="1" />
           </radialGradient>
-          <mask id="grid-mask">
-            <rect width="100%" height="100%" fill="url(#grid-vignette)" />
+          <mask id={ids.mask}>
+            <rect width="100%" height="100%" fill={`url(#${ids.vignette})`} />
           </mask>
 
-          {/* Lightweight static grain pattern */}
-          <pattern id="blueprint-grain" width="4" height="4" patternUnits="userSpaceOnUse">
-            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
-            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
-            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
-          </pattern>
         </defs>
 
-        {/* Static grain texture */}
-        <rect width="100%" height="100%" fill="url(#blueprint-grain)" />
-
         {/* Technical grid paper backdrop */}
-        <rect width="100%" height="100%" fill="url(#technical-grid)" mask="url(#grid-mask)" />
+        <rect width="100%" height="100%" fill={`url(#${ids.grid})`} mask={`url(#${ids.mask})`} />
 
         {/* CAD Blueprint Top Right */}
         <g transform="translate(850, 200)">

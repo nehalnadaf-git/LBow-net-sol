@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -189,10 +190,12 @@ const AboutIntro = () => {
             <div className="absolute -top-px -left-px -right-px -bottom-px rounded-xl shadow-[inset_0_0_60px_rgba(46,125,50,0.07)] z-10 pointer-events-none" />
 
             <div className="overflow-hidden rounded-xl">
-              <img
+              <Image
                 className="about-image w-full h-auto object-cover scale-[1.12] will-change-transform"
                 src="/images/service-ppr-installation.webp"
                 alt="Green PPR pipe installations in a Bangalore factory"
+                width={800}
+                height={600}
                 loading="lazy"
               />
             </div>

@@ -1,14 +1,20 @@
 'use client'
 
-import React from 'react';
+import React, { useId } from 'react';
 
 interface PipeFlowBgProps {
   isLight?: boolean;
 }
 
 export const PipeFlowBg: React.FC<PipeFlowBgProps> = ({ isLight = false }) => {
+  const uid = useId();
   const strokeColor = isLight ? 'rgba(30,32,33,0.05)' : 'rgba(238,238,238,0.035)';
   const flowColor = isLight ? 'rgba(46, 125, 50, 0.30)' : 'rgba(74, 222, 128, 0.30)';
+
+  const ids = {
+    fadeGrad: `${uid}-flow-fade-grad`,
+    grain: `${uid}-flow-grain`,
+  };
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none">
@@ -20,26 +26,17 @@ export const PipeFlowBg: React.FC<PipeFlowBgProps> = ({ isLight = false }) => {
       >
         <defs>
           {/* Linear Gradients to gracefully fade paths towards borders */}
-          <linearGradient id="flow-fade-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id={ids.fadeGrad} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="transparent" />
             <stop offset="12%" stopColor={strokeColor} />
             <stop offset="88%" stopColor={strokeColor} />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
 
-          {/* Lightweight static grain pattern */}
-          <pattern id="flow-grain" width="4" height="4" patternUnits="userSpaceOnUse">
-            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
-            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
-            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
-          </pattern>
         </defs>
 
-        {/* Static grain texture */}
-        <rect width="100%" height="100%" fill="url(#flow-grain)" />
-
         {/* Static fluid flow lines */}
-        <g stroke="url(#flow-fade-grad)" fill="none">
+        <g stroke={`url(#${ids.fadeGrad})`} fill="none">
           {/* Flow 1: Top wave — outer wall */}
           <path d="M -100 150 C 200 50, 400 250, 700 100 C 850 25, 950 120, 1100 80" strokeWidth="1.5" />
           {/* Flow 1: inner wall */}

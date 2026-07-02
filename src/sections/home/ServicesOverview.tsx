@@ -127,7 +127,7 @@ const ServicesOverview = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   {/* Icon badge */}
-                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center z-10">
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center z-10">
                     <Icon size={16} className="text-[#4ADE80] sm:hidden" />
                     <Icon size={18} className="text-[#4ADE80] hidden sm:block" />
                   </div>

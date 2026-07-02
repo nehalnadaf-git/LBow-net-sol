@@ -1,14 +1,21 @@
 'use client'
 
-import React from 'react';
+import React, { useId } from 'react';
 
 interface PipeTopologyBgProps {
   isLight?: boolean;
 }
 
 export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false }) => {
+  const uid = useId();
   const strokeColor = isLight ? 'rgba(30,32,33,0.06)' : 'rgba(238,238,238,0.04)';
   const nodeColor = isLight ? 'rgba(46, 125, 50, 0.35)' : 'rgba(46, 125, 50, 0.25)';
+
+  const ids = {
+    fadeH: `${uid}-pipe-fade-h`,
+    fadeV: `${uid}-pipe-fade-v`,
+    grain: `${uid}-topo-grain`,
+  };
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none">
@@ -20,49 +27,39 @@ export const PipeTopologyBg: React.FC<PipeTopologyBgProps> = ({ isLight = false 
       >
         <defs>
           {/* Edge Fading Linear Gradients for pipelines */}
-          <linearGradient id="pipe-fade-h" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id={ids.fadeH} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="transparent" />
             <stop offset="10%" stopColor={strokeColor} />
             <stop offset="90%" stopColor={strokeColor} />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
 
-          <linearGradient id="pipe-fade-v" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={ids.fadeV} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="transparent" />
             <stop offset="15%" stopColor={strokeColor} />
             <stop offset="85%" stopColor={strokeColor} />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
-
-          {/* Lightweight static grain pattern */}
-          <pattern id="topo-grain" width="4" height="4" patternUnits="userSpaceOnUse">
-            <rect width="1" height="1" x="0" y="2" fill={isLight ? 'rgba(30,32,33,0.03)' : 'rgba(238,238,238,0.015)'} />
-            <rect width="1" height="1" x="2" y="0" fill={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.01)'} />
-            <rect width="1" height="1" x="3" y="3" fill={isLight ? 'rgba(30,32,33,0.025)' : 'rgba(238,238,238,0.012)'} />
-          </pattern>
         </defs>
-
-        {/* Static grain texture */}
-        <rect width="100%" height="100%" fill="url(#topo-grain)" />
 
         {/* Pipeline network lines (static) */}
         <g fill="none" strokeLinecap="round" strokeLinejoin="round">
           {/* Main pipeline 1 */}
-          <path d="M -50 300 H 200 L 250 350 V 500 H 450 L 500 450 V 200 H 700 L 750 250 V 450 H 1050" stroke="url(#pipe-fade-h)" strokeWidth="1.5" />
+          <path d="M -50 300 H 200 L 250 350 V 500 H 450 L 500 450 V 200 H 700 L 750 250 V 450 H 1050" stroke={`url(#${ids.fadeH})`} strokeWidth="1.5" />
           
           {/* Parallel pipeline 1 offset */}
-          <path d="M -50 285 H 190 L 235 330 V 490 H 440 L 490 440 V 215 H 690 L 735 260 V 465 H 1050" stroke="url(#pipe-fade-h)" strokeWidth="0.75" />
+          <path d="M -50 285 H 190 L 235 330 V 490 H 440 L 490 440 V 215 H 690 L 735 260 V 465 H 1050" stroke={`url(#${ids.fadeH})`} strokeWidth="0.75" />
 
           {/* Secondary branch 2 */}
-          <path d="M 400 -50 V 150 L 450 200 H 500" stroke="url(#pipe-fade-v)" strokeWidth="1.25" />
-          <path d="M 450 200 L 350 300 H 100 V 450 L 50 500 V 850" stroke="url(#pipe-fade-v)" strokeWidth="1.25" />
+          <path d="M 400 -50 V 150 L 450 200 H 500" stroke={`url(#${ids.fadeV})`} strokeWidth="1.25" />
+          <path d="M 450 200 L 350 300 H 100 V 450 L 50 500 V 850" stroke={`url(#${ids.fadeV})`} strokeWidth="1.25" />
 
           {/* High-pressure loop */}
           <path d="M 700 100 H 850 L 900 150 V 600 L 850 650 H 600 L 550 600 V 550" stroke={strokeColor} strokeWidth="1.5" />
           <path d="M 685 115 H 840 L 885 160 V 590 L 840 635 H 610 L 565 590 V 560" stroke={strokeColor} strokeWidth="0.75" />
 
           {/* Bottom branch */}
-          <path d="M 250 850 V 600 L 300 550 H 550" stroke="url(#pipe-fade-v)" strokeWidth="1.25" />
+          <path d="M 250 850 V 600 L 300 550 H 550" stroke={`url(#${ids.fadeV})`} strokeWidth="1.25" />
         </g>
 
         {/* Junction Nodes (static crosshair ticks) */}

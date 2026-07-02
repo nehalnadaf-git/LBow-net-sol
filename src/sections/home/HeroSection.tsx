@@ -28,8 +28,8 @@ const HeroSection = () => {
       scrollIndicatorRef.current,
       scrollIndicatorDesktopRef.current,
     ], { opacity: 0 });
-    gsap.set([labelRef.current, subtitleRef.current, ctaRef.current,
-      scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], { y: 16 });
+    gsap.set([labelRef.current, subtitleRef.current, ctaRef.current], { y: 16 });
+    gsap.set([scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], { y: 16, xPercent: -50 });
     gsap.set([line1Ref.current, line2Ref.current, line3Ref.current], { y: 28 });
 
     const tl = gsap.timeline({ delay: 0.3 });
@@ -85,43 +85,29 @@ const HeroSection = () => {
       {/* Subtle Background engineering grid */}
       <DotMatrixBg isLight={true} />
 
-      {/* Premium Backlight Mesh Glow behind 3D Pipes (Vibrant green blending) */}
+      {/* Backlight glow behind 3D Pipes — plain CSS radial-gradient, zero GPU filter cost */}
       {/* Desktop Spotlight */}
-      <div className="hidden md:block absolute right-[8%] top-[8%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-[#2E7D32]/40 via-[#4ADE80]/30 to-[#A5D6A7]/20 blur-[120px] pointer-events-none z-0" />
+      <div className="hidden md:block absolute right-[8%] top-[8%] w-[700px] h-[700px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(46,125,50,0.18) 0%, rgba(74,222,128,0.10) 35%, rgba(165,214,167,0.04) 65%, transparent 100%)' }}
+      />
       {/* Mobile Spotlight */}
-      <div className="block md:hidden absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 w-[390px] h-[390px] rounded-full bg-gradient-to-br from-[#2E7D32]/45 via-[#4ADE80]/35 to-[#A5D6A7]/25 blur-[75px] pointer-events-none z-0" />
+      <div className="block md:hidden absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 w-[390px] h-[390px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(46,125,50,0.20) 0%, rgba(74,222,128,0.10) 40%, transparent 70%)' }}
+      />
 
       {/* 3D Background */}
       <PPRPipes3D />
 
       {/* Hero Content */}
       <div className="absolute bottom-0 left-0 right-0 z-20 w-full flex flex-col items-start md:absolute md:top-1/2 md:-translate-y-1/2 md:left-[8%] md:bottom-auto md:right-auto md:w-auto md:max-w-xl md:mx-0">
-        {/* Full-bleed bottom gradient blur overlay (Mobile only, no borders or margins) */}
-        <div className="w-full relative px-6 pb-12 pt-20 md:p-0 md:bg-transparent md:border-none md:rounded-none md:shadow-none flex flex-col items-start bg-transparent overflow-hidden">
+        {/* Full-bleed bottom gradient overlay with larger bottom padding to clear the scroll indicator */}
+        <div className="w-full relative px-6 pb-28 pt-20 md:p-0 md:bg-transparent md:border-none md:rounded-none md:shadow-none flex flex-col items-start bg-transparent overflow-hidden">
           
-          {/* Progressive Multi-Layer Gradient Blur (Mobile only, edge-to-edge) */}
-          {/* Layer 1: Base blur layer (covers entire block, fades to transparent at top) */}
-          <div 
-            className="absolute inset-0 z-0 bg-[#0A0B0D]/30 backdrop-blur-[6px] md:hidden"
+          {/* Single solid gradient overlay — replaces 3 stacked backdrop-blur layers. */}
+          <div
+            className="absolute inset-0 z-0 md:hidden"
             style={{
-              maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
-              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)'
-            }}
-          />
-          {/* Layer 2: Intermediate blur layer (covers bottom 75%) */}
-          <div 
-            className="absolute inset-0 z-0 bg-[#0A0B0D]/20 backdrop-blur-[12px] md:hidden"
-            style={{
-              maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 75%)',
-              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 75%)'
-            }}
-          />
-          {/* Layer 3: Intense bottom frosted glass blur layer (covers bottom 45%) */}
-          <div 
-            className="absolute inset-0 z-0 bg-white/10 backdrop-blur-[24px] md:hidden"
-            style={{
-              maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 45%)',
-              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 45%)'
+              background: 'linear-gradient(to top, rgba(10,11,13,0.85) 0%, rgba(10,11,13,0.50) 60%, rgba(10,11,13,0.0) 100%)'
             }}
           />
 
@@ -131,7 +117,7 @@ const HeroSection = () => {
             {/* Typographic Capsule Badge with live pulsing indicator */}
             <div
               ref={labelRef}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white mb-6 opacity-0 translate-y-5 shadow-sm md:border-[#2E7D32]/10 md:bg-[#2E7D32]/5 md:text-[#2E7D32]"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-white mb-6 shadow-sm md:border-[#2E7D32]/10 md:bg-[#2E7D32]/5 md:text-[#2E7D32]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2E7D32] opacity-75"></span>
@@ -144,14 +130,14 @@ const HeroSection = () => {
             </div>
 
             <h1 className="font-heading font-bold text-white md:text-[#0A0A0B] leading-[1.1] tracking-tight text-left">
-              <div ref={line1Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] opacity-0 translate-y-10">
+              <div ref={line1Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem]">
                 <span className="text-white md:hidden">Piping Solutions</span>
                 <span className="hidden md:inline-block"><span className="metallic-shimmer-text">Piping Solutions</span></span>
               </div>
-              <div ref={line2Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] opacity-0 translate-y-10 mt-1 md:mt-0">
-                for All <span className="font-editorial text-white md:text-[#0A0A0B]">Industrial</span>
+              <div ref={line2Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] mt-1 md:mt-0">
+                for <span className="font-editorial text-white md:text-[#0A0A0B]">Industrial</span>
               </div>
-              <div ref={line3Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] opacity-0 translate-y-10 mt-1 md:mt-0">
+              <div ref={line3Ref} className="text-[1.85rem] xs:text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] mt-1 md:mt-0">
                 <span className="font-editorial">Applications</span>
               </div>
             </h1>
@@ -161,7 +147,7 @@ const HeroSection = () => {
 
             <p
               ref={subtitleRef}
-              className="font-body text-sm xs:text-base md:text-lg text-white/70 md:text-[#434343] max-w-[540px] mt-4 md:mt-1 text-left mx-0 opacity-0 translate-y-5 leading-relaxed"
+              className="font-body text-sm xs:text-base md:text-lg text-white/70 md:text-[#434343] max-w-[540px] mt-4 md:mt-1 text-left mx-0 leading-relaxed"
             >
               Since 2018, delivering premium PPR pipe fittings, PPCH pipelines, and
               cooling tower systems across Bangalore.
@@ -169,7 +155,7 @@ const HeroSection = () => {
 
             <div
               ref={ctaRef}
-              className="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-xs sm:max-w-none mx-0 opacity-0 translate-y-5"
+              className="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-xs sm:max-w-none mx-0"
             >
               <Link
                 href="/products"
@@ -184,35 +170,53 @@ const HeroSection = () => {
                 Get a Free Quote
               </Link>
             </div>
-
-            {/* Scroll to explore indicator — mobile only (desktop version is centered at section bottom) */}
-            <div
-              ref={scrollIndicatorRef}
-              className="flex flex-col items-start gap-2 mt-8 w-full opacity-0 translate-y-5 md:hidden"
-            >
-              <div className="flex flex-col items-start gap-2 pl-2">
-                <div className="w-px h-8 bg-white/20 relative overflow-hidden">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#2E7D32] absolute left-1/2 -translate-x-1/2 scroll-indicator-dot" />
-                </div>
-                <span className="font-body text-[0.7rem] text-white/50 uppercase tracking-wide">
-                  Scroll to explore
-                </span>
-              </div>
-            </div>
+            {/* Scroll indicator spacer for mobile alignment */}
+            <div className="h-4 md:hidden" />
 
           </div>
         </div>
       </div>
 
+      {/* Scroll to explore — mobile only, centered at section bottom */}
+      <div
+        ref={scrollIndicatorRef}
+        className="flex md:hidden absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 opacity-0"
+      >
+        <div className="flex flex-col items-center h-12">
+          <div className="w-[1.5px] bg-gradient-to-b from-white/60 to-transparent scroll-line-anim" />
+          <svg
+            className="w-4 h-4 text-[#4ADE80] scroll-chevron-anim mt-1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+        <span className="font-body text-[0.58rem] text-white/50 uppercase tracking-[0.2em] font-bold">
+          Scroll to explore
+        </span>
+      </div>
+
       {/* Scroll to explore — desktop only, centered at section bottom */}
       <div
         ref={scrollIndicatorDesktopRef}
-        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 opacity-0 translate-y-5"
+        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 opacity-0"
       >
-        <div className="w-px h-10 bg-[#434343]/30 relative overflow-hidden">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2E7D32] absolute left-1/2 -translate-x-1/2 scroll-indicator-dot" />
+        <div className="flex flex-col items-center h-14">
+          <div className="w-[1.5px] bg-gradient-to-b from-[#2E7D32] to-transparent scroll-line-anim" />
+          <svg
+            className="w-4 h-4 text-[#2E7D32] scroll-chevron-anim mt-1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
-        <span className="font-body text-[0.68rem] text-[#434343]/70 uppercase tracking-widest">
+        <span className="font-body text-[0.62rem] text-[#434343]/60 uppercase tracking-[0.24em] font-bold">
           Scroll to explore
         </span>
       </div>

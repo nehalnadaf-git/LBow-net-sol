@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { prefersReducedMotion } from '../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,12 +17,23 @@ const PPRPipes3D = () => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Respect prefers-reduced-motion — skip all WebGL animation for
+    // users with vestibular disorders. The hero still renders (no blank space)
+    // but the 3D pipes are not shown.
+    if (prefersReducedMotion()) return;
+
     // Track WebGL resources for proper garbage collection (memory leak prevention)
     const geometriesToDispose: THREE.BufferGeometry[] = [];
+    const materialsToDispose: THREE.Material[] = [];
 
     const trackGeometry = <T extends THREE.BufferGeometry>(geom: T): T => {
       geometriesToDispose.push(geom);
       return geom;
+    };
+
+    const trackMaterial = <T extends THREE.Material>(mat: T): T => {
+      materialsToDispose.push(mat);
+      return mat;
     };
 
     // 1. Renderer Setup (High-performance WebGL settings)
@@ -162,7 +174,7 @@ const PPRPipes3D = () => {
         // Dark inner hole lined with gold metal threads on the sides
         const innerHole = new THREE.Mesh(
           trackGeometry(new THREE.CylinderGeometry(rThread, rThread, 0.41, 24)),
-          new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+          trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
         );
         innerHole.position.y = 1.41;
         group.add(innerHole);
@@ -518,7 +530,7 @@ const PPRPipes3D = () => {
     // Dark inner hole at the top of the vertical socket
     const vertHole = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
     );
     vertHole.position.set(-0.55, 0.46, 0);
     elbowFitting.add(vertHole);
@@ -609,7 +621,7 @@ const PPRPipes3D = () => {
     // Dark bore hole inside the threaded metal insert
     const metalBoreHole = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.28, 0.28, 0.47, 24)),
-      new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
     );
     metalBoreHole.rotation.z = -Math.PI / 2;
     metalBoreHole.position.set(1.14, -0.55, 0);
@@ -684,7 +696,7 @@ const PPRPipes3D = () => {
     // Dark inner hole at the top of the vertical socket
     const vertHole2 = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
     );
     vertHole2.position.set(-0.55, 0.46, 0);
     elbowFitting2.add(vertHole2);
@@ -719,7 +731,7 @@ const PPRPipes3D = () => {
     // Dark inner hole at the end of the horizontal socket
     const horizHole2 = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
     );
     horizHole2.rotation.z = -Math.PI / 2;
     horizHole2.position.set(0.46, -0.55, 0);
@@ -808,7 +820,8 @@ const PPRPipes3D = () => {
     scene.add(new THREE.AmbientLight(0xffffff, 1.4));
 
     // Warm Key Light (casts soft shadows, optimized for mobile)
-    const shadowSize = window.innerWidth > 768 ? 2048 : 1024;
+    // Shadow map size: 1024 desktop / 512 mobile — sufficient quality, better GPU perf
+    const shadowSize = window.innerWidth > 768 ? 1024 : 512;
     const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.5);
     dirLight1.position.set(-5, 8, 6);
     dirLight1.castShadow = true;
@@ -951,8 +964,9 @@ const PPRPipes3D = () => {
       if (visibilityObserver) visibilityObserver.disconnect();
       renderer.dispose();
       
-      // Dispose all tracked WebGL resources
+      // Dispose all tracked WebGL resources (geometries + materials)
       geometriesToDispose.forEach(geom => geom.dispose());
+      materialsToDispose.forEach(mat => mat.dispose());
 
       // Kill GSAP timelines and ScrollTriggers
       introTl.kill();
