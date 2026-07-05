@@ -379,39 +379,51 @@ const PPRPipes3D = () => {
     introTl.to(elbowFitting2Parent.scale, { x: targetElbow2Scale, y: targetElbow2Scale, z: targetElbow2Scale, ease: 'elastic.out(1.0, 0.65)', duration: 1.6 }, 0.65);
 
     // Create scroll-linked timeline.
-    // Mobile: scrub: true = frame-perfect sync, zero GSAP lag buffer.
-    //   Native scroll momentum provides all the smoothness — no double-lag.
-    // Desktop: scrub: 0.45 — Lenis smooth-scroll provides the smoothness.
+    // ──────────────────────────────────────────────────────────────────────────
+    // KEY FIX: trigger = heroSection (not document.body)
+    //   - Ties the pipe exit ONLY to the hero scrolling away.
+    //   - On mobile, document.body is very long → the pipes used to fade over
+    //     the entire page length, so they were still visible in later sections.
+    //   - With heroSection trigger: pipes fully exit exactly when the hero
+    //     scrolls offscreen — perfect on every screen size.
+    //
+    // Mobile scroll values are tuned separately:
+    //   - Main pipe y: -=2.8 (mobile) vs -=4.5 (desktop) — mobile baseY is 0.4,
+    //     camera at z=11, so shorter travel is enough to exit the viewport.
+    //   - Elbow y offsets reduced proportionally.
+    // ──────────────────────────────────────────────────────────────────────────
     const isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
+    const heroEl = container.closest('section') as HTMLElement | null;
+
     const scrollTl = gsap.timeline({
       scrollTrigger: {
-        trigger: document.body,
+        trigger: heroEl || document.body,
         start: 'top top',
-        end: 'bottom bottom',
+        end: 'bottom top',          // hero fully exited = animation complete
         scrub: isMobileDevice ? true : 0.45,
-        invalidateOnRefresh: true,
+        invalidateOnRefresh: true,  // recalc on resize / orientation change
       }
     });
 
     // Rotate main group as we scroll
     scrollTl.to(scrollGroup.rotation, {
-      y: 0.75,
-      x: -0.2,
+      y: isMobileDevice ? 0.5 : 0.75,
+      x: isMobileDevice ? -0.1 : -0.2,
       ease: 'none'
     }, 0);
 
-    // Slide down and pull deep into background
+    // Slide out and pull into background
     scrollTl.to(scrollGroup.position, {
-      y: '-=4.5',
-      z: -3,
+      y: isMobileDevice ? '-=2.8' : '-=4.5',
+      z: isMobileDevice ? -1.5 : -3,
       ease: 'none'
     }, 0);
 
     // Carry away the floating elbow fittings as we scroll
     scrollTl.to(elbowFittingParent.position, {
-      y: '-=3.0',
-      x: '-=1.2',
-      z: '+=0.8',
+      y: isMobileDevice ? '-=2.0' : '-=3.0',
+      x: isMobileDevice ? '-=0.8' : '-=1.2',
+      z: isMobileDevice ? '+=0.5' : '+=0.8',
       ease: 'none'
     }, 0);
     scrollTl.to(elbowFittingParent.rotation, {
@@ -421,9 +433,9 @@ const PPRPipes3D = () => {
     }, 0);
 
     scrollTl.to(elbowFitting2Parent.position, {
-      y: '-=2.5',
-      x: '-=1.0',
-      z: '+=1.0',
+      y: isMobileDevice ? '-=1.8' : '-=2.5',
+      x: isMobileDevice ? '-=0.7' : '-=1.0',
+      z: isMobileDevice ? '+=0.6' : '+=1.0',
       ease: 'none'
     }, 0);
     scrollTl.to(elbowFitting2Parent.rotation, {
@@ -997,10 +1009,8 @@ const PPRPipes3D = () => {
 
       // Kill GSAP timelines and ScrollTriggers
       introTl.kill();
+      scrollTl.scrollTrigger?.kill();
       scrollTl.kill();
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === document.body) t.kill();
-      });
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
