@@ -8,7 +8,7 @@ import ClientProviders from '@/components/ClientProviders';
 export const metadata: Metadata = {
   title: 'LBow Network Solutions — PPR Pipe Fitting Dealers in Bangalore | T Dasarahalli',
   description:
-    "LBow Network Solutions is Bangalore's trusted PPR pipe fitting dealer and industrial piping solution provider. 10 year warranty. Free delivery above 22K within 22Km. Call +91 9606419076.",
+    "LBow Network Solutions is Bangalore's trusted PPR pipe fitting dealer and industrial piping solution provider. 10 year warranty. Free demo available. Call +91 8123501407.",
   keywords:
     'PPR pipe fittings, PPCH pipe, PPRC chemical pipe, cooling tower pipeline, pipe dealers Bangalore, T Dasarahalli, industrial piping solutions',
   authors: [{ name: 'LBow Network Solutions' }],
@@ -56,7 +56,7 @@ export const viewport: Viewport = {
   themeColor: '#0A0A0B',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  // maximumScale intentionally omitted — pinch-zoom must remain accessible on iOS
 };
 
 const BASE_URL = 'https://lbownetworksolutions.com';
@@ -67,7 +67,7 @@ const localBusinessSchema = {
   name: 'LBow Network Solutions',
   description: 'PPR Pipe Fitting Dealers and Industrial Piping Solution Provider in Bangalore',
   url: BASE_URL,
-  telephone: '+91-9606419076',
+  telephone: '+91-8123501407',
   email: 'lbownetwork9solutions@gmail.com',
   logo: `${BASE_URL}/web-app-manifest-512x512.png`,
   image: `${BASE_URL}/og-image.jpg`,
@@ -114,7 +114,7 @@ const organizationSchema = {
   logo: `${BASE_URL}/web-app-manifest-512x512.png`,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+91-9606419076',
+    telephone: '+91-8123501407',
     contactType: 'customer service',
     availableLanguage: ['English', 'Kannada', 'Hindi'],
   },

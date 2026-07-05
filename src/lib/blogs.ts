@@ -15,134 +15,206 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'ppr-vs-ppch-pipes-industrial-guide',
-    title: 'PPR vs PPCH Pipes: Which One Does Your Industrial System Need?',
+    slug: 'common-industrial-pipe-problems-and-solutions',
+    title: '10 Common Industrial Pipe Problems and How to Fix Them',
     excerpt:
-      'PPR handles hot water up to 95°C. PPCH handles pressure up to 16 bar. The temperature–pressure distinction is the core difference. Here is how to choose the right material for your industrial piping system.',
-    publishedAt: '2025-10-15',
-    readTime: '7 min read',
-    tags: ['PPR Pipes', 'PPCH Pipes', 'Industrial Piping', 'Material Selection'],
-    relatedProducts: ['ppch-industrial-pipeline', 'ppr-pipe-fittings', 'air-compressor-pipeline'],
-    image: '/images/blog-ppr-vs-ppch.webp',
-    metaTitle: 'PPR vs PPCH Pipes: Industrial Selection Guide | LBow Network',
+      'Unexpected pipe failures can halt production, waste materials, and cost factories time and money. Here are the 10 most common industrial pipe problems — from leaking joints to chiller pipeline inefficiency — with practical solutions for each.',
+    publishedAt: '2025-07-05',
+    readTime: '12 min read',
+    tags: ['Industrial Piping', 'Pipe Maintenance', 'PPR Pipes', 'Compressed Air', 'Bangalore'],
+    relatedProducts: ['ppr-green-pipe', 'ppr-blue-pipe', 'pneumatic-fittings', 'brass-ball-valve', 'butterfly-valve'],
+    image: '/images/blog-10-common-industrial-pipe-problems.webp',
+    metaTitle: '10 Common Industrial Pipe Problems and Easy Fixes — LBow Bangalore',
     metaDescription:
-      'PPR vs PPCH pipes for industrial use — temperature vs pressure rating explained. Which material does your factory need? Full guide from LBow Network Solutions.',
+      'Discover the 10 most common industrial pipe problems faced by factories in Bangalore and learn easy solutions. For complex issues, LBow Network Solutions is here to help.',
     keywords: [
-      'PPR vs PPCH pipe',
-      'PPR pipe industrial',
-      'PPCH pipe industrial',
-      'which pipe for compressed air',
-      'industrial pipe selection guide',
+      'industrial pipe problems and solutions',
+      'PPR pipe leaking fix',
+      'pipe fitting failure Bangalore',
+      'compressed air pipeline problems',
+      'PPCH pipe issues',
     ],
-    content: `## The Core Question: Temperature or Pressure?
-
-When selecting a piping material for an industrial system, the two most fundamental parameters are operating temperature and operating pressure. PPR and PPCH are both manufactured from polypropylene — but they are engineered for different sides of this temperature–pressure trade-off.
-
-**PPR pipes are optimised for temperature.** They are rated for continuous service up to 95°C, making them the standard choice for hot water distribution systems, solar water heater connections, central heating circuits, and process lines carrying warm fluids.
-
-**PPCH pipes are optimised for pressure.** Rated for working pressures up to 16 bar, PPCH is the material of choice for compressed air distribution, high-pressure process water lines, pneumatic tool supply networks, and any industrial application requiring higher pressure capability than standard PPR can provide.
-
-Understanding this distinction before specifying your piping system will save you from the expensive mistake of using an under-rated material for your operating conditions.
+    content: `Unexpected pipe failures can **halt production**, waste materials, and cost factories time and money. Industrial plants in Bangalore often face **industrial pipe problems** — from a leaking valve shutting down an assembly line to pressure loss slowing an air compressor. In this article we cover the **10 most common industrial pipe problems** and give practical solutions for each.
 
 ---
 
-## PPR Pipe: What It Is and Where It Excels
+## Problem 1 — Leaking Pipe Joints or Fittings
 
-PPR stands for Polypropylene Random Copolymer. The "random" refers to the molecular arrangement of the polymer chains, which gives PPR a specific combination of properties: good thermal resistance, chemical inertness, and flexibility compared to other polypropylene grades.
+**What It Is:** Leaks at pipe joints or fittings occur when connections fail. In PPR pipes this often happens due to **improper fusion welding**, worn gaskets, or loose threaded joints. Poor installation is a top cause: a bad weld, loose compression fitting, or damage to the fitting can create gaps. Vibration and thermal cycling can gradually loosen fittings. Left unchecked, these leaks waste fluid and can damage equipment.
 
-### Key PPR Specifications
-- **Maximum temperature**: 95°C (continuous service)
-- **Pressure rating**: PN10/PN16 (1.0–1.6 MPa at lower temperatures)
-- **Joining method**: Heat fusion (socket fusion) welding
-- **Colour**: Typically green or grey
+**Easy Fixes:**
+- **Tighten loose fittings:** Check and snug all unions, compression fittings, or flanged joints (but don't overtighten). A slight turn may stop minor leaks.
+- **Re-weld or replace failed joints:** Cut out and re-fuse welded PPR joints using a proper hot-air fusion tool. For broken segments, install a new pipe section with fresh fusion welds.
+- **Use sealant or tape:** For threaded joints, apply fresh Teflon tape or pipe sealant on the threads. This can quickly fix small drips at metal fittings.
+- **Temporary clamps or epoxy:** For small cracks, use an emergency pipe clamp or epoxy putty as a short-term patch. Then schedule a full repair.
+- **Replace worn seals:** If there are O-rings or gaskets in unions, replace them whenever a leak is detected.
 
-### Where PPR Is the Right Choice
-
-**Hot water supply systems**: PPR's 95°C temperature rating makes it the standard material for building hot water supply — residential, commercial, and light industrial. No other plastic pipe material offers this combination of temperature resistance and ease of installation.
-
-**Solar water heater circuits**: The high stagnation temperatures in solar collector circuits (which can briefly exceed 80°C even on hot days) require a pipe material that won't degrade or deform. PPR handles these temperatures reliably.
-
-**Industrial process water at moderate temperatures**: Factories with process heating applications — wash tanks, pre-treatment systems, food processing warm water — benefit from PPR's temperature rating.
-
-**Chemical process lines (mild conditions)**: PPR is chemically resistant to most neutral and mildly acidic or alkaline process fluids. For aggressive chemicals, PPRC (the chemical-grade variant) is the appropriate choice.
-
-**Cooling tower secondary circuits**: Lower-pressure cooling distribution circuits in industrial cooling systems are commonly piped in PPR, where the working pressure is within PPR's rating.
+**When to Call a Professional:** If leaks persist at multiple joints or you suspect widespread poor welding, call a piping expert. Complex repairs — like re-piping a large section — should be handled by professionals to avoid further leaks.
 
 ---
 
-## PPCH Pipe: What It Is and Where It Excels
+## Problem 2 — Pressure Drop in Compressed Air Pipelines
 
-PPCH stands for Polypropylene Copolymer High-pressure. This grade of polypropylene is specifically engineered for greater mechanical strength and higher pressure capability compared to standard PPR.
+**What It Is:** A **pressure drop** means air pressure falls along the pipe run so tools or actuators don't get full pressure. This usually comes from flow restrictions, leaks, or undersized piping in your compressed air system. Common causes include **clogged filters or dryers**, malfunctioning valves or regulators, and too many sharp bends or fittings. In Bangalore's humid conditions, moisture can clog filters or corrode steel lines, worsening pressure loss. Even a few psi drop means higher energy use and poor tool performance.
 
-### Key PPCH Specifications
-- **Maximum working pressure**: Up to 16 bar (1.6 MPa)
-- **Joining method**: Heat fusion welding (socket fusion or electrofusion)
-- **Applications**: Compressed air, high-pressure process water, industrial pneumatics
+**Easy Fixes:**
+- **Clean or replace filters and dryers:** A dirty intake filter or saturated air dryer can choke the flow. Change filters per schedule to avoid blockage.
+- **Check valves and regulators:** Inspect pressure regulators and automatic drain valves for proper operation. Replace any that are sticking or leaking.
+- **Look for leaks:** Spray soapy water on joints or use an ultrasonic leak detector to find and seal leaks.
+- **Upgrade piping if undersized:** Ensure you are using the correct pipe diameter for your flow. Keeping a uniform larger diameter minimizes drop.
+- **Use low-friction pipe:** Replace old black iron lines with PPCH pipes. PPCH has **smoother internal walls** and lower friction, reducing pressure loss significantly.
+- **Optimize layout:** Use a loop design (air flows in two directions) instead of many branches. Minimize 90° elbows and sharp bends.
 
-### Where PPCH Is the Right Choice
-
-**Compressed air distribution systems**: This is PPCH's primary application in industrial settings. Factory compressed air is typically supplied at 6–10 bar, but the distribution system must be rated for maximum compressor output pressure — which can be 10–16 bar for industrial compressors. PPCH's 16 bar rating provides the appropriate safety margin.
-
-**High-pressure process water lines**: Manufacturing processes that use high-pressure water for cleaning, surface treatment, or process purposes require pipework rated to the working pressure of the pump system. Where that pressure exceeds what standard PPR can handle, PPCH is specified.
-
-**Pneumatic tool supply networks**: In machine shops, automotive plants, and fabrication facilities, PPCH distribution pipework supplies air to pneumatic tools, presses, and automated equipment throughout the facility.
-
-**Chilled water high-pressure circuits**: Industrial chiller systems, particularly those serving large cooling loads, operate at elevated pressures. PPCH is specified for the primary chiller circuits where pressure exceeds standard PPR rating.
+**When to Call a Professional:** If you still have low pressure after these checks — especially if multiple units are affected — call an air system specialist. System-wide issues like poor design, hidden leaks, or an undersized compressor need expert analysis.
 
 ---
 
-## Direct Comparison: PPR vs PPCH
+## Problem 3 — Pipe Corrosion and Rust in Metal Systems
 
-| Property | PPR | PPCH |
-|---|---|---|
-| Max Temperature | 95°C | Lower (suited to ambient–moderate range) |
-| Max Pressure | ~1.6 MPa at lower temps | Up to 16 bar |
-| Primary Application | Hot water, process water | Compressed air, high-pressure systems |
-| Joining Method | Heat fusion | Heat fusion |
-| Chemical Resistance | Good (neutral/mild) | Good |
-| Internal Corrosion | None | None |
-| Warranty | 10 years | 10 years |
+**What It Is:** Metal pipes (steel, cast iron, brass) **rust and corrode** when exposed to water, chemicals, or humid air. In factories, this often shows up as reddish-brown flakes inside pipes or a rough exterior. Corrosion occurs chemically (e.g. from acidic or chlorinated water) or galvanically (when dissimilar metals touch in a conductive fluid). Once corrosion starts, it weakens the pipe wall and can cause leaks or contamination. Cooling tower water (with chlorine) can eat into metal pipes quickly.
 
----
+**Easy Fixes:**
+- **Inspect and clean:** Routinely inspect metal lines and fittings. Remove surface rust from external pipes. Inside, flush lines with inhibitors or descaling chemicals to remove rust and scale.
+- **Use corrosion inhibitors:** For closed-loop systems, add appropriate corrosion inhibitor chemicals. Maintain pH balance and use biocides to prevent biological corrosion.
+- **Replace corroded sections:** Cut out severely rusted pipe and replace with new pipe. When connecting new metal, isolate dissimilar metals to prevent galvanic corrosion.
+- **Switch to corrosion-resistant materials:** In highly corrosive circuits (cooling towers, chemical lines), consider PPR/PPCH or FRP-lined pipes. **LBow offers FRP lining for chiller and cooling tower lines** — permanently ending the corrosion problem.
 
-## The Critical Mistake to Avoid
-
-The most common error we see in industrial piping projects is specifying PPR for a compressed air system.
-
-Standard PPR pipes are not rated for the working pressures of industrial compressed air systems. Using PPR in a compressed air application is a safety and reliability risk — the pipe may fail under pressure, particularly as the material ages or if operating temperatures are elevated.
-
-For any compressed air application — regardless of line size — specify PPCH.
+**When to Call a Professional:** Call a piping expert if you see multiple leak points from corrosion or if you need to convert a system to lined or plastic piping.
 
 ---
 
-## What About PPRC?
+## Problem 4 — Water Hammer or Pipe Vibration and Noise
 
-PPRC (chemical grade) is a third variant worth mentioning: it has the same temperature range as standard PPR but is specifically formulated for enhanced chemical resistance. PPRC is the right choice for chemical transfer lines, pharmaceutical process lines, and any application where the fluid contains concentrations of acids, alkalis, or solvents that PPR's standard grade may not handle reliably.
+**What It Is:** **Water hammer** is a pressure shock wave that causes loud banging when flow in a pipe stops or reverses suddenly — typically when a valve or pump shuts off too quickly. The momentum of moving fluid "slams" into the closed valve, sending a shock through the pipe. This can loosen joints and even rupture fittings over time. Vibration and noise can also come from turbulent flow or pipes hitting their supports.
 
-For most industrial water service applications, standard PPR is appropriate. For chemical process lines, specify PPRC.
+**Easy Fixes:**
+- **Secure and cushion pipes:** Ensure all pipes are firmly clamped or strapped to the structure. Add sturdy hangers or straps where pipes are loose.
+- **Install water hammer arrestors or air chambers:** Add pipe-mounted arrestors (spring/air-bladder devices) or simple air chambers near quick-closing valves. They absorb the shock wave.
+- **Use slow-closing valves:** Replace fast-acting valves with ones that close slowly — giving fluid time to decelerate.
+- **Pressure relief valves:** In some systems, a pressure relief valve can mitigate shock by opening slightly under a surge.
+- **Soft-start controls:** For pump-fed systems, use soft-start controls or a variable-speed drive.
 
----
-
-## Making the Right Choice for Your System
-
-The selection process is straightforward once you establish two parameters:
-
-1. **What is the maximum operating pressure?** If it exceeds 1.0–1.6 MPa (10–16 bar) or if the system is a compressed air network, choose PPCH.
-
-2. **What is the maximum operating temperature?** If the fluid temperature will reach 80°C or above, ensure PPR (or PPRC) is specified rather than PPCH, which is optimised for the pressure domain.
-
-For systems with both high temperature and high pressure requirements, consult with a piping specialist — a combination of materials or a different approach may be required.
+**When to Call a Professional:** If banging continues after adding arrestors or adjusting valves, call a mechanical expert. Persistent water hammer may require redesigning pipe anchors or professional-grade solutions.
 
 ---
 
-## Get Expert Guidance from LBow Network Solutions
+## Problem 5 — Pipe Blockage or Scaling Inside the Pipe
 
-LBow Network Solutions has 8+ years of experience supplying PPR and PPCH piping to industrial customers across Bangalore and Karnataka. We supply both standard industrial (unbranded) PPR and PPCH pipes and fittings, as well as the Prince Pipes branded range for residential and commercial applications.
+**What It Is:** Over time, pipes can become **blocked by deposits**. In water systems this is often **mineral scale** (calcium carbonate) from hard water, which narrows pipe diameter. Compressed air lines can clog from oil and moisture. Scaling and debris reduce flow and pressure. Bangalore's hard water (rich in calcium/magnesium) makes **lime scale** a very common problem. You may notice flow dropping off or hear whistling from a restricted valve.
 
-If you are unsure which pipe material is appropriate for your system, contact us at **+91 9606419076** or [WhatsApp us](https://wa.me/919606419076) with your system pressure and temperature requirements. We will recommend the right product and provide a competitive quotation with no minimum order quantity.
+**Easy Fixes:**
+- **Flush and descale regularly:** Use chemical descalers or detergents to dissolve mineral buildup. Hydrojetting or pigging can mechanically clear obstructions.
+- **Install filtration:** Put strainers or filters before sensitive equipment to catch debris and rust particles. Clean filters often.
+- **Water treatment:** For water lines, use a water softener to remove hardness minerals before they enter the system.
+- **Scale inhibitors:** In cooling or boiler systems, dose scale inhibitor chemicals to prevent crystal formation.
+- **Replace heavily scaled sections:** If scale has heavily constricted a pipe, cutting out and replacing that section may be the easiest solution.
 
-**Free delivery within 22km of T Dasarahalli, Bangalore.** Courier and freight delivery available for all Karnataka and pan-India locations.`,
+**When to Call a Professional:** If multiple lines are scaling or completely blocked, a pipe cleaning specialist should be called.
+
+---
+
+## Problem 6 — Thermal Expansion Causing Pipe Stress and Cracks
+
+**What It Is:** Pipes carrying hot fluids expand significantly as they heat up. If a pipe run is anchored rigidly at both ends, **thermal expansion** induces huge stress that can crack welds or burst the pipe. PPR plastic pipes expand even more than metal — about 0.15–0.20 mm per metre per °C. A 10 m PPR run heated 50°C will lengthen 75–100 mm. Without room to expand, that force can buckle or crack the pipe. This is especially common in hot-water lines if no expansion joints or loops are provided.
+
+**Easy Fixes:**
+- **Add expansion loops or joints:** Incorporate U-shaped loops or mechanical expansion joints to absorb movement.
+- **Provide sliding supports:** Use pipe supports or hangers that allow the pipe to slide slightly. Do not clamp pipes so tightly that they cannot expand.
+- **Use flexible connectors:** For connections to equipment or between rigid sections, use flexible hoses or bellows to absorb motion.
+- **Adjust layout:** Avoid long straight runs of hot pipe. Break the run with bends or angled sections that can flex.
+- **Insulate hot pipes:** Insulating a hot line slows temperature changes, reducing the rate of expansion.
+
+**When to Call a Professional:** Persistent cracking or bulging from expansion means your system needs a professional redesign. A piping engineer can add the proper joints and anchors in the right places.
+
+---
+
+## Problem 7 — Wrong Pipe Material Selected for the Application
+
+**What It Is:** Using the **incorrect pipe material** for the fluid or environment leads to repeated failures. For example, ordinary PPR pipes used with aggressive acids or hot solvents can degrade or crack. A metal pipe in a corrosive cooling tower line will rust out. Every fluid's chemistry and temperature must match the pipe's material properties. This is one of the most expensive mistakes in industrial piping.
+
+**Easy Fixes:**
+- **Check compatibility:** Review the fluid being carried. If it is corrosive, use a corrosion-resistant material. For hot fluids, use a high-temperature rated pipe.
+- **Use the right plastic:** For compressed air, use PPCH — not standard PPR or PVC (PVC can fail dangerously under air pressure). For chemical lines, use PPRC or PPCH.
+- **Match pressure and temp rating:** Always match the pipe's pressure rating (PN) and temperature rating to your system. Never exceed these specifications.
+- **Replace incompatible sections immediately:** If you find any pipe using the wrong material, replace it before a failure occurs.
+
+**When to Call a Professional:** If the entire system was built with the wrong material, a complete repiping is needed. Call a piping specialist to evaluate and replace all non-compatible piping.
+
+---
+
+## Problem 8 — Poor Pipe Support Causing Sagging or Misalignment
+
+**What It Is:** Pipes need proper **support and alignment**. If hangers are too far apart, too weak, or missing, heavy pipes will sag between supports. Sagging stresses joints and can cause leaks or misaligned flanges. This often appears as low spots in horizontal runs, or pipes leaning to one side. Without solid support, thermal expansion and hydraulic forces can also shift pipes out of place.
+
+**Easy Fixes:**
+- **Add or adjust hangers:** Install supports at recommended spacing (every 1–2 m for PPR pipes, per manufacturer guidelines). Ensure hangers are rated for the pipe weight and temperature.
+- **Tighten straps and clamps:** Inspect all pipe clamps, U-bolts, and hangers and re-tighten them securely to the structure.
+- **Use vibration damping:** If vibration was shaking supports loose, add vibration isolators or rubber pads in the clamps.
+- **Correct misaligned flanges:** Use shims or adjustable supports to re-align piping. Avoid forcing pipes into place at joints.
+- **Anchor strategically:** Fixed anchors should be at pipe ends or branches, with sliding guides in between.
+
+**When to Call a Professional:** If many supports need redesign (for example, in a large ceiling or underground run), call a piping engineer for professional pipe stress analysis and hanger design.
+
+---
+
+## Problem 9 — Fitting Failures Due to Incorrect Installation
+
+**What It Is:** Improperly installed fittings (unions, valves, flanges) often fail prematurely. Examples include over-torqued compression fittings that crack pipes, cross-threaded unions that never seal, or solenoid valves installed backwards. In PPR installations, common mistakes include insufficient heating during fusion or pulling the joint before it cools. **Installation errors** put stress on fittings and cause leaks or cracks from day one.
+
+**Easy Fixes:**
+- **Inspect and re-do bad joints:** Check every fitting for correct alignment and tightness. If a fitting leaks or is loose, dismantle it, clean threads or gasket surfaces, and reinstall correctly.
+- **Follow torque specs:** Tighten threaded or bolted fittings to manufacturer torque values. Too much torque can deform a fitting.
+- **Use correct sealants:** Always apply fresh thread sealant or Teflon tape correctly. Never use general adhesive glues on PPR pipe — only use certified fusion welding.
+- **Check O-rings and gaskets:** Ensure O-rings are correctly seated and lubricated. Replace any that are pinched or aged.
+- **Test new joints:** After installation, pressure-test the system at low pressure to catch bad fittings before full use.
+
+**When to Call a Professional:** Persistent fitting failures means something is systematically wrong. A trained fitter should correct installation errors before more fittings are damaged.
+
+---
+
+## Problem 10 — Chiller or Cooling Tower Pipeline Inefficiency
+
+**What It Is:** Inefficiency in chiller or cooling tower loops often stems from piping issues. In a **chilled water system**, scale and air pockets in pipes reduce flow and heat transfer, making chillers work harder. Corroded metal pipes or poorly insulated lines gain heat, leading to longer chill cycles. In a **cooling tower system**, pipes exposed to open air often corrode or biofoul, reducing water circulation and cooling capacity. A common sign is that the system cannot reach its target temperature.
+
+**Easy Fixes:**
+- **Clean and flush the loop:** Perform a chiller loop flush to remove scale, rust, and algae. Purge all air from the system (open air vents at high points) to ensure full circulation.
+- **Insulate chilled water pipes:** Add proper insulation on chilled and hot-water lines to prevent heat gain or loss.
+- **Check pump and pipe sizing:** Confirm that pumps and pipe diameters are correct for your chiller's flow rate.
+- **Upgrade piping material:** For long-term reliability, relining or replacing old steel pipes with **FRP-lined or PPCH pipes** prevents corrosion. LBow offers FRP lining specifically for chiller and cooling tower pipelines.
+- **Maintain water quality:** Use biocides and corrosion inhibitors in open systems. Keep coolant in closed loops at proper chemical balance.
+
+**When to Call a Professional:** If the cooling system still underperforms after basic fixes — chillers not reaching setpoint, tower not cooling adequately — get a specialist. Large-scale issues like re-piping or repairing FRP liners need professional expertise.
+
+---
+
+## When Should You Call a Professional Piping Expert?
+
+Small leaks or clogs can often be handled by in-house maintenance. However, **complex issues** demand professional help. If you encounter a complete system pressure failure, multiple joint leaks, or a cooling/chiller pipeline that is severely corroded or scaled, do not attempt DIY repairs. Problems like chiller loop inefficiency, cooling tower pipeline corrosion, compressed air system redesign, or damaged FRP linings require an experienced industrial piping expert.
+
+LBow Network Solutions in Bangalore has been solving complex industrial pipe problems since 2018. With a **10-year product warranty**, expert installation teams, and a full range of PPR, PPCH, PPRC, FRP, and compressed air pipeline products and services, LBow is the trusted choice for factories and industrial facilities across Bangalore.
+
+For any pipe problem — big or small — **contact LBow Network Solutions today**. Call or WhatsApp **+91 8123501407**, or visit us at **51/3 Officers Model Colony, T Dasarahalli, Bangalore 560057**. Free demo available on request.
+
+---
+
+## Frequently Asked Questions About Industrial Pipe Problems
+
+**How do I fix a leaking industrial pipe joint?**
+First turn off the system pressure. Check for loose fittings and tighten gently. If the leak is at a welded or fusion joint, cut out the damaged section and re-weld or replace the fitting. Small threaded leaks often seal with new Teflon tape or pipe sealant.
+
+**What causes pressure drop in compressed air lines?**
+Pressure drop usually comes from leaks, undersized pipes, or restrictions like clogged filters, many elbows, or faulty regulators. Fix leaks, clean filters, and ensure your air piping is correctly sized to eliminate pressure drop.
+
+**Why are my pipes corroding inside the factory?**
+Metal pipes corrode when exposed to moisture, chemicals, or dissimilar metals (galvanic action). Using corrosion inhibitors, replacing rusted sections, or switching to PPR, PPCH, or FRP-lined pipes can prevent this entirely.
+
+**What is causing banging noise in my plant's pipes?**
+Loud banging (water hammer) happens when flow is stopped quickly by fast-closing valves or rapid pump stops. Install water hammer arrestors, use slow-closing valves, and secure loose pipes to resolve the noise.
+
+**How can I prevent pipe blockages in my system?**
+Prevent blockages by filtering fluids and regularly flushing the system. For hard-water scale, install a water softener or use chemical inhibitors. Clean strainers regularly and replace old piping that harbours buildup.`,
   },
+
   {
     slug: 'how-to-choose-industrial-pipe-pressure-chemical-resistance',
     title: 'How to Choose the Right Pipe for Industrial Use: Pressure Rating, Chemical Resistance & Material Guide',
@@ -152,7 +224,7 @@ If you are unsure which pipe material is appropriate for your system, contact us
     readTime: '9 min read',
     tags: ['Pipe Selection', 'Industrial Piping', 'Pressure Rating', 'Chemical Resistance'],
     relatedProducts: ['pprc-chemical-pipe', 'ppch-industrial-pipeline', 'ppr-pipe-fittings'],
-    image: '/images/blog-compressed-air-pipeline.webp',
+    image: '/images/blog-how-to-choose-right-pipe.webp',
     metaTitle: 'How to Choose Industrial Pipes: Pressure, Chemical & Material Guide | LBow',
     metaDescription:
       'Complete guide to industrial pipe selection — pressure ratings, chemical resistance, PPR vs PPRC vs PPCH vs PVC. Expert advice from LBow Network Solutions, Bangalore.',
@@ -294,9 +366,9 @@ For compressed air: PPCH (up to 16 bar). For hot water: PPR (up to 95°C). For c
 
 ## Talk to Our Team for Expert Pipe Selection Advice
 
-LBow Network Solutions has 8+ years of experience helping Bangalore's industrial sector specify, procure, and install the right piping systems. We supply PPR, PPRC, PPCH, and Prince Pipes branded products with no minimum order quantity and free delivery within 22km of T Dasarahalli.
+LBow Network Solutions has 8+ years of experience helping Bangalore's industrial sector specify, procure, and install the right piping systems. We supply PPR, PPRC, PPCH, and Prince Pipes branded products with no minimum order quantity. Free demo available — call +91 8123501407 to schedule.
 
-Call us at **+91 9606419076** or [WhatsApp us](https://wa.me/919606419076) with your system parameters and we will recommend the right pipe for your application.`,
+Call us at **+91 8123501407** or [WhatsApp us](https://wa.me/918123501407) with your system parameters and we will recommend the right pipe for your application.`,
   },
   {
     slug: 'frp-lining-chiller-pipes-benefits-explained',
@@ -307,7 +379,7 @@ Call us at **+91 9606419076** or [WhatsApp us](https://wa.me/919606419076) with 
     readTime: '6 min read',
     tags: ['FRP Lining', 'Chiller Pipes', 'Pipe Rehabilitation', 'Industrial Maintenance'],
     relatedProducts: ['frp-lining-chiller-pipes', 'cooling-tower-pipeline', 'ppch-industrial-pipeline'],
-    image: '/images/blog-ppr-installation.webp',
+    image: '/images/blog-frp-lining-chiller-pipes.webp',
     metaTitle: 'FRP Lining for Chiller Pipes — Benefits & Service Life | LBow Bangalore',
     metaDescription:
       'FRP lining extends chiller pipe life 10+ years. Learn when it is better than replacement, how it works, and costs vs benefits. LBow Network Solutions, Bangalore.',
@@ -431,9 +503,9 @@ LBow Network Solutions provides FRP lining services for chiller pipe lines as pa
 
 If your chiller pipes are showing signs of corrosion, reduced flow, or localised leaks, contact our team for a technical assessment. We can advise on whether FRP lining or pipe replacement is the right solution for your specific situation.
 
-Call **+91 9606419076** or [WhatsApp us](https://wa.me/919606419076) to discuss your chiller pipe rehabilitation requirements.
+Call **+91 8123501407** or [WhatsApp us](https://wa.me/918123501407) to discuss your chiller pipe rehabilitation requirements.
 
-Free delivery within 22km of T Dasarahalli, Bangalore. Courier and freight available for all Karnataka and pan-India locations. No minimum order quantity.`,
+Free demo available for all products. Contact us at +91 8123501407. No minimum order quantity.`,
   },
 ];
 

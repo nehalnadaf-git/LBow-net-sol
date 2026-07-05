@@ -1,9 +1,9 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Building2, TrendingUp, Users, FileText, Shield, Briefcase } from 'lucide-react';
+import { Building2, TrendingUp, Users, FileText, Shield, Briefcase, Award, BadgeCheck, Hash } from 'lucide-react';
 import { HexGridBg } from '../../components/backgrounds/HexGridBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
@@ -22,12 +22,15 @@ interface DetailItem {
 }
 
 const details: DetailItem[] = [
-  { icon: Building2, value: '2018', label: 'Year Established', countTo: 2018, countDelay: 0 },
-  { icon: TrendingUp, value: '₹1–5 Crores', label: 'Annual Turnover' },
-  { icon: Users, value: '< 10', label: 'Team Size' },
-  { icon: FileText, value: '29AUIPV4726C2ZB', label: 'GST Number' },
-  { icon: Shield, value: '10 Years', label: 'Product Warranty', countTo: 10, countSuffix: ' Years', countDelay: 0.1 },
-  { icon: Briefcase, value: 'Dealers, Manufacturers, Wholesalers', label: 'Business Nature' },
+  { icon: Building2,    value: '2018',                               label: 'Year Established',            countTo: 2018, countDelay: 0 },
+  { icon: TrendingUp,   value: '₹1–5 Crores',                          label: 'Annual Turnover' },
+  { icon: Users,        value: '< 10',                               label: 'Team Size' },
+  { icon: FileText,     value: '29AUIPV4726C2ZB',                    label: 'GST Number' },
+  { icon: Shield,       value: '10 Years',                           label: 'Product Warranty',            countTo: 10, countSuffix: ' Years', countDelay: 0.1 },
+  { icon: Briefcase,    value: 'Dealers, Manufacturers, Wholesalers', label: 'Business Nature' },
+  { icon: Award,        value: 'Prince Pipes',                        label: 'Authorized Dealer' },
+  { icon: BadgeCheck,   value: 'MSME',                                label: 'Certified Business' },
+  { icon: Hash,         value: 'UDYAM-KR-03-0717969',                 label: 'Udyam Registration No.' },
 ];
 
 const BusinessDetails = () => {
@@ -68,8 +71,8 @@ const BusinessDetails = () => {
       {/* Premium Background Graphics */}
       <HexGridBg isLight={false} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-center">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
           {details.map((detail, index) => {
             const Icon = detail.icon;
             return (

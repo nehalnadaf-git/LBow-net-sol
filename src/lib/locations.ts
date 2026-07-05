@@ -43,14 +43,14 @@ The machine tool and precision engineering units in Peenya Industrial Area have 
 
 Electronics assembly and light manufacturing units in Peenya require clean compressed air and process water systems where pipe corrosion cannot be tolerated — applications where PPR and PPCH piping excel compared to metal alternatives.
 
-LBow Network Solutions is based in T Dasarahalli, which is directly adjacent to the Peenya industrial belt — making us the closest specialist PPR/PPCH pipe supplier to Peenya Industrial Area. Free delivery within 22km covers the entire Peenya zone, ensuring same-day or next-day stock availability for urgent project requirements.`,
+LBow Network Solutions is located in Peenya itself — at 8th Main Road, 8th Cross, Peenya 1st Stage — making us the closest specialist PPR/PPCH pipe supplier to Peenya Industrial Area. Free demo available for all product ranges — call us to schedule one.`,
     dominantIndustries: ['Machine tools', 'Engineering & precision manufacturing', 'Automotive components', 'Electronics assembly', 'Garments & textiles', 'Light manufacturing'],
-    distanceFromBangalore: 'Directly adjacent to T Dasarahalli (within free delivery zone)',
+    distanceFromBangalore: 'Located within Peenya',
     nearbyZones: ['nelamangala', 'bommasandra', 'jigani'],
     princePipesOk: true,
     metaTitle: 'PPR & PPCH Pipe Supplier in Peenya, Bangalore | LBow',
     metaDescription:
-      'PPR, PPRC & PPCH pipe supplier in Peenya Industrial Area, Bangalore. Free delivery, 10-year warranty. Compressed air & process piping. Call +91 9606419076.',
+      'PPR, PPRC & PPCH pipe supplier in Peenya Industrial Area, Bangalore. Free demo available, 10-year warranty. Compressed air & process piping. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier Peenya Bangalore',
       'PPCH pipe Peenya industrial area',
@@ -60,9 +60,9 @@ LBow Network Solutions is based in T Dasarahalli, which is directly adjacent to 
     ],
     faqs: [
       {
-        question: 'Do you offer free delivery to Peenya Industrial Area?',
+        question: 'Do you offer a free demo in Peenya?',
         answer:
-          'Yes. Peenya Industrial Area is within our 22km free delivery zone from our T Dasarahalli base. We offer free delivery on all orders within this zone. Call +91 9606419076 or WhatsApp us to arrange delivery.',
+          'Yes. We offer a free demo for all our product ranges at our Peenya location. Call +91 8123501407 or WhatsApp us to schedule.',
       },
       {
         question: 'Which pipe types are most suitable for Peenya machine tool factories?',
@@ -77,7 +77,7 @@ LBow Network Solutions is based in T Dasarahalli, which is directly adjacent to 
       {
         question: 'Do you stock pipes for urgent orders from Peenya factories?',
         answer:
-          'Yes. We maintain stock of PPR, PPRC, and PPCH pipes and fittings for immediate dispatch. Given our proximity to Peenya, we can typically arrange same-day or next-day delivery for stock items. Call us at +91 9606419076 for urgent requirements.',
+          'Yes. We maintain stock of PPR, PPRC, and PPCH pipes and fittings for immediate dispatch. Given our proximity to Peenya, we can typically arrange same-day or next-day delivery for stock items. Call us at +91 8123501407 for urgent requirements.',
       },
       {
         question: 'Are Prince Pipes products available for Peenya projects?',
@@ -100,14 +100,14 @@ The warehousing and cold storage facilities at Nelamangala have significant pipi
 
 Food processing and agro-processing units in Nelamangala require hygienic water supply systems where pipe corrosion or contamination cannot be tolerated — an area where PPR's smooth bore and chemical inertness make it the material of choice for process water supply lines.
 
-LBow Network Solutions provides free delivery to Nelamangala within our 22km delivery zone from T Dasarahalli. The NH-48 corridor provides direct access, making us well-positioned to serve both established industries and new facilities in the Nelamangala Growth Corridor.`,
+LBow Network Solutions provides piping products and installation services to Nelamangala. Free demo available for all product ranges — contact us to schedule.`,
     dominantIndustries: ['Warehousing & logistics', 'Cold storage & food processing', 'Light engineering', 'Agro-processing', 'Building materials'],
-    distanceFromBangalore: 'Approximately 25km from Bangalore city centre (within free delivery zone from T Dasarahalli)',
+    distanceFromBangalore: 'Approximately 25km from Bangalore city centre',
     nearbyZones: ['peenya', 'bidadi'],
     princePipesOk: true,
     metaTitle: 'PPR & PPCH Pipe Supplier in Nelamangala, Bangalore | LBow',
     metaDescription:
-      'PPR & PPCH pipe dealer in Nelamangala, Bangalore. Warehousing, food processing & cold storage piping. Free delivery. Call +91 9606419076.',
+      'PPR & PPCH pipe dealer in Nelamangala, Bangalore. Warehousing, food processing & cold storage piping. Free demo available. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier Nelamangala Bangalore',
       'pipe dealer Nelamangala',
@@ -119,7 +119,7 @@ LBow Network Solutions provides free delivery to Nelamangala within our 22km del
       {
         question: 'Do you deliver PPR and PPCH pipes to Nelamangala?',
         answer:
-          'Yes. Nelamangala falls within our free delivery zone from our T Dasarahalli base. We offer free delivery on all qualifying orders in this area. WhatsApp or call us at +91 9606419076 to arrange.',
+          'Yes. We offer a free demo for all our product ranges. Visit our Peenya location or call +91 8123501407 to schedule.',
       },
       {
         question: 'What pipe systems are suitable for cold storage facilities in Nelamangala?',
@@ -164,7 +164,7 @@ The chemical manufacturing sector in Bommasandra also relies on PPRC and PPCH pi
     princePipesOk: true,
     metaTitle: 'PPR & PPRC Pipe Supplier in Bommasandra, Bangalore | LBow',
     metaDescription:
-      'PPRC chemical & PPR pipe supplier in Bommasandra Industrial Area, Bangalore. Pharma, biotech & chemical plant piping. Call +91 9606419076.',
+      'PPRC chemical & PPR pipe supplier in Bommasandra Industrial Area, Bangalore. Pharma, biotech & chemical plant piping. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier Bommasandra Bangalore',
       'PPRC chemical pipe Bommasandra',
@@ -223,7 +223,7 @@ LBow Network Solutions serves the Jigani Industrial Area with its full range of 
     princePipesOk: true,
     metaTitle: 'PPR & PPRC Pipe Supplier in Jigani, Bangalore | LBow',
     metaDescription:
-      'PPRC chemical-resistant & PPR pipe supplier in Jigani Industrial Area, Bangalore. Pharma, biotech & specialty chemicals. Call +91 9606419076.',
+      'PPRC chemical-resistant & PPR pipe supplier in Jigani Industrial Area, Bangalore. Pharma, biotech & specialty chemicals. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier Jigani Bangalore',
       'PPRC chemical pipe Jigani',
@@ -250,7 +250,7 @@ LBow Network Solutions serves the Jigani Industrial Area with its full range of 
       {
         question: 'How quickly can you deliver to Jigani Industrial Area?',
         answer:
-          'We deliver to Jigani Industrial Area, with delivery time depending on your specific location within the zone. For stock items, we can typically arrange delivery within 1–2 working days. Contact us at +91 9606419076 for urgent requirements.',
+          'We deliver to Jigani Industrial Area, with delivery time depending on your specific location within the zone. For stock items, we can typically arrange delivery within 1–2 working days. Contact us at +91 8123501407 for urgent requirements.',
       },
       {
         question: 'Do you offer site visits for piping system assessments in Jigani?',
@@ -280,7 +280,7 @@ LBow Network Solutions supplies PPR, PPRC, and PPCH piping to manufacturing cont
     princePipesOk: true,
     metaTitle: 'PPR & PPCH Pipe Supplier in Bidadi, Bangalore | LBow',
     metaDescription:
-      'PPR & PPCH industrial pipe supplier in Bidadi. Automotive, FMCG & manufacturing piping. Toyota, Bosch supplier area. Call +91 9606419076.',
+      'PPR & PPCH industrial pipe supplier in Bidadi. Automotive, FMCG & manufacturing piping. Toyota, Bosch supplier area. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier Bidadi Bangalore',
       'PPCH pipe Bidadi industrial area',
@@ -332,14 +332,14 @@ LBow Network Solutions supplies industrial-grade PPCH and PPRC pipes to Hubli-Dh
 
 Machine tool and engineering units in Hubli-Dharwad require PPCH compressed air pipelines (rated up to 16 bar) for pneumatic tool supply and CNC machining air systems. Textile mills and processing units require chemical-resistant PPRC piping for dyeing and processing chemical lines. Food processing facilities require PPR for hygienic water supply.
 
-Our PPCH and PPRC supply to Hubli-Dharwad focuses entirely on our industrial, unbranded piping range — manufactured to industry-standard specifications and suited to the demanding requirements of the region's manufacturing sector. For enquiries and project quotations, contact us via WhatsApp or call +91 9606419076.`,
+Our PPCH and PPRC supply to Hubli-Dharwad focuses entirely on our industrial, unbranded piping range — manufactured to industry-standard specifications and suited to the demanding requirements of the region's manufacturing sector. For enquiries and project quotations, contact us via WhatsApp or call +91 8123501407.`,
     dominantIndustries: ['Machine tools', 'Precision engineering', 'Textiles & garments', 'Food processing', 'Cotton ginning', 'Engineering works'],
     distanceFromBangalore: 'Approximately 400km from Bangalore (courier / freight delivery)',
     nearbyZones: [],
     princePipesOk: false,
     metaTitle: 'PPCH & PPRC Pipe Supplier in Hubli-Dharwad | LBow Network',
     metaDescription:
-      'Industrial PPCH & PPRC pipe supply to Hubli-Dharwad, Karnataka. Machine tools, textiles & food processing. No MOQ. Call +91 9606419076.',
+      'Industrial PPCH & PPRC pipe supply to Hubli-Dharwad, Karnataka. Machine tools, textiles & food processing. No MOQ. Call +91 8123501407.',
     keywords: [
       'PPCH pipe supplier Hubli Dharwad',
       'industrial pipe Hubli Karnataka',
@@ -351,7 +351,7 @@ Our PPCH and PPRC supply to Hubli-Dharwad focuses entirely on our industrial, un
       {
         question: 'Do you supply industrial pipes to Hubli-Dharwad?',
         answer:
-          'Yes. We supply industrial PPCH and PPRC pipes to Hubli-Dharwad. Small-to-medium orders are dispatched via courier, while bulk orders are sent by freight truck. There is no minimum order quantity. Contact us at +91 9606419076.',
+          'Yes. We supply industrial PPCH and PPRC pipes to Hubli-Dharwad. Small-to-medium orders are dispatched via courier, while bulk orders are sent by freight truck. There is no minimum order quantity. Contact us at +91 8123501407.',
       },
       {
         question: 'What types of pipes do you supply to Hubli-Dharwad?',
@@ -396,7 +396,7 @@ LBow Network Solutions supplies industrial PPCH and PPRC pipes to Mangaluru via 
     princePipesOk: false,
     metaTitle: 'PPCH & PPRC Pipe Supplier in Mangaluru, Karnataka | LBow',
     metaDescription:
-      'Industrial PPCH & PPRC pipe supply to Mangaluru. Refinery, petrochemical & food processing piping. No MOQ. Call +91 9606419076.',
+      'Industrial PPCH & PPRC pipe supply to Mangaluru. Refinery, petrochemical & food processing piping. No MOQ. Call +91 8123501407.',
     keywords: [
       'PPCH pipe supplier Mangaluru Mangalore',
       'industrial pipe Mangaluru Karnataka',
@@ -408,7 +408,7 @@ LBow Network Solutions supplies industrial PPCH and PPRC pipes to Mangaluru via 
       {
         question: 'Do you supply industrial pipes to Mangaluru?',
         answer:
-          'Yes. We supply PPCH and PPRC industrial pipes to Mangaluru via courier for smaller orders and freight truck for bulk requirements. No minimum order quantity applies. Contact us at +91 9606419076 or WhatsApp for a quotation.',
+          'Yes. We supply PPCH and PPRC industrial pipes to Mangaluru via courier for smaller orders and freight truck for bulk requirements. No minimum order quantity applies. Contact us at +91 8123501407 or WhatsApp for a quotation.',
       },
       {
         question: 'Are PPRC pipes suitable for utility systems in petrochemical facilities in Mangaluru?',
@@ -453,7 +453,7 @@ LBow Network Solutions supplies industrial PPCH and PPRC pipes to Belagavi via c
     princePipesOk: false,
     metaTitle: 'PPCH & PPR Pipe Supplier in Belagavi, Karnataka | LBow',
     metaDescription:
-      'Industrial PPCH & PPR pipe supply to Belagavi. Foundry, cement, sugar processing & aluminium plant piping. No MOQ. Call +91 9606419076.',
+      'Industrial PPCH & PPR pipe supply to Belagavi. Foundry, cement, sugar processing & aluminium plant piping. No MOQ. Call +91 8123501407.',
     keywords: [
       'PPCH pipe supplier Belagavi Belgaum',
       'industrial pipe Belagavi Karnataka',
@@ -465,7 +465,7 @@ LBow Network Solutions supplies industrial PPCH and PPRC pipes to Belagavi via c
       {
         question: 'Do you supply industrial pipes to Belagavi?',
         answer:
-          'Yes. We supply PPCH and PPRC industrial pipes to Belagavi via courier (smaller orders) and freight truck (bulk orders). No minimum order quantity applies. Contact us at +91 9606419076 for a quotation.',
+          'Yes. We supply PPCH and PPRC industrial pipes to Belagavi via courier (smaller orders) and freight truck (bulk orders). No minimum order quantity applies. Contact us at +91 8123501407 for a quotation.',
       },
       {
         question: 'What pipe types are suitable for foundry and metal casting operations in Belagavi?',
@@ -518,7 +518,7 @@ All supply to these cities is from our industrial, unbranded range — manufactu
     princePipesOk: false,
     metaTitle: 'PPR & PPCH Pipe Supply Across Karnataka | LBow Network Solutions',
     metaDescription:
-      'Industrial PPR & PPCH pipe supply to Tumakuru, Davanagere, Hassan, Raichur and across Karnataka. No MOQ. Courier & freight delivery. Call +91 9606419076.',
+      'Industrial PPR & PPCH pipe supply to Tumakuru, Davanagere, Hassan, Raichur and across Karnataka. No MOQ. Courier & freight delivery. Call +91 8123501407.',
     keywords: [
       'PPR pipe supply Karnataka',
       'PPCH pipe supplier Karnataka',
@@ -585,7 +585,7 @@ All pan-India supply is from our industrial, unbranded range — manufactured to
     princePipesOk: false,
     metaTitle: 'PPR & PPCH Pipe Supplier — Pan-India Delivery | LBow',
     metaDescription:
-      'Industrial PPR, PPRC & PPCH pipe supply across India. Gujarat, Maharashtra, Tamil Nadu, Telangana. No MOQ, courier & freight. Call +91 9606419076.',
+      'Industrial PPR, PPRC & PPCH pipe supply across India. Gujarat, Maharashtra, Tamil Nadu, Telangana. No MOQ, courier & freight. Call +91 8123501407.',
     keywords: [
       'PPR pipe supplier India',
       'PPCH pipe pan-India supply',

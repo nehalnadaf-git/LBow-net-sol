@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 
@@ -33,7 +33,7 @@ export default function TermsOfService() {
       />
 
       <section className="relative w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <nav className="font-body text-xs text-[#A6A6A6] mb-8 flex gap-2 items-center">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
@@ -71,7 +71,7 @@ export default function TermsOfService() {
             <section>
               <h2 className="font-heading font-semibold text-xl text-white mb-3">4. Delivery</h2>
               <ul className="list-disc pl-5 space-y-2">
-                <li>Free delivery is provided within 22km of our T Dasarahalli, Bangalore location.</li>
+                <li>Free demo is available for all product ranges. Contact us to schedule.</li>
                 <li>Delivery charges apply for all locations outside the 22km free zone.</li>
                 <li>Small orders outside the free zone are dispatched by courier; bulk orders by freight truck.</li>
                 <li>There is no minimum order quantity.</li>
@@ -112,7 +112,7 @@ export default function TermsOfService() {
               <div className="mt-4 p-4 border border-white/10 rounded-lg">
                 <p className="text-white font-semibold">LBow Network Solutions</p>
                 <p>51/3, Officers Model Colony, T Dasarahalli, Bangalore – 560057</p>
-                <p>Phone: <a href="tel:+919606419076" className="text-[#2E7D32] hover:underline">+91 9606419076</a></p>
+                <p>Phone: <a href="tel:+918123501407" className="text-[#2E7D32] hover:underline">+91 8123501407</a></p>
                 <p>Email: <a href="mailto:lbownetwork9solutions@gmail.com" className="text-[#2E7D32] hover:underline">lbownetwork9solutions@gmail.com</a></p>
               </div>
             </section>

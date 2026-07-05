@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -46,7 +46,7 @@ const ProductFAQSection = ({ faqs, productName }: ProductFAQSectionProps) => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-24">
       <DotMatrixBg isLight={false} />
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#A6A6A6] mb-3">
           Common Questions
         </div>

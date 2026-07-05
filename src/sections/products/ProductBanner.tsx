@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const items = [
   { icon: ShieldCheck, text: '10 Year Warranty on All Products' },
-  { icon: Truck, text: 'Free Delivery Above ₹22,000 within 22km' },
-  { icon: Phone, text: 'Call: +91 9606419076' },
+  { icon: Truck, text: 'Free Demo Available — Call to Schedule' },
+  { icon: Phone, text: 'Call: +91 8123501407' },
 ];
 
 const ProductBanner = () => {
@@ -52,7 +52,7 @@ const ProductBanner = () => {
       {/* Premium Background Graphics */}
       <PipeCrossSectionBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="flex flex-col sm:flex-row flex-wrap gap-5 sm:gap-8 md:gap-12 justify-center items-center">
           {items.map((item, index) => {
             const Icon = item.icon;

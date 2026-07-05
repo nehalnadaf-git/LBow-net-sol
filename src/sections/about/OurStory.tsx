@@ -1,6 +1,7 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CheckCircle } from 'lucide-react';
@@ -69,14 +70,16 @@ const OurStory = () => {
       {/* Premium Background Graphics */}
       <DotMatrixBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           {/* Left - Image */}
-          <div className="animate-left">
-            <img
-              src="/images/service-ppr-installation.webp"
+          <div className="animate-left relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
+            <Image
+              src="/images/about-section-home-mixed.webp"
               alt="Professional green PPR pipe network installation by LBow Network Solutions"
-              className="w-full h-auto rounded-xl object-cover shadow-lg"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
               loading="lazy"
             />
           </div>
@@ -90,13 +93,13 @@ const OurStory = () => {
               From a Small Shop to Bangalore&apos;s Leading Pipe Dealer
             </h2>
             <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-4">
-              Established in 2018 in T Dasarahalli, Bangalore, LBow Network Solutions started as a small pipe fitting shop with a big vision — to provide premium quality piping solutions at competitive prices. Our founder&apos;s commitment to quality and customer satisfaction quickly earned us a reputation as a reliable supplier in the local industrial community.
+              Established in 2018 in Peenya, Bengaluru, LBow Network Solutions started as a small pipe fitting shop with a big vision — to provide premium quality piping solutions at competitive prices. Our founder&apos;s commitment to quality and customer satisfaction quickly earned us a reputation as a reliable supplier in the local industrial community.
             </p>
             <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-4">
-              Over the years, we&apos;ve expanded our product range to include PPR pipe unions, PPRC chemical pipes, PPCH industrial pipe lines, PPR pipe fittings, PPCH pipe fittings, cooling tower pipelines, and FRP lining services. Today, we serve over 50 industrial clients across Bangalore, from small workshops to large manufacturing facilities.
+              Over the years, we&apos;ve expanded our product range to include PPR green and blue pipes, PPRC chemical pipes, PPCH industrial pipe lines, PPR and PPCH pipe fittings, brass ball valves, butterfly valves, SS fittings, pneumatic fittings, and PU/FRL airguns. Today, we serve over 200 industrial clients across India, from small workshops to large manufacturing facilities. We are an <strong>Authorized Prince Pipes Dealer</strong>, an <strong>MSME Certified</strong> business (Udyam No: UDYAM-KR-03-0717969), and a GST registered enterprise (GSTIN: 29AUIPV4726C2ZB).
             </p>
             <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-8">
-              Our mission is simple: to provide the best piping solutions with unmatched service. Every product we sell comes with a 10-year warranty, and our expert team ensures proper installation and ongoing support.
+              Our mission is simple: to provide the best piping solutions with unmatched service. Every PPR product we sell comes with a 10-year warranty, and our expert team ensures proper installation. We offer free demo for all our product ranges — call us to schedule one.
             </p>
 
             {/* Values */}

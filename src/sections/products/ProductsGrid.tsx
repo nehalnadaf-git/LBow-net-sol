@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
@@ -48,18 +49,20 @@ const ProductsGrid = () => {
       {/* Premium Background Graphics */}
       <DotMatrixBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {products.map((product) => (
             <div
               key={product.slug}
-              className="product-grid-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-400 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
+              className="product-grid-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
             >
-              <div className="h-[200px] sm:h-[230px] lg:h-[260px] overflow-hidden">
-                <img
+              <div className="h-[200px] sm:h-[230px] lg:h-[260px] overflow-hidden relative">
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
                   loading="lazy"
                 />
               </div>

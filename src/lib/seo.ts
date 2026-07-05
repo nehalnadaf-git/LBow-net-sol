@@ -9,7 +9,7 @@ export const PLACE_ID = '0x3bae3d9fc3dcf213:0xec0a5df81eedd4dd';
 
 export const defaultMetaTitle = 'PPR & PPCH Pipe Dealer in Bangalore | LBow Network Solutions';
 export const defaultMetaDescription =
-  "LBow Network Solutions — Authorized Prince Pipes dealer & industrial PPR, PPRC, PPCH pipe supplier in Bangalore since 2018. Free delivery within 22km. Call +91 9606419076.";
+  "LBow Network Solutions — Authorized Prince Pipes dealer & industrial PPR, PPRC, PPCH pipe supplier in Bangalore since 2018. Free demo available. Call +91 8123501407.";
 
 export const defaultKeywords = [
   'PPR pipe dealer Bangalore',
@@ -30,7 +30,7 @@ export const localBusinessSchemaBase = {
   description:
     'Authorized Prince Pipes dealer and industrial PPR, PPRC, PPCH pipe supplier in Bangalore. 8+ years of experience since 2018.',
   url: BASE_URL,
-  telephone: '+91-9606419076',
+  telephone: '+91-8123501407',
   email: 'lbownetwork9solutions@gmail.com',
   logo: `${BASE_URL}/icon-512x512.png`,
   image: `${BASE_URL}/og-image.jpg`,
@@ -38,9 +38,9 @@ export const localBusinessSchemaBase = {
   sameAs: [`https://www.google.com/maps/place/?q=place_id:${PLACE_ID}`],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '51/3, Officers Model Colony, T Dasarahalli, Opposite Eco Fresh Mart',
-    addressLocality: 'Bangalore',
-    postalCode: '560057',
+    streetAddress: 'No.273/2, ST No.20/20/1, 8th Main Road, 8th Cross, Opp. RTO Track, Peenya 1st Block, Peenya 1st Stage',
+    addressLocality: 'Bengaluru',
+    postalCode: '560058',
     addressRegion: 'Karnataka',
     addressCountry: 'IN',
   },
@@ -60,4 +60,8 @@ export const localBusinessSchemaBase = {
   priceRange: '$$',
   foundingDate: '2018',
   vatID: '29AUIPV4726C2ZB',
+  identifier: [
+    { '@type': 'PropertyValue', name: 'GSTIN', value: '29AUIPV4726C2ZB' },
+    { '@type': 'PropertyValue', name: 'Udyam Registration Number', value: 'UDYAM-KR-03-0717969' },
+  ],
 };

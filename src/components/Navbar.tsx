@@ -55,13 +55,13 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-all duration-400 ${
+        className={`fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-all duration-300 ${
           scrolled
             ? 'bg-[#0A0A0B]/98 border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between">
+        <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex flex-col">
             <span className={`font-heading font-bold text-xl md:text-2xl leading-tight transition-colors duration-300 ${
@@ -76,9 +76,9 @@ const Navbar = () => {
             </span>
           </Link>
  
-          {/* Desktop Nav */}
+          {/* Desktop Nav — all links including Home */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
-            {navLinks.filter(l => l.path !== '/').map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 href={link.path}
@@ -130,7 +130,7 @@ const Navbar = () => {
         id="mobile-nav"
         role="navigation"
         aria-label="Mobile navigation"
-        className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col transition-all duration-400 md:hidden ${
+        className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col transition-all duration-300 md:hidden ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
@@ -211,8 +211,8 @@ const Navbar = () => {
             <p className="font-mono text-[0.65rem] uppercase tracking-wider text-[#A6A6A6]/60">
               T Dasarahalli, Bangalore
             </p>
-            <a href="tel:+919606419076" className="font-mono text-[0.7rem] text-[#A6A6A6] hover:text-white transition-colors mt-1 block">
-              +91 9606419076
+            <a href="tel:+918123501407" className="font-mono text-[0.7rem] text-[#A6A6A6] hover:text-white transition-colors mt-1 block">
+              +91 81235 01407
             </a>
           </div>
         </div>

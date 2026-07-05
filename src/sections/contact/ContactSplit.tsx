@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
@@ -18,15 +18,15 @@ const contactItems = [
   {
     icon: MapPin,
     label: 'Address',
-    value: '51/3, Officers Model Colony, T Dasarahalli, Bangalore — 560057, Opposite Eco Fresh Mart',
+    value: 'No.273/2, 8th Main Road, Opp. RTO Track, T Dasarahalli, Bengaluru — 560057',
     href: null,
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+91 9606419076',
+    value: '+91 81235 01407',
     secondary: '+91 8123501407',
-    href: 'tel:+919606419076',
+    href: 'tel:+918123501407',
     hrefSecondary: 'tel:+918123501407',
   },
   {
@@ -51,14 +51,22 @@ const contactItems = [
 
 const productOptions = [
   'Select an option',
-  'PPR Pipe Unions',
-  'PPRC Chemical Pipe',
-  'PPCH Pipe Line for Industrial',
-  'PPR Pipe Fittings',
-  'PPCH Pipe Fittings',
+  'PPR Green Pipe',
+  'PPR Blue Pipe',
+  'PPR Fittings (Green)',
+  'PPR Fittings (Blue)',
+  'Brass Ball Valve',
+  'Butterfly Valve',
+  'SS Fittings',
+  'Brass Fittings',
+  'Pneumatic Fittings',
+  'PU / FRL Airgun',
+  'Air Compressor Pipeline',
   'Cooling Tower Pipeline',
-  'FRP Lining Services',
-  'Air Compressor Pipe Line',
+  'Chiller Line Pipeline',
+  'Chemical Line Pipeline',
+  'Vacuum Line System',
+  'Water Line & General Piping',
   'Other',
 ];
 
@@ -154,7 +162,7 @@ const ContactSplit = () => {
       {/* Premium Background Graphics */}
       <PipeFlowBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-10 sm:gap-12 lg:gap-16">
           {/* Left Column - Contact Info */}
           <div>
@@ -206,7 +214,7 @@ const ContactSplit = () => {
             {/* Quick CTAs */}
             <div className="animate-left flex flex-col sm:flex-row lg:flex-col gap-3 mt-8 sm:mt-10">
               <a
-                href="tel:+919606419076"
+                href="tel:+918123501407"
                 className="inline-flex items-center justify-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
               >
                 <Phone size={16} />
@@ -237,10 +245,11 @@ const ContactSplit = () => {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
                 <div>
-                  <label className={labelClass}>
+                  <label htmlFor="contact-name" className={labelClass}>
                     Your Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     placeholder="Enter your full name"
@@ -252,10 +261,11 @@ const ContactSplit = () => {
                 </div>
 
                 <div>
-                  <label className={labelClass}>
+                  <label htmlFor="contact-phone" className={labelClass}>
                     Phone Number
                   </label>
                   <input
+                    id="contact-phone"
                     type="tel"
                     name="phone"
                     placeholder="+91 XXXXX XXXXX"
@@ -267,10 +277,11 @@ const ContactSplit = () => {
                 </div>
 
                 <div>
-                  <label className={labelClass}>
+                  <label htmlFor="contact-email" className={labelClass}>
                     Email Address
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     placeholder="your@email.com"
@@ -281,10 +292,11 @@ const ContactSplit = () => {
                 </div>
 
                 <div>
-                  <label className={labelClass}>
+                  <label htmlFor="contact-product" className={labelClass}>
                     Product or Service Interested In
                   </label>
                   <select
+                    id="contact-product"
                     name="product"
                     value={formData.product}
                     onChange={handleChange}
@@ -300,10 +312,11 @@ const ContactSplit = () => {
                 </div>
 
                 <div>
-                  <label className={labelClass}>
+                  <label htmlFor="contact-message" className={labelClass}>
                     Message
                   </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     placeholder="Tell us about your requirements..."
                     rows={4}

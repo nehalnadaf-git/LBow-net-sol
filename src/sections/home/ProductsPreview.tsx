@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -9,12 +9,16 @@ import { HexGridBg } from '../../components/backgrounds/HexGridBg';
 
 /* ─────────────────────────────────── data ──────────────────────────────── */
 const products = [
-  { slug: 'ppr-pipe-unions',         image: '/images/product-ppr-unions.webp',      category: 'PPR Fittings',     name: 'PPR Pipe Unions',               description: 'Durable PPR pipe unions with brass inserts, perfect for hot and cold water applications.' },
-  { slug: 'pprc-chemical-pipe',      image: '/images/product-pprc-pipe.webp',        category: 'Chemical Pipes',   name: 'PPRC Chemical Pipe',            description: 'Chemical-resistant PPRC pipes designed for industrial chemical transport systems.' },
-  { slug: 'ppch-industrial-pipeline',image: '/images/product-ppch-industrial.webp',  category: 'Industrial Pipes', name: 'PPCH Pipe Line for Industrial', description: 'High-pressure PPCH pipe lines engineered for demanding industrial environments.' },
-  { slug: 'ppr-pipe-fittings',       image: '/images/product-ppr-fittings.webp',     category: 'Pipe Fittings',    name: 'PPR Pipe Fittings',             description: 'Complete range of PPR fittings — elbows, tees, couplers, and reducers for every need.' },
-  { slug: 'ppch-pipe-fittings',      image: '/images/product-ppch-fittings.webp',    category: 'PPCH Fittings',    name: 'PPCH Pipe Fittings',            description: 'Precision-engineered PPCH fittings ensuring leak-proof connections in critical systems.' },
-  { slug: 'cooling-tower-pipeline',  image: '/images/product-cooling-tower.webp',    category: 'Cooling Systems',  name: 'Cooling Tower Pipeline',        description: 'Specialized pipeline systems for cooling towers — designed for efficiency and longevity.' },
+  { slug: 'ppr-green-pipe',           image: '/images/product-ppr-green-pipe.webp',        category: 'PPR Pipes',         name: 'PPR Green Pipe',          description: 'Standard green PPR pipes — 20mm to 315mm. Food grade certified, 10-year warranty, temperature rated -5°C to +95°C.' },
+  { slug: 'ppr-blue-pipe',            image: '/images/product-ppr-blue-pipe.webp',  category: 'PPR Pipes',         name: 'PPR Blue Pipe',           description: 'Premium blue PPR pipes — full range 20mm to 315mm. Ideal for hot/cold water and industrial pressure lines.' },
+  { slug: 'ppr-fittings-green',       image: '/images/product-ppr-fittings-green.webp',     category: 'PPR Fittings',      name: 'PPR Fittings (Green)',    description: 'Complete range of green PPR fittings — elbows, tees, couplers, reducers, and unions for every need.' },
+  { slug: 'ppr-fittings-blue',        image: '/images/product-ppr-fittings-blue.webp',       category: 'PPR Fittings',      name: 'PPR Fittings (Blue)',     description: 'Full set of blue PPR fittings with brass inserts for hot and cold water applications in industrial setups.' },
+  { slug: 'brass-ball-valve',         image: '/images/product-brass-ball-valve.webp',    category: 'Valves',            name: 'Brass Ball Valve',        description: 'High-quality brass ball valves for reliable flow control in water, air, and light chemical lines.' },
+  { slug: 'butterfly-valve',          image: '/images/product-butterfly-valve.webp',    category: 'Valves',            name: 'Butterfly Valve',         description: 'Industrial-grade butterfly valves for large-bore lines — lightweight, quick-acting, and corrosion resistant.' },
+  { slug: 'ss-fittings',              image: '/images/product-ss-fittings.webp',        category: 'SS Fittings',       name: 'SS Fittings',             description: 'Stainless steel fittings for hygienic, high-pressure, and corrosive environments including food and pharma.' },
+  { slug: 'brass-fittings',           image: '/images/product-brass-fittings.webp',       category: 'Brass Fittings',    name: 'Brass Fittings',          description: 'Precision-machined brass fittings for threaded connections in air, water, and gas line applications.' },
+  { slug: 'pneumatic-fittings',       image: '/images/product-pneumatic-fittings.webp',    category: 'Pneumatic',         name: 'Pneumatic Fittings',      description: 'Push-to-connect and compression pneumatic fittings for air compressor lines and automated systems.' },
+  { slug: 'pu-frl-airgun',            image: '/images/product-pu-frl-airgun.webp',     category: 'Air Tools',         name: 'PU/FRL Airgun',           description: 'PU tubing, FRL units (Filter-Regulator-Lubricator), and airguns for complete compressed air tool setups.' },
 ];
 
 // Triple the set so the marquee loops seamlessly in both directions
@@ -262,14 +266,14 @@ const ProductsPreview = () => {
   /* ── Render ───────────────────────────────────────────────────────────── */
   return (
     <section className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-24">
-      <HexGridBg isLight={false} />
+      <HexGridBg isLight={false} isMinimal={true} />
 
       <div className="relative z-10">
 
         {/* ── Section Header ─────────────────────────────────────────── */}
         <div
           ref={headerRef}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-8 sm:mb-10 text-center will-change-transform"
+          className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 mb-8 sm:mb-10 text-center will-change-transform"
         >
           {/* Label */}
           <div className="inline-flex items-center gap-2 mb-3">
@@ -280,10 +284,10 @@ const ProductsPreview = () => {
             <span className="block w-6 h-px bg-[#4ADE80]/60" />
           </div>
           <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.6rem] text-[#EEEEEE] mb-3 leading-tight">
-            Premium Quality<br className="sm:hidden" /> Pipes &amp; Fittings
+            PPR Pipes, Fittings<br className="sm:hidden" /> & Industrial Valves
           </h2>
           <p className="font-body text-sm sm:text-base text-[#A6A6A6] max-w-lg sm:max-w-2xl mx-auto leading-relaxed">
-            From PPR unions to cooling tower pipelines — we supply the full range of industrial piping solutions.
+            From PPR pipes and fittings to valves, pneumatic fittings, and air tools — everything your industry needs.
           </p>
         </div>
 
@@ -352,7 +356,7 @@ const ProductsPreview = () => {
         </div>
 
         {/* ── View All Button ────────────────────────────────────────── */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-8 sm:mt-10 text-center">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 mt-8 sm:mt-10 text-center">
           <Link
             href="/products"
             className="inline-flex items-center gap-2 justify-center bg-[#EEEEEE] text-[#0A0A0B]

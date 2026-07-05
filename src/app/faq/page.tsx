@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { faqs, faqCategories, getFAQsByCategory } from '@/lib/faqs';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
@@ -8,11 +8,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { PipeTopologyBg } from '@/components/backgrounds/PipeTopologyBg';
 
 export const metadata: Metadata = {
   title: 'FAQ | PPR & PPCH Pipe Supplier Bangalore | LBow Network Solutions',
   description:
-    'Frequently asked questions about PPR, PPRC, PPCH pipes, delivery, ordering, and Prince Pipes dealership at LBow Network Solutions, Bangalore. Call +91 9606419076.',
+    'Frequently asked questions about PPR, PPRC, PPCH pipes, delivery, ordering, and Prince Pipes dealership at LBow Network Solutions, Bangalore. Call +91 8123501407.',
   alternates: { canonical: `${BASE_URL}/faq` },
 };
 
@@ -43,8 +44,9 @@ export default function FAQPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}
-      <section className="relative w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 text-center">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+      <section className="relative overflow-hidden w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 text-center">
+        <PipeTopologyBg isLight={false} />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-4">
             Help Centre
           </div>
@@ -59,7 +61,7 @@ export default function FAQPage() {
 
       {/* FAQ Content */}
       <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <nav className="font-body text-xs text-[#A6A6A6] mb-10 flex gap-2 items-center">
             <Link href="/" className="hover:text-[#0A0A0B] transition-colors">Home</Link>
             <span>/</span>
@@ -103,13 +105,13 @@ export default function FAQPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+919606419076"
+                href="tel:+918123501407"
                 className="inline-flex items-center justify-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
               >
-                Call +91 9606419076
+                Call +91 8123501407
               </a>
               <a
-                href="https://wa.me/919606419076"
+                href="https://wa.me/918123501407"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"

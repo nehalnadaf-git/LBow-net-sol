@@ -95,7 +95,7 @@ export default async function BrandPage({ params }: Props) {
 
       {/* Dealership Info + Description */}
       <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-10 lg:gap-16">
             {/* Description */}
             <div>
@@ -193,17 +193,17 @@ export default async function BrandPage({ params }: Props) {
                   Order {brand.name} Products
                 </h3>
                 <p className="font-body text-xs text-[#A6A6A6] mb-4">
-                  Free delivery within 22km of Bangalore. No minimum order quantity.
+                  Free demo available. No minimum order quantity.
                 </p>
                 <a
-                  href="tel:+919606419076"
+                  href="tel:+918123501407"
                   className="flex items-center justify-center gap-2 w-full text-center bg-[#EEEEEE] hover:bg-[#434343] hover:text-[#EEEEEE] text-[#0A0A0B] font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300 mb-3"
                 >
                   <Phone size={15} />
-                  Call +91 9606419076
+                  Call +91 8123501407
                 </a>
                 <a
-                  href="https://wa.me/919606419076"
+                  href="https://wa.me/918123501407"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300"
@@ -218,7 +218,7 @@ export default async function BrandPage({ params }: Props) {
 
       {/* FAQ */}
       <section className="relative w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#A6A6A6] mb-3">
             Common Questions
           </div>

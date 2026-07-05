@@ -48,7 +48,7 @@ const PPRPipes3D = () => {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap; // smooth shadow borders
+    renderer.shadowMap.type = THREE.PCFShadowMap; // PCFSoftShadowMap deprecated in r169+
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -69,6 +69,15 @@ const PPRPipes3D = () => {
       metalness: 0.01,
       clearcoat: 0.28, // soft outer glossy lacquer look
       clearcoatRoughness: 0.18,
+    });
+
+    // PPR Blue material — matches standard blue PPR pipe colour (royal/deep blue)
+    const solidBluePlasticMat = new THREE.MeshPhysicalMaterial({
+      color: 0x1565C0, // Deep royal blue — authentic PPR pipe blue
+      roughness: 0.20,
+      metalness: 0.01,
+      clearcoat: 0.32,
+      clearcoatRoughness: 0.16,
     });
 
 
@@ -283,34 +292,51 @@ const PPRPipes3D = () => {
     // Dynamic layout offset and sizing based on screen size (Fully responsive)
     const updateLayoutPosition = () => {
       const width = window.innerWidth;
-      if (width > 1200) {
-        baseX = 2.1;
-        baseY = 0.1;
-        targetMainScale = 0.72;
+      if (width > 1400) {
+        // Large desktop (1400px+)
+        baseX = 2.5;
+        baseY = -0.1;
+        targetMainScale = 0.68;
 
         elbowBaseX = 1.8;
-        elbowBaseY = -2.2;
-        targetElbowScale = 0.75;
-
-        elbow2BaseX = 3.0;
-        elbow2BaseY = -0.9;
-        targetElbow2Scale = 0.75;
-      } else if (width > 768) {
-        baseX = 1.3;
-        baseY = 0;
-        targetMainScale = 0.62;
-
-        elbowBaseX = 2.2;
-        elbowBaseY = -2.1;
-        targetElbowScale = 0.75;
+        elbowBaseY = -2.4;
+        targetElbowScale = 0.70;
 
         elbow2BaseX = 3.2;
         elbow2BaseY = -1.0;
-        targetElbow2Scale = 0.75;
+        targetElbow2Scale = 0.70;
+      } else if (width > 1200) {
+        // Standard desktop (1200–1400px) — original working values
+        baseX = 2.1;
+        baseY = -0.1;
+        targetMainScale = 0.62;
+
+        elbowBaseX = 1.8;
+        elbowBaseY = -2.2;
+        targetElbowScale = 0.65;
+
+        elbow2BaseX = 3.0;
+        elbow2BaseY = -0.9;
+        targetElbow2Scale = 0.65;
+      } else if (width > 768) {
+        // Tablet / small desktop (768–1200px)
+        baseX = 1.5;
+        baseY = -0.1;
+        targetMainScale = 0.54;
+
+        elbowBaseX = 2.2;
+        elbowBaseY = -2.0;
+        targetElbowScale = 0.58;
+
+        elbow2BaseX = 3.2;
+        elbow2BaseY = -0.9;
+        targetElbow2Scale = 0.58;
       } else {
-        baseX = -0.12;
-        baseY = -0.38;
-        targetMainScale = 0.60;
+        // Mobile (< 768px): move pipes UP into transparent upper portion of gradient
+        // The dark gradient covers the bottom 55% (where text is) — pipes must be in the clear top half
+        baseX = 0.2;
+        baseY = 0.4;
+        targetMainScale = 0.46;
 
         elbowBaseX = -0.7;
         elbowBaseY = 2.5;
@@ -407,14 +433,14 @@ const PPRPipes3D = () => {
     }, 0);
 
     // ----------------------------------------------------
-    // PIPE 1: Straight PPR Pipe (Solid Green, Male Tee Fitting)
+    // PIPE 1: Straight PPR Pipe (Blue — matches blue PPR pipe product)
     // ----------------------------------------------------
     const pipe1 = new THREE.Group();
     
     // Main tube body (Fat radius: 0.55, length: 6.5)
     const body1 = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 6.5, 32)), 
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     pipe1.add(body1);
 
@@ -423,18 +449,18 @@ const PPRPipes3D = () => {
     
     const teeMain = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 1.4, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     const teeBranch = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 0.6, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     teeBranch.rotation.z = -Math.PI / 2;
     teeBranch.position.set(0.4, 0, 0); // pointing outwards (right)
     
     const teeTaper = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.55, 0.68, 0.2, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     teeTaper.rotation.z = -Math.PI / 2;
     teeTaper.position.set(0.8, 0, 0);
@@ -470,10 +496,10 @@ const PPRPipes3D = () => {
     teeGroup.position.y = -0.5; // positioned off-center
     pipe1.add(teeGroup);
 
-    // Metal transition fittings at the pipe ends
-    const fitting1a = createBrassFitting(true, 0.55); // Top Male Fitting
+    // Metal transition fittings at the pipe ends (blue pipe uses blue plastic in fittings)
+    const fitting1a = createBrassFitting(true, 0.55, solidBluePlasticMat); // Top Male Fitting
     fitting1a.position.y = 2.75;
-    const fitting1b = createBrassFitting(true, 0.55); // Bottom Male Fitting
+    const fitting1b = createBrassFitting(true, 0.55, solidBluePlasticMat); // Bottom Male Fitting
     fitting1b.position.y = -2.75;
     fitting1b.rotation.x = Math.PI;
     pipe1.add(fitting1a, fitting1b);
@@ -483,7 +509,7 @@ const PPRPipes3D = () => {
     mainGroup.add(pipe1);
 
     // ----------------------------------------------------
-    // PIPE 2: Straight PPR Pipe (Solid Green)
+    // PIPE 2: Straight PPR Pipe (Green — standard green PPR)
     // ----------------------------------------------------
     const pipe2 = new THREE.Group();
 
@@ -515,14 +541,14 @@ const PPRPipes3D = () => {
 
 
     // ----------------------------------------------------
-    // FITTING: Floating Green 90° Elbow with Threaded Male Insert (matches image)
+    // FITTING 1: Floating Blue 90° Elbow with Threaded Male Insert
     // ----------------------------------------------------
 
     // 1. Vertical socket part (pointing up)
     // Axis: x = -0.55, goes from y = 0 to y = 0.9 (length 0.9)
     const vertSocket = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     vertSocket.position.set(-0.55, 0.45, 0);
     elbowFitting.add(vertSocket);
@@ -538,7 +564,7 @@ const PPRPipes3D = () => {
     // Rounded lip torus at the top edge of the vertical socket for realistic molded finish
     const vertLip = new THREE.Mesh(
       trackGeometry(new THREE.TorusGeometry(0.485, 0.065, 16, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     vertLip.rotation.x = Math.PI / 2;
     vertLip.position.set(-0.55, 0.9, 0);
@@ -548,7 +574,7 @@ const PPRPipes3D = () => {
     // Torus centered at (0, 0, 0) curving from (-0.55, 0) to (0, -0.55)
     const cornerElbow = new THREE.Mesh(
       trackGeometry(new THREE.TorusGeometry(0.55, 0.55, 32, 32, Math.PI / 2)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     cornerElbow.rotation.z = Math.PI; // Rotates to start at 9 o'clock and curve to 6 o'clock
     elbowFitting.add(cornerElbow);
@@ -558,7 +584,7 @@ const PPRPipes3D = () => {
     // In the image, the fluted collar is wider than the vertical socket.
     const horizSocket = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.64, 0.64, 0.7, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     horizSocket.rotation.z = -Math.PI / 2;
     horizSocket.position.set(0.35, -0.55, 0);
@@ -567,7 +593,7 @@ const PPRPipes3D = () => {
     // Rounded shoulder torus at the horizontal socket end
     const horizShoulder = new THREE.Mesh(
       trackGeometry(new THREE.TorusGeometry(0.575, 0.065, 16, 32)),
-      solidGreenPlasticMat
+      solidBluePlasticMat
     );
     horizShoulder.rotation.y = Math.PI / 2;
     horizShoulder.position.set(0.7, -0.55, 0);
@@ -577,7 +603,7 @@ const PPRPipes3D = () => {
     const fluteGeom = trackGeometry(new THREE.CylinderGeometry(0.045, 0.045, 0.7, 12));
     for (let i = 0; i < 12; i++) {
       const angle = (i / 12) * Math.PI * 2;
-      const flute = new THREE.Mesh(fluteGeom, solidGreenPlasticMat);
+      const flute = new THREE.Mesh(fluteGeom, solidBluePlasticMat);
       flute.rotation.z = -Math.PI / 2; // parallel to X axis
       flute.rotation.x = angle;
       flute.position.set(
@@ -627,8 +653,8 @@ const PPRPipes3D = () => {
     metalBoreHole.position.set(1.14, -0.55, 0);
     elbowFitting.add(metalBoreHole);
 
-    // 5. Mold parting line seam (thin raised parting lines at z = 0 plane matching real molded plastic)
-    const seamColorMat = solidGreenPlasticMat;
+    // 5. Mold parting line seam for elbow fitting 1 (blue)
+    const seamColorMat = solidBluePlasticMat;
 
     // Seam on vertical socket (outer side)
     const vertSeamOuter = new THREE.Mesh(
@@ -681,7 +707,7 @@ const PPRPipes3D = () => {
     // Note: elbowFitting position and scale are responsively updated in updateLayoutPosition()
 
     // ----------------------------------------------------
-    // FITTING 2: Floating Green 90° All-Plastic Elbow (matches second image)
+    // FITTING 2: Floating Green 90° All-Plastic Elbow (standard green)
     // ----------------------------------------------------
 
     // 1. Vertical socket part (pointing up)
@@ -747,10 +773,11 @@ const PPRPipes3D = () => {
     elbowFitting2.add(horizLip2);
 
     // 4. Mold parting line seam (thin raised parting lines at z = 0 plane)
+    const seamColorMat2 = solidGreenPlasticMat; // Green elbow — all seams are green
     // Seam on vertical socket (outer side)
     const vertSeamOuter2 = new THREE.Mesh(
       trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat
+      seamColorMat2
     );
     vertSeamOuter2.position.set(-1.105, 0.45, 0);
     elbowFitting2.add(vertSeamOuter2);
@@ -758,7 +785,7 @@ const PPRPipes3D = () => {
     // Seam on vertical socket (inner side)
     const vertSeamInner2 = new THREE.Mesh(
       trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat
+      seamColorMat2
     );
     vertSeamInner2.position.set(0.005, 0.45, 0);
     elbowFitting2.add(vertSeamInner2);
@@ -766,7 +793,7 @@ const PPRPipes3D = () => {
     // Seam on corner elbow (outer curve)
     const cornerSeamOuter2 = new THREE.Mesh(
       trackGeometry(new THREE.TorusGeometry(1.105, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat
+      seamColorMat2
     );
     cornerSeamOuter2.rotation.z = Math.PI;
     elbowFitting2.add(cornerSeamOuter2);
@@ -774,7 +801,7 @@ const PPRPipes3D = () => {
     // Seam on corner elbow (inner curve)
     const cornerSeamInner2 = new THREE.Mesh(
       trackGeometry(new THREE.TorusGeometry(0.005, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat
+      seamColorMat2
     );
     cornerSeamInner2.rotation.z = Math.PI;
     elbowFitting2.add(cornerSeamInner2);
@@ -782,7 +809,7 @@ const PPRPipes3D = () => {
     // Seam on horizontal socket (outer bottom side)
     const horizSeamOuter2 = new THREE.Mesh(
       trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
-      seamColorMat
+      seamColorMat2
     );
     horizSeamOuter2.position.set(0.45, -1.105, 0);
     elbowFitting2.add(horizSeamOuter2);
@@ -790,7 +817,7 @@ const PPRPipes3D = () => {
     // Seam on horizontal socket (inner top side)
     const horizSeamInner2 = new THREE.Mesh(
       trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
-      seamColorMat
+      seamColorMat2
     );
     horizSeamInner2.position.set(0.45, 0.005, 0);
     elbowFitting2.add(horizSeamInner2);
@@ -898,10 +925,10 @@ const PPRPipes3D = () => {
     window.addEventListener('touchstart', onTouchMove, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
 
-    // 8. Animation Loop
-    const clock = new THREE.Clock();
+    // 8. Animation Loop — use performance.now() instead of deprecated THREE.Clock
+    const startMs = performance.now();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = (performance.now() - startMs) / 1000; // seconds, same API as clock.getElapsedTime()
 
       // Subtle vertical floating animation
       mainGroup.position.y = Math.sin(elapsed * 0.8) * 0.05;

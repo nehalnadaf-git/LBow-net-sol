@@ -8,8 +8,9 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Stop iOS address-bar resize events from thrashing ScrollTrigger
-ScrollTrigger.config({ ignoreMobileResize: true });
+// ignoreMobileResize disabled — we handle this ourselves with a width-only debounce
+// (iOS address-bar height changes are filtered out; real viewport switches are not)
+ScrollTrigger.config({ ignoreMobileResize: false });
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
@@ -29,10 +30,10 @@ export default function ClientProviders({ children }: { children: React.ReactNod
 
     // ── Lenis configuration ───────────────────────────────────────────────
     const lenis = new Lenis({
-      // Desktop: lerp 0.1 = premium smooth scroll
+      // Desktop: lerp 0.082 = premium "velvet" smooth scroll (0.1 was slightly slow)
       // Touch/Mobile: lerp 1 = no smoothing (native scroll pass-through)
       // Reduced motion: lerp 1 = instant
-      lerp: (reducedMotion || isTouchDevice) ? 1 : 0.1,
+      lerp: (reducedMotion || isTouchDevice) ? 1 : 0.082,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       // Desktop only: smooth wheel. On touch devices, disable entirely
@@ -40,8 +41,8 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       smoothWheel: !(reducedMotion || isTouchDevice),
       // 1:1 finger-to-scroll on mobile — prevents overshoot
       touchMultiplier: 1.0,
-      // Slight wheel resistance for desktop precision
-      wheelMultiplier: 0.85,
+      // Natural wheel speed (0.85 was slightly sluggish)
+      wheelMultiplier: 1.0,
       infinite: false,
       // We drive RAF via GSAP ticker — prevents double rAF loop
       autoRaf: false,
@@ -73,16 +74,44 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       window.addEventListener('load', onLoad, { once: true });
     }
 
+    // ── ResizeObserver: re-refresh when body height changes (font swap, images) ──
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+    });
+    ro.observe(document.body);
+
+    // ── Window resize: refresh only on WIDTH change (device switch) ─────────────
+    // Height-only changes (iOS address bar) are ignored to prevent jitter.
+    let lastWidth = window.innerWidth;
+    let viewportResizeTimer: ReturnType<typeof setTimeout>;
+    const onViewportResize = () => {
+      const currentWidth = window.innerWidth;
+      if (currentWidth === lastWidth) return; // height-only change — ignore
+      lastWidth = currentWidth;
+      clearTimeout(viewportResizeTimer);
+      viewportResizeTimer = setTimeout(() => {
+        // Recalculate all ScrollTrigger positions after viewport width change
+        ScrollTrigger.refresh(true);
+      }, 250);
+    };
+    window.addEventListener('resize', onViewportResize, { passive: true });
+
     // Register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
           .register('/sw.js')
           .then((registration) => {
-            console.log('SW registered:', registration.scope);
+            if (process.env.NODE_ENV === 'development') {
+              console.log('SW registered:', registration.scope);
+            }
           })
           .catch((error) => {
-            console.log('SW registration failed:', error);
+            if (process.env.NODE_ENV === 'development') {
+              console.log('SW registration failed:', error);
+            }
           });
       });
     }
@@ -91,6 +120,8 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       lenis.destroy();
       lenisRef.current = null;
       gsap.ticker.remove(updateTicker);
+      ro.disconnect();
+      window.removeEventListener('resize', onViewportResize);
     };
   }, []);
 

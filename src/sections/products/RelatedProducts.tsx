@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
@@ -44,7 +45,7 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-24 border-t border-[rgba(30,32,33,0.08)]">
       <DotMatrixBg isLight={true} />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#434343] mb-3">
           Related Products
         </div>
@@ -55,13 +56,15 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
           {products.map((product) => (
             <div
               key={product.slug}
-              className="related-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-400 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
+              className="related-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
             >
-              <div className="h-[180px] overflow-hidden">
-                <img
+              <div className="h-[180px] overflow-hidden relative">
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
                   loading="lazy"
                 />
               </div>

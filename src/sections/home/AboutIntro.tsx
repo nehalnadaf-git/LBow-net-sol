@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { PipeTopologyBg } from '../../components/backgrounds/PipeTopologyBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
-import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS, PARALLAX_TRIGGER_DEFAULTS } from '../../hooks/useScrollReveal';
+import { useScrollReveal, REVEAL_TRIGGER_DEFAULTS, getParallaxTriggerDefaults, isMobileDevice } from '../../hooks/useScrollReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,32 +86,26 @@ const AboutIntro = () => {
       duration: 0.55, ease: 'power3.out',
     }, 0.06);
 
-    // ── Scroll-linked parallax on image ───────────────────────────────────
-    // scrub: true = direct 1:1 mapping — zero added lag
-    if (imageEl) {
-      gsap.fromTo(imageEl,
-        { yPercent: 3 },
-        {
-          yPercent: -3,
+    // ── Scroll-linked parallax — desktop only (skipped on touch to save GPU) ──
+    if (!isMobileDevice()) {
+      const parallax = getParallaxTriggerDefaults();
+      if (imageEl) {
+        gsap.fromTo(imageEl,
+          { yPercent: 3 },
+          {
+            yPercent: -3,
+            ease: 'none',
+            scrollTrigger: { trigger: section, ...parallax },
+          }
+        );
+      }
+      if (label) {
+        gsap.to(label, {
+          y: -8,
           ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            ...PARALLAX_TRIGGER_DEFAULTS,  // scrub: true
-          },
-        }
-      );
-    }
-
-    // ── Label parallax (drifts upward slightly faster) ────────────────────
-    if (label) {
-      gsap.to(label, {
-        y: -8,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          ...PARALLAX_TRIGGER_DEFAULTS,  // scrub: true
-        },
-      });
+          scrollTrigger: { trigger: section, ...parallax },
+        });
+      }
     }
   });
 
@@ -119,7 +113,7 @@ const AboutIntro = () => {
     <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
       <PipeTopologyBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-10 sm:gap-12 lg:gap-16 items-center">
 
           {/* Left Column */}
@@ -136,26 +130,26 @@ const AboutIntro = () => {
             <p className="about-para-1 font-body text-base text-[#434343] leading-[1.7] mb-4 will-change-transform">
               Established in 2018, LBow Network Solutions has grown to become
               one of Bangalore&apos;s leading PPR pipe fitting dealers and
-              industrial piping solution providers. From residential plumbing to
+              industrial piping solution providers. From small scale industry to
               large-scale industrial installations, we deliver quality,
               durability, and unmatched expertise to every project. Our
               commitment to customer satisfaction has helped us build a vast base
-              of loyal clients across Bangalore.
+              of loyal clients across India.
             </p>
             <p className="about-para-2 font-body text-base text-[#434343] leading-[1.7] mb-8 will-change-transform">
-              We specialize in PPR pipe unions, PPRC chemical pipes, PPCH pipe
-              lines for industrial use, PPR pipe fittings, PPCH pipe fittings,
-              cooling tower pipelines, and FRP lining in chiller pipe lines. Our
-              products come with a 10-year warranty, and we offer free delivery
-              on orders above ₹22,000 within a 22km radius.
+              We specialize in air compressor pipelines, Cooling Tower, Chiller
+              Line, Chemical Line, Vacuum Line and more. Our focus industries
+              include Pharmaceutical, Sugar Factories, Automobile Industries,
+              Car Service Centers, Chemical Industries, Food Processing, and
+              more — all backed by a 10-year product warranty and free demo on request.
             </p>
 
             {/* Stats */}
             <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-6 sm:mt-8">
               {[
-                { to: 8,    suffix: '+', label: 'Years of Excellence',  delay: 0    },
-                { to: 1000, suffix: '+', label: 'Projects Completed',   delay: 0.12 },
-                { to: 50,   suffix: '+', label: 'Industrial Clients',   delay: 0.24 },
+                { to: 8,   suffix: '+', label: 'Years of Excellence',  delay: 0    },
+                { to: 600, suffix: '+', label: 'Projects Completed',   delay: 0.12 },
+                { to: 200, suffix: '+', label: 'Industrial Clients',   delay: 0.24 },
               ].map((stat, i) => (
                 <div key={i} className="about-stat will-change-transform">
                   <div className="font-heading font-bold text-2xl">
@@ -191,12 +185,13 @@ const AboutIntro = () => {
 
             <div className="overflow-hidden rounded-xl">
               <Image
-                className="about-image w-full h-auto object-cover scale-[1.12] will-change-transform"
-                src="/images/service-ppr-installation.webp"
+                className="about-image w-full aspect-square object-cover scale-[1.12] will-change-transform"
+                src="/images/about-section-home-mixed.webp"
                 alt="Green PPR pipe installations in a Bangalore factory"
                 width={800}
-                height={600}
-                loading="lazy"
+                height={800}
+                loading="eager"
+                priority
               />
             </div>
           </div>

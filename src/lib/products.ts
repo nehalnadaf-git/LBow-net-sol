@@ -28,275 +28,192 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    slug: 'ppr-pipe-unions',
-    name: 'PPR Pipe Unions',
-    category: 'Pipe Union',
-    tagline: 'Leak-proof brass-insert unions for hot and cold water systems',
+    slug: 'ppr-green-pipe',
+    name: 'PPR Green Pipe',
+    category: 'PPR Pipes',
+    tagline: 'Food grade certified green PPR pipes — 20mm to 315mm, 50-year life',
     shortDescription:
-      'High-quality PPR pipe unions with brass inserts for reliable, leak-proof connections in hot and cold water distribution systems.',
-    fullDescription: `PPR (Polypropylene Random Copolymer) pipe unions are precision-engineered fittings designed for creating separable, leak-proof joints in water distribution and industrial plumbing systems. Manufactured from virgin PPR resin, these unions incorporate brass inserts for superior threaded connections that resist corrosion and maintain torque integrity over the long term.
+      'Standard green PPR pipes from 20mm to 315mm. Food grade certified, temperature rated -5°C to +95°C, with a 10-year product warranty.',
+    fullDescription: `PPR Green Pipes (Polypropylene Random Copolymer) are the industry-standard piping solution for hot and cold water distribution in residential, commercial, and industrial facilities. The distinctive green colour makes them instantly recognisable on site and helps prevent cross-connection errors during installation.
 
-The heat fusion (socket fusion) welding process creates a molecular-level bond between the union body and the PPR pipe, eliminating the risk of joint separation under pressure or thermal expansion. This makes PPR pipe unions the ideal choice for both hot water (up to 95°C) and cold water systems in residential, commercial, and light industrial applications.
+Manufactured from virgin PPR resin, these pipes offer outstanding performance across a temperature range of -5°C to +95°C, making them equally suitable for chilled water supply lines and hot water distribution up to near-boiling temperatures. The material's inherent resistance to corrosion, scaling, and chemical attack means the bore remains clean and full-flow throughout the pipe's service life.
 
-At LBow Network Solutions, our PPR pipe unions are sourced from manufacturers who adhere to industry-standard production specifications, ensuring dimensional consistency and pressure integrity across every batch. The unions are available in sizes ranging from ½ inch to 4 inches to accommodate varying flow requirements.
+At LBow Network Solutions, we are an authorised Prince dealer supplying PPR green pipes across the full range from 20mm (half inch) to 315mm. All our pipes carry food grade certification, making them safe for potable water applications in food processing facilities, hospitals, and commercial kitchens.
 
-These unions are particularly valuable in maintenance-prone sections of a pipeline, as they allow individual pipe segments or equipment (such as pumps, meters, and filters) to be disconnected and serviced without cutting the pipe. The dual-union design further simplifies disassembly in confined spaces.
+Heat fusion (socket fusion) welding creates molecular-level bonds at every joint, producing a system that is stronger at the joint than in the pipe body itself. There are no adhesives, solvent cements, or O-ring seals to degrade over time. A properly installed PPR system has a design service life of 50 years.
 
-Our 10-year product warranty covers manufacturing defects, and all unions undergo pressure testing before dispatch.`,
+Our 10-year product warranty on PPR pipes gives you long-term assurance of material quality and performance.`,
     specifications: [
-      { label: 'Material', value: 'PPR (Polypropylene Random Copolymer)' },
-      { label: 'Insert Material', value: 'Brass (for threaded connections)' },
-      { label: 'Temperature Rating', value: 'Up to 95°C (continuous service)' },
+      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer (virgin resin)' },
+      { label: 'Colour', value: 'Green' },
+      { label: 'Size Range', value: '20mm (½ inch) to 315mm' },
+      { label: 'Temperature Range', value: '-5°C to +95°C' },
       { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
-      { label: 'Color', value: 'Green / Grey' },
       { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
-      { label: 'Size Range', value: '½ inch to 4 inches (DN15–DN110)' },
-      { label: 'Standard', value: 'Manufactured to industry-standard specifications' },
-      { label: 'Warranty', value: '10 years' },
+      { label: 'Certification', value: 'Food grade certified' },
+      { label: 'Service Life', value: '50 years' },
+      { label: 'Warranty', value: '10 years (product warranty on PPR pipes)' },
     ],
     applications: [
       'Hot and cold water distribution systems',
-      'Domestic plumbing and commercial buildings',
       'Industrial process water lines',
-      'Equipment isolation (pumps, filters, meters)',
-      'HVAC chilled water circuits',
       'Food and beverage facility water supply',
+      'Pharmaceutical clean water supply',
+      'HVAC chilled water circuits',
+      'Solar water heater feed and return lines',
+    ],
+    industries: [
+      'Manufacturing and industrial plants',
+      'Food and beverage processing',
+      'Pharmaceuticals and biotech',
+      'Commercial construction',
+      'Hospitals and healthcare',
+      'HVAC contractors',
+    ],
+    relatedProducts: ['ppr-blue-pipe', 'ppr-fittings-green', 'brass-ball-valve'],
+    image: '/images/product-ppr-green-pipe.webp',
+    metaTitle: 'PPR Green Pipe Supplier in Bangalore | LBow Network Solutions',
+    metaDescription:
+      'Buy PPR green pipes 20mm–315mm in Bangalore. Food grade certified, -5°C to +95°C, 10-year warranty. Authorised Prince dealer. Call +91 8123501407.',
+    keywords: [
+      'PPR green pipe Bangalore',
+      'PPR pipe supplier Bangalore',
+      'PPR pipe 20mm to 315mm',
+      'food grade PPR pipe',
+      'green PPR pipe industrial',
+    ],
+    faqs: [
+      {
+        question: 'What sizes of PPR green pipe are available?',
+        answer:
+          'We supply PPR green pipes from 20mm (half inch) to 315mm. Contact us for availability on specific sizes and quantities.',
+      },
+      {
+        question: 'Is PPR green pipe food grade certified?',
+        answer:
+          'Yes. Our PPR green pipes are food grade certified, making them safe for potable water and food processing applications.',
+      },
+      {
+        question: 'What temperature range can PPR green pipe handle?',
+        answer:
+          'PPR green pipe is rated for continuous service from -5°C to +95°C, suitable for both chilled water and hot water systems.',
+      },
+      {
+        question: 'What is the warranty on PPR green pipe?',
+        answer:
+          'We offer a 10-year product warranty on PPR green pipes covering manufacturing defects.',
+      },
+      {
+        question: 'How long will a PPR pipe system last?',
+        answer:
+          'A properly installed PPR pipe system has a design life of 50 years under normal operating conditions.',
+      },
+    ],
+  },
+  {
+    slug: 'ppr-blue-pipe',
+    name: 'PPR Blue Pipe',
+    category: 'PPR Pipes',
+    tagline: 'Premium blue PPR pipes for hot/cold water and industrial pressure lines',
+    shortDescription:
+      'Premium blue PPR pipes — full range 20mm to 315mm. Ideal for hot/cold water and industrial pressure lines with 10-year warranty.',
+    fullDescription: `PPR Blue Pipes represent the premium tier of our PPR pipe range, designed for high-pressure industrial water lines and applications where blue colour-coding is preferred or required for system identification. Like our green PPR pipes, these are manufactured from virgin PPR resin and carry the same performance specifications.
+
+The blue colour is particularly common in industrial installations where colour-coded piping systems distinguish hot water lines (red), cold water lines (blue), and other service lines, helping maintenance teams quickly identify each circuit without labelling. In larger industrial facilities, this colour-coding system significantly reduces the risk of incorrect valve operation.
+
+PPR blue pipes share the same -5°C to +95°C temperature rating, food grade certification, and 50-year design life as our green PPR pipes. They are joined using the same heat fusion welding process, creating permanent, leak-free joints that match the pressure and temperature rating of the pipe body.
+
+At LBow Network Solutions, we supply PPR blue pipes across the full size range from 20mm to 315mm. Our team can assist with pipe selection, sizing, and take-off calculations for complete projects.`,
+    specifications: [
+      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer (virgin resin)' },
+      { label: 'Colour', value: 'Blue' },
+      { label: 'Size Range', value: '20mm (½ inch) to 315mm' },
+      { label: 'Temperature Range', value: '-5°C to +95°C' },
+      { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
+      { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
+      { label: 'Certification', value: 'Food grade certified' },
+      { label: 'Service Life', value: '50 years' },
+      { label: 'Warranty', value: '10 years (product warranty on PPR pipes)' },
+    ],
+    applications: [
+      'Cold water distribution with colour-coded systems',
+      'Industrial pressure water lines',
+      'Hot water distribution (up to 95°C)',
+      'Compressed air secondary distribution',
+      'HVAC chilled and condenser water lines',
+      'Chemical feed lines (low concentration)',
     ],
     industries: [
       'Manufacturing plants',
-      'Commercial construction',
-      'Food processing',
-      'Pharmaceuticals',
-      'HVAC contractors',
-    ],
-    relatedProducts: ['ppr-pipe-fittings', 'ppch-industrial-pipeline', 'cooling-tower-pipeline'],
-    image: '/images/product-ppr-unions.webp',
-    metaTitle: 'PPR Pipe Unions in Bangalore | LBow Network Solutions',
-    metaDescription:
-      'Buy PPR pipe unions with brass inserts in Bangalore. Hot & cold water rated up to 95°C, 10-year warranty. Call +91 9606419076.',
-    keywords: [
-      'PPR pipe unions Bangalore',
-      'brass insert PPR union',
-      'PPR pipe union supplier Bangalore',
-      'hot water pipe union',
-      'heat fusion pipe fittings',
-    ],
-    faqs: [
-      {
-        question: 'What temperature can PPR pipe unions handle?',
-        answer:
-          'PPR pipe unions are rated for continuous service up to 95°C, making them suitable for hot water supply lines, solar water heater systems, and light industrial hot-process lines.',
-      },
-      {
-        question: 'How are PPR pipe unions joined to the pipeline?',
-        answer:
-          'PPR pipe unions are joined using heat fusion (socket fusion) welding. A special welding tool heats both the pipe end and the union socket simultaneously to the fusion temperature, and they are then pressed together to form a permanent, monolithic joint.',
-      },
-      {
-        question: 'Why do PPR pipe unions have brass inserts?',
-        answer:
-          'Brass inserts provide the threaded connection point where the union mates with other fittings or equipment. Brass is corrosion-resistant and maintains thread integrity under torque, preventing the softening or deformation that can occur with pure plastic threads over time.',
-      },
-      {
-        question: 'What sizes of PPR pipe unions are available?',
-        answer:
-          'We supply PPR pipe unions from ½ inch (DN15) up to 4 inches (DN110). Contact us with your specific size requirements and we will confirm stock availability and lead time.',
-      },
-      {
-        question: 'Do you offer free delivery for PPR pipe union orders in Bangalore?',
-        answer:
-          'Yes. We offer free delivery within 22km of our T Dasarahalli, Bangalore location. For locations beyond 22km, delivery charges apply — orders are dispatched by courier (small quantities) or freight truck (bulk orders) with no minimum order quantity.',
-      },
-    ],
-  },
-  {
-    slug: 'pprc-chemical-pipe',
-    name: 'PPRC Chemical Pipe',
-    category: 'Chemical Pipe',
-    tagline: 'Superior chemical resistance for industrial process pipelines',
-    shortDescription:
-      'PPRC pipes engineered for chemical resistance in industrial plants, pharmaceutical facilities, and processing environments.',
-    fullDescription: `PPRC (Polypropylene Random Copolymer - Chemical grade) pipes are specifically formulated for use in aggressive chemical environments where standard piping materials would corrode, degrade, or contaminate the process fluid. The inherent inertness of polypropylene makes PPRC an ideal material for transporting a wide range of acids, alkalis, salts, and organic compounds at elevated temperatures.
-
-Unlike metal pipes that require protective coatings or linings, PPRC chemical pipes are chemically inert throughout their wall thickness. This eliminates the risk of lining delamination and ensures a consistent bore diameter over the pipe's service life — a critical factor in precise-flow applications.
-
-PPRC chemical pipes are joined using the same heat fusion welding method as standard PPR pipes, creating seamless, homogeneous joints that offer the same chemical resistance as the pipe body itself. There are no adhesives, solvent cements, or mechanical fasteners at the joint — eliminating the common failure point present in other plastic pipe systems.
-
-At LBow Network Solutions, we supply PPRC chemical pipes for industrial customers in Bangalore's pharmaceutical corridor (Jigani, Bommasandra), chemical processing facilities, and laboratory infrastructure. The pipes are available in straight lengths and can be combined with PPRC fittings (tees, elbows, reducers, flanges) for complete system installation.
-
-The blue and green colour coding distinguishes PPRC chemical pipes from standard PPR pipes, preventing mix-ups during installation and maintenance.`,
-    specifications: [
-      { label: 'Material', value: 'PPRC (Chemical Grade Polypropylene Random Copolymer)' },
-      { label: 'Temperature Rating', value: 'Up to 95°C' },
-      { label: 'Chemical Resistance', value: 'Resistant to acids, alkalis, salts, and most organic solvents' },
-      { label: 'Color', value: 'Blue / Green (chemical-grade identification)' },
-      { label: 'Joining Method', value: 'Heat fusion (socket fusion / butt fusion) welding' },
-      { label: 'Shape', value: 'Round (circular cross-section)' },
-      { label: 'Standard', value: 'Manufactured to industry-standard specifications' },
-      { label: 'Warranty', value: '10 years' },
-    ],
-    applications: [
-      'Chemical dosing and transfer lines',
-      'Pharmaceutical process pipelines',
-      'Laboratory acid/alkali drainage',
-      'Electroplating and surface treatment facilities',
-      'Water treatment chemical feed lines',
-      'Fertilizer and agrochemical plants',
-    ],
-    industries: [
-      'Pharmaceuticals and biotechnology',
-      'Chemical manufacturing',
-      'Water treatment',
-      'Electronics manufacturing',
-      'Fertilizer production',
-      'Research and testing laboratories',
-    ],
-    relatedProducts: ['ppch-industrial-pipeline', 'ppr-pipe-fittings', 'frp-lining-chiller-pipes'],
-    image: '/images/product-pprc-pipe.webp',
-    metaTitle: 'PPRC Chemical Pipe Supplier in Bangalore | LBow Network Solutions',
-    metaDescription:
-      'PPRC chemical-resistant pipes for industrial plants and pharma facilities in Bangalore. Heat fusion welded, up to 95°C. Call +91 9606419076.',
-    keywords: [
-      'PPRC chemical pipe Bangalore',
-      'chemical resistant pipe supplier Bangalore',
-      'PPRC pipe industrial Bangalore',
-      'polypropylene chemical pipe',
-      'pharma grade pipe Bangalore',
-    ],
-    faqs: [
-      {
-        question: 'What chemicals is PPRC pipe resistant to?',
-        answer:
-          'PPRC pipes are resistant to most dilute and concentrated acids (hydrochloric, sulphuric, phosphoric), alkalis (sodium hydroxide, potassium hydroxide), salts, and a wide range of organic solvents. For specific chemical compatibility, we recommend consulting a chemical resistance chart for polypropylene.',
-      },
-      {
-        question: 'Is PPRC pipe suitable for pharmaceutical clean rooms?',
-        answer:
-          'Yes. PPRC chemical pipes are non-toxic, non-leaching, and maintain a smooth bore that resists biofilm accumulation. They are widely used in pharmaceutical and biotech facilities for process water and chemical transfer lines.',
-      },
-      {
-        question: 'What is the difference between PPR and PPRC pipe?',
-        answer:
-          'Both are made from polypropylene random copolymer, but PPRC (chemical grade) uses a specific formulation that enhances chemical resistance. Standard PPR is optimised for water service (hot/cold), while PPRC is specifically designed for chemical transport applications.',
-      },
-      {
-        question: 'Can PPRC pipe be used outdoors?',
-        answer:
-          'PPRC pipes have limited UV resistance and should be protected from prolonged direct sunlight in outdoor installations. Underground installation or use of UV-protective sleeves/cladding is recommended for exposed outdoor runs.',
-      },
-      {
-        question: 'Do you supply PPRC fittings to match the pipes?',
-        answer:
-          'Yes. We supply matching PPRC fittings including elbows, tees, couplers, reducers, and flanges to complete your chemical pipeline system. Contact us for a system quotation.',
-      },
-    ],
-  },
-  {
-    slug: 'ppch-industrial-pipeline',
-    name: 'PPCH Pipe Line for Industrial',
-    category: 'Industrial Pipeline',
-    tagline: 'High-pressure PPCH pipelines rated up to 16 bar for heavy industry',
-    shortDescription:
-      'PPCH industrial pipelines designed for compressed air, high-pressure process systems, and demanding manufacturing environments up to 16 bar.',
-    fullDescription: `PPCH (Polypropylene Copolymer High-pressure) pipes represent the heavy-duty tier of polypropylene piping solutions. Engineered specifically for high-pressure industrial applications, PPCH pipelines are rated up to 16 bar working pressure — significantly exceeding the capabilities of standard PPR or PPRC systems — while retaining the corrosion-free, low-maintenance characteristics that make polypropylene the material of choice for modern industrial facilities.
-
-PPCH industrial pipelines are the preferred choice for compressed air distribution, high-pressure process water systems, industrial chilled water circuits, and other demanding applications where metal pipework would be susceptible to corrosion, scaling, or conductivity issues.
-
-The heat fusion welding joint technology eliminates threaded and flanged connections as potential leak points, creating a fully continuous, homogeneous pipeline system. This is especially valuable in compressed air systems, where even minor leaks represent significant energy losses and operational inefficiency.
-
-Unlike steel or copper pipework, PPCH does not corrode, scale internally, or require external protective coatings. This translates directly into lower lifetime maintenance costs and ensures that compressed air or process fluid remains free from rust or scale contamination.
-
-LBow Network Solutions has installed PPCH industrial pipelines for manufacturing facilities across Bangalore's industrial belt — including factories in Peenya, Nelamangala, and Bommasandra industrial areas. Our experienced technical team can advise on pressure system design, pipe sizing, and flow rate optimisation.`,
-    specifications: [
-      { label: 'Material', value: 'PPCH (Polypropylene Copolymer High-pressure)' },
-      { label: 'Working Pressure', value: 'Up to 16 bar (1.6 MPa)' },
-      { label: 'Temperature Rating', value: 'Suitable for industrial operating temperatures' },
-      { label: 'Joining Method', value: 'Heat fusion (socket fusion / electrofusion) welding' },
-      { label: 'Type', value: 'Industrial pressure pipe' },
-      { label: 'Applications', value: 'Compressed air, high-pressure process, chilled water' },
-      { label: 'Standard', value: 'Manufactured to industry-standard specifications' },
-      { label: 'Warranty', value: '10 years' },
-    ],
-    applications: [
-      'Compressed air distribution systems (up to 16 bar)',
-      'Industrial process water high-pressure lines',
-      'Chilled water circuits in large HVAC systems',
-      'Pneumatic tool supply networks',
-      'High-pressure rinse and wash systems',
-      'Industrial automation fluid circuits',
-    ],
-    industries: [
-      'Automotive manufacturing',
-      'Machine tool and engineering',
-      'Textile manufacturing',
+      'Automotive and engineering',
       'Food and beverage processing',
-      'Electronics assembly',
-      'General manufacturing',
+      'Commercial construction',
+      'HVAC and MEP contractors',
+      'Pharmaceuticals',
     ],
-    relatedProducts: ['ppch-pipe-fittings', 'air-compressor-pipeline', 'cooling-tower-pipeline'],
-    image: '/images/product-ppch-industrial.webp',
-    metaTitle: 'PPCH Industrial Pipeline Supplier Bangalore | LBow Network Solutions',
+    relatedProducts: ['ppr-green-pipe', 'ppr-fittings-blue', 'brass-ball-valve'],
+    image: '/images/product-ppr-blue-pipe.webp',
+    metaTitle: 'PPR Blue Pipe Supplier in Bangalore | LBow Network Solutions',
     metaDescription:
-      'PPCH high-pressure industrial pipelines rated up to 16 bar in Bangalore. Compressed air, process systems. Call +91 9606419076.',
+      'Buy PPR blue pipes 20mm–315mm in Bangalore. Food grade, -5°C to +95°C, 10-year warranty. Industrial piping supply. Call +91 8123501407.',
     keywords: [
-      'PPCH industrial pipeline Bangalore',
-      'high pressure pipe Bangalore',
-      'compressed air pipe system Bangalore',
-      'PPCH pipe 16 bar',
-      'industrial pipe supplier Bangalore',
+      'PPR blue pipe Bangalore',
+      'blue PPR pipe industrial',
+      'PPR pipe supplier Bangalore',
+      'colour coded PPR pipe',
+      'industrial water pipe Bangalore',
     ],
     faqs: [
       {
-        question: 'What pressure rating does PPCH pipe support?',
+        question: 'What is the difference between PPR green and PPR blue pipe?',
         answer:
-          'PPCH industrial pipelines are rated for working pressures up to 16 bar (1.6 MPa). This makes them suitable for compressed air distribution, high-pressure process water, and other demanding industrial applications.',
+          'Both PPR green and blue pipes are made from the same virgin PPR resin with identical performance specifications. The difference is colour only — blue is often used for colour-coded system identification in industrial settings.',
       },
       {
-        question: 'Is PPCH pipe suitable for compressed air systems?',
+        question: 'Are PPR blue pipes suitable for hot water?',
         answer:
-          'Yes. PPCH is widely used for compressed air distribution networks in factories and manufacturing plants. The heat fusion welded joints are leak-free, which is critical for energy efficiency in compressed air systems where even small leaks cause significant power wastage.',
+          'Yes. PPR blue pipes have the same temperature rating as green PPR: -5°C to +95°C continuous service. They are fully suitable for hot water distribution systems.',
       },
       {
-        question: 'How does PPCH compare to steel pipe for industrial use?',
+        question: 'What sizes of PPR blue pipe do you supply?',
         answer:
-          'PPCH does not corrode, does not require painting or protective coatings, and has a smooth bore that resists scaling. While steel pipe has greater structural strength, PPCH offers superior corrosion resistance, lower weight, and significantly lower installation and lifetime maintenance costs for fluid transport applications.',
+          'We supply PPR blue pipes from 20mm (half inch) to 315mm. Contact us for specific sizes and bulk pricing.',
       },
       {
-        question: 'Can PPCH pipe be used for high-temperature industrial applications?',
+        question: 'Is PPR blue pipe food grade certified?',
         answer:
-          'PPCH is suitable for typical industrial operating temperatures. For applications exceeding standard temperature limits, please contact us to discuss the specific system requirements and we will recommend the most appropriate piping solution.',
+          'Yes. Our PPR blue pipes are food grade certified and safe for potable water applications.',
       },
       {
-        question: 'What sizes of PPCH industrial pipe do you supply?',
+        question: 'Can PPR blue pipes be joined with PPR green pipe fittings?',
         answer:
-          'We supply PPCH industrial pipes across a range of diameters to suit different flow and pressure requirements. Contact us with your system specifications — flow rate, pressure, and run lengths — and we will provide appropriate sizing recommendations.',
+          'Yes. PPR pipes of the same nominal diameter are dimensionally compatible regardless of colour. They are joined using the same heat fusion welding process.',
       },
     ],
   },
   {
-    slug: 'ppr-pipe-fittings',
-    name: 'PPR Pipe Fittings',
-    category: 'Pipe Fittings',
-    tagline: 'Complete range of PPR elbows, tees, couplers and reducers',
+    slug: 'ppr-fittings-green',
+    name: 'PPR Fittings (Green)',
+    category: 'PPR Fittings',
+    tagline: 'Complete range of green PPR elbows, tees, couplers, and reducers',
     shortDescription:
-      'Full range of PPR pipe fittings including elbows, tees, couplers, and reducers for building complete PPR pipeline systems.',
-    fullDescription: `PPR pipe fittings form the connective backbone of any PPR piping system. At LBow Network Solutions, we supply a comprehensive range of PPR fittings engineered to match the material properties and pressure ratings of PPR pipes — ensuring a uniform, monolithic system from supply to point-of-use.
+      'Complete range of green PPR fittings — elbows, tees, couplers, reducers, and unions for every residential and industrial piping need.',
+    fullDescription: `Green PPR fittings are the connective components that complete your PPR piping system. At LBow Network Solutions, we supply a comprehensive range covering every connection type required: 90° and 45° elbows for direction changes, equal and reducing tees for branch connections, straight and reducing couplers, end caps, male and female threaded adapters (with brass inserts), pipe clips, and unions.
 
-Our PPR fitting range includes: elbows (45° and 90°), equal and reducing tees, straight couplers, reducing couplers, end caps, cross joints, male and female threaded adapters (with brass inserts), pipe clips and supports, ball valves, and check valves — everything required to build a complete PPR pipeline system for hot water, cold water, or process fluid distribution.
+All green PPR fittings are manufactured from the same virgin PPR resin as our pipes, with the same temperature and pressure ratings. Heat fusion welding creates a homogeneous, monolithic joint between pipe and fitting — there are no O-rings, adhesives, or mechanical fasteners that could fail over time.
 
-All fittings are joined using heat fusion (socket fusion) welding, the same process used for PPR pipes. This creates a fully homogeneous joint with no adhesives, solvent cements, or O-ring seals that could fail over time. Properly executed heat fusion joints are stronger than the pipe body itself and carry the same pressure and temperature ratings.
+The green colour range coordinates with PPR green pipes for a clean, professional installation finish. Brass-insert fittings (male and female adapters) provide the threaded connection point for equipment interfaces, maintaining the corrosion resistance of brass threads while keeping the system body in PPR.
 
-PPR fittings are dimensionally engineered to match the pipe outer diameters, ensuring precise alignment and full-bore flow without turbulence-inducing restrictions at joints. The smooth internal bore of PPR pipe and fittings minimises pressure drop and flow resistance compared to metal fittings with rougher bores.
-
-At LBow Network Solutions, we stock PPR fittings in sizes from ½ inch (DN15) to 4 inches (DN110), covering the full range of residential, commercial, and light industrial piping requirements. Our technical team can assist with take-off calculations for complete projects to ensure no items are missed.`,
+We stock green PPR fittings from ½ inch (DN15) to 4 inches (DN110) for immediate dispatch. Larger sizes and special configurations are available on order. Our technical team can assist with material take-off for complete projects.`,
     specifications: [
-      { label: 'Material', value: 'PPR (Polypropylene Random Copolymer)' },
+      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer' },
+      { label: 'Colour', value: 'Green' },
       { label: 'Temperature Rating', value: 'Up to 95°C (continuous service)' },
       { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
-      { label: 'Color', value: 'Green' },
       { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
       { label: 'Size Range', value: '½ inch to 4 inches (DN15–DN110)' },
-      { label: 'Types Available', value: 'Elbows, tees, couplers, reducers, end caps, adapters, valves' },
+      { label: 'Types Available', value: 'Elbows (45°/90°), tees, couplers, reducers, end caps, adapters, unions' },
+      { label: 'Insert Material', value: 'Brass (threaded adapters)' },
       { label: 'Warranty', value: '10 years' },
     ],
     applications: [
@@ -304,394 +221,630 @@ At LBow Network Solutions, we stock PPR fittings in sizes from ½ inch (DN15) to
       'Industrial process water distribution',
       'Solar water heater systems',
       'HVAC chilled and hot water circuits',
+      'Food and beverage facility water supply',
       'Agricultural irrigation headers',
-      'Swimming pool and water treatment piping',
     ],
     industries: [
       'Construction and real estate',
       'Manufacturing plants',
-      'Hotels and hospitality',
       'Food and beverage',
       'Pharmaceuticals',
       'HVAC contractors',
+      'Hotels and hospitality',
     ],
-    relatedProducts: ['ppr-pipe-unions', 'pprc-chemical-pipe', 'cooling-tower-pipeline'],
-    image: '/images/product-ppr-fittings.webp',
-    metaTitle: 'PPR Pipe Fittings Dealer in Bangalore | LBow Network Solutions',
+    relatedProducts: ['ppr-green-pipe', 'ppr-fittings-blue', 'brass-ball-valve'],
+    image: '/images/product-ppr-fittings-green.webp',
+    metaTitle: 'PPR Green Fittings Supplier in Bangalore | LBow Network Solutions',
     metaDescription:
-      'PPR elbows, tees, couplers, reducers — complete range from Bangalore dealer. 10-year warranty, heat fusion welded. Call +91 9606419076.',
+      'PPR green elbows, tees, couplers, reducers — complete range from Bangalore dealer. 10-year warranty. Call +91 8123501407.',
     keywords: [
-      'PPR pipe fittings Bangalore',
+      'PPR green fittings Bangalore',
       'PPR elbow tee coupler Bangalore',
-      'PPR fittings dealer Bangalore',
+      'green PPR fittings dealer',
+      'PPR pipe fittings supplier',
       'heat fusion fittings Bangalore',
-      'pipe fittings supplier Bangalore',
     ],
     faqs: [
       {
-        question: 'What types of PPR fittings do you stock?',
+        question: 'What types of green PPR fittings do you stock?',
         answer:
-          'We stock a comprehensive range including 90° and 45° elbows, equal and reducing tees, straight and reducing couplers, end caps, cross joints, male and female threaded adapters with brass inserts, ball valves, and pipe supports. Contact us for a full catalogue.',
+          'We stock 90° and 45° elbows, equal and reducing tees, straight and reducing couplers, end caps, male and female threaded adapters with brass inserts, unions, and pipe supports.',
       },
       {
-        question: 'Can PPR fittings be used with standard PPR pipes from other brands?',
+        question: 'Are green PPR fittings compatible with PPR blue pipes?',
         answer:
-          'PPR fittings are dimensionally standardised and will typically be compatible with PPR pipes of the same nominal diameter from any manufacturer, provided both comply with the same dimensional standards. However, we recommend using fittings and pipes from a consistent source for guaranteed compatibility.',
-      },
-      {
-        question: 'How are PPR fittings connected to PPR pipes?',
-        answer:
-          'PPR fittings are joined using heat fusion (socket fusion) welding. The pipe end and fitting socket are simultaneously heated to fusion temperature using a welding tool, then quickly pressed together and held for a few seconds while the joint solidifies. No adhesives, solvents, or clamps are needed.',
+          'Yes. PPR fittings of the same nominal diameter are dimensionally compatible regardless of colour. Both are joined using heat fusion welding.',
       },
       {
         question: 'What is the maximum temperature for PPR fittings?',
         answer:
-          'PPR fittings are rated for continuous service up to 95°C, matching the temperature rating of PPR pipes. This covers all typical hot water supply applications including solar water heaters and central hot water systems.',
+          'PPR fittings are rated for continuous service up to 95°C, matching the temperature rating of PPR pipes.',
       },
       {
         question: 'Do you offer bulk pricing for PPR fittings?',
         answer:
-          'Yes. We offer competitive pricing for bulk project orders with no minimum order quantity. Contact us at +91 9606419076 or via WhatsApp with your project take-off list for a custom quote.',
+          'Yes. We offer competitive pricing for bulk project orders. Contact us at +91 8123501407 or via WhatsApp with your project take-off list for a custom quote.',
+      },
+      {
+        question: 'Do you supply PPR fittings for both green and blue pipe systems?',
+        answer:
+          'Yes. We stock fittings in both green and blue to match your pipe selection. Both types use the same heat fusion welding process.',
       },
     ],
   },
   {
-    slug: 'ppch-pipe-fittings',
-    name: 'PPCH Pipe Fittings',
-    category: 'PPCH Fittings',
-    tagline: 'High-pressure PPCH fittings for industrial compressed air and process systems',
+    slug: 'ppr-fittings-blue',
+    name: 'PPR Fittings (Blue)',
+    category: 'PPR Fittings',
+    tagline: 'Blue PPR fittings with brass inserts for industrial hot and cold water systems',
     shortDescription:
-      'PPCH fittings rated up to 16 bar for completing PPCH high-pressure industrial pipeline systems in factories and processing plants.',
-    fullDescription: `PPCH pipe fittings are the high-pressure counterparts to standard PPR fittings, engineered to match the pressure and performance specifications of PPCH industrial pipelines. With a working pressure rating up to 16 bar, PPCH fittings are designed for compressed air systems, high-pressure process lines, and other demanding industrial applications where standard plastic fittings would be inadequate.
+      'Full set of blue PPR fittings with brass inserts for hot and cold water applications in industrial and commercial setups.',
+    fullDescription: `Blue PPR fittings complete the blue PPR pipe system for industrial and commercial installations where colour-coded piping is used. Available in the same comprehensive range as our green fittings — elbows, tees, couplers, reducers, unions, and threaded adapters — all manufactured from virgin PPR resin with brass inserts where required.
 
-The PPCH fitting range includes all the connective components required to build a complete high-pressure industrial pipeline system: 90° and 45° elbows for direction changes, tees and wyes for branch connections, couplers and reducers for pipe joining and size transitions, flanged adapters for equipment connections, and end caps for system termination.
+Blue PPR fittings are especially popular in larger industrial facilities and commercial buildings where maintenance teams use colour coding to identify cold water lines (blue), hot water lines (red/green), and other services at a glance. Using matching blue fittings with blue pipes produces a clean, professional installation that is easy to trace and maintain.
 
-Like PPCH pipes, all PPCH fittings are joined using heat fusion welding technology. This is especially critical in high-pressure systems — the fusion-welded joint creates a homogeneous, seamless connection that matches the full pressure rating of the pipe and fitting, with no O-ring seals, adhesives, or mechanical clamps that could become the weakest point in the system.
+Like all our PPR fittings, the blue range is joined using heat fusion welding. The resulting joint is permanent, pressure-rated to PN16, and requires no ongoing maintenance. Brass-insert adapters provide durable threaded connection points for equipment interfaces without compromising the corrosion-free nature of the overall system.
 
-PPCH fittings are particularly valuable in compressed air distribution networks where leak-free performance is not just a quality concern but a direct energy efficiency and cost factor. A well-installed PPCH compressed air system with fusion-welded fittings can operate for decades with minimal maintenance.
-
-At LBow Network Solutions, we supply PPCH pipe fittings to manufacturing plants, engineering works, and industrial contractors across Bangalore and Karnataka. Our technical team can assist with system design, pipe routing, and fitting selection for new installations and system upgrades.`,
+We supply blue PPR fittings from ½ inch (DN15) to 4 inches (DN110). Contact us for a complete material list and project pricing.`,
     specifications: [
-      { label: 'Material', value: 'PPCH (Polypropylene Copolymer High-pressure)' },
-      { label: 'Working Pressure', value: 'Up to 16 bar (1.6 MPa)' },
-      { label: 'Joining Method', value: 'Heat fusion welding' },
-      { label: 'Types Available', value: 'Elbows, tees, couplers, reducers, flanged adapters, end caps' },
-      { label: 'Compatibility', value: 'Designed for use with PPCH industrial pipes' },
-      { label: 'Applications', value: 'Compressed air, high-pressure process, industrial fluid systems' },
+      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer' },
+      { label: 'Colour', value: 'Blue' },
+      { label: 'Temperature Rating', value: 'Up to 95°C (continuous service)' },
+      { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
+      { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
+      { label: 'Size Range', value: '½ inch to 4 inches (DN15–DN110)' },
+      { label: 'Types Available', value: 'Elbows (45°/90°), tees, couplers, reducers, end caps, adapters, unions' },
+      { label: 'Insert Material', value: 'Brass (threaded adapters)' },
       { label: 'Warranty', value: '10 years' },
     ],
     applications: [
-      'Compressed air distribution network connections',
-      'High-pressure industrial process system joints',
-      'Branch connections in manufacturing plant pipework',
-      'Equipment connections in pneumatic systems',
-      'Industrial chiller and cooling system connections',
-      'Size transitions in multi-diameter pressure systems',
+      'Colour-coded cold water distribution systems',
+      'Industrial hot and cold water plumbing',
+      'Equipment connections in process plants',
+      'Commercial building services',
+      'HVAC chilled water connections',
+      'Hospital and healthcare water systems',
     ],
     industries: [
-      'Automotive manufacturing',
-      'Machine tool and engineering',
-      'Textile production',
-      'Food and beverage processing',
-      'Pharmaceutical manufacturing',
-      'Electronics and semiconductor fabrication',
+      'Manufacturing plants',
+      'Commercial construction',
+      'Hospitals and healthcare',
+      'HVAC contractors',
+      'Food and beverage',
+      'Pharmaceuticals',
     ],
-    relatedProducts: ['ppch-industrial-pipeline', 'air-compressor-pipeline', 'ppr-pipe-fittings'],
-    image: '/images/product-ppch-fittings.webp',
-    metaTitle: 'PPCH Pipe Fittings Supplier Bangalore | LBow Network Solutions',
+    relatedProducts: ['ppr-blue-pipe', 'ppr-fittings-green', 'brass-ball-valve'],
+    image: '/images/product-ppr-fittings-blue.webp',
+    metaTitle: 'PPR Blue Fittings Supplier in Bangalore | LBow Network Solutions',
     metaDescription:
-      'PPCH high-pressure fittings up to 16 bar for industrial compressed air and process systems in Bangalore. Call +91 9606419076.',
+      'PPR blue fittings with brass inserts for industrial installations in Bangalore. Full range, heat fusion welded. Call +91 8123501407.',
     keywords: [
-      'PPCH pipe fittings Bangalore',
-      'high pressure pipe fittings Bangalore',
-      'PPCH fittings industrial Bangalore',
-      'compressed air pipe fittings',
-      'industrial pipe fittings supplier Bangalore',
+      'PPR blue fittings Bangalore',
+      'blue PPR pipe fittings',
+      'colour coded PPR fittings',
+      'PPR fittings industrial',
+      'pipe fittings supplier Bangalore',
     ],
     faqs: [
       {
-        question: 'What pressure rating do PPCH fittings support?',
+        question: 'What is the advantage of blue PPR fittings over green?',
         answer:
-          'PPCH pipe fittings are rated for working pressures up to 16 bar (1.6 MPa), matching the pressure capability of PPCH industrial pipes. This makes them suitable for compressed air systems and high-pressure industrial process lines.',
+          'The advantage is purely visual — blue fittings with blue pipes create a colour-coded system that helps identify cold water lines from hot water lines and other services in large facilities. Performance is identical.',
       },
       {
-        question: 'Can PPCH fittings be used with PPR or PPRC pipes?',
+        question: 'Can blue PPR fittings be used with green PPR pipes?',
         answer:
-          'No. PPCH fittings are specifically designed for PPCH pipes and the dimensions may differ from standard PPR pipe fittings. Mixing PPCH fittings with PPR pipes (or vice versa) is not recommended as it may result in incompatible joint dimensions and reduced pressure integrity.',
+          'Technically yes, since dimensions are the same. However, for a clean colour-coded installation, we recommend matching pipe and fitting colours.',
       },
       {
-        question: 'Are PPCH fittings suitable for outdoor industrial installations?',
+        question: 'Do blue PPR fittings have the same pressure and temperature rating as green?',
         answer:
-          'PPCH fittings have limited UV resistance. For outdoor installations, we recommend providing UV protection through cladding, insulation, or paint. Underground or enclosed installations are preferred. Contact us for guidance on your specific application.',
+          'Yes. Both blue and green PPR fittings are rated for PN16 pressure and continuous service up to 95°C.',
       },
       {
-        question: 'How are PPCH fittings connected in a compressed air system?',
+        question: 'What sizes are available in blue PPR fittings?',
         answer:
-          'PPCH fittings are joined using heat fusion welding, which creates a seamless, homogeneous joint rated to the same pressure as the pipe body. In compressed air systems, this eliminates potential leak points at every joint — a critical factor since compressed air leaks represent wasted energy and increased compressor running costs.',
+          'We supply blue PPR fittings from ½ inch (DN15) to 4 inches (DN110). Contact us for specific sizes and project quantities.',
       },
       {
-        question: 'Do you supply PPCH fittings for system upgrades or repairs?',
+        question: 'Do you supply both pipes and fittings in blue PPR?',
         answer:
-          'Yes. We supply PPCH fittings for both new installations and system upgrades or repairs. Bring us your system drawing or describe your requirements and we can provide a complete fitting list and quotation.',
+          'Yes. We stock both blue PPR pipes (20mm–315mm) and the complete range of blue PPR fittings for a fully matched system.',
       },
     ],
   },
   {
-    slug: 'cooling-tower-pipeline',
-    name: 'Cooling Tower Pipeline',
-    category: 'Cooling System',
-    tagline: 'Corrosion-resistant piping systems for industrial cooling tower circuits',
+    slug: 'brass-ball-valve',
+    name: 'Brass Ball Valve',
+    category: 'Valves',
+    tagline: 'High-quality brass ball valves for reliable flow control in water, air, and chemical lines',
     shortDescription:
-      'PPR and PPCH cooling tower pipeline systems for industrial facilities — corrosion-free, low-maintenance, and engineered for continuous operation.',
-    fullDescription: `Industrial cooling towers are among the most demanding environments for piping systems. The combination of continuously circulating water, dissolved minerals, biocides, and scale inhibitors creates a corrosive environment that rapidly degrades conventional metal pipework. PPR and PPCH cooling tower pipeline systems offer a superior alternative — inherently corrosion-free, scale-resistant, and capable of maintaining flow rates and pressure integrity over decades of continuous service.
+      'High-quality brass ball valves for reliable flow control in water, air, and light chemical lines — quarter-turn operation, bubble-tight shut-off.',
+    fullDescription: `Brass ball valves are the workhorse of industrial isolation valves — simple, reliable, and durable. At LBow Network Solutions, we supply high-quality brass ball valves suitable for water, compressed air, and light chemical service lines across a wide range of sizes and end connections.
 
-Cooling tower piping circuits typically comprise a supply line (chilled water or condenser water from the tower to the process equipment), a return line (warm water returning to the tower for cooling), bypass lines, and chemical dosing connections. At LBow Network Solutions, we design and supply complete cooling tower pipeline packages — pipes, fittings, valves, and unions — tailored to the specific flow rates and pressure requirements of each installation.
+The quarter-turn operation (90° from full open to full closed) makes brass ball valves fast to operate, easy to inspect visually (the handle position shows valve state at a glance), and suitable for both manual and actuated operation. The full-bore design ensures no flow restriction when open, maintaining system efficiency.
 
-PPR pipes are the standard choice for cooling tower circuits operating at ambient to moderately elevated temperatures, while PPCH pipes are selected for applications requiring higher working pressures. Both materials are fully compatible with standard water treatment chemicals used in cooling tower maintenance, including biocides, scale inhibitors, and corrosion inhibitors.
+Our brass ball valves feature PTFE-seated balls for bubble-tight shut-off, chrome-plated brass balls for corrosion resistance, and stems with blow-out proof design for safe operation under pressure. Available in threaded (BSP/NPT) and socket-weld ends to suit different connection requirements.
 
-The heat fusion welded joint system eliminates potential leak points — a critical factor in cooling tower circuits where water loss represents both an operational and water treatment cost. Unlike flanged or threaded metal connections that require periodic re-tightening and gasket replacement, fusion-welded PPR/PPCH joints remain permanently leak-free under normal operating conditions.
-
-We have supplied cooling tower pipeline systems for industrial facilities across Bangalore's manufacturing belt, including food processing plants, pharmaceutical manufacturers, and heavy engineering works. Our 10-year product warranty provides assurance of long-term performance.`,
+Brass ball valves are an essential component in PPR pipe systems — typically installed at equipment connections, branch points, and zone isolation positions throughout the distribution network. We stock standard sizes for immediate supply and can source special sizes on request.`,
     specifications: [
-      { label: 'Pipe Material', value: 'PPR or PPCH depending on pressure requirements' },
-      { label: 'Working Pressure', value: 'PPR: up to 1.6 MPa; PPCH: up to 16 bar' },
-      { label: 'Chemical Compatibility', value: 'Compatible with standard cooling tower treatment chemicals' },
-      { label: 'Joining Method', value: 'Heat fusion welding (leak-free permanent joints)' },
-      { label: 'Temperature Range', value: 'Suitable for cooling tower operating temperatures' },
-      { label: 'Components Supplied', value: 'Pipes, fittings, unions, valves, supports' },
-      { label: 'Warranty', value: '10 years' },
+      { label: 'Body Material', value: 'Brass (dezincification-resistant grade)' },
+      { label: 'Ball Material', value: 'Chrome-plated brass' },
+      { label: 'Seat Material', value: 'PTFE (bubble-tight shut-off)' },
+      { label: 'Operation', value: 'Quarter-turn (90°) manual handle' },
+      { label: 'End Connections', value: 'Threaded (BSP/NPT) and socket-weld options' },
+      { label: 'Pressure Rating', value: 'Up to 16 bar (1.6 MPa)' },
+      { label: 'Temperature Rating', value: 'Up to 120°C (PTFE seats)' },
+      { label: 'Size Range', value: '½ inch to 4 inches' },
+      { label: 'Standard', value: 'Industry standard specifications' },
     ],
     applications: [
-      'Industrial cooling tower supply and return circuits',
-      'Condenser water distribution systems',
-      'Chilled water secondary circuits',
-      'Chemical dosing connection headers',
-      'Cooling water bypass and balancing lines',
-      'Evaporative cooler distribution piping',
+      'PPR and PPCH pipeline isolation valves',
+      'Compressed air line shut-off points',
+      'Water distribution system zone isolation',
+      'Equipment connection isolation',
+      'HVAC water system control valves',
+      'Light chemical line isolation',
     ],
     industries: [
-      'Food and beverage manufacturing',
-      'Pharmaceutical and biotech',
-      'Automotive and heavy engineering',
-      'Plastic and rubber manufacturing',
-      'Data centres and server rooms',
+      'Manufacturing and industrial plants',
+      'HVAC and MEP contractors',
+      'Food and beverage processing',
+      'Pharmaceuticals',
+      'Automotive manufacturing',
+      'Commercial construction',
+    ],
+    relatedProducts: ['butterfly-valve', 'ppr-green-pipe', 'pneumatic-fittings'],
+    image: '/images/product-brass-ball-valve.webp',
+    metaTitle: 'Brass Ball Valve Supplier in Bangalore | LBow Network Solutions',
+    metaDescription:
+      'Quality brass ball valves for water, air, and chemical lines in Bangalore. Quarter-turn, bubble-tight, 16 bar rated. Call +91 8123501407.',
+    keywords: [
+      'brass ball valve Bangalore',
+      'industrial ball valve supplier',
+      'ball valve for PPR pipe',
+      'quarter turn valve Bangalore',
+      'flow control valve industrial',
+    ],
+    faqs: [
+      {
+        question: 'What is a brass ball valve used for?',
+        answer:
+          'Brass ball valves are used for isolating (shutting off) flow in water, compressed air, and light chemical pipelines. The quarter-turn handle makes them fast and easy to operate.',
+      },
+      {
+        question: 'What pressure rating do your brass ball valves have?',
+        answer:
+          'Our brass ball valves are rated up to 16 bar (1.6 MPa), suitable for most industrial water and compressed air applications.',
+      },
+      {
+        question: 'Can brass ball valves be used with PPR pipes?',
+        answer:
+          'Yes. Brass ball valves with threaded ends connect to PPR systems via PPR male/female threaded adapters. They are the standard isolation valve choice for PPR pipeline systems.',
+      },
+      {
+        question: 'What sizes of brass ball valves do you supply?',
+        answer:
+          'We supply brass ball valves from ½ inch to 4 inches. Contact us for specific sizes and quantities.',
+      },
+      {
+        question: 'Are brass ball valves suitable for hot water lines?',
+        answer:
+          'Yes. With PTFE seats, our brass ball valves are rated up to 120°C, making them suitable for hot water distribution systems.',
+      },
+    ],
+  },
+  {
+    slug: 'butterfly-valve',
+    name: 'Butterfly Valve',
+    category: 'Valves',
+    tagline: 'Industrial-grade butterfly valves for large-bore lines — quick-acting and corrosion resistant',
+    shortDescription:
+      'Industrial-grade butterfly valves for large-bore lines — lightweight, quick-acting, and corrosion resistant for water and HVAC applications.',
+    fullDescription: `Butterfly valves are the preferred choice for large-bore pipeline isolation and flow control where the compact, lightweight design of ball valves becomes impractical or cost-prohibitive at larger diameters. LBow Network Solutions supplies industrial-grade butterfly valves for water treatment, HVAC, and process piping applications.
+
+The butterfly valve disc rotates 90° within the valve body to open or close flow. The concentric (centric) disc design is suitable for low-pressure water and HVAC service, while eccentric designs are available for higher-pressure or tighter shut-off requirements. Wafer-type butterfly valves are sandwiched between flanges, making them compact and easy to install in tight spaces.
+
+Our butterfly valves are available with different disc and seat materials to suit the application: EPDM-seated valves for water and HVAC service, NBR seats for oil-resistant applications, and PTFE seats for chemical service. Disc materials include ductile iron (epoxy coated), 316 stainless steel, and aluminium alloy.
+
+Butterfly valves are commonly installed on cooling tower supply and return lines, chiller headers, HVAC air handling units, and large-diameter water mains — anywhere that a compact, lightweight, low-torque isolation valve is preferred over a heavy gate or ball valve.`,
+    specifications: [
+      { label: 'Type', value: 'Wafer / Lug type butterfly valve' },
+      { label: 'Body Material', value: 'Ductile iron / Cast iron' },
+      { label: 'Disc Material', value: 'Ductile iron (epoxy coated), SS316, or aluminium' },
+      { label: 'Seat Material', value: 'EPDM, NBR, or PTFE depending on application' },
+      { label: 'Operation', value: 'Quarter-turn (90°) — manual lever or gear operated' },
+      { label: 'End Connection', value: 'Wafer (between flanges) or lug type' },
+      { label: 'Pressure Rating', value: 'Up to 16 bar' },
+      { label: 'Temperature Rating', value: 'Up to 120°C (EPDM); up to 180°C (PTFE)' },
+      { label: 'Size Range', value: '2 inches (DN50) to 24 inches (DN600)' },
+    ],
+    applications: [
+      'Cooling tower supply and return main isolation',
+      'Chiller header flow control',
+      'HVAC air handling unit water control',
+      'Large-diameter water main isolation',
+      'Industrial process water flow control',
+      'Fire suppression system control valves',
+    ],
+    industries: [
+      'HVAC and MEP contractors',
+      'Water treatment plants',
+      'Manufacturing and industrial plants',
+      'Commercial buildings',
+      'Food and beverage processing',
+      'Power and utilities',
+    ],
+    relatedProducts: ['brass-ball-valve', 'ppr-green-pipe', 'ss-fittings'],
+    image: '/images/product-butterfly-valve.webp',
+    metaTitle: 'Butterfly Valve Supplier in Bangalore | LBow Network Solutions',
+    metaDescription:
+      'Industrial butterfly valves for cooling towers, HVAC, and large-bore water lines in Bangalore. DN50 to DN600. Call +91 8123501407.',
+    keywords: [
+      'butterfly valve Bangalore',
+      'industrial butterfly valve supplier',
+      'wafer butterfly valve',
+      'HVAC butterfly valve',
+      'large bore valve Bangalore',
+    ],
+    faqs: [
+      {
+        question: 'What is a butterfly valve used for?',
+        answer:
+          'Butterfly valves are used for isolating or regulating flow in large-bore pipelines. They are commonly used in cooling tower lines, HVAC systems, water mains, and industrial process piping.',
+      },
+      {
+        question: 'What is the difference between wafer and lug butterfly valves?',
+        answer:
+          'Wafer butterfly valves are clamped between two pipe flanges and rely on the flanges for retention. Lug butterfly valves have threaded inserts allowing them to be bolted independently on each side — useful when one end of the pipeline needs to be removable without disturbing the other side.',
+      },
+      {
+        question: 'What size butterfly valves do you supply?',
+        answer:
+          'We supply butterfly valves from 2 inches (DN50) to 24 inches (DN600). Contact us for specific sizes and actuator options.',
+      },
+      {
+        question: 'Can butterfly valves be used with cooling tower pipelines?',
+        answer:
+          'Yes. Butterfly valves are the standard choice for cooling tower supply and return main isolation due to their compact size, light weight, and low operating torque at large diameters.',
+      },
+      {
+        question: 'Are motorised butterfly valves available?',
+        answer:
+          'Yes. We supply butterfly valves with electric actuators for automated flow control. Contact us for actuator specifications and control options.',
+      },
+    ],
+  },
+  {
+    slug: 'ss-fittings',
+    name: 'SS Fittings',
+    category: 'SS Fittings',
+    tagline: 'Stainless steel fittings for hygienic, high-pressure, and corrosive environments',
+    shortDescription:
+      'Stainless steel fittings for hygienic, high-pressure, and corrosive environments including food processing, pharma, and chemical industries.',
+    fullDescription: `Stainless steel (SS) fittings are the premium choice for pipeline connections in hygienic, high-pressure, and corrosive environments where brass or PPR would be unsuitable. LBow Network Solutions supplies SS fittings in 304 and 316 grades for a wide range of industrial applications.
+
+SS 304 fittings are suitable for general corrosive environments, food and beverage applications, and moderate chemical service. SS 316 fittings offer superior resistance to chloride attack, making them the preferred choice for marine environments, pharmaceutical clean-in-place systems, and aggressive chemical service.
+
+Our SS fitting range includes compression fittings, push-fit fittings, threaded fittings (male/female BSP and NPT), flanged connections, clamp-end fittings (tri-clover / sanitary fittings for hygienic applications), and tube-to-tube unions. The smooth internal bore of SS fittings meets sanitary requirements and resists biofilm accumulation.
+
+SS fittings are frequently used in conjunction with our PPR and PPCH pipe systems — at equipment connections, instrument tapping points, and any location where the superior hygiene or pressure characteristics of stainless steel are required at the interface.`,
+    specifications: [
+      { label: 'Material Grade', value: 'SS 304 or SS 316 (specified on order)' },
+      { label: 'Finish', value: 'Polished (for hygienic applications) or bead-blasted' },
+      { label: 'Connection Types', value: 'Compression, push-fit, threaded (BSP/NPT), flanged, tri-clover (sanitary)' },
+      { label: 'Pressure Rating', value: 'Up to 40 bar (varies by type and size)' },
+      { label: 'Temperature Rating', value: '-196°C to +800°C (material range)' },
+      { label: 'Size Range', value: '¼ inch to 4 inches' },
+      { label: 'Standards', value: 'ASTM A403 / DIN / ISO' },
+    ],
+    applications: [
+      'Food and beverage hygienic process piping',
+      'Pharmaceutical clean-in-place (CIP) systems',
+      'Chemical dosing and transfer lines',
+      'High-pressure instrument connections',
+      'Marine and offshore piping',
+      'Brewery and dairy facility piping',
+    ],
+    industries: [
+      'Food and beverage processing',
+      'Pharmaceuticals and biotech',
+      'Chemical manufacturing',
+      'Brewery and dairy',
+      'Marine and offshore',
+      'Research and laboratories',
+    ],
+    relatedProducts: ['brass-fittings', 'pneumatic-fittings', 'butterfly-valve'],
+    image: '/images/product-ss-fittings.webp',
+    metaTitle: 'Stainless Steel Fittings Supplier in Bangalore | LBow Network Solutions',
+    metaDescription:
+      'SS 304 and SS 316 stainless steel fittings for food, pharma, and chemical industries in Bangalore. Call +91 8123501407.',
+    keywords: [
+      'stainless steel fittings Bangalore',
+      'SS fittings supplier industrial',
+      'SS 316 fittings Bangalore',
+      'hygienic pipe fittings',
+      'food grade fittings Bangalore',
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between SS 304 and SS 316 fittings?',
+        answer:
+          'SS 304 is suitable for general food, beverage, and corrosive applications. SS 316 contains molybdenum which gives superior resistance to chloride and acid attack, making it the better choice for pharmaceutical, marine, and aggressive chemical environments.',
+      },
+      {
+        question: 'Are stainless steel fittings food grade certified?',
+        answer:
+          'Yes. Our SS fittings in polished sanitary finish meet food grade hygiene requirements and are suitable for food, beverage, dairy, and pharmaceutical applications.',
+      },
+      {
+        question: 'What types of SS fittings do you supply?',
+        answer:
+          'We supply compression fittings, threaded fittings, push-fit fittings, flanged connections, and sanitary tri-clover fittings in both SS 304 and SS 316.',
+      },
+      {
+        question: 'Can SS fittings be used with PPR pipes?',
+        answer:
+          'SS fittings connect to PPR systems via threaded adapters. They are used at equipment interfaces, instrument connections, and any point where stainless steel properties are required.',
+      },
+      {
+        question: 'What pressure rating do your SS fittings support?',
+        answer:
+          'Pressure ratings vary by type and size. Compression and threaded fittings are typically rated up to 40 bar. Contact us for specific ratings for your application.',
+      },
+    ],
+  },
+  {
+    slug: 'brass-fittings',
+    name: 'Brass Fittings',
+    category: 'Brass Fittings',
+    tagline: 'Precision-machined brass fittings for threaded connections in air, water, and gas lines',
+    shortDescription:
+      'Precision-machined brass fittings for threaded connections in air, water, and gas line applications — reliable, corrosion-resistant, and widely compatible.',
+    fullDescription: `Brass fittings are among the most versatile and widely used pipeline connection components in industrial and plumbing applications. LBow Network Solutions supplies a comprehensive range of precision-machined brass fittings for compressed air, water, and gas line threaded connections.
+
+Our brass fitting range includes: male and female threaded adapters (BSP and NPT), elbow fittings (45° and 90°), equal and reducing tees, couplers, nipples, hex bushes, and union connectors. All are manufactured from free-machining brass (CuZn39Pb3) for precise thread form and reliable sealing.
+
+Brass fittings are used extensively at the interface between PPR/PPCH pipeline systems and threaded equipment connections — compressor outlets, pressure gauge tapping points, filter connections, and solenoid valve ports. The corrosion resistance of brass in water and air service, combined with its ease of machining, makes it the standard material for threaded connection points.
+
+Dezincification-resistant (DZR) brass fittings are available for applications in aggressive water conditions. BSP (British Standard Pipe) and NPT (National Pipe Thread) thread standards are both stocked. PTFE thread tape or thread sealant should be used for leak-free threaded assembly.`,
+    specifications: [
+      { label: 'Material', value: 'Brass CuZn39Pb3 (free-machining brass)' },
+      { label: 'Thread Standards', value: 'BSP (G) and NPT available' },
+      { label: 'Pressure Rating', value: 'Up to 25 bar (varies by size)' },
+      { label: 'Temperature Rating', value: 'Up to 120°C' },
+      { label: 'Size Range', value: '⅛ inch to 4 inches' },
+      { label: 'Types Available', value: 'Adapters, elbows, tees, couplers, nipples, unions, bushes' },
+      { label: 'Finish', value: 'Natural brass / nickel plated (on request)' },
+    ],
+    applications: [
+      'Compressed air system threaded connections',
+      'Equipment connections in PPR/PPCH systems',
+      'Water distribution threaded fittings',
+      'Gas line fittings (LPG, natural gas)',
+      'Instrument and gauge tapping points',
+      'Solenoid valve and actuator connections',
+    ],
+    industries: [
+      'Manufacturing plants',
+      'Automotive and engineering',
+      'HVAC and MEP contractors',
+      'Food and beverage',
+      'Pharmaceuticals',
+      'General construction',
+    ],
+    relatedProducts: ['ss-fittings', 'pneumatic-fittings', 'brass-ball-valve'],
+    image: '/images/product-brass-fittings.webp',
+    metaTitle: 'Brass Fittings Supplier in Bangalore | LBow Network Solutions',
+    metaDescription:
+      'Precision brass fittings for compressed air, water, and gas lines in Bangalore. BSP and NPT threads. Call +91 8123501407.',
+    keywords: [
+      'brass fittings Bangalore',
+      'brass pipe fittings supplier',
+      'BSP brass fittings Bangalore',
+      'compressed air brass fittings',
+      'industrial brass fittings',
+    ],
+    faqs: [
+      {
+        question: 'What thread standards are your brass fittings available in?',
+        answer:
+          'We stock brass fittings in both BSP (British Standard Pipe — G thread) and NPT (National Pipe Thread) standards. Specify which thread type you require when ordering.',
+      },
+      {
+        question: 'Can brass fittings be used with PPR pipes?',
+        answer:
+          'Yes. Brass male or female threaded adapters connect to PPR pipes via heat fusion welding. This is the standard way to create a threaded connection point in a PPR pipe system.',
+      },
+      {
+        question: 'What is the pressure rating of your brass fittings?',
+        answer:
+          'Our brass fittings are rated up to 25 bar for smaller sizes, with ratings varying by size. They are suitable for most compressed air and water service applications.',
+      },
+      {
+        question: 'Are brass fittings suitable for gas lines?',
+        answer:
+          'Yes. Brass fittings are commonly used for LPG and natural gas line connections. Ensure fittings are rated for gas service and use an appropriate gas-grade thread sealant.',
+      },
+      {
+        question: 'Do you supply nickel-plated brass fittings?',
+        answer:
+          'Yes. Nickel-plated brass fittings are available on request for applications requiring improved appearance or corrosion resistance in damp environments.',
+      },
+    ],
+  },
+  {
+    slug: 'pneumatic-fittings',
+    name: 'Pneumatic Fittings',
+    category: 'Pneumatic',
+    tagline: 'Push-to-connect and compression pneumatic fittings for air compressor lines',
+    shortDescription:
+      'Push-to-connect and compression pneumatic fittings for air compressor lines and automated industrial systems — quick assembly, leak-free performance.',
+    fullDescription: `Pneumatic fittings connect compressed air components — compressors, valves, actuators, cylinders, and tools — into a complete, leak-free pneumatic system. LBow Network Solutions supplies a comprehensive range of pneumatic fittings suitable for PU tubing, nylon tubing, and metal tube pneumatic circuits.
+
+Our pneumatic fitting range includes push-to-connect (push-in) fittings for quick toolless assembly with PU and nylon tubing, compression fittings for metal tube and high-vibration applications, and threaded adapters for connecting pneumatic components to the compressed air distribution network. Fitting bodies are available in brass, aluminium alloy, and nickel-plated brass.
+
+Push-to-connect pneumatic fittings are ideal for machine-building and automation applications where frequent connections and disconnections are required. The spring-loaded collet grips the tube on insertion and releases with a push on the release ring. One-touch fittings dramatically reduce assembly time compared to compression fittings.
+
+Pneumatic fittings are used throughout factory compressed air systems — from the main air receiver and compressor outlet, through the distribution ring main, to individual machine drops and tool connection points. Selecting the correct fitting type and size is critical for maintaining system pressure and preventing air leaks, which represent a direct energy cost.`,
+    specifications: [
+      { label: 'Types', value: 'Push-to-connect (push-in), compression, threaded adapters' },
+      { label: 'Body Material', value: 'Brass, aluminium alloy, nickel-plated brass' },
+      { label: 'Compatible Tubing', value: 'PU, nylon, polyethylene, and metal tube' },
+      { label: 'Tube OD Range', value: '4mm to 16mm (push-in); ¼ inch to 1 inch (compression)' },
+      { label: 'Thread', value: 'BSP and metric (M5, M6) thread options' },
+      { label: 'Pressure Rating', value: 'Up to 10 bar (push-in); up to 16 bar (compression)' },
+      { label: 'Temperature Rating', value: '-20°C to +80°C (push-in); up to 120°C (metal compression)' },
+      { label: 'Types Available', value: 'Straight, elbow, tee, cross, reducer, bulkhead, Y-splitter' },
+    ],
+    applications: [
+      'Machine automation pneumatic circuits',
+      'Air compressor line connections',
+      'Pneumatic tool supply drops',
+      'Actuator and cylinder connections',
+      'Pneumatic valve manifold connections',
+      'Air line filtration and regulation systems',
+    ],
+    industries: [
+      'Automotive manufacturing',
+      'Electronics assembly',
+      'Machine building and automation',
+      'Food and beverage packaging',
       'Textile manufacturing',
+      'General manufacturing',
     ],
-    relatedProducts: ['ppch-industrial-pipeline', 'frp-lining-chiller-pipes', 'air-compressor-pipeline'],
-    image: '/images/product-cooling-tower.webp',
-    metaTitle: 'Cooling Tower Pipeline Supplier Bangalore | LBow Network Solutions',
+    relatedProducts: ['pu-frl-airgun', 'brass-fittings', 'brass-ball-valve'],
+    image: '/images/product-pneumatic-fittings.webp',
+    metaTitle: 'Pneumatic Fittings Supplier in Bangalore | LBow Network Solutions',
     metaDescription:
-      'PPR & PPCH cooling tower pipeline systems for industrial facilities in Bangalore. Corrosion-free, heat fusion welded. Call +91 9606419076.',
+      'Push-to-connect and compression pneumatic fittings for compressed air systems in Bangalore. Fast assembly, leak-free. Call +91 8123501407.',
     keywords: [
-      'cooling tower pipeline Bangalore',
-      'cooling tower pipe supplier Bangalore',
-      'industrial cooling system piping',
-      'PPR cooling tower pipe',
-      'PPCH cooling water pipeline',
+      'pneumatic fittings Bangalore',
+      'push to connect fittings',
+      'compressed air fittings',
+      'pneumatic pipe fittings industrial',
+      'PU tube fittings Bangalore',
     ],
     faqs: [
       {
-        question: 'What type of pipe is best for cooling tower circuits?',
+        question: 'What is a push-to-connect pneumatic fitting?',
         answer:
-          'PPR pipes are suitable for most standard cooling tower circuits operating at ambient to moderate temperatures and pressures. For higher-pressure chiller systems or applications requiring greater mechanical strength, PPCH pipes rated up to 16 bar are recommended. We can advise on the appropriate selection for your specific system.',
+          'A push-to-connect (push-in) fitting allows you to connect PU or nylon tubing by simply pushing the tube end into the fitting. A spring-loaded collet grips the tube and creates an airtight seal. No tools are needed. To release the tube, push the release ring and pull the tube.',
       },
       {
-        question: 'Are PPR/PPCH pipes compatible with cooling tower treatment chemicals?',
+        question: 'What tubing is compatible with push-in pneumatic fittings?',
         answer:
-          'Yes. Both PPR and PPCH are chemically resistant to the standard range of cooling tower treatment chemicals, including biocides (chlorine, bromine compounds), scale inhibitors, and corrosion inhibitors used in industrial water treatment programmes.',
+          'Push-in fittings are compatible with PU (polyurethane), nylon, and polyethylene tubing of the correct OD. Ensure the tubing OD matches the fitting port size for a secure, leak-free connection.',
       },
       {
-        question: 'How long do PPR/PPCH cooling tower pipelines last?',
+        question: 'What pressure rating do pneumatic fittings have?',
         answer:
-          'PPR and PPCH cooling tower pipelines are designed for long service life. Our products carry a 10-year warranty, and properly installed polypropylene pipe systems routinely deliver 20–30 years of service life in typical cooling tower environments — significantly outlasting metal pipework in corrosive water conditions.',
+          'Push-in fittings are typically rated up to 10 bar. Metal compression fittings are rated up to 16 bar. Always verify the fitting rating matches your system working pressure.',
       },
       {
-        question: 'Can you supply a complete cooling tower piping package?',
+        question: 'Do you supply pneumatic fittings for machine automation?',
         answer:
-          'Yes. We supply complete cooling tower piping packages including pipes, elbows, tees, couplers, unions, ball valves, and support brackets. Contact us with your system layout or flow/pressure specifications for a custom package quotation.',
+          'Yes. We supply a full range of push-in pneumatic fittings including straight, elbow, tee, and bulkhead types for machine building and automation applications.',
       },
       {
-        question: 'Do you provide cooling tower pipeline installation guidance?',
+        question: 'Can pneumatic fittings be used with brass compression fittings on the same system?',
         answer:
-          'Yes. We provide technical guidance on pipe sizing, pressure drop calculations, and heat fusion welding best practices. For large industrial installations, our team can also assist with on-site technical support for the installation team.',
+          'Yes. Push-in fittings and compression fittings can be used on the same system. Push-in fittings are typically used for flexible tubing circuits, while brass compression fittings are used for hard tubing or high-vibration connections.',
       },
     ],
   },
   {
-    slug: 'frp-lining-chiller-pipes',
-    name: 'FRP Lining in Chiller Pipe Lines',
-    category: 'Pipe Lining',
-    tagline: 'Extend chiller pipe service life by 10+ years with FRP protective lining',
+    slug: 'pu-frl-airgun',
+    name: 'PU/FRL Airgun',
+    category: 'Air Tools',
+    tagline: 'PU tubing, FRL units, and airguns for complete compressed air tool setups',
     shortDescription:
-      'FRP (Fibre Reinforced Plastic) lining for chiller pipe lines — protects against internal corrosion and extends service life by 10+ years.',
-    fullDescription: `FRP (Fibre Reinforced Plastic) lining is a protective rehabilitation technique applied to the interior of existing chiller pipe lines that have begun showing signs of corrosion, pitting, or reduced flow capacity due to scale buildup. Rather than replacing the entire pipe system — a costly and time-consuming process that requires plant shutdown — FRP lining provides a cost-effective alternative that restores the pipe's internal bore, eliminates corrosion, and significantly extends the pipe's remaining service life.
+      'PU tubing, FRL units (Filter-Regulator-Lubricator), and airguns for complete compressed air tool setups in factories and workshops.',
+    fullDescription: `A well-functioning compressed air tool setup requires more than just pipes and fittings — it needs the right PU tubing for flexible hose runs, FRL (Filter-Regulator-Lubricator) units for air treatment and pressure control, and quality airguns for cleaning and blowing applications. LBow Network Solutions supplies the complete range.
 
-The FRP lining process involves cleaning the internal pipe surface to remove existing corrosion and scale, then applying a fibre-reinforced epoxy composite layer that bonds permanently to the pipe wall. The result is a smooth, corrosion-resistant interior surface that prevents future oxidation and scale adhesion, restoring the original flow characteristics of the pipe.
+**PU Tubing (Polyurethane Tubing):** Flexible, lightweight, and kink-resistant, PU tubing is the standard flexible hose for machine pneumatic circuits and air tool connections. Available in multiple colours for circuit identification, in sizes from 4mm to 16mm OD. Higher burst pressure than standard nylon tubing.
 
-Key benefits of FRP lining for chiller pipes:
-- Extends pipe service life by 10+ years (delaying full pipe replacement)
-- Eliminates ongoing corrosion without full system shutdown
-- Restores smooth bore for improved flow efficiency
-- Provides a chemical barrier against aggressive cooling water chemistry
-- Cost-effective compared to full pipe replacement, especially for large-diameter chiller mains
-- Minimal disruption to plant operations during installation
+**FRL Units (Filter-Regulator-Lubricator):** FRL units condition the compressed air at each tool drop point. The filter removes moisture and particulates that damage air tools. The regulator sets the working pressure for the downstream tool. The lubricator injects a fine mist of oil to lubricate air-powered tools, extending their service life. FRL units are the critical interface between the compressed air distribution system and air-powered equipment.
 
-FRP lining is particularly valuable for industrial chiller systems in Bangalore's manufacturing sector, where chiller downtime directly impacts production capacity. The lining is applied in situ (in-place) without removing the pipe from service for extended periods.
+**Airguns:** Industrial airguns for cleaning, blowing, and drying applications — used on production lines for part cleaning, mould blowing, and chip removal. Available in ergonomic pistol-grip designs with adjustable flow and safety nozzles compliant with occupational safety requirements.
 
-At LBow Network Solutions, we provide FRP lining services for chiller pipe lines as part of our industrial piping solutions portfolio. We also supply complete chiller pipe systems (PPR/PPCH) for new installations where replacement is the preferred option.`,
+We supply FRL units as individual components (filter, regulator, lubricator separately) or as pre-assembled modular units. Contact us for sizing recommendations based on your tool air consumption and working pressure requirements.`,
     specifications: [
-      { label: 'Lining Material', value: 'Fibre Reinforced Plastic (FRP) — epoxy composite' },
-      { label: 'Service Life Extension', value: '10+ years beyond current pipe condition' },
-      { label: 'Application Method', value: 'In-situ (in-place) lining without pipe removal' },
-      { label: 'Internal Surface', value: 'Smooth bore restoring original flow characteristics' },
-      { label: 'Chemical Resistance', value: 'Resistant to chiller water chemistry and treatment chemicals' },
-      { label: 'Temperature Rating', value: 'Suitable for chiller operating temperatures' },
-      { label: 'Pipe Diameter', value: 'Applicable to a range of pipe diameters — contact for specifics' },
+      { label: 'PU Tubing Material', value: 'Polyurethane (PU) — multi-colour available' },
+      { label: 'PU Tubing Sizes', value: '4mm to 16mm OD' },
+      { label: 'PU Tubing Pressure', value: 'Up to 10 bar working pressure' },
+      { label: 'FRL Pressure Range', value: '0.05 to 1.0 MPa (0.5 to 10 bar)' },
+      { label: 'FRL Port Sizes', value: '¼ inch to 1 inch BSP' },
+      { label: 'Filtration Grade', value: '5 micron (standard filter element)' },
+      { label: 'Airgun Operating Pressure', value: '4 to 8 bar' },
+      { label: 'Airgun Design', value: 'Ergonomic pistol grip — safety nozzle available' },
     ],
     applications: [
-      'Chiller plant supply and return main pipe rehabilitation',
-      'Industrial cooling circuit pipe restoration',
-      'District cooling system pipe lining',
-      'Corroded process pipe internal protection',
-      'Large-diameter pipe corrosion barrier installation',
-      'Flow restoration for scaled or pitted chiller pipes',
-    ],
-    industries: [
-      'Pharmaceutical and biotech manufacturing',
-      'Food and beverage processing',
-      'Data centres and IT facilities',
-      'Automotive manufacturing',
-      'Large commercial buildings with district cooling',
-      'Hospital and healthcare facilities',
-    ],
-    relatedProducts: ['cooling-tower-pipeline', 'ppch-industrial-pipeline', 'air-compressor-pipeline'],
-    image: '/images/service-ppch-industrial.webp',
-    metaTitle: 'FRP Lining for Chiller Pipes in Bangalore | LBow Network Solutions',
-    metaDescription:
-      'FRP lining for chiller pipe lines in Bangalore — extends service life 10+ years, restores flow. Industrial pipe rehabilitation. Call +91 9606419076.',
-    keywords: [
-      'FRP lining chiller pipes Bangalore',
-      'chiller pipe rehabilitation Bangalore',
-      'pipe lining service Bangalore',
-      'FRP pipe lining industrial',
-      'chiller pipe corrosion protection',
-    ],
-    faqs: [
-      {
-        question: 'What is FRP lining and how does it protect chiller pipes?',
-        answer:
-          'FRP (Fibre Reinforced Plastic) lining is a protective composite layer applied to the interior of existing pipes. It creates a smooth, corrosion-resistant barrier between the pipe wall and the flowing fluid, preventing further corrosion and scale buildup while restoring the original bore diameter.',
-      },
-      {
-        question: 'How much can FRP lining extend the life of chiller pipes?',
-        answer:
-          'FRP lining can extend the service life of corroded chiller pipes by 10 or more years, depending on the original pipe condition and the operating environment. This provides a significant cost benefit compared to full pipe replacement, particularly for large-diameter mains where replacement costs are substantial.',
-      },
-      {
-        question: 'Do chiller pipes need to be taken out of service for FRP lining?',
-        answer:
-          'FRP lining is an in-situ (in-place) process. While a controlled shutdown of the specific pipe section is required during lining application and curing, the process is significantly faster and less disruptive than full pipe replacement, which would require removal, cutting, and re-installation of new pipe sections.',
-      },
-      {
-        question: 'Is FRP lining suitable for pipes with heavy corrosion?',
-        answer:
-          'FRP lining is most effective when the pipe retains structural integrity. For pipes with severe corrosion that has compromised the wall thickness, full replacement may be necessary. A pipe inspection (visual or ultrasonic thickness measurement) is recommended before deciding between lining and replacement.',
-      },
-      {
-        question: 'Can you supply replacement PPR or PPCH pipes if lining is not suitable?',
-        answer:
-          'Yes. If inspection reveals that FRP lining is not appropriate due to pipe condition, we can supply complete PPR or PPCH replacement pipe systems. Contact us to discuss both options and we will help you make the most cost-effective decision for your situation.',
-      },
-    ],
-  },
-  {
-    slug: 'air-compressor-pipeline',
-    name: 'Air Compressor Pipe Line',
-    category: 'Compressed Air',
-    tagline: 'Leak-free PPCH compressed air distribution for factories and workshops',
-    shortDescription:
-      'Complete PPCH air compressor pipeline systems for factory compressed air distribution — rated up to 16 bar, heat fusion welded for zero-leak performance.',
-    fullDescription: `A compressed air system is often called the "fourth utility" in manufacturing — alongside electricity, water, and gas. The efficiency of your compressed air distribution network has a direct impact on production capacity, energy consumption, and operating costs. PPCH air compressor pipelines provide the modern solution: a corrosion-free, leak-free, low-maintenance compressed air distribution system that is faster to install than metal pipework and significantly more efficient over its service life.
-
-Compressed air leaks are the single biggest source of energy waste in most factory compressed air systems. Studies consistently show that poorly maintained metal pipe systems can waste 20–30% of compressed air output through leaks at corroded joints, worn fittings, and degraded thread connections. A PPCH compressed air pipeline eliminates these failure modes — heat fusion welded joints are permanently leak-free, and PPCH does not corrode internally.
-
-The smooth bore of PPCH pipes also reduces pressure drop along the distribution main, ensuring consistent working pressure at every point-of-use outlet — whether powering pneumatic tools, feeding automated assembly equipment, or supplying air to industrial processes.
-
-PPCH air compressor pipeline systems can be designed in ring main, radial spur, or combined layouts to suit any factory floor plan. We supply complete system packages including the main distribution ring, drop legs, isolation valves, pressure regulators, and drain points for condensate management.
-
-At LBow Network Solutions, we have supplied PPCH compressed air pipeline systems for factories across Peenya, Nelamangala, Bommasandra, and Bidadi industrial areas in Bangalore. Our team can provide system design guidance, pipe sizing calculations, and technical specifications for your facility.`,
-    specifications: [
-      { label: 'Pipe Material', value: 'PPCH (Polypropylene Copolymer High-pressure)' },
-      { label: 'Working Pressure', value: 'Up to 16 bar (1.6 MPa)' },
-      { label: 'Joining Method', value: 'Heat fusion welding — permanent leak-free joints' },
-      { label: 'Layout Options', value: 'Ring main, radial spur, or combined' },
-      { label: 'Components', value: 'Pipes, elbows, tees, reducers, isolation valves, condensate drains' },
-      { label: 'Internal Surface', value: 'Smooth bore — minimal pressure drop' },
-      { label: 'Corrosion', value: 'Zero internal corrosion — no rust contamination of air supply' },
-      { label: 'Warranty', value: '10 years' },
-    ],
-    applications: [
-      'Factory compressed air distribution ring mains',
-      'Workshop pneumatic tool supply networks',
-      'Automated manufacturing line air supply',
-      'Pneumatic conveying system air headers',
-      'Industrial spray painting compressed air supply',
-      'Packaging line and bottling plant air systems',
+      'Machine pneumatic circuit flexible connections',
+      'Air tool supply drops with FRL conditioning',
+      'Production line part cleaning and blowing',
+      'Mould blowing in plastics processing',
+      'Tool connection hose sets',
+      'Point-of-use air treatment and regulation',
     ],
     industries: [
       'Automotive and auto-components manufacturing',
-      'General engineering and machine shops',
+      'Electronics assembly',
+      'Plastics processing',
       'Textile and garment manufacturing',
-      'Food and beverage packaging',
-      'Plastics processing and moulding',
-      'Pharmaceutical manufacturing',
+      'General machine shops',
+      'Packaging and bottling plants',
     ],
-    relatedProducts: ['ppch-industrial-pipeline', 'ppch-pipe-fittings', 'cooling-tower-pipeline'],
-    image: '/images/product-ppch-industrial.webp',
-    metaTitle: 'Air Compressor Pipeline Supplier Bangalore | LBow Network Solutions',
+    relatedProducts: ['pneumatic-fittings', 'brass-fittings', 'brass-ball-valve'],
+    image: '/images/product-pu-frl-airgun.webp',
+    metaTitle: 'PU Tubing, FRL Units & Airguns Supplier Bangalore | LBow Network Solutions',
     metaDescription:
-      'PPCH compressed air distribution pipelines rated up to 16 bar for Bangalore factories. Leak-free heat fusion welded. Call +91 9606419076.',
+      'PU tubing, FRL (Filter-Regulator-Lubricator) units, and industrial airguns for compressed air systems in Bangalore. Call +91 8123501407.',
     keywords: [
-      'air compressor pipeline Bangalore',
-      'compressed air pipe system Bangalore factory',
-      'PPCH compressed air pipe',
-      'factory compressed air distribution',
-      'air compressor pipe supplier Bangalore',
+      'PU tubing Bangalore',
+      'FRL unit supplier Bangalore',
+      'industrial airgun Bangalore',
+      'compressed air accessories',
+      'filter regulator lubricator Bangalore',
     ],
     faqs: [
       {
-        question: 'Why choose PPCH over aluminium or galvanised steel for compressed air pipes?',
+        question: 'What does FRL stand for in compressed air systems?',
         answer:
-          'PPCH does not corrode internally, eliminating rust contamination of the compressed air supply — a common issue with galvanised steel that degrades over time. Unlike aluminium, PPCH is not subject to electrolytic corrosion. Heat fusion welded PPCH joints are permanently leak-free, reducing energy waste compared to threaded metal connections that leak over time.',
+          'FRL stands for Filter-Regulator-Lubricator. The filter removes moisture and particulates, the regulator controls downstream pressure, and the lubricator adds a fine oil mist to lubricate air-powered tools.',
       },
       {
-        question: 'What working pressure is the PPCH air compressor pipeline rated for?',
+        question: 'Is an FRL unit necessary for every air tool?',
         answer:
-          'PPCH air compressor pipelines are rated for working pressures up to 16 bar (1.6 MPa). Most factory compressed air systems operate at 6–10 bar, so PPCH provides a comfortable safety margin for standard industrial applications.',
+          'For air tools with moving parts (impact wrenches, grinders, drills), an FRL unit significantly extends tool life by providing filtered, regulated, and lubricated air. For blowing applications (airguns), only a filter and regulator are typically needed.',
       },
       {
-        question: 'How do compressed air leaks affect energy costs?',
+        question: 'What size FRL unit do I need?',
         answer:
-          'In typical factory compressed air systems, leaks account for 20–30% of total compressed air output. This wasted air requires the compressor to run longer, consuming more electricity. A leak-free PPCH system can reduce compressed air energy costs significantly — often paying for the system upgrade within a few years through energy savings alone.',
+          'FRL sizing depends on the air consumption of your tool and the working pressure. We can recommend the correct port size and flow capacity based on your tool specifications. Contact us for sizing guidance.',
       },
       {
-        question: 'Can you design a compressed air distribution system layout for our factory?',
+        question: 'What colours of PU tubing are available?',
         answer:
-          'Yes. We provide technical consultation for compressed air system design, including ring main sizing, pressure drop calculations, drop leg positioning, and condensate management. Contact us with your factory floor plan and operating pressure requirements.',
+          'PU tubing is available in blue, red, black, transparent, and yellow — useful for colour-coding different circuits in a machine.',
       },
       {
-        question: 'Do you supply the complete compressed air pipeline system or just the pipes?',
+        question: 'Are your airguns safe for industrial use?',
         answer:
-          'We supply complete compressed air pipeline packages including PPCH pipes, elbows, tees, reducers, isolation valves, condensate drains, and pipe supports. We can supply either individual components or a complete system package based on your requirements.',
+          'Yes. Our industrial airguns comply with occupational safety requirements and are available with safety nozzles that reduce noise and prevent direct high-pressure air contact with skin.',
       },
     ],
   },
 ];
+
+/* ─── Helper functions used by /products/[slug] page ─── */
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
 
 export function getRelatedProducts(slugs: string[]): Product[] {
-  return slugs.map((s) => products.find((p) => p.slug === s)).filter(Boolean) as Product[];
+  return slugs
+    .map((slug) => products.find((p) => p.slug === slug))
+    .filter((p): p is Product => p !== undefined);
 }

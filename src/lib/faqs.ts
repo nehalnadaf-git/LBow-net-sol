@@ -28,7 +28,7 @@ export const faqs: FAQItem[] = [
     category: 'General',
     question: 'What are your business hours?',
     answer:
-      'We are open Monday to Saturday, 9:00 AM to 7:00 PM. We are closed on Sundays. For urgent enquiries outside business hours, you can reach us via WhatsApp at +91 9606419076.',
+      'We are open Monday to Saturday, 9:00 AM to 7:00 PM. We are closed on Sundays. For urgent enquiries outside business hours, you can reach us via WhatsApp at +91 8123501407.',
   },
   {
     category: 'General',
@@ -48,7 +48,7 @@ export const faqs: FAQItem[] = [
     category: 'Ordering & MOQ',
     question: 'How do I place an order?',
     answer:
-      'You can place an order by calling us at +91 9606419076, sending a WhatsApp message to +91 9606419076, or emailing us at lbownetwork9solutions@gmail.com. For project orders, share your pipe schedule or specifications and we will provide a quotation.',
+      'You can place an order by calling us at +91 8123501407, sending a WhatsApp message to +91 8123501407, or emailing us at lbownetwork9solutions@gmail.com. For project orders, share your pipe schedule or specifications and we will provide a quotation.',
   },
   {
     category: 'Ordering & MOQ',
@@ -60,27 +60,27 @@ export const faqs: FAQItem[] = [
     category: 'Ordering & MOQ',
     question: 'Do you offer bulk discounts for large project orders?',
     answer:
-      'Yes. We offer competitive pricing for bulk project orders. Contact us with your project take-off list or pipe schedule and we will provide a project-specific quotation. Call +91 9606419076 or WhatsApp us for a quick response.',
+      'Yes. We offer competitive pricing for bulk project orders. Contact us with your project take-off list or pipe schedule and we will provide a project-specific quotation. Call +91 8123501407 or WhatsApp us for a quick response.',
   },
   {
     category: 'Ordering & MOQ',
     question: 'Can I get a price quote before placing an order?',
     answer:
-      'Yes. Contact us via phone (+91 9606419076), WhatsApp, or email with your requirements and we will provide a quotation promptly during business hours. We typically respond to enquiries within 2 hours.',
+      'Yes. Contact us via phone (+91 8123501407), WhatsApp, or email with your requirements and we will provide a quotation promptly during business hours. We typically respond to enquiries within 2 hours.',
   },
 
   // ── Delivery & Logistics ──────────────────────────────────────────────
   {
     category: 'Delivery & Logistics',
-    question: 'Do you offer free delivery in Bangalore?',
+    question: 'Do you offer a free demo in Bangalore?',
     answer:
-      'Yes. We offer free delivery within 22km of our T Dasarahalli, Bangalore location. This covers the majority of the Bangalore Urban District including Peenya, Yeshwanthpur, Rajajinagar, Vijayanagar, Magadi Road, and surrounding areas.',
+      'Yes. We offer a free demo for all our product ranges — PPR, PPRC, PPCH pipes, fittings, valves, and pneumatic products. Visit our Peenya, Bengaluru location or call +91 8123501407 to schedule a demo.',
   },
   {
     category: 'Delivery & Logistics',
     question: 'What is the delivery charge for orders outside the 22km free zone?',
     answer:
-      'For orders outside our 22km free delivery zone, delivery charges apply. Small orders are dispatched by courier with charges based on weight and destination. Bulk orders are dispatched by freight truck with charges based on order volume and delivery location. Contact us with your delivery address for a delivery cost estimate.',
+      'Contact us with your location for delivery cost estimates. For urgent requirements, call +91 8123501407 or WhatsApp us.',
   },
   {
     category: 'Delivery & Logistics',

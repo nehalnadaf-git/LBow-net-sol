@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -78,17 +78,17 @@ const ServiceArea = () => {
       {/* Premium Background Graphics */}
       <DotMatrixBg isLight={false} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-3 sm:mb-4">
             Service Area
           </div>
           <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.5rem] text-[#EEEEEE] mb-4 sm:mb-6">
-            Serving All of Bangalore
+            Serving Across India
           </h2>
           <p className="font-body text-sm sm:text-base text-[#A6A6A6] max-w-2xl mx-auto">
-            Based in T Dasarahalli, we deliver and install across Bangalore with free delivery within 22km.
+            Based in T Dasarahalli, Bangalore — we supply and install across India. Free demo available on request.
           </p>
         </div>
 

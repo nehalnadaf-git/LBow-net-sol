@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -44,15 +44,15 @@ const ProductsHero = () => {
       {/* Premium Background Graphics */}
       <HexGridBg isLight={false} />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div ref={labelRef} className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-3 sm:mb-4 will-change-transform">
           Our Products
         </div>
         <h1 ref={headingRef} className="font-heading font-bold text-2xl sm:text-3xl md:text-[3rem] lg:text-[3.5rem] text-white leading-[1.1] mb-4 sm:mb-6 will-change-transform">
-          Premium Industrial Pipes &amp; Fittings
+          PPR Pipes, Fittings &amp; Industrial Valves
         </h1>
         <p ref={subtitleRef} className="font-body text-sm sm:text-base md:text-lg text-[#A6A6A6] max-w-2xl mx-auto will-change-transform">
-          Complete range of PPR, PPRC, and PPCH piping solutions for every industrial application.
+          From PPR green &amp; blue pipes (20mm–315mm) to brass ball valves, butterfly valves, SS fittings, pneumatic fittings, and PU/FRL airguns — the complete range for your industry.
         </p>
       </div>
     </section>

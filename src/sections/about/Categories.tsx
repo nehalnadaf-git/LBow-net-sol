@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -60,7 +60,7 @@ const Categories = () => {
       {/* Premium Background Graphics */}
       <PipeCrossSectionBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#434343] mb-3 sm:mb-4">

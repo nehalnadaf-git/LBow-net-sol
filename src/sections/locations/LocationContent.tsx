@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -61,7 +61,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
       {/* Description */}
       <section ref={contentRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
         <DotMatrixBg isLight={true} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-10 lg:gap-16">
             {/* Left: Description */}
             <div className="loc-animate">
@@ -116,7 +116,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
                     <div className="flex items-start gap-2">
                       <CheckCircle size={15} className="text-[#2E7D32] mt-0.5 flex-shrink-0" />
                       <p className="font-body text-sm text-[#434343]">
-                        <strong>Free delivery</strong> within 22km of our T Dasarahalli, Bangalore base
+                        <strong>Free demo</strong> available for all product ranges — call to schedule
                       </p>
                     </div>
                     <div className="flex items-start gap-2">
@@ -165,13 +165,13 @@ const LocationContent = ({ location }: LocationContentProps) => {
                   No minimum order. Prompt response during business hours.
                 </p>
                 <a
-                  href="tel:+919606419076"
+                  href="tel:+918123501407"
                   className="block w-full text-center bg-[#EEEEEE] hover:bg-[#434343] hover:text-[#EEEEEE] text-[#0A0A0B] font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300 mb-3"
                 >
-                  Call +91 9606419076
+                  Call +91 8123501407
                 </a>
                 <a
-                  href="https://wa.me/919606419076?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
+                  href="https://wa.me/918123501407?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300"
@@ -187,7 +187,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
       {/* Relevant Products */}
       <section className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20">
         <PipeTopologyBg isLight={false} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#A6A6A6] mb-3">
             Products We Supply
           </div>
@@ -230,7 +230,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
       {location.nearbyZones && location.nearbyZones.length > 0 && (
         <section className="relative overflow-hidden w-full bg-[#FAFAF9] py-12 sm:py-14 border-t border-[rgba(30,32,33,0.06)]">
           <DotMatrixBg isLight={true} />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
             <h3 className="font-heading font-semibold text-base text-[#0A0A0B] mb-4">
               Nearby Zones We Also Serve
             </h3>

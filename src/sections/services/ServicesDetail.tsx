@@ -1,6 +1,7 @@
-'use client'
+﻿'use client'
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,71 +12,91 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    image: '/images/service-ppr-installation.webp',
-    title: 'PPR Pipe Supply & Installation',
+    image: '/images/services/air-compressor-pipeline.webp',
+    title: 'Air Compressor Pipeline',
     description:
-      'We supply and install complete PPR (Polypropylene Random Copolymer) piping systems for hot and cold water applications. Our PPR pipes and fittings are heat-fused for leak-proof joints that last decades. Suitable for residential buildings, commercial complexes, and industrial facilities.',
+      'We design and install professional compressed air pipeline systems using PPCH and PPR piping for factories, workshops, and industrial facilities. Leak-free heat fusion welded joints ensure zero energy loss from your compressed air network.',
     features: [
-      'Heat fusion welding for permanent joints',
-      'Corrosion and chemical resistant',
-      'Suitable for temperatures up to 95°C',
-      'Smooth inner surface prevents scale buildup',
+      'Rated up to 16 bar working pressure',
+      'Ring main, radial spur, or combined layouts',
+      'Zero internal corrosion — no rust contamination',
+      'Smooth bore for minimal pressure drop',
     ],
+    color: 'green',
     imageLeft: true,
   },
   {
-    image: '/images/service-ppch-industrial.webp',
-    title: 'PPCH Industrial Pipeline Systems',
+    image: '/images/services/cooling-tower-pipelines.webp',
+    title: 'Cooling Tower Pipelines',
     description:
-      'Our PPCH (Polypropylene Homopolymer) pipeline systems are designed for heavy-duty industrial applications. These high-pressure pipes can handle aggressive chemicals, high temperatures, and demanding operating conditions in factories and processing plants.',
+      'Complete design, supply, and installation of cooling tower pipeline systems for industrial HVAC and process cooling. PPR and PPCH materials ensure corrosion-free, low-maintenance operation over decades.',
     features: [
-      'High pressure rating up to 16 bar',
-      'Chemical resistant for industrial fluids',
-      'UV stabilized for outdoor installations',
-      'Custom fabrication and fitting available',
+      'Corrosion-resistant PPR/PPCH materials',
+      'Compatible with all cooling tower treatment chemicals',
+      'Heat fusion welded — permanently leak-free',
+      '10-year product warranty',
     ],
+    color: 'blue',
     imageLeft: false,
   },
   {
-    image: '/images/service-ppch-industrial.webp',
-    title: 'Air Compressor Pipe Line Installation',
+    image: '/images/services/chiller-line-pipelines.webp',
+    title: 'Chiller Line Pipelines',
     description:
-      'We design and install efficient compressed air distribution systems using specialized piping materials. Our installations minimize pressure drops and ensure clean, dry air reaches every point of use in your facility.',
+      'Specialized chiller pipeline solutions including supply, return, and bypass lines — with optional FRP lining for superior corrosion resistance. Extends infrastructure life in data centers, pharmaceutical plants, and cold rooms.',
     features: [
-      'Optimized pipe sizing for minimal pressure loss',
-      'Leak-free push-fit or threaded connections',
-      'Modular system for easy expansion',
-      'Supports pressures up to 16 bar',
+      'FRP lining option for 10+ year life extension',
+      'Suitable for chiller operating temperatures',
+      'Restores smooth bore for improved flow efficiency',
+      'In-situ lining with minimal plant disruption',
     ],
+    color: 'green',
     imageLeft: true,
   },
   {
-    image: '/images/product-cooling-tower.webp',
-    title: 'Cooling Tower Pipeline',
+    image: '/images/services/chemical-line-pipelines.webp',
+    title: 'Chemical Line Pipelines',
     description:
-      'We provide complete cooling tower piping solutions including supply, return, and make-up water lines. Our systems are designed for the unique demands of evaporative cooling systems, ensuring efficient heat rejection and minimal water waste.',
+      'Chemical-resistant PPRC and PPCH pipeline systems engineered for safe and reliable industrial chemical and acid transport. Ideal for pharmaceutical, sugar factory, chemical, and automobile industry applications.',
     features: [
-      'Corrosion-resistant materials for wet environments',
-      'Properly sized for design flow rates',
-      'Integration with existing HVAC systems',
-      'UV and algae-resistant piping options',
+      'Resistant to acids, alkalis, salts, and solvents',
+      'Heat fusion welded — no adhesive joint failures',
+      'Non-toxic, non-leaching for safe chemical transport',
+      'Custom fabrication and system design available',
     ],
+    color: 'blue',
     imageLeft: false,
   },
   {
-    image: '/images/service-ppr-installation.webp',
-    title: 'FRP Lining in Chiller Pipe Lines',
+    image: '/images/services/vacuum-line-systems.webp',
+    title: 'Vacuum Line Systems',
     description:
-      'Our specialized FRP (Fiberglass Reinforced Plastic) lining services protect chiller pipe lines from corrosion, erosion, and chemical attack. The seamless lining extends pipe life by 10+ years and maintains system efficiency.',
+      'Precision vacuum pipeline installation for pharmaceutical, food processing, and laboratory industries. Airtight, zero-contamination performance with heat fusion welded joints that hold vacuum without degradation.',
     features: [
-      'Seamless corrosion protection',
-      'Smooth surface maintains flow efficiency',
-      'Resistant to chlorides and acids',
-      '10+ year service life extension',
+      'Zero-contamination airtight performance',
+      'Suitable for pharmaceutical and food-grade use',
+      'Food grade certified materials available',
+      'Modular design for easy expansion',
     ],
+    color: 'green',
     imageLeft: true,
+  },
+  {
+    image: '/images/services/water-line-general-piping.webp',
+    title: 'Water Line & General Piping',
+    description:
+      'Hot and cold water lines, PPR supply and full installation for all industrial water distribution, utilities, and plumbing requirements. Available from 20mm to 315mm to suit every scale of project.',
+    features: [
+      'Full range: 20mm to 315mm pipe diameter',
+      'Temperature rated -5°C to +95°C',
+      'Food grade certified for potable water',
+      '50-year design life span',
+    ],
+    color: 'blue',
+    imageLeft: false,
   },
 ];
+
 
 const ServicesDetail = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -148,7 +169,7 @@ const ServicesDetail = () => {
       {/* Premium Background Graphics */}
       <PipeTopologyBg isLight={true} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {services.map((service, index) => (
           <div
             key={index}
@@ -159,12 +180,16 @@ const ServicesDetail = () => {
           >
             {/* Image */}
             <div className={`service-image ${!service.imageLeft ? 'lg:order-2' : ''}`}>
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-auto rounded-xl object-cover shadow-md"
-                loading="lazy"
-              />
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-md">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             {/* Text */}
@@ -181,7 +206,7 @@ const ServicesDetail = () => {
                     key={i}
                     className="service-feature flex items-start gap-2 font-body text-sm text-[#434343]"
                   >
-                    <span className="text-[#2E7D32] font-bold mt-0.5">&#x2713;</span>
+                    <span className={`font-bold mt-0.5 ${service.color === 'blue' ? 'text-[#1565C0]' : 'text-[#2E7D32]'}`}>&#x2713;</span>
                     {feature}
                   </li>
                 ))}

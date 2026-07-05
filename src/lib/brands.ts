@@ -39,7 +39,7 @@ As the Authorized Dealer for Prince Pipes in Bangalore, LBow Network Solutions o
 
 **Comprehensive Product Range**: Our dealership covers the Prince Pipes product portfolio including pipes (PPR, UPVC, CPVC, SWR, column pipes), fittings (a complete range to match the pipe systems), water storage tanks (Sintex, Aqua, and other Prince Pipes branded tanks), and bathware products.
 
-**Bangalore Coverage**: Our Prince Pipes supply serves Bangalore and the Bangalore Urban/Rural region. For enquiries about Prince Pipes products, contact LBow Network Solutions at +91 9606419076.
+**Bangalore Coverage**: Our Prince Pipes supply serves Bangalore and the Bangalore Urban/Rural region. For enquiries about Prince Pipes products, contact LBow Network Solutions at +91 8123501407.
 
 **Technical Support**: Our team is knowledgeable about the Prince Pipes product range and can advise on product selection, sizing, and compatibility for your project requirements.
 
@@ -59,7 +59,7 @@ In addition to our Prince Pipes authorized dealership, LBow Network Solutions al
     ],
     metaTitle: 'Prince Pipes Authorized Dealer in Bangalore | LBow Network Solutions',
     metaDescription:
-      'LBow Network Solutions is an Authorized Dealer for Prince Pipes and Fittings Limited in Bangalore (certificate 2025–2027). Call +91 9606419076.',
+      'LBow Network Solutions is an Authorized Dealer for Prince Pipes and Fittings Limited in Bangalore (certificate 2025–2027). Call +91 8123501407.',
     keywords: [
       'Prince Pipes authorized dealer Bangalore',
       'Prince Pipes dealer Bangalore',

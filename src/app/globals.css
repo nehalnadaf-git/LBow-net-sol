@@ -67,7 +67,7 @@
     position: relative;
   }
 
-  /* Ambient glow — plain radial-gradient, no filter:blur (zero GPU filter cost) */
+  /* Ambient glow left — dark neutral */
   body::before {
     content: "";
     position: absolute;
@@ -76,6 +76,19 @@
     width: 60vw;
     height: 60vw;
     background: radial-gradient(circle at 20% 20%, rgba(67,67,67,0.08) 0%, rgba(67,67,67,0) 65%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Ambient glow right — PPR Blue subtle halo */
+  body::after {
+    content: "";
+    position: fixed;
+    top: -10%;
+    right: -15%;
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle at 80% 20%, rgba(21,101,192,0.06) 0%, rgba(66,165,245,0.03) 45%, transparent 70%);
     z-index: -1;
     pointer-events: none;
   }
@@ -118,7 +131,17 @@
   }
 
   .scroll-indicator-dot {
-    background-color: #2E7D32 !important;
+    background: linear-gradient(135deg, #2E7D32, #1565C0) !important;
+  }
+
+  /* PPR Blue accent utility — use alongside green for secondary highlights */
+  .text-blue-accent  { color: #42A5F5; }
+  .bg-blue-accent    { background-color: #1565C0; }
+  .border-blue-accent { border-color: #42A5F5; }
+
+  /* Green–Blue dual glow — for section spotlights and card halos */
+  .glow-dual {
+    box-shadow: 0 0 40px rgba(46,125,50,0.15), 0 0 80px rgba(21,101,192,0.08);
   }
 }
 
@@ -222,11 +245,9 @@
   animation: whatsappPulse 2.5s ease-in-out infinite;
 }
 
-/* Disable float/pulse animations on touch devices */
+/* On touch devices: disable WhatsApp button pulse (distracting on mobile) */
+/* Note: badge-icon-float is intentionally kept active on touch — floating spec tags need it */
 @media (pointer: coarse) {
-  .badge-icon-float {
-    animation: none;
-  }
   .whatsapp-pulse {
     animation: none;
     box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
@@ -252,14 +273,14 @@
   will-change: transform;
 }
 
-/* Product card hover — clean lift */
+/* Product card hover — clean lift with blue-green dual glow */
 .product-card {
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease, border-color 0.4s ease;
 }
 
 .product-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.40);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.40), 0 0 40px rgba(21,101,192,0.08);
 }
 
 /* ── Parallax / animation utilities ─────────────────────────────── */
@@ -275,19 +296,28 @@
   100% { background-position:  200% center; }
 }
 
+/* Shimmer flows: Forest Green → PPR Blue → Neon Lime → Sky Blue → Mint → Forest Green */
 .metallic-shimmer-text {
   display: inline-block;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(90deg, #2E7D32 0%, #4ADE80 35%, #A5D6A7 50%, #4ADE80 65%, #2E7D32 100%);
-  background-size: 200% auto;
+  background: linear-gradient(
+    90deg,
+    #2E7D32 0%,
+    #1565C0 18%,
+    #4ADE80 35%,
+    #42A5F5 52%,
+    #A5D6A7 65%,
+    #1976D2 80%,
+    #2E7D32 100%
+  );
+  background-size: 250% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: shimmerMove 6s linear infinite; /* Slowed from 4s — halves repaint frequency */
+  animation: shimmerMove 7s linear infinite;
 }
 
-/* On touch devices: disable shimmer animation and use solid color.
-   background-clip:text overrides break on Android/iOS — use -webkit-text-fill-color instead. */
+/* Touch devices: disable shimmer, use green-to-blue gradient fallback */
 @media (pointer: coarse) {
   .metallic-shimmer-text {
     animation: none;

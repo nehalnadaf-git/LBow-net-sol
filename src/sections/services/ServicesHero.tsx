@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -44,7 +44,7 @@ const ServicesHero = () => {
       {/* Premium Background Graphics */}
       <PipeFlowBg isLight={false} />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div ref={labelRef} className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-3 sm:mb-4 will-change-transform">
           Our Services
         </div>
@@ -52,7 +52,7 @@ const ServicesHero = () => {
           Complete Piping Solutions Under One Roof
         </h1>
         <p ref={subtitleRef} className="font-body text-sm sm:text-base md:text-lg text-[#A6A6A6] max-w-2xl mx-auto will-change-transform">
-          From design and supply to installation and maintenance — we handle it all.
+          Air compressor pipelines, cooling towers, chiller lines, chemical lines, vacuum lines, and water lines — supply and installation across India.
         </p>
       </div>
     </section>

@@ -1,9 +1,9 @@
-'use client'
+﻿'use client'
 
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Shield, Truck, Calendar, Phone } from 'lucide-react';
+import { Shield, PlayCircle, Calendar, Phone } from 'lucide-react';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 import { PipeCrossSectionBg } from '../../components/backgrounds/PipeCrossSectionBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
@@ -21,10 +21,10 @@ interface BadgeItem {
 }
 
 const badges: BadgeItem[] = [
-  { icon: Shield,   value: '10 Years',       label: 'Product Warranty',              countTo: 10,   countSuffix: ' Years', countDelay: 0    },
-  { icon: Truck,    value: 'Free Delivery',  label: 'Above ₹22,000 within 22km' },
-  { icon: Calendar, value: 'Since 2018',     label: 'Serving Bangalore Industries',  countTo: 2018, countSuffix: '',        countDelay: 0.1 },
-  { icon: Phone,    value: '+91 9606419076', label: 'Call or WhatsApp Now' },
+  { icon: Shield,      value: '10 Years',       label: 'Product Warranty on PPR Pipes',  countTo: 10,   countSuffix: ' Years', countDelay: 0    },
+  { icon: PlayCircle,  value: 'Free Demo',      label: 'Available on Request' },
+  { icon: Calendar,    value: 'Since 2018',     label: 'Serving Across India',           countTo: 2018, countSuffix: '',        countDelay: 0.1 },
+  { icon: Phone,       value: '+91 81235 01407', label: 'Call or WhatsApp Now' },
 ];
 
 const TrustBadges = () => {
@@ -76,7 +76,7 @@ const TrustBadges = () => {
       {/* Subtle top divider line */}
       <div className="divider-line absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/50 to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-6 lg:gap-8">
           {badges.map((badge, index) => {
             const Icon = badge.icon;

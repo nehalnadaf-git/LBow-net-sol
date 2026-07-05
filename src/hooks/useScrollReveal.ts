@@ -16,23 +16,44 @@ export function prefersReducedMotion(): boolean {
 }
 
 /**
+ * Returns true on touch/pointer:coarse devices (iOS, Android).
+ * Use to skip heavy parallax effects that waste GPU on mobile.
+ */
+export function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
+/**
  * Shared ScrollTrigger defaults for all section reveal animations.
- * - start: 'top 85%' — earlier trigger for snappier perceived response
+ * - start: 'top 88%' — triggers slightly before element fully enters viewport
  * - toggleActions: 'play none none none' — fire once, no reverse
  */
 export const REVEAL_TRIGGER_DEFAULTS = {
-  start: 'top 85%',
+  start: 'top 88%',
   toggleActions: 'play none none none' as const,
 };
 
 /**
- * Shared parallax ScrollTrigger defaults.
- * scrub: true = direct 1:1 mapping to scroll position, zero added lag.
+ * Returns parallax ScrollTrigger defaults, evaluated lazily at call time.
+ * scrub: 1 on desktop = silky lag that feels premium.
+ * scrub: true on touch = direct 1:1 mapping, no added lag (native momentum).
+ * Called as a function so isMobileDevice() is evaluated fresh each time
+ * (not frozen at module-load time, which breaks DevTools device switching).
  */
+export function getParallaxTriggerDefaults() {
+  return {
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: isMobileDevice() ? true : 1,
+  };
+}
+
+/** @deprecated Use getParallaxTriggerDefaults() instead */
 export const PARALLAX_TRIGGER_DEFAULTS = {
   start: 'top bottom',
   end: 'bottom top',
-  scrub: true,
+  scrub: 1 as number | boolean,
 };
 
 /**

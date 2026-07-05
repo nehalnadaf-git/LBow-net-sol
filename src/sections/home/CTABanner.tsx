@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -40,7 +40,7 @@ const CTABanner = () => {
     >
       <PipeFlowBg isLight={true} />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 text-center">
         <p className="cta-eyebrow font-body text-xs uppercase tracking-[0.2em] text-[#2E7D32] font-semibold mb-3 sm:mb-4">
           Let&apos;s Work Together
         </p>
@@ -55,7 +55,7 @@ const CTABanner = () => {
 
         <div className="cta-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <a
-            href="tel:+919606419076"
+            href="tel:+918123501407"
             className="inline-flex items-center justify-center bg-[#2E7D32] text-white hover:bg-[#256428] font-body font-semibold rounded-md px-8 py-3.5 transition-colors duration-200 shadow-[0_4px_20px_rgba(46,125,50,0.28)] text-sm sm:text-base"
           >
             Call Us Now

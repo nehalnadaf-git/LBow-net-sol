@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { locations, getTier1Locations, getTier2CityLocations } from '@/lib/locations';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 import { MapPin } from 'lucide-react';
+import { DotMatrixBg } from '@/components/backgrounds/DotMatrixBg';
 
 export const metadata: Metadata = {
   title: 'Locations — Where We Supply | LBow Network Solutions Bangalore',
   description:
-    'LBow Network Solutions supplies PPR & PPCH pipes across Bangalore industrial zones, Karnataka cities, and pan-India. Free delivery within 22km. Call +91 9606419076.',
+    'LBow Network Solutions supplies PPR & PPCH pipes across Bangalore industrial zones, Karnataka cities, and pan-India. Free demo available. Call +91 8123501407.',
   keywords: ['PPR pipe supplier Bangalore', 'pipe dealer Bangalore industrial areas', 'PPCH pipe Karnataka supply'],
   alternates: {
     canonical: `${BASE_URL}/locations`,
@@ -32,7 +33,7 @@ function LocationCard({ location }: { location: { slug: string; displayName: str
   return (
     <Link
       href={`/locations/${location.slug}`}
-      className="group bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-400 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)] p-5 sm:p-6 flex flex-col"
+      className="group bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)] p-5 sm:p-6 flex flex-col"
     >
       <div className="flex items-center gap-2 mb-3">
         <MapPin size={16} className="text-[#2E7D32]" />
@@ -64,8 +65,9 @@ export default function LocationsIndex() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}
-      <section className="relative w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 text-center">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+      <section className="relative overflow-hidden w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 text-center">
+        <DotMatrixBg isLight={false} />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-4">
             Service Coverage
           </div>
@@ -80,10 +82,10 @@ export default function LocationsIndex() {
 
       {/* Tier 1: Bangalore Industrial Zones */}
       <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
-              Free Delivery Zone (within 22km)
+              Free Demo Available
             </div>
             <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#0A0A0B]">
               Bangalore Industrial Zones
@@ -99,7 +101,7 @@ export default function LocationsIndex() {
 
       {/* Tier 2: Karnataka Cities */}
       <section className="relative w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 bg-white/5 text-[#A6A6A6] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
               Courier &amp; Freight Delivery
@@ -158,7 +160,7 @@ export default function LocationsIndex() {
       {/* Tier 3: Pan-India */}
       {panIndia && (
         <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
             <div className="bg-white rounded-xl border border-[rgba(30,32,33,0.12)] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-3 py-1 rounded-full font-body text-xs font-medium mb-3">

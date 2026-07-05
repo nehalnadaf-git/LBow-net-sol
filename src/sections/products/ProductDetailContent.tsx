@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -51,7 +51,7 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
       {/* Description + Specs */}
       <section ref={contentRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
         <DotMatrixBg isLight={true} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-[58%_42%] gap-10 sm:gap-12 lg:gap-16">
             {/* Left: Description */}
             <div className="product-content-block">
@@ -108,7 +108,7 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
       {/* Applications + Industries */}
       <section ref={appsRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-28">
         <PipeTopologyBg isLight={false} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 lg:gap-16">
             {/* Applications */}
             <div>
@@ -154,26 +154,26 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
       {/* CTA */}
       <section className="relative overflow-hidden w-full bg-[#FAFAF9] py-12 sm:py-16">
         <DotMatrixBg isLight={true} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 sm:p-8 bg-white rounded-xl border border-[rgba(30,32,33,0.12)] shadow-sm">
             <div>
               <h3 className="font-heading font-semibold text-lg sm:text-xl text-[#0A0A0B] mb-1">
                 Interested in {product.name}?
               </h3>
               <p className="font-body text-sm text-[#434343]">
-                No minimum order quantity. Free delivery within 22km of Bangalore.
+                No minimum order quantity. Free demo available — call to schedule.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
-                href="tel:+919606419076"
+                href="tel:+918123501407"
                 className="inline-flex items-center justify-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm whitespace-nowrap"
               >
                 <Phone size={16} />
-                Call +91 9606419076
+                Call +91 8123501407
               </a>
               <a
-                href="https://wa.me/919606419076?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
+                href="https://wa.me/918123501407?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm whitespace-nowrap"

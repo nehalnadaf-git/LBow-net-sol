@@ -233,16 +233,16 @@ export default async function BlogPostPage({ params }: Props) {
                   Get a Quote
                 </h3>
                 <p className="font-body text-xs text-[#A6A6A6] mb-4">
-                  No minimum order quantity. Free delivery within 22km of Bangalore.
+                  No minimum order quantity. Free demo available — call to schedule.
                 </p>
                 <a
-                  href="tel:+919606419076"
+                  href="tel:+918123501407"
                   className="block w-full text-center bg-[#EEEEEE] hover:bg-[#434343] hover:text-[#EEEEEE] text-[#0A0A0B] font-body font-semibold text-sm rounded-md px-4 py-2.5 transition-all duration-300 mb-3"
                 >
-                  +91 9606419076
+                  +91 8123501407
                 </a>
                 <a
-                  href="https://wa.me/919606419076"
+                  href="https://wa.me/918123501407"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-4 py-2.5 transition-all duration-300"
