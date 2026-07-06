@@ -395,6 +395,13 @@ const PPRPipes3D = () => {
     //   - Elbow y offsets reduced proportionally.
     // ──────────────────────────────────────────────────────────────────────────
     const isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
+    // Touch-device check is separate from size — tablets (768px+) are also touch.
+    // Touch devices use native scroll with no Lenis, so scrub:true gives direct
+    // 1:1 mapping with no added lag. Desktop uses Lenis (already buttery smooth),
+    // so scrub:0.15 is just enough to smooth Three.js frame deltas without the
+    // sluggish double-dampening that 0.45 + Lenis caused.
+    const isTouchScrollDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     const heroEl = container.closest('section') as HTMLElement | null;
 
     const scrollTl = gsap.timeline({
@@ -402,7 +409,7 @@ const PPRPipes3D = () => {
         trigger: heroEl || document.body,
         start: 'top top',
         end: 'bottom top',          // hero fully exited = animation complete
-        scrub: isMobileDevice ? true : 0.45,
+        scrub: isTouchScrollDevice ? true : 0.15,
         invalidateOnRefresh: false, // locked: do NOT recalculate positions on resize/refresh
       }
     });
@@ -893,10 +900,9 @@ const PPRPipes3D = () => {
     let targetX = 0;
     let targetY = 0;
 
-    // ── Visibility guard — pause the entire render loop when hero is offscreen ──
-    // threshold: 0.0  → "any pixel visible" triggers isIntersecting = true  → loop runs
-    // threshold: 1.0  → "fully offscreen"   triggers isIntersecting = false → loop stops
-    // Two-threshold array lets us detect both edges in one observer.
+    // ── Visibility guard — toggle isAnimating when hero enters/leaves viewport ──
+    // With GSAP ticker we don’t start/stop RAF — the animate function returns
+    // early when isAnimating is false, spending negligible CPU while off-screen.
     let isHeroVisible = true;
     let isAnimating = true;
     const heroSection = container.closest('section') as HTMLElement | null;
@@ -906,31 +912,17 @@ const PPRPipes3D = () => {
       visibilityObserver = new IntersectionObserver(
         ([entry]) => {
           const nowVisible = entry.isIntersecting;
-
-          if (!nowVisible && isAnimating) {
-            // Hero fully left the viewport — stop the render loop
-            cancelAnimationFrame(frameRef.current);
-            isAnimating = false;
-            isHeroVisible = false;
-            // Reset mouse so pipes return to neutral when user comes back
+          isAnimating = nowVisible;
+          isHeroVisible = nowVisible;
+          if (!nowVisible) {
+            // Reset mouse so pipes return to neutral when hero is revisited
             mouseX = 0;
             mouseY = 0;
             targetX = 0;
             targetY = 0;
-          } else if (nowVisible && !isAnimating) {
-            // Hero is back in view — restart the render loop
-            isHeroVisible = true;
-            isAnimating = true;
-            frameRef.current = requestAnimationFrame(animate);
-          } else {
-            isHeroVisible = nowVisible;
           }
         },
-        {
-          // Fire when any pixel enters (0) AND when fully gone (use 0 only — 
-          // IntersectionObserver with threshold 0 fires on both enter and exit).
-          threshold: 0,
-        }
+        { threshold: 0 }
       );
       visibilityObserver.observe(heroSection);
     }
@@ -950,13 +942,29 @@ const PPRPipes3D = () => {
     };
 
     window.addEventListener('mousemove', onMouseMove);
-    // touchstart intentionally omitted — it fires on every button tap too, causing
-    // a sudden parallax jolt on mobile. touchmove-only gives smooth drag parallax.
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    // On touch devices, touchmove fires during scroll and is misread as parallax
+    // intent — the finger’s live Y coordinate tilts the pipes while the scroll
+    // animation is also moving them, causing erratic twitching. On mobile the
+    // idle float animation (sin/cos oscillations) provides enough visual life.
+    if (!isTouchScrollDevice) {
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+    }
 
-    // 8. Animation Loop — use performance.now() instead of deprecated THREE.Clock
+    // 8. Render loop — driven by GSAP ticker (same RAF as Lenis + ScrollTrigger).
+    // ─────────────────────────────────────────────────────────────────────────
+    // WHY gsap.ticker INSTEAD OF A STANDALONE requestAnimationFrame:
+    //   A separate rAF loop is async from GSAP’s tick — GSAP updates scrollGroup
+    //   positions in its frame, Three.js reads them ONE FRAME LATER (desync).
+    //   With gsap.ticker.add(), our render runs in the SAME frame, AFTER:
+    //     1. Lenis calculates scroll position
+    //     2. ScrollTrigger.update() fires
+    //     3. Scroll tweens update scrollGroup
+    //     4. Our render ← always sees current positions, zero stutter.
+    // ─────────────────────────────────────────────────────────────────────────
     const startMs = performance.now();
     const animate = () => {
+      if (!isAnimating) return; // hero off-screen — skip render, save GPU
+
       const elapsed = (performance.now() - startMs) / 1000; // seconds
 
       // Subtle vertical floating animation
@@ -985,17 +993,12 @@ const PPRPipes3D = () => {
       elbowFitting2.rotation.x = Math.sin(elapsed * 0.5) * 0.1;
       elbowFitting2.position.y = Math.cos(elapsed * 0.6) * 0.08;
 
-      // Render
+      // Render — always in sync with GSAP scroll position (same frame)
       renderer.render(scene, camera);
-
-      // Only schedule next frame if still active — loop is paused by observer when
-      // hero is fully offscreen and restarted when hero re-enters the viewport.
-      if (isAnimating) {
-        frameRef.current = requestAnimationFrame(animate);
-      }
     };
 
-    animate();
+    // Register with GSAP ticker — no standalone rAF loop needed
+    gsap.ticker.add(animate);
 
     // 9. Resize Handling
     // NOTE: updateLayoutPosition() is intentionally NOT called here.
@@ -1014,9 +1017,12 @@ const PPRPipes3D = () => {
     // 10. Cleanup (Comprehensive WebGL disposal to prevent memory leaks)
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('touchmove', onTouchMove);
+      if (!isTouchScrollDevice) {
+        window.removeEventListener('touchmove', onTouchMove);
+      }
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(frameRef.current);
+      gsap.ticker.remove(animate); // Remove from shared GSAP ticker
+      cancelAnimationFrame(frameRef.current); // Safety: cancel any lingering rAF
       // Disconnect visibility observer
       if (visibilityObserver) visibilityObserver.disconnect();
       renderer.dispose();
