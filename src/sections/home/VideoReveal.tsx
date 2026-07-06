@@ -138,31 +138,7 @@ export default function VideoReveal() {
         </div>
       </div>
 
-      {/* ═══ Layer 3: Scroll indicator ══════════════════════════════ */}
-      <div
-        className="absolute z-[3] flex flex-col items-center gap-1.5"
-        style={{
-          bottom: 'calc(max(2rem, env(safe-area-inset-bottom, 0px)) + 0.5rem)',
-          left: '50%',
-          transform: 'translateX(-50%)',
-        }}
-      >
-        <div className="flex flex-col items-center h-10">
-          <div className="w-[1.5px] bg-gradient-to-b from-white/40 to-transparent scroll-line-anim" />
-          <svg
-            className="w-3.5 h-3.5 text-[#4ADE80] scroll-chevron-anim mt-1"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
-        <span className="font-body text-[0.58rem] text-white/40 uppercase tracking-[0.2em] font-semibold">
-          Scroll to explore
-        </span>
-      </div>
+
     </section>
   )
 }
