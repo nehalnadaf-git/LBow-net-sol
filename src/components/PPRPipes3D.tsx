@@ -288,6 +288,10 @@ const PPRPipes3D = () => {
     let baseX = 0;
     let baseY = 0;
     let targetMainScale = 1.0;
+    // Declared BEFORE updateLayoutPosition() so the function can safely assign them
+    // (let is not hoisted with a value — using them before declaration = TDZ ReferenceError)
+    let targetElbowScale = 0.68;
+    let targetElbow2Scale = 0.68;
 
     // Dynamic layout offset and sizing based on screen size (Fully responsive)
     const updateLayoutPosition = () => {
@@ -357,8 +361,6 @@ const PPRPipes3D = () => {
       elbowFitting2Parent.scale.set(targetElbow2Scale, targetElbow2Scale, targetElbow2Scale);
     };
 
-    let targetElbowScale = 0.68;
-    let targetElbow2Scale = 0.68;
     updateLayoutPosition();
 
     // 10. GSAP Intro Reveal & Scroll Animations
@@ -948,7 +950,8 @@ const PPRPipes3D = () => {
     };
 
     window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('touchstart', onTouchMove, { passive: true });
+    // touchstart intentionally omitted — it fires on every button tap too, causing
+    // a sudden parallax jolt on mobile. touchmove-only gives smooth drag parallax.
     window.addEventListener('touchmove', onTouchMove, { passive: true });
 
     // 8. Animation Loop — use performance.now() instead of deprecated THREE.Clock
@@ -967,8 +970,11 @@ const PPRPipes3D = () => {
       targetX += (mouseX - targetX) * 0.04;
       targetY += (mouseY - targetY) * 0.04;
 
-      mainGroup.rotation.y += targetX * 0.4;
-      mainGroup.rotation.x += targetY * 0.4;
+      // Cap parallax influence — prevents excessive swing on 4K/ultrawide screens
+      const clampedX = Math.max(-0.15, Math.min(0.15, targetX));
+      const clampedY = Math.max(-0.15, Math.min(0.15, targetY));
+      mainGroup.rotation.y += clampedX * 0.4;
+      mainGroup.rotation.x += clampedY * 0.4;
 
       // Individual subtle slow drift & rotation for the two floating fittings
       elbowFitting.rotation.y = Math.sin(elapsed * 0.5) * 0.15;
@@ -1008,7 +1014,6 @@ const PPRPipes3D = () => {
     // 10. Cleanup (Comprehensive WebGL disposal to prevent memory leaks)
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('touchstart', onTouchMove);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameRef.current);

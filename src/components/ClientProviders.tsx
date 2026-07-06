@@ -74,9 +74,15 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       window.addEventListener('load', onLoad, { once: true });
     }
 
-    // ── ResizeObserver: re-refresh when body height changes (font swap, images) ──
+    // ── ResizeObserver: re-refresh on body width change (font swap, image load) ──
+    // Height-only changes (iOS address bar, virtual keyboard) are ignored to
+    // prevent redundant ScrollTrigger recalculations on every iOS scroll.
     let resizeTimer: ReturnType<typeof setTimeout>;
+    let lastROWidth = document.body.offsetWidth;
     const ro = new ResizeObserver(() => {
+      const currentWidth = document.body.offsetWidth;
+      if (currentWidth === lastROWidth) return; // height-only change — skip
+      lastROWidth = currentWidth;
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
     });
