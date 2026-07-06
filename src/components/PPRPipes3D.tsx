@@ -401,7 +401,7 @@ const PPRPipes3D = () => {
         start: 'top top',
         end: 'bottom top',          // hero fully exited = animation complete
         scrub: isMobileDevice ? true : 0.45,
-        invalidateOnRefresh: true,  // recalc on resize / orientation change
+        invalidateOnRefresh: false, // locked: do NOT recalculate positions on resize/refresh
       }
     });
 
@@ -891,29 +891,43 @@ const PPRPipes3D = () => {
     let targetX = 0;
     let targetY = 0;
 
-    // ── Visibility guard — disable mouse tracking when hero is off-screen ──
-    // IntersectionObserver fires when the hero section leaves the viewport.
-    // threshold: 0 → fires as soon as ANY part exits (entering next section).
-    // This stops costly mouse interpolation when the 3D canvas isn't visible.
+    // ── Visibility guard — pause the entire render loop when hero is offscreen ──
+    // threshold: 0.0  → "any pixel visible" triggers isIntersecting = true  → loop runs
+    // threshold: 1.0  → "fully offscreen"   triggers isIntersecting = false → loop stops
+    // Two-threshold array lets us detect both edges in one observer.
     let isHeroVisible = true;
+    let isAnimating = true;
     const heroSection = container.closest('section') as HTMLElement | null;
 
     let visibilityObserver: IntersectionObserver | null = null;
     if (heroSection) {
       visibilityObserver = new IntersectionObserver(
         ([entry]) => {
-          isHeroVisible = entry.isIntersecting;
-          // When hero exits viewport, snap mouse targets to zero so the
-          // next time it re-enters the pipes start from a neutral position.
-          if (!isHeroVisible) {
+          const nowVisible = entry.isIntersecting;
+
+          if (!nowVisible && isAnimating) {
+            // Hero fully left the viewport — stop the render loop
+            cancelAnimationFrame(frameRef.current);
+            isAnimating = false;
+            isHeroVisible = false;
+            // Reset mouse so pipes return to neutral when user comes back
             mouseX = 0;
             mouseY = 0;
+            targetX = 0;
+            targetY = 0;
+          } else if (nowVisible && !isAnimating) {
+            // Hero is back in view — restart the render loop
+            isHeroVisible = true;
+            isAnimating = true;
+            frameRef.current = requestAnimationFrame(animate);
+          } else {
+            isHeroVisible = nowVisible;
           }
         },
         {
-          // 0.0 = fires the moment the hero starts leaving the viewport
-          // We use this so mouse tracking stops as soon as any scroll away begins
-          threshold: 0.0,
+          // Fire when any pixel enters (0) AND when fully gone (use 0 only — 
+          // IntersectionObserver with threshold 0 fires on both enter and exit).
+          threshold: 0,
         }
       );
       visibilityObserver.observe(heroSection);
@@ -940,7 +954,7 @@ const PPRPipes3D = () => {
     // 8. Animation Loop — use performance.now() instead of deprecated THREE.Clock
     const startMs = performance.now();
     const animate = () => {
-      const elapsed = (performance.now() - startMs) / 1000; // seconds, same API as clock.getElapsedTime()
+      const elapsed = (performance.now() - startMs) / 1000; // seconds
 
       // Subtle vertical floating animation
       mainGroup.position.y = Math.sin(elapsed * 0.8) * 0.05;
@@ -950,16 +964,8 @@ const PPRPipes3D = () => {
       mainGroup.rotation.y = Math.cos(elapsed * 0.2) * 0.04;
 
       // Mouse/Touch Parallax movement (smooth interpolation)
-      // When hero is off-screen, decay targetX/Y back to zero smoothly
-      // so the pipes return to neutral without a jarring snap.
-      if (isHeroVisible) {
-        targetX += (mouseX - targetX) * 0.04;
-        targetY += (mouseY - targetY) * 0.04;
-      } else {
-        // Gentle decay to zero — pipes settle back to idle rotation
-        targetX *= 0.92;
-        targetY *= 0.92;
-      }
+      targetX += (mouseX - targetX) * 0.04;
+      targetY += (mouseY - targetY) * 0.04;
 
       mainGroup.rotation.y += targetX * 0.4;
       mainGroup.rotation.x += targetY * 0.4;
@@ -976,19 +982,26 @@ const PPRPipes3D = () => {
       // Render
       renderer.render(scene, camera);
 
-      frameRef.current = requestAnimationFrame(animate);
+      // Only schedule next frame if still active — loop is paused by observer when
+      // hero is fully offscreen and restarted when hero re-enters the viewport.
+      if (isAnimating) {
+        frameRef.current = requestAnimationFrame(animate);
+      }
     };
 
     animate();
 
     // 9. Resize Handling
+    // NOTE: updateLayoutPosition() is intentionally NOT called here.
+    // The pipe positions/scales are locked to the values set at mount time
+    // based on the initial viewport. Calling it on resize would cause the
+    // pipes to jump to different coordinates on orientation change or resize.
     const handleResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-      updateLayoutPosition();
     };
     window.addEventListener('resize', handleResize);
 

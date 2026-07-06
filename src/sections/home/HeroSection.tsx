@@ -116,8 +116,8 @@ const HeroSection = () => {
       {/* ── MOBILE LAYOUT ─────────────────────────────────────────────── */}
       <div className="md:hidden absolute inset-0 z-20 flex flex-col justify-end">
         <div
-          className="absolute inset-0 z-0"
-          style={{ background: 'linear-gradient(to top, rgba(10,11,13,0.88) 0%, rgba(10,11,13,0.55) 55%, rgba(10,11,13,0.0) 100%)' }}
+          className="absolute bottom-0 left-0 right-0 h-[60%] z-0"
+          style={{ background: 'linear-gradient(to top, rgba(10,11,13,0.92) 0%, rgba(10,11,13,0.5) 60%, transparent 100%)' }}
         />
 
         <div className="relative z-10 px-6 pt-6 pb-28 flex flex-col items-start">
@@ -226,7 +226,7 @@ const HeroSection = () => {
       </div>
 
       {/* ── FLOATING SPEC TAGS OVER THE 3D PIPES ───────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
         <div className="relative w-full h-full max-w-[1700px] mx-auto px-6 lg:px-16 xl:px-24">
           
           {/* Desktop Floating Tags (only visible on md+) */}
