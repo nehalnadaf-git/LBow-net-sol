@@ -1,6 +1,7 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -11,6 +12,7 @@ import {
   CreditCard,
 } from 'lucide-react';
 import { PipeFlowBg } from '../../components/backgrounds/PipeFlowBg';
+import { generalWhatsAppUrl } from '@/lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,6 +74,7 @@ const productOptions = [
 
 const ContactSplit = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -79,6 +82,18 @@ const ContactSplit = () => {
     product: '',
     message: '',
   });
+
+  // Pre-select product/service from URL query param (?service=Air+Compressor+Pipeline)
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (!serviceParam) return;
+    const match = productOptions.find(
+      (o) => o.toLowerCase() === serviceParam.toLowerCase()
+    );
+    if (match) {
+      setFormData((prev) => ({ ...prev, product: match }));
+    }
+  }, [searchParams]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -221,7 +236,7 @@ const ContactSplit = () => {
                 Call Now
               </a>
               <a
-                href="https://wa.me/918123501407?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
+                href={generalWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"

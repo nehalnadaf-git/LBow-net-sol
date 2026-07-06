@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useRef } from 'react';
 import Image from 'next/image';
@@ -14,6 +14,7 @@ const services = [
   {
     image: '/images/services/air-compressor-pipeline.webp',
     title: 'Air Compressor Pipeline',
+    contactKey: 'Air Compressor Pipeline',
     description:
       'We design and install professional compressed air pipeline systems using PPCH and PPR piping for factories, workshops, and industrial facilities. Leak-free heat fusion welded joints ensure zero energy loss from your compressed air network.',
     features: [
@@ -28,6 +29,7 @@ const services = [
   {
     image: '/images/services/cooling-tower-pipelines.webp',
     title: 'Cooling Tower Pipelines',
+    contactKey: 'Cooling Tower Pipeline',
     description:
       'Complete design, supply, and installation of cooling tower pipeline systems for industrial HVAC and process cooling. PPR and PPCH materials ensure corrosion-free, low-maintenance operation over decades.',
     features: [
@@ -42,6 +44,7 @@ const services = [
   {
     image: '/images/services/chiller-line-pipelines.webp',
     title: 'Chiller Line Pipelines',
+    contactKey: 'Chiller Line Pipeline',
     description:
       'Specialized chiller pipeline solutions including supply, return, and bypass lines — with optional FRP lining for superior corrosion resistance. Extends infrastructure life in data centers, pharmaceutical plants, and cold rooms.',
     features: [
@@ -56,6 +59,7 @@ const services = [
   {
     image: '/images/services/chemical-line-pipelines.webp',
     title: 'Chemical Line Pipelines',
+    contactKey: 'Chemical Line Pipeline',
     description:
       'Chemical-resistant PPRC and PPCH pipeline systems engineered for safe and reliable industrial chemical and acid transport. Ideal for pharmaceutical, sugar factory, chemical, and automobile industry applications.',
     features: [
@@ -70,6 +74,7 @@ const services = [
   {
     image: '/images/services/vacuum-line-systems.webp',
     title: 'Vacuum Line Systems',
+    contactKey: 'Vacuum Line System',
     description:
       'Precision vacuum pipeline installation for pharmaceutical, food processing, and laboratory industries. Airtight, zero-contamination performance with heat fusion welded joints that hold vacuum without degradation.',
     features: [
@@ -84,6 +89,7 @@ const services = [
   {
     image: '/images/services/water-line-general-piping.webp',
     title: 'Water Line & General Piping',
+    contactKey: 'Water Line & General Piping',
     description:
       'Hot and cold water lines, PPR supply and full installation for all industrial water distribution, utilities, and plumbing requirements. Available from 20mm to 315mm to suit every scale of project.',
     features: [
@@ -96,6 +102,7 @@ const services = [
     imageLeft: false,
   },
 ];
+
 
 
 const ServicesDetail = () => {
@@ -212,7 +219,7 @@ const ServicesDetail = () => {
                 ))}
               </ul>
               <Link
-                href="/contact"
+                href={`/contact?service=${encodeURIComponent(service.contactKey)}`}
                 className="inline-flex items-center justify-center bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold text-sm rounded-md px-6 py-2.5 transition-all duration-300"
               >
                 Get a Quote

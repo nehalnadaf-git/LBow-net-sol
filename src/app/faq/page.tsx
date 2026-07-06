@@ -1,6 +1,7 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { faqs, faqCategories, getFAQsByCategory } from '@/lib/faqs';
+import { generalWhatsAppUrl } from '@/lib/whatsapp';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 import {
   Accordion,
@@ -111,7 +112,7 @@ export default function FAQPage() {
                 Call +91 8123501407
               </a>
               <a
-                href="https://wa.me/918123501407"
+                href={generalWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"

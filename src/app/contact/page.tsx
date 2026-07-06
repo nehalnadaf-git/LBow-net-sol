@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import ContactHero from '@/sections/contact/ContactHero';
 import ContactSplit from '@/sections/contact/ContactSplit';
 import MapSection from '@/sections/contact/MapSection';
@@ -16,8 +17,11 @@ export default function Contact() {
   return (
     <>
       <ContactHero />
-      <ContactSplit />
+      <Suspense fallback={null}>
+        <ContactSplit />
+      </Suspense>
       <MapSection />
     </>
   );
 }
+

@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { CheckCircle, Phone } from 'lucide-react';
+import { brandWhatsAppUrl } from '@/lib/whatsapp';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -203,7 +204,7 @@ export default async function BrandPage({ params }: Props) {
                   Call +91 8123501407
                 </a>
                 <a
-                  href="https://wa.me/918123501407"
+                  href={brandWhatsAppUrl(brand.name)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300"

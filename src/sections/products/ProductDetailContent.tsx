@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ import { CheckCircle, Phone } from 'lucide-react';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 import { PipeTopologyBg } from '../../components/backgrounds/PipeTopologyBg';
 import type { Product } from '@/lib/products';
+import { productWhatsAppUrl } from '@/lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -173,7 +174,7 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
                 Call +91 8123501407
               </a>
               <a
-                href="https://wa.me/918123501407?text=Hello%2C%20I%20am%20interested%20in%20your%20piping%20solutions."
+                href={productWhatsAppUrl(product.name)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm whitespace-nowrap"

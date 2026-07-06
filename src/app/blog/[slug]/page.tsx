@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { blogPosts, getBlogBySlug } from '@/lib/blogs';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
+import { generalWhatsAppUrl } from '@/lib/whatsapp';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -242,7 +243,7 @@ export default async function BlogPostPage({ params }: Props) {
                   +91 8123501407
                 </a>
                 <a
-                  href="https://wa.me/918123501407"
+                  href={generalWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-4 py-2.5 transition-all duration-300"

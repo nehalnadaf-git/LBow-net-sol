@@ -81,23 +81,26 @@ const Footer = () => {
           <div>
             <span className="text-[#A6A6A6] block mb-3">Products</span>
             <div className="flex flex-col gap-2">
-              <Link href="/products/ppr-pipe-unions"          className="text-white hover:underline underline-offset-4">PPR Pipe Unions</Link>
-              <Link href="/products/pprc-chemical-pipe"       className="text-white hover:underline underline-offset-4">PPRC Chemical Pipe</Link>
-              <Link href="/products/ppch-industrial-pipeline" className="text-white hover:underline underline-offset-4">PPCH Industrial Pipeline</Link>
-              <Link href="/products/cooling-tower-pipeline"   className="text-white hover:underline underline-offset-4">Cooling Tower Pipeline</Link>
-              <Link href="/products"                          className="text-[#A6A6A6] hover:text-white hover:underline underline-offset-4 mt-1">View All Products →</Link>
+              <Link href="/products/ppr-green-pipe"      className="text-white hover:underline underline-offset-4">PPR Green Pipe</Link>
+              <Link href="/products/ppr-blue-pipe"       className="text-white hover:underline underline-offset-4">PPR Blue Pipe</Link>
+              <Link href="/products/brass-ball-valve"    className="text-white hover:underline underline-offset-4">Brass Ball Valve</Link>
+              <Link href="/products/butterfly-valve"     className="text-white hover:underline underline-offset-4">Butterfly Valve</Link>
+              <Link href="/products/ss-fittings"         className="text-white hover:underline underline-offset-4">SS Fittings</Link>
+              <Link href="/products/pneumatic-fittings"  className="text-white hover:underline underline-offset-4">Pneumatic Fittings</Link>
+              <Link href="/products"                     className="text-[#A6A6A6] hover:text-white hover:underline underline-offset-4 mt-1">View All Products →</Link>
             </div>
           </div>
           {/* Quick Links */}
           <div>
             <span className="text-[#A6A6A6] block mb-3">Quick Links</span>
             <div className="flex flex-col gap-2">
-              <Link href="/about"              className="text-white hover:underline underline-offset-4">About</Link>
-              <Link href="/services"           className="text-white hover:underline underline-offset-4">Services</Link>
+              <Link href="/about"               className="text-white hover:underline underline-offset-4">About</Link>
+              <Link href="/services"            className="text-white hover:underline underline-offset-4">Services</Link>
               <Link href="/brands/prince-pipes" className="text-white hover:underline underline-offset-4">Prince Pipes</Link>
-              <Link href="/blog"               className="text-white hover:underline underline-offset-4">Blog</Link>
-              <Link href="/faq"                className="text-white hover:underline underline-offset-4">FAQ</Link>
-              <Link href="/contact"            className="text-white hover:underline underline-offset-4">Contact</Link>
+              <Link href="/locations"           className="text-white hover:underline underline-offset-4">Locations</Link>
+              <Link href="/blog"                className="text-white hover:underline underline-offset-4">Blog</Link>
+              <Link href="/faq"                 className="text-white hover:underline underline-offset-4">FAQ</Link>
+              <Link href="/contact"             className="text-white hover:underline underline-offset-4">Contact</Link>
             </div>
           </div>
         </div>

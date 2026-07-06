@@ -6,19 +6,19 @@ interface DotMatrixBgProps {
   isLight?: boolean;
 }
 
+/**
+ * DotMatrixBg — minimal dot-grid background.
+ * Light mode: very faint dots on white/light surfaces.
+ * Dark mode:  very faint dots on dark surfaces.
+ */
 export const DotMatrixBg: React.FC<DotMatrixBgProps> = ({ isLight = false }) => {
   const uid = useId();
-  const gridColor = isLight ? 'rgba(30,32,33,0.04)' : 'rgba(238,238,238,0.025)';
-  const subGridColor = isLight ? 'rgba(30,32,33,0.015)' : 'rgba(238,238,238,0.01)';
-  const borderOutlineColor = isLight ? 'rgba(30,32,33,0.08)' : 'rgba(238,238,238,0.05)';
+  const dotColor = isLight ? 'rgba(30,32,33,0.12)' : 'rgba(238,238,238,0.08)';
 
-  // Unique IDs per instance to prevent SVG defs collision
   const ids = {
-    gridPattern: `${uid}-grid-pattern`,
-    vignette: `${uid}-vignette`,
-    fadeMask: `${uid}-fade-mask`,
-    grain: `${uid}-grain`,
-    bracketGrad: `${uid}-bracket-grad`,
+    dot: `${uid}-dot`,
+    fade: `${uid}-fade`,
+    mask: `${uid}-mask`,
   };
 
   return (
@@ -30,87 +30,23 @@ export const DotMatrixBg: React.FC<DotMatrixBgProps> = ({ isLight = false }) => 
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Seamless technical grid pattern */}
-          <pattern
-            id={ids.gridPattern}
-            width="80"
-            height="80"
-            patternUnits="userSpaceOnUse"
-          >
-            {/* Sub-grid lines (fine scale) */}
-            <path
-              d="M 20 0 L 20 80 M 40 0 L 40 80 M 60 0 L 60 80 M 0 20 L 80 20 M 0 40 L 80 40 M 0 60 L 80 60"
-              fill="none"
-              stroke={subGridColor}
-              strokeWidth="0.4"
-            />
-            {/* Major grid lines */}
-            <path
-              d="M 80 0 L 0 0 0 80"
-              fill="none"
-              stroke={gridColor}
-              strokeWidth="0.6"
-            />
+          {/* Dot pattern — 28px grid, 1px dot */}
+          <pattern id={ids.dot} width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.85" fill={dotColor} />
           </pattern>
 
-          {/* Vignette mask to fade grid towards borders */}
-          <radialGradient id={ids.vignette} cx="50%" cy="50%" r="65%">
-            <stop offset="0%" stopColor="white" stopOpacity="1" />
-            <stop offset="45%" stopColor="white" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="white" stopOpacity="0.15" />
+          {/* Radial fade — denser in centre, dissolves at edges */}
+          <radialGradient id={ids.fade} cx="50%" cy="50%" r="65%">
+            <stop offset="0%"   stopColor="white" stopOpacity="1"    />
+            <stop offset="55%"  stopColor="white" stopOpacity="0.7"  />
+            <stop offset="100%" stopColor="white" stopOpacity="0"    />
           </radialGradient>
-          <mask id={ids.fadeMask}>
-            <rect width="100%" height="100%" fill={`url(#${ids.vignette})`} />
+          <mask id={ids.mask}>
+            <rect width="100%" height="100%" fill={`url(#${ids.fade})`} />
           </mask>
-
-        {/* Repeating technical grid pattern with vignette fade mask */}
-          <linearGradient id={ids.bracketGrad} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={isLight ? 'rgba(30,32,33,0.12)' : 'rgba(74,222,128,0.2)'} />
-            <stop offset="100%" stopColor={isLight ? 'rgba(30,32,33,0.02)' : 'rgba(238,238,238,0.03)'} />
-          </linearGradient>
         </defs>
 
-        {/* Repeating technical grid pattern with vignette fade mask */}
-        <rect width="100%" height="100%" fill={`url(#${ids.gridPattern})`} mask={`url(#${ids.fadeMask})`} />
-
-        {/* Outer technical brackets inside the viewport bounds */}
-        <g>
-          {/* Top-Left Corner Bracket */}
-          <path d="M 24 48 H 48 V 24" stroke={`url(#${ids.bracketGrad})`} strokeWidth="0.75" fill="none" />
-          <line x1="28" y1="28" x2="38" y2="38" stroke={borderOutlineColor} strokeWidth="0.5" />
-
-          {/* Top-Right Corner Bracket */}
-          <svg x="100%" y="0" style={{ overflow: 'visible' }}>
-            <path d="M -24 48 H -48 V 24" stroke={`url(#${ids.bracketGrad})`} strokeWidth="0.75" fill="none" />
-            <line x1="-28" y1="28" x2="-38" y2="38" stroke={borderOutlineColor} strokeWidth="0.5" />
-          </svg>
-
-          {/* Bottom-Left Corner Bracket */}
-          <svg x="0" y="100%" style={{ overflow: 'visible' }}>
-            <path d="M 24 -48 H 48 V -24" stroke={`url(#${ids.bracketGrad})`} strokeWidth="0.75" fill="none" />
-            <line x1="28" y1="-28" x2="38" y2="-38" stroke={borderOutlineColor} strokeWidth="0.5" />
-          </svg>
-
-          {/* Bottom-Right Corner Bracket */}
-          <svg x="100%" y="100%" style={{ overflow: 'visible' }}>
-            <path d="M -24 -48 H -48 V -24" stroke={`url(#${ids.bracketGrad})`} strokeWidth="0.75" fill="none" />
-            <line x1="-28" y1="-28" x2="-38" y2="-38" stroke={borderOutlineColor} strokeWidth="0.5" />
-          </svg>
-
-          {/* Micro alignment ticks along center lines */}
-          <svg x="50%" y="0" style={{ overflow: 'visible' }}>
-            <line x1="0" y1="20" x2="0" y2="30" stroke={borderOutlineColor} strokeWidth="0.75" />
-          </svg>
-          <svg x="50%" y="100%" style={{ overflow: 'visible' }}>
-            <line x1="0" y1="-30" x2="0" y2="-20" stroke={borderOutlineColor} strokeWidth="0.75" />
-          </svg>
-          <svg x="0" y="50%" style={{ overflow: 'visible' }}>
-            <line x1="20" y1="0" x2="30" y2="0" stroke={borderOutlineColor} strokeWidth="0.75" />
-          </svg>
-          <svg x="100%" y="50%" style={{ overflow: 'visible' }}>
-            <line x1="-30" y1="0" x2="-20" y2="0" stroke={borderOutlineColor} strokeWidth="0.75" />
-          </svg>
-        </g>
+        <rect width="100%" height="100%" fill={`url(#${ids.dot})`} mask={`url(#${ids.mask})`} />
       </svg>
     </div>
   );
