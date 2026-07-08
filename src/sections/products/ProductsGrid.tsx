@@ -56,7 +56,7 @@ const ProductsGrid = () => {
               key={product.slug}
               className="product-grid-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
             >
-              <div className="h-[200px] sm:h-[230px] lg:h-[260px] overflow-hidden relative">
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src={product.image}
                   alt={product.name}

@@ -50,7 +50,7 @@ const ProductCard = ({ product, width }: { product: Product; width: number }) =>
     style={{ width }}
   >
     {/* Image area */}
-    <div className="h-44 sm:h-52 lg:h-60 overflow-hidden relative pointer-events-none">
+    <div className="relative w-full aspect-[4/3] overflow-hidden pointer-events-none">
       <Image
         src={product.image}
         alt={product.name}
