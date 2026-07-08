@@ -65,16 +65,20 @@ export default function LocationsIndex() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 text-center">
-        <DotMatrixBg isLight={false} />
+      <section
+        className="relative overflow-hidden w-full pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 md:pb-16 text-center"
+        style={{ background: 'linear-gradient(160deg, #F0F7F1 0%, #FAFFFE 35%, #EDF4FF 70%, #F4FBF5 100%)' }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)' }} />
+        <DotMatrixBg isLight={true} />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-4">
+          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] mb-4" style={{ color: '#2E7D32' }}>
             Service Coverage
           </div>
-          <h1 className="font-heading font-bold text-2xl sm:text-3xl md:text-[3rem] lg:text-[3.5rem] text-white leading-[1.1] mb-6">
+          <h1 className="font-heading font-bold text-2xl sm:text-3xl md:text-[3rem] lg:text-[3.5rem] leading-[1.1] mb-6" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             Where We Supply — Bangalore, Karnataka &amp; Pan-India
           </h1>
-          <p className="font-body text-sm sm:text-base md:text-lg text-[#A6A6A6] max-w-2xl mx-auto">
+          <p className="font-body text-sm sm:text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#3D5040' }}>
             From our base in T Dasarahalli, Bangalore — serving industrial zones across the city, Karnataka, and nationwide.
           </p>
         </div>
@@ -100,7 +104,7 @@ export default function LocationsIndex() {
       </section>
 
       {/* Tier 2: Karnataka Cities */}
-      <section className="relative w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-28">
+      <section className="relative w-full py-16 sm:py-20 lg:py-28" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 bg-white/5 text-[#A6A6A6] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
@@ -114,7 +118,8 @@ export default function LocationsIndex() {
             {tier2Cities.map((loc) => (
               <div
                 key={loc.slug}
-                className="bg-[#121315] rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6"
+                className="rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6"
+                style={{ background: 'linear-gradient(135deg, #0D1118 0%, #131c2e 100%)' }}
               >
                 <Link href={`/locations/${loc.slug}`} className="group block">
                   <div className="flex items-center gap-2 mb-3">
@@ -138,7 +143,10 @@ export default function LocationsIndex() {
 
             {/* Combined Karnataka page */}
             {combined && (
-              <div className="bg-[#121315] rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6">
+              <div
+                className="rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6"
+                style={{ background: 'linear-gradient(135deg, #0D1118 0%, #131c2e 100%)' }}
+              >
                 <Link href={`/locations/${combined.slug}`} className="group block">
                   <div className="flex items-center gap-2 mb-3">
                     <MapPin size={16} className="text-[#2E7D32]" />

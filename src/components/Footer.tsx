@@ -5,7 +5,7 @@ import { PipeTopologyBg } from './backgrounds/PipeTopologyBg';
 
 const Footer = () => {
   return (
-    <footer className="relative w-full bg-[#0A0A0B] border-t border-white/5 pt-12 md:pt-20 text-[#EEEEEE] overflow-hidden">
+    <footer className="relative w-full border-t border-white/5 pt-12 md:pt-20 text-[#EEEEEE] overflow-hidden" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0A0E15 100%)' }}>
       {/* Premium Background Graphics */}
       <PipeTopologyBg isLight={false} />
 

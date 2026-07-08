@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -74,7 +74,7 @@ const ServiceArea = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
       {/* Premium Background Graphics */}
       <DotMatrixBg isLight={false} />
 

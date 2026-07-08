@@ -5,7 +5,7 @@
   /* Custom breakpoints — xs for small phones 375-640px */
   --breakpoint-xs: 475px;
 
-  --color-background: hsl(210 7% 13%);
+  --color-background: hsl(222 18% 10%);
   --color-foreground: hsl(0 0% 93%);
   --color-card: hsl(0 0% 93%);
   --color-card-foreground: hsl(210 7% 13%);
@@ -58,7 +58,7 @@
   }
 
   body {
-    background-color: #0A0A0B;
+    background-color: #0D1118;
     color: #EEEEEE;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -123,11 +123,11 @@
   }
 
   .gradient-hero-bottom {
-    background: linear-gradient(to top, rgba(10, 10, 11, 0.95) 0%, rgba(10, 10, 11, 0.5) 50%, transparent 80%);
+    background: linear-gradient(to top, rgba(13, 17, 24, 0.95) 0%, rgba(13, 17, 24, 0.5) 50%, transparent 80%);
   }
 
   .gradient-overlay-dark {
-    background: linear-gradient(to top, rgba(10, 10, 11, 0.98) 0%, rgba(10, 10, 11, 0.75) 40%, transparent 70%);
+    background: linear-gradient(to top, rgba(13, 17, 24, 0.98) 0%, rgba(13, 17, 24, 0.75) 40%, transparent 70%);
   }
 
   .scroll-indicator-dot {

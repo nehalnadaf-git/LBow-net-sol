@@ -29,165 +29,224 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'ppr-green-pipe',
-    name: 'PPR Green Pipe',
+    name: 'PPR Green Pipe & Fittings (GREENFIT)',
     category: 'PPR Pipes',
-    tagline: 'Food grade certified green PPR pipes — 20mm to 315mm, 50-year life',
+    tagline: 'Prince GREENFIT PP-R — IS:15801 certified hot & cold water pipe, 20mm to 160mm, up to 95°C',
     shortDescription:
-      'Standard green PPR pipes from 20mm to 315mm. Food grade certified, temperature rated -5°C to +95°C, with a 10-year product warranty.',
-    fullDescription: `PPR Green Pipes (Polypropylene Random Copolymer) are the industry-standard piping solution for hot and cold water distribution in residential, commercial, and industrial facilities. The distinctive green colour makes them instantly recognisable on site and helps prevent cross-connection errors during installation.
+      'Prince GREENFIT PPR (Polypropylene Random Copolymer) pipes and fittings for hot and cold water plumbing and industrial piping. IS:15801 certified, heat-fusion jointed, rated to 95°C continuous service. Available 20mm to 160mm.',
+    fullDescription: `Prince GREENFIT PP-R (Polypropylene Random Copolymer) is a high-performance piping system for residential, commercial, and industrial hot and cold water distribution. At LBow Network Solutions, we are an authorised Prince dealer supplying the complete GREENFIT range across Bangalore and Karnataka.
 
-Manufactured from virgin PPR resin, these pipes offer outstanding performance across a temperature range of -5°C to +95°C, making them equally suitable for chilled water supply lines and hot water distribution up to near-boiling temperatures. The material's inherent resistance to corrosion, scaling, and chemical attack means the bore remains clean and full-flow throughout the pipe's service life.
+GREENFIT pipes are manufactured from Polypropylene Random Copolymer resin and conform to IS:15801 (pipes) and DIN 16962 (fittings). They are compliant with IS:10500 for contact with foodstuff, pharmaceuticals, and drinking water, making them safe for potable water applications in kitchens, hospitals, food processing plants, and pharmaceutical facilities.
 
-At LBow Network Solutions, we are an authorised Prince dealer supplying PPR green pipes across the full range from 20mm (half inch) to 315mm. All our pipes carry food grade certification, making them safe for potable water applications in food processing facilities, hospitals, and commercial kitchens.
+**Single-Layer and Triple-Layer Options:**
+GREENFIT is available in single-layer (green) for indoor use and triple-layer construction (green outer, white middle, off-white inner) for outdoor UV-exposed installations. The triple-layer design provides ultraviolet resistance without compromising the internal food-grade surface.
 
-Heat fusion (socket fusion) welding creates molecular-level bonds at every joint, producing a system that is stronger at the joint than in the pipe body itself. There are no adhesives, solvent cements, or O-ring seals to degrade over time. A properly installed PPR system has a design service life of 50 years.
+**GREENFIT Thermex — Insulated Pipes:**
+For extreme thermal environments, GREENFIT Thermex pipes incorporate an insulating layer that reduces linear expansion and contraction — particularly important in long-run, high-temperature installations.
 
-Our 10-year product warranty on PPR pipes gives you long-term assurance of material quality and performance.`,
+**Heat-Fusion Jointing:**
+GREENFIT pipes and fittings are joined by polyfusion (socket fusion) welding, which creates a homogeneous, monolithic bond stronger than the pipe body itself. No adhesives, solvent cements, or O-ring seals are used. A properly installed GREENFIT system has a design service life of 50+ years with zero joint maintenance.
+
+**Key Performance Advantages:**
+- Highly resistant to oxidation, calcification, and scaling — bore stays full-flow for life
+- Bacteriologically neutral and non-toxic; safe for potable water and food contact
+- Low coefficient of friction for excellent flow rates
+- Good thermal insulation — minimises heat loss in hot water lines
+- Excellent noise insulation properties
+- Resistant to a wide range of industrial fluids and aggressive chemicals
+
+We stock GREENFIT pipes from 20mm to 160mm and the complete fitting range (elbows, tees, couplers, reducers, end caps, threaded adapters with brass inserts, unions) for immediate dispatch from Bangalore.`,
     specifications: [
-      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer (virgin resin)' },
-      { label: 'Colour', value: 'Green' },
-      { label: 'Size Range', value: '20mm (½ inch) to 315mm' },
-      { label: 'Temperature Range', value: '-5°C to +95°C' },
-      { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
-      { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
-      { label: 'Certification', value: 'Food grade certified' },
-      { label: 'Service Life', value: '50 years' },
-      { label: 'Warranty', value: '10 years (product warranty on PPR pipes)' },
+      { label: 'Material', value: 'PP-R — Polypropylene Random Copolymer (virgin resin)' },
+      { label: 'Brand System', value: 'Prince GREENFIT (Authorised Dealer: LBow Network Solutions)' },
+      { label: 'Colour', value: 'Green (single-layer) / Green-White-Off-White (triple-layer, UV-resistant)' },
+      { label: 'Pipe Size Range', value: '20 mm to 160 mm (standard range)' },
+      { label: 'Fitting Size Range', value: '20 mm to 160 mm' },
+      { label: 'Temperature Range', value: 'Up to 95°C continuous service (insulation required below 0°C)' },
+      { label: 'Pressure Rating (Pipes)', value: 'PN 10, PN 16, PN 20 (depending on size and class)' },
+      { label: 'Pressure Rating (Fittings)', value: 'PN 20 and PN 25' },
+      { label: 'Pipe Standard', value: 'IS:15801' },
+      { label: 'Fitting Standard', value: 'DIN 16962' },
+      { label: 'Water Quality Standard', value: 'IS:10500 — safe for drinking water, food, and pharma contact' },
+      { label: 'Jointing Method', value: 'Polyfusion (socket fusion) heat-fusion welding — no adhesives' },
+      { label: 'Special Variants', value: 'GREENFIT Triple-Layer (UV-resistant outdoor) | GREENFIT Thermex (thermally insulated)' },
+      { label: 'Service Life', value: '50+ years (properly installed)' },
     ],
     applications: [
-      'Hot and cold water distribution systems',
-      'Industrial process water lines',
-      'Food and beverage facility water supply',
-      'Pharmaceutical clean water supply',
-      'HVAC chilled water circuits',
+      'Indoor and outdoor hot and cold water distribution in residential and commercial buildings',
+      'Industrial process water and fluid transport lines',
+      'HVAC heating, cooling, and chilled water circuits (AHUs, cooling towers)',
+      'Floor, wall, and radiator heating systems',
       'Solar water heater feed and return lines',
+      'Drinking water, food and beverage facility water supply',
+      'Pharmaceutical and clean water process lines',
+      'Compressed air and industrial fluid transport',
     ],
     industries: [
+      'Construction and real estate (residential and commercial)',
       'Manufacturing and industrial plants',
       'Food and beverage processing',
       'Pharmaceuticals and biotech',
-      'Commercial construction',
-      'Hospitals and healthcare',
-      'HVAC contractors',
+      'HVAC and MEP contractors',
+      'Hospitals and healthcare facilities',
+      'Hotels and hospitality',
     ],
     relatedProducts: ['ppr-blue-pipe', 'ppr-fittings-green', 'brass-ball-valve'],
     image: '/images/product-ppr-green-pipe.webp',
-    metaTitle: 'PPR Green Pipe Supplier in Bangalore | LBow Network Solutions',
+    metaTitle: 'Prince GREENFIT PPR Pipe Supplier Bangalore | LBow Network Solutions',
     metaDescription:
-      'Buy PPR green pipes 20mm–315mm in Bangalore. Food grade certified, -5°C to +95°C, 10-year warranty. Authorised Prince dealer. Call +91 8123501407.',
+      'Buy Prince GREENFIT PPR pipes 20mm–160mm in Bangalore. IS:15801 certified, up to 95°C, triple-layer UV option. Authorised Prince dealer. Call +91 8123501407.',
     keywords: [
-      'PPR green pipe Bangalore',
+      'Prince GREENFIT PPR pipe Bangalore',
       'PPR pipe supplier Bangalore',
-      'PPR pipe 20mm to 315mm',
-      'food grade PPR pipe',
-      'green PPR pipe industrial',
+      'IS 15801 PPR pipe',
+      'Prince PPR pipe dealer Bangalore',
+      'hot cold water PPR pipe Bangalore',
+      'GREENFIT PPR industrial piping',
     ],
     faqs: [
       {
-        question: 'What sizes of PPR green pipe are available?',
+        question: 'What is Prince GREENFIT PPR pipe?',
         answer:
-          'We supply PPR green pipes from 20mm (half inch) to 315mm. Contact us for availability on specific sizes and quantities.',
+          'Prince GREENFIT is a Polypropylene Random Copolymer (PP-R) piping system manufactured by Prince Pipes & Fittings Ltd. It is certified to IS:15801 (pipes) and DIN 16962 (fittings) and is suitable for hot and cold water plumbing, industrial fluid lines, and HVAC systems. LBow Network Solutions is an authorised Prince dealer supplying GREENFIT across Bangalore.',
       },
       {
-        question: 'Is PPR green pipe food grade certified?',
+        question: 'What sizes of GREENFIT PPR pipe are available?',
         answer:
-          'Yes. Our PPR green pipes are food grade certified, making them safe for potable water and food processing applications.',
+          'We supply Prince GREENFIT PPR pipes from 20mm to 160mm, covering the full standard range. Contact us for availability on specific sizes and pressure classes (PN10, PN16, PN20).',
       },
       {
-        question: 'What temperature range can PPR green pipe handle?',
+        question: 'What is the difference between single-layer and triple-layer GREENFIT?',
         answer:
-          'PPR green pipe is rated for continuous service from -5°C to +95°C, suitable for both chilled water and hot water systems.',
+          'Single-layer GREENFIT (green) is designed for indoor installations. Triple-layer GREENFIT has a green outer layer, white middle layer, and off-white inner layer — the outer layer is UV-resistant, making it suitable for outdoor exposed installations without degradation.',
       },
       {
-        question: 'What is the warranty on PPR green pipe?',
+        question: 'What is GREENFIT Thermex?',
         answer:
-          'We offer a 10-year product warranty on PPR green pipes covering manufacturing defects.',
+          'GREENFIT Thermex is a specialised insulated pipe variant within the GREENFIT range that includes a thermal insulation layer. It reduces linear expansion and contraction in long runs and high-temperature applications, making it ideal for hot water mains in large facilities.',
       },
       {
-        question: 'How long will a PPR pipe system last?',
+        question: 'What temperature can GREENFIT PPR pipe handle?',
         answer:
-          'A properly installed PPR pipe system has a design life of 50 years under normal operating conditions.',
+          'Prince GREENFIT PPR pipe is rated for continuous service up to 95°C, making it suitable for both hot water distribution and solar water heater systems. For sub-zero temperature applications, the piping system must be insulated.',
+      },
+      {
+        question: 'Is GREENFIT PPR pipe safe for drinking water?',
+        answer:
+          'Yes. Prince GREENFIT PPR complies with IS:10500 for contact with foodstuff, pharmaceuticals, and drinking water. The material is non-toxic and bacteriologically neutral — safe for potable water systems in homes, hospitals, and food processing facilities.',
+      },
+      {
+        question: 'How are GREENFIT PPR pipes joined?',
+        answer:
+          'GREENFIT pipes and fittings are joined using polyfusion (socket fusion) heat-fusion welding. The fusion process creates a homogeneous, monolithic joint — no adhesives, solvent cements, or O-rings are used. The joint is stronger than the pipe body itself and requires no ongoing maintenance.',
       },
     ],
   },
   {
     slug: 'ppr-blue-pipe',
-    name: 'PPR Blue Pipe',
+    name: 'PPR Blue Pipe & Fittings (GREENFIT Blue)',
     category: 'PPR Pipes',
-    tagline: 'Premium blue PPR pipes for hot/cold water and industrial pressure lines',
+    tagline: 'Prince GREENFIT Blue — glass-fibre reinforced PP-R for compressed air, vacuum & industrial lines',
     shortDescription:
-      'Premium blue PPR pipes — full range 20mm to 315mm. Ideal for hot/cold water and industrial pressure lines with 10-year warranty.',
-    fullDescription: `PPR Blue Pipes represent the premium tier of our PPR pipe range, designed for high-pressure industrial water lines and applications where blue colour-coding is preferred or required for system identification. Like our green PPR pipes, these are manufactured from virgin PPR resin and carry the same performance specifications.
+      'Prince GREENFIT Blue — a 3-layer glass-fibre reinforced PP-R piping system rated from -20°C to 95°C with PN10 to PN20 pressure ratings. Designed for compressed air, vacuum lines, and industrial process fluids. No corrosion, no scaling.',
+    fullDescription: `Prince GREENFIT Blue is a specialist Polypropylene Random Copolymer (PP-R) industrial piping system engineered specifically for compressed air, vacuum, and process gas distribution in manufacturing, automation, and industrial environments. At LBow Network Solutions, we supply the full GREENFIT Blue range as an authorised Prince dealer.
 
-The blue colour is particularly common in industrial installations where colour-coded piping systems distinguish hot water lines (red), cold water lines (blue), and other service lines, helping maintenance teams quickly identify each circuit without labelling. In larger industrial facilities, this colour-coding system significantly reduces the risk of incorrect valve operation.
+**Three-Layer Construction:**
+Unlike standard single-layer PPR pipes, GREENFIT Blue features a three-layer design:
+- Inner and outer layers of PP-R for chemical resistance and smooth bore
+- Middle layer of PP-R reinforced with glass fibre for enhanced structural rigidity and significantly reduced linear expansion/contraction
 
-PPR blue pipes share the same -5°C to +95°C temperature rating, food grade certification, and 50-year design life as our green PPR pipes. They are joined using the same heat fusion welding process, creating permanent, leak-free joints that match the pressure and temperature rating of the pipe body.
+The glass-fibre reinforced middle layer is the key differentiator — it gives GREENFIT Blue greater stiffness and pressure retention at elevated temperatures compared to unreinforced PPR, and dramatically reduces the thermal expansion that can cause stress in long runs.
 
-At LBow Network Solutions, we supply PPR blue pipes across the full size range from 20mm to 315mm. Our team can assist with pipe selection, sizing, and take-off calculations for complete projects.`,
+**Clean Air Advantage:**
+GREENFIT Blue eliminates the contamination and corrosion problems that plague metal compressed air systems. Steel and copper pipes corrode internally, releasing rust particles, scale, and moisture into the air supply — contaminating pneumatic tools, valves, and sensitive instruments. GREENFIT Blue's inert PP-R bore delivers perfectly clean, dry, uncontaminated compressed air to every point of use.
+
+**Leak-Free by Design:**
+Polyfusion heat-fusion welding creates permanent, monolithic joints throughout the system. Unlike threaded metal joints (which require ongoing PTFE tape re-application and can loosen under vibration), GREENFIT Blue joints never work loose, never corrode, and require no maintenance. Compressed air leaks are a direct and significant energy cost — a leak-free polyfusion system pays for itself rapidly.
+
+**Extended Temperature Range:**
+The -20°C to 95°C operating range makes GREENFIT Blue suitable for both chilled process lines (refrigeration condensate, cold water) and hot fluid lines, with the glass-fibre reinforcement maintaining structural integrity across the full range.
+
+**Standards Compliance:**
+GREENFIT Blue pipes conform to IS:15801 and fittings to DIN 16962, the same internationally recognised standards as the GREENFIT green range.
+
+We supply GREENFIT Blue in the full size range and PN class from our Bangalore stock. Contact us for sizing guidance, take-off calculations, and project pricing.`,
     specifications: [
-      { label: 'Material', value: 'PPR — Polypropylene Random Copolymer (virgin resin)' },
+      { label: 'Material', value: 'PP-R — Polypropylene Random Copolymer' },
+      { label: 'Brand System', value: 'Prince GREENFIT Blue (Authorised Dealer: LBow Network Solutions)' },
+      { label: 'Construction', value: '3-layer: PP-R inner/outer | PP-R + Glass-fibre reinforced middle layer' },
       { label: 'Colour', value: 'Blue' },
-      { label: 'Size Range', value: '20mm (½ inch) to 315mm' },
-      { label: 'Temperature Range', value: '-5°C to +95°C' },
-      { label: 'Pressure Rating', value: 'PN10 / PN16 (1.0–1.6 MPa)' },
-      { label: 'Joining Method', value: 'Heat fusion (socket fusion) welding' },
-      { label: 'Certification', value: 'Food grade certified' },
-      { label: 'Service Life', value: '50 years' },
-      { label: 'Warranty', value: '10 years (product warranty on PPR pipes)' },
+      { label: 'Pipe Size Range', value: '20 mm to 315 mm' },
+      { label: 'Temperature Range', value: '-20°C to 95°C (insulation required below 0°C)' },
+      { label: 'Pressure Rating (Pipes)', value: 'PN 10, PN 16, PN 20' },
+      { label: 'Pressure Rating (Fittings)', value: 'PN 20, PN 25' },
+      { label: 'Pipe Standard', value: 'IS:15801' },
+      { label: 'Fitting Standard', value: 'DIN 16962' },
+      { label: 'Jointing Method', value: 'Polyfusion (socket fusion) heat-fusion welding — no adhesives, no threads' },
+      { label: 'Key Advantage', value: 'Glass-fibre reinforced middle layer — reduced thermal expansion, higher rigidity' },
+      { label: 'UV Resistance', value: 'UV-resistant outer layer — suitable for outdoor exposed installations' },
     ],
     applications: [
-      'Cold water distribution with colour-coded systems',
-      'Industrial pressure water lines',
-      'Hot water distribution (up to 95°C)',
-      'Compressed air secondary distribution',
-      'HVAC chilled and condenser water lines',
-      'Chemical feed lines (low concentration)',
+      'Compressed air main and branch distribution lines in factories',
+      'Vacuum piping systems — clean, sealed, no contamination',
+      'Instrument air supply for pneumatic controls and instrumentation',
+      'Nitrogen and inert gas distribution lines',
+      'Industrial process water and fluid transport',
+      'Cold process lines and chilled water circuits (-20°C capable)',
+      'Outdoor UV-exposed industrial piping installations',
     ],
     industries: [
-      'Manufacturing plants',
-      'Automotive and engineering',
-      'Food and beverage processing',
-      'Commercial construction',
-      'HVAC and MEP contractors',
-      'Pharmaceuticals',
+      'Automotive and auto-components manufacturing',
+      'Electronics and semiconductor assembly',
+      'Machine building and industrial automation',
+      'Pharmaceutical and biotech manufacturing',
+      'Food and beverage processing plants',
+      'Textile manufacturing',
+      'General manufacturing and engineering',
     ],
     relatedProducts: ['ppr-green-pipe', 'ppr-fittings-blue', 'brass-ball-valve'],
     image: '/images/product-ppr-blue-pipe.webp',
-    metaTitle: 'PPR Blue Pipe Supplier in Bangalore | LBow Network Solutions',
+    metaTitle: 'Prince GREENFIT Blue PPR Pipe Supplier Bangalore | LBow Network Solutions',
     metaDescription:
-      'Buy PPR blue pipes 20mm–315mm in Bangalore. Food grade, -5°C to +95°C, 10-year warranty. Industrial piping supply. Call +91 8123501407.',
+      'Prince GREENFIT Blue glass-fibre reinforced PP-R pipes for compressed air, vacuum, and industrial lines in Bangalore. -20°C to 95°C, PN10–PN20. Authorised Prince dealer. Call +91 8123501407.',
     keywords: [
-      'PPR blue pipe Bangalore',
-      'blue PPR pipe industrial',
-      'PPR pipe supplier Bangalore',
-      'colour coded PPR pipe',
-      'industrial water pipe Bangalore',
+      'Prince GREENFIT Blue PPR pipe Bangalore',
+      'compressed air PPR pipe Bangalore',
+      'glass fibre reinforced PPR pipe',
+      'Prince PPR pipe dealer Bangalore',
+      'industrial compressed air pipe Bangalore',
+      'vacuum pipe PPR industrial',
     ],
     faqs: [
       {
-        question: 'What is the difference between PPR green and PPR blue pipe?',
+        question: 'What is Prince GREENFIT Blue PPR pipe used for?',
         answer:
-          'Both PPR green and blue pipes are made from the same virgin PPR resin with identical performance specifications. The difference is colour only — blue is often used for colour-coded system identification in industrial settings.',
+          'Prince GREENFIT Blue is a specialised PP-R piping system designed primarily for compressed air, vacuum lines, instrument air, and inert gas distribution in industrial environments. Its glass-fibre reinforced middle layer gives it greater rigidity and reduced thermal expansion compared to standard PPR, making it ideal for long-run industrial compressed air systems.',
       },
       {
-        question: 'Are PPR blue pipes suitable for hot water?',
+        question: 'What makes GREENFIT Blue different from GREENFIT (green)?',
         answer:
-          'Yes. PPR blue pipes have the same temperature rating as green PPR: -5°C to +95°C continuous service. They are fully suitable for hot water distribution systems.',
+          'GREENFIT Blue has a three-layer construction with a PP-R + glass-fibre reinforced middle layer. This gives it higher structural rigidity, reduced linear thermal expansion, and suitability for compressed air and vacuum applications. The standard GREENFIT (green) is a single or triple-layer PP-R optimised for hot and cold water plumbing. Both are IS:15801 certified and heat-fusion welded.',
       },
       {
-        question: 'What sizes of PPR blue pipe do you supply?',
+        question: 'Why use GREENFIT Blue for compressed air instead of metal pipes?',
         answer:
-          'We supply PPR blue pipes from 20mm (half inch) to 315mm. Contact us for specific sizes and bulk pricing.',
+          'Steel and copper compressed air pipes corrode internally, releasing rust particles, scale, and moisture that contaminate pneumatic tools, valves, and instruments. GREENFIT Blue is fully inert — no corrosion, no scaling, no contamination. The heat-fusion joints are also permanently leak-free, eliminating the energy losses from threaded joint air leaks that are common in metal systems.',
       },
       {
-        question: 'Is PPR blue pipe food grade certified?',
+        question: 'What temperature range does GREENFIT Blue support?',
         answer:
-          'Yes. Our PPR blue pipes are food grade certified and safe for potable water applications.',
+          'GREENFIT Blue operates across a wide range from -20°C to 95°C. Below 0°C, the piping system should be insulated. This range makes it suitable for both chilled process lines and hot fluid applications.',
       },
       {
-        question: 'Can PPR blue pipes be joined with PPR green pipe fittings?',
+        question: 'What pressure classes are available for GREENFIT Blue?',
         answer:
-          'Yes. PPR pipes of the same nominal diameter are dimensionally compatible regardless of colour. They are joined using the same heat fusion welding process.',
+          'Pipes are available in PN10, PN16, and PN20 pressure classes. Fittings are rated PN20 and PN25. The appropriate pressure class depends on your system working pressure and temperature — our team can assist with the correct selection.',
+      },
+      {
+        question: 'Are GREENFIT Blue pipes suitable for outdoor installation?',
+        answer:
+          'Yes. The outer layer of GREENFIT Blue is UV-resistant, making it suitable for outdoor and direct sunlight exposed installations without degradation. This is a significant advantage over standard PPR pipes that require UV protection when installed outdoors.',
       },
     ],
   },

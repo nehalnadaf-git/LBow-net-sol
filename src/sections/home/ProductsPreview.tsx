@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -45,7 +45,7 @@ interface Product { slug: string; image: string; category: string; name: string;
 
 const ProductCard = ({ product, width }: { product: Product; width: number }) => (
   <div
-    className="product-card flex-shrink-0 bg-[#121315] rounded-2xl overflow-hidden border border-white/8
+    className="product-card flex-shrink-0 bg-[#131822] rounded-2xl overflow-hidden border border-white/8
                group shadow-md hover:shadow-[0_20px_60px_rgba(0,0,0,0.7)] transition-shadow duration-500"
     style={{ width }}
   >
@@ -265,7 +265,7 @@ const ProductsPreview = () => {
 
   /* ── Render ───────────────────────────────────────────────────────────── */
   return (
-    <section className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-24" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
       <HexGridBg isLight={false} isMinimal={true} />
 
       <div className="relative z-10">
@@ -284,7 +284,7 @@ const ProductsPreview = () => {
             <span className="block w-6 h-px bg-[#4ADE80]/60" />
           </div>
           <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.6rem] text-[#EEEEEE] mb-3 leading-tight">
-            PPR Pipes, Fittings<br className="sm:hidden" /> & Industrial Valves
+            PPR Pipes, Fittings<br className="sm:hidden" /> &amp; Industrial Valves
           </h2>
           <p className="font-body text-sm sm:text-base text-[#A6A6A6] max-w-lg sm:max-w-2xl mx-auto leading-relaxed">
             From PPR pipes and fittings to valves, pneumatic fittings, and air tools — everything your industry needs.
@@ -325,7 +325,7 @@ const ProductsPreview = () => {
           <button
             onClick={() => arrowSlide(1)}
             className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10
-                       w-10 h-10 rounded-full bg-[#0A0A0B]/90 border border-white/10
+                       w-10 h-10 rounded-full bg-[#0D1118]/90 border border-white/10
                        items-center justify-center text-[#EEEEEE]
                        hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
                        transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"
@@ -336,7 +336,7 @@ const ProductsPreview = () => {
           <button
             onClick={() => arrowSlide(-1)}
             className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10
-                       w-10 h-10 rounded-full bg-[#0A0A0B]/90 border border-white/10
+                       w-10 h-10 rounded-full bg-[#0D1118]/90 border border-white/10
                        items-center justify-center text-[#EEEEEE]
                        hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
                        transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"

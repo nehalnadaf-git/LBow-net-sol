@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <section className="relative w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24">
+      <section className="relative w-full pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24" style={{ background: 'linear-gradient(160deg, #0D1118 0%, #111827 40%, #0F1923 70%, #0A0F17 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <nav className="font-body text-xs text-[#A6A6A6] mb-8 flex gap-2 items-center">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>

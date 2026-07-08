@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useRef } from 'react';
 import gsap from 'gsap';
@@ -69,7 +69,7 @@ const TrustBadges = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-14 sm:py-16 lg:py-20">
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-14 sm:py-16 lg:py-20" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
       <DotMatrixBg isLight={false} />
       <PipeCrossSectionBg isLight={false} />
 

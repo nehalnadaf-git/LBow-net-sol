@@ -107,7 +107,7 @@ const ProductDetailContent = ({ product }: ProductDetailContentProps) => {
       </section>
 
       {/* Applications + Industries */}
-      <section ref={appsRef} className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20 lg:py-28">
+      <section ref={appsRef} className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
         <PipeTopologyBg isLight={false} />
         <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 lg:gap-16">

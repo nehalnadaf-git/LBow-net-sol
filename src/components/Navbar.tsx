@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
@@ -50,30 +51,51 @@ const Navbar = () => {
     return pathname.startsWith(path);
   };
 
-  const isLightTheme = !scrolled && pathname === '/';
+  // Home page keeps its dark/transparent navbar behaviour.
+  // Every other page has a light hero, so always show a white navbar there.
+  const isHome = pathname === '/';
+  const isLightTheme = !scrolled && isHome; // only used for home unscrolled state
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-all duration-300 ${
-          scrolled
-            ? 'bg-[#0A0A0B]/98 border-b border-white/5'
-            : 'bg-transparent'
+          !isHome
+            ? 'bg-[#0D1118]/98 border-b border-white/5'
+            : scrolled
+              ? 'bg-[#0D1118]/98 border-b border-white/5'
+              : 'bg-transparent'
         }`}
       >
         <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col">
-            <span className={`font-heading font-bold text-xl md:text-2xl leading-tight transition-colors duration-300 ${
-              isLightTheme ? 'text-[#0A0A0B]' : 'text-[#EEEEEE]'
-            }`}>
-              LBow<span className="text-[#2E7D32]">.</span>
-            </span>
-            <span className={`font-body text-[0.6rem] md:text-[0.7rem] tracking-[0.1em] uppercase -mt-0.5 transition-colors duration-300 ${
-              isLightTheme ? 'text-[#434343]' : 'text-[#A6A6A6]'
-            }`}>
-              Network Solutions
-            </span>
+          <Link href="/" className="flex items-center">
+            {/* Dark logo — shown on dark navbar (all non-home, + scrolled home) */}
+            <Image
+              src="/lns_logo_dark.webp"
+              alt="LBow Network Solutions"
+              width={192}
+              height={192}
+              quality={90}
+              priority
+              sizes="(max-width: 768px) 48px, 64px"
+              className={`h-12 md:h-16 w-auto object-contain transition-opacity duration-300 ${
+                isLightTheme ? 'opacity-0 absolute pointer-events-none' : 'opacity-100'
+              }`}
+            />
+            {/* Light logo — shown on home page unscrolled (transparent/light context) */}
+            <Image
+              src="/lns_logo_light.webp"
+              alt="LBow Network Solutions"
+              width={192}
+              height={192}
+              quality={90}
+              priority
+              sizes="(max-width: 768px) 48px, 64px"
+              className={`h-12 md:h-16 w-auto object-contain transition-opacity duration-300 ${
+                isLightTheme ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'
+              }`}
+            />
           </Link>
  
           {/* Desktop Nav — all links including Home */}
@@ -82,11 +104,11 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 href={link.path}
-                className={`relative font-body font-medium text-[0.7rem] lg:text-[0.75rem] uppercase tracking-[0.04em] lg:tracking-[0.05em] transition-colors duration-300 group ${
-                  isActive(link.path)
-                    ? (isLightTheme ? 'text-[#0A0A0B]' : 'text-[#EEEEEE]')
-                    : (isLightTheme ? 'text-[#434343] hover:text-[#2E7D32]' : 'text-[#A6A6A6] hover:text-[#2E7D32]')
-                }`}
+              className={`relative font-body font-medium text-[0.7rem] lg:text-[0.75rem] uppercase tracking-[0.04em] lg:tracking-[0.05em] transition-colors duration-300 group ${
+                isActive(link.path)
+                  ? (isLightTheme ? 'text-[#0A0A0B]' : 'text-[#EEEEEE]')
+                  : (isLightTheme ? 'text-[#434343] hover:text-[#2E7D32]' : 'text-[#A6A6A6] hover:text-[#2E7D32]')
+              }`}
               >
                 {link.name}
                 <span
@@ -130,19 +152,24 @@ const Navbar = () => {
         id="mobile-nav"
         role="navigation"
         aria-label="Mobile navigation"
-        className={`fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] flex flex-col transition-all duration-300 md:hidden ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
+        style={{ background: '#0D1118' }}
       >
         {/* Top bar — logo + close */}
         <div className="flex items-center justify-between px-6 h-[64px] border-b border-white/5 flex-shrink-0">
-          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex flex-col">
-            <span className="font-heading font-bold text-xl text-[#EEEEEE] leading-tight">
-              LBow<span className="text-[#2E7D32]">.</span>
-            </span>
-            <span className="font-body text-[0.58rem] tracking-[0.1em] uppercase -mt-0.5 text-[#A6A6A6]">
-              Network Solutions
-            </span>
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
+            <Image
+              src="/lns_logo_dark.webp"
+              alt="LBow Network Solutions"
+              width={160}
+              height={160}
+              quality={90}
+              priority
+              sizes="40px"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}

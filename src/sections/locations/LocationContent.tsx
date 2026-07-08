@@ -158,7 +158,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
               </div>
 
               {/* CTA Card */}
-              <div className="bg-[#0A0A0B] rounded-xl p-5 text-center">
+              <div className="rounded-xl p-5 text-center" style={{ background: 'linear-gradient(135deg, #0D1118 0%, #111827 100%)' }}>
                 <h3 className="font-heading font-semibold text-base text-white mb-2">
                   Get a Quote for {location.displayName}
                 </h3>
@@ -186,7 +186,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
       </section>
 
       {/* Relevant Products */}
-      <section className="relative overflow-hidden w-full bg-[#0A0A0B] py-16 sm:py-20">
+      <section className="relative overflow-hidden w-full py-16 sm:py-20" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
         <PipeTopologyBg isLight={false} />
         <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#A6A6A6] mb-3">

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -36,21 +36,25 @@ const LocationHero = ({ h1Suffix, tagline, tier, breadcrumb }: LocationHeroProps
   const labelText = tier === 1 ? 'Bangalore Industrial Zone' : tier === 2 ? 'Karnataka Supply' : 'Pan-India Supply';
 
   return (
-    <section className="relative overflow-hidden w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 md:pb-32 text-center">
-      <PipeFlowBg isLight={false} />
+    <section
+      className="relative overflow-hidden w-full pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 md:pb-16 text-center"
+      style={{ background: 'linear-gradient(160deg, #F0F7F1 0%, #FAFFFE 35%, #EDF4FF 70%, #F4FBF5 100%)' }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)' }} />
+      <PipeFlowBg isLight={true} />
       {breadcrumb && (
         <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 mb-5 text-left">
           {breadcrumb}
         </div>
       )}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-        <div ref={labelRef} className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-3 sm:mb-4 will-change-transform">
+        <div ref={labelRef} className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] mb-3 sm:mb-4 will-change-transform" style={{ color: '#2E7D32' }}>
           {labelText}
         </div>
-        <h1 ref={headingRef} className="font-heading font-bold text-2xl sm:text-3xl md:text-[3rem] lg:text-[3.5rem] text-white leading-[1.1] mb-4 sm:mb-6 will-change-transform">
+        <h1 ref={headingRef} className="font-heading font-bold text-2xl sm:text-3xl md:text-[3rem] lg:text-[3.5rem] leading-[1.1] mb-4 sm:mb-6 will-change-transform" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           PPR &amp; PPCH Pipe Supplier in {h1Suffix}
         </h1>
-        <p ref={subtitleRef} className="font-body text-sm sm:text-base md:text-lg text-[#A6A6A6] max-w-2xl mx-auto will-change-transform">
+        <p ref={subtitleRef} className="font-body text-sm sm:text-base md:text-lg max-w-2xl mx-auto will-change-transform" style={{ color: '#3D5040' }}>
           {tagline}
         </p>
       </div>
