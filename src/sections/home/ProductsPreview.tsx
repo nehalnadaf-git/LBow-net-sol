@@ -9,8 +9,8 @@ import { HexGridBg } from '../../components/backgrounds/HexGridBg';
 
 /* ─────────────────────────────────── data ──────────────────────────────── */
 const products = [
-  { slug: 'ppr-green-pipe',           image: '/images/product-ppr-green-pipe.webp',        category: 'PPR Pipes',         name: 'PPR Green Pipe',          description: 'Standard green PPR pipes — 20mm to 315mm. Food grade certified, 10-year warranty, temperature rated -5°C to +95°C.' },
-  { slug: 'ppr-blue-pipe',            image: '/images/product-ppr-blue-pipe.webp',  category: 'PPR Pipes',         name: 'PPR Blue Pipe',           description: 'Premium blue PPR pipes — full range 20mm to 315mm. Ideal for hot/cold water and industrial pressure lines.' },
+  { slug: 'ppr-green-pipe',       image: '/images/product-ppr-green-pipe.webp',      category: 'PPR Pipes',               name: 'PPR Green Pipe & Fittings', description: 'Standard green PPR pipes — 20mm to 315mm. Food grade certified, 10-year warranty, rated up to 95°C.' },
+  { slug: 'ppr-blue-pipe',        image: '/images/product-ppr-blue-pipe.webp',        category: 'PPR Pipes',               name: 'PPR Blue Pipe & Fittings',  description: 'Premium blue PPR pipes — full range 20mm to 315mm. Ideal for hot/cold water and industrial pressure lines.' },
   { slug: 'ppr-fittings-green',       image: '/images/product-ppr-fittings-green.webp',     category: 'PPR Fittings',      name: 'PPR Fittings (Green)',    description: 'Complete range of green PPR fittings — elbows, tees, couplers, reducers, and unions for every need.' },
   { slug: 'ppr-fittings-blue',        image: '/images/product-ppr-fittings-blue.webp',       category: 'PPR Fittings',      name: 'PPR Fittings (Blue)',     description: 'Full set of blue PPR fittings with brass inserts for hot and cold water applications in industrial setups.' },
   { slug: 'brass-ball-valve',         image: '/images/product-brass-ball-valve.webp',    category: 'Valves',            name: 'Brass Ball Valve',        description: 'High-quality brass ball valves for reliable flow control in water, air, and light chemical lines.' },
@@ -18,7 +18,8 @@ const products = [
   { slug: 'ss-fittings',              image: '/images/product-ss-fittings.webp',        category: 'SS Fittings',       name: 'SS Fittings',             description: 'Stainless steel fittings for hygienic, high-pressure, and corrosive environments including food and pharma.' },
   { slug: 'brass-fittings',           image: '/images/product-brass-fittings.webp',       category: 'Brass Fittings',    name: 'Brass Fittings',          description: 'Precision-machined brass fittings for threaded connections in air, water, and gas line applications.' },
   { slug: 'pneumatic-fittings',       image: '/images/product-pneumatic-fittings.webp',    category: 'Pneumatic',         name: 'Pneumatic Fittings',      description: 'Push-to-connect and compression pneumatic fittings for air compressor lines and automated systems.' },
-  { slug: 'pu-frl-airgun',            image: '/images/product-pu-frl-airgun.webp',     category: 'Air Tools',         name: 'PU/FRL Airgun',           description: 'PU tubing, FRL units (Filter-Regulator-Lubricator), and airguns for complete compressed air tool setups.' },
+  { slug: 'pu-frl-airgun',        image: '/images/Pu,Frl,Airgun.webp',                category: 'Air Tools & Accessories', name: 'PU/FRL/Airgun',             description: 'PU tubing (straight & coiled), FRL units, and pneumatic airguns for complete compressed air tool setups.' },
+  { slug: 'ppr-fusion-equipment', image: '/images/product-ppr-fusion-equipment.webp', category: 'Fusion Equipment',        name: 'PPR Fusion Equipment',      description: 'Prince 20–63mm socket fusion kit — heating unit, socket dies, pipe clamp & accessories for PPR pipe jointing.' },
 ];
 
 // Triple the set so the marquee loops seamlessly in both directions
