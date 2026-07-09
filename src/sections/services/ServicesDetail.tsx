@@ -220,7 +220,7 @@ const ServicesDetail = () => {
               </ul>
               <Link
                 href={`/contact?service=${encodeURIComponent(service.contactKey)}`}
-                className="inline-flex items-center justify-center bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold text-sm rounded-md px-6 py-2.5 transition-all duration-300"
+                className="inline-flex items-center justify-center bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold text-sm rounded-md px-6 py-2.5 transition-all duration-300"
               >
                 Get a Quote
               </Link>

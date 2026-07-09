@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 import type { Product } from '@/lib/products';
+import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,43 +44,58 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
   if (!products || products.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-24 border-t border-[rgba(30,32,33,0.08)]">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-24 border-t border-[rgba(15,23,42,0.07)]">
       <DotMatrixBg isLight={true} />
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-        <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#434343] mb-3">
-          Related Products
+
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12">
+          <div>
+            <div className="font-body font-medium text-xs uppercase tracking-[0.1em] text-[#2E7D32] mb-2">
+              Related Products
+            </div>
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#0A0F1E]">
+              You May Also Need
+            </h2>
+          </div>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-1.5 font-body font-semibold text-sm text-[#374151] hover:text-[#2E7D32] transition-colors whitespace-nowrap"
+          >
+            View All Products <ArrowRight size={14} />
+          </Link>
         </div>
-        <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#0A0A0B] mb-8">
-          You May Also Need
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+
+        {/* Cards grid — up to 4 on xl */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 lg:gap-7">
           {products.map((product) => (
             <div
               key={product.slug}
-              className="related-card bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
+              className="related-card group bg-white rounded-2xl overflow-hidden border border-[rgba(15,23,42,0.08)] transition-all duration-300 hover:border-[rgba(15,23,42,0.18)] hover:-translate-y-2 hover:shadow-[0_20px_48px_rgba(15,23,42,0.10)] flex flex-col"
             >
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-[4/3] overflow-hidden flex-shrink-0">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
-              <div className="px-4 py-4 sm:px-5 sm:py-5">
-                <span className="inline-block font-body font-medium text-[0.65rem] uppercase bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-3 py-1 rounded-full mb-2">
+              <div className="flex flex-col flex-1 px-5 py-5 lg:px-6 lg:py-6">
+                <span className="inline-block font-body font-semibold text-[0.65rem] uppercase tracking-wide bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-3 py-1 rounded-full mb-3 self-start">
                   {product.category}
                 </span>
-                <h3 className="font-heading font-semibold text-base sm:text-lg text-[#0A0A0B] mb-3">
+                <h3 className="font-heading font-bold text-base lg:text-[1.05rem] text-[#0A0F1E] mb-4 leading-snug flex-1">
                   {product.name}
                 </h3>
                 <Link
                   href={`/products/${product.slug}`}
-                  className="block w-full text-center bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full text-center bg-[#0A0F1E] hover:bg-[#2E7D32] text-white font-body font-bold text-sm rounded-xl px-5 py-2.5 transition-all duration-300 mt-auto group/btn"
                 >
                   View Details
+                  <ArrowRight size={13} className="transition-transform duration-200 group-hover/btn:translate-x-1" />
                 </Link>
               </div>
             </div>

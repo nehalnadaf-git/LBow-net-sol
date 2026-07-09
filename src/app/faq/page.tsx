@@ -65,19 +65,19 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Content */}
-      <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+      <section className="relative w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-          <nav className="font-body text-xs text-[#A6A6A6] mb-10 flex gap-2 items-center">
-            <Link href="/" className="hover:text-[#0A0A0B] transition-colors">Home</Link>
+          <nav className="font-body text-xs text-[#6B7280] mb-10 flex gap-2 items-center">
+            <Link href="/" className="hover:text-[#0A0F1E] transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-[#0A0A0B]">FAQ</span>
+            <span className="text-[#0A0F1E]">FAQ</span>
           </nav>
 
           {faqCategories.map((category) => {
             const items = getFAQsByCategory(category);
             return (
               <div key={category} className="mb-12">
-                <h2 className="font-heading font-semibold text-lg sm:text-xl text-[#0A0A0B] mb-6 pb-3 border-b border-[rgba(30,32,33,0.12)]">
+                <h2 className="font-heading font-semibold text-lg sm:text-xl text-[#0A0F1E] mb-6 pb-3 border-b border-[rgba(15,23,42,0.10)]">
                   {category}
                 </h2>
                 <Accordion type="single" collapsible className="w-full">
@@ -85,12 +85,12 @@ export default function FAQPage() {
                     <AccordionItem
                       key={i}
                       value={`${category}-${i}`}
-                      className="border-b border-[rgba(30,32,33,0.08)]"
+                      className="border-b border-[rgba(15,23,42,0.06)]"
                     >
-                      <AccordionTrigger className="text-[#0A0A0B] hover:text-[#2E7D32] text-left">
+                      <AccordionTrigger className="text-[#0A0F1E] hover:text-[#2E7D32] text-left">
                         {faq.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-[#434343]">
+                      <AccordionContent className="text-[#374151]">
                         {faq.answer}
                       </AccordionContent>
                     </AccordionItem>
@@ -101,17 +101,17 @@ export default function FAQPage() {
           })}
 
           {/* Bottom CTA */}
-          <div className="mt-12 p-6 sm:p-8 bg-white rounded-xl border border-[rgba(30,32,33,0.12)] text-center">
-            <h3 className="font-heading font-semibold text-lg text-[#0A0A0B] mb-2">
+          <div className="mt-12 p-6 sm:p-8 bg-white rounded-xl border border-[rgba(15,23,42,0.08)] text-center">
+            <h3 className="font-heading font-semibold text-lg text-[#0A0F1E] mb-2">
               Still Have Questions?
             </h3>
-            <p className="font-body text-sm text-[#434343] mb-5">
+            <p className="font-body text-sm text-[#374151] mb-5">
               Contact our team directly — we respond promptly during business hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="tel:+918123501407"
-                className="inline-flex items-center justify-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
               >
                 Call +91 8123501407
               </a>
@@ -125,7 +125,7 @@ export default function FAQPage() {
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#FAFAF9] text-[#0A0A0B] border border-[rgba(30,32,33,0.2)] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F8F9FA] text-[#0A0F1E] border border-[rgba(15,23,42,0.15)] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
               >
                 Contact Form →
               </Link>

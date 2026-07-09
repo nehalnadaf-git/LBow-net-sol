@@ -29,7 +29,7 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'ppr-green-pipe',
-    name: 'PPR Green Pipe & Fittings (GREENFIT)',
+    name: 'PPR Green Pipe & Fittings',
     category: 'PPR Pipes',
     tagline: 'Prince GREENFIT PP-R — IS:15801 certified hot & cold water pipe, 20mm to 160mm, up to 95°C',
     shortDescription:
@@ -60,8 +60,8 @@ We stock GREENFIT pipes from 20mm to 160mm and the complete fitting range (elbow
       { label: 'Material', value: 'PP-R — Polypropylene Random Copolymer (virgin resin)' },
       { label: 'Brand System', value: 'Prince GREENFIT (Authorised Dealer: LBow Network Solutions)' },
       { label: 'Colour', value: 'Green (single-layer) / Green-White-Off-White (triple-layer, UV-resistant)' },
-      { label: 'Pipe Size Range', value: '20 mm to 160 mm (standard range)' },
-      { label: 'Fitting Size Range', value: '20 mm to 160 mm' },
+      { label: 'Pipe Size Range', value: '20 mm to 315 mm (standard range)' },
+      { label: 'Fitting Size Range', value: '20 mm to 315 mm' },
       { label: 'Temperature Range', value: 'Up to 95°C continuous service (insulation required below 0°C)' },
       { label: 'Pressure Rating (Pipes)', value: 'PN 10, PN 16, PN 20 (depending on size and class)' },
       { label: 'Pressure Rating (Fittings)', value: 'PN 20 and PN 25' },
@@ -144,7 +144,7 @@ We stock GREENFIT pipes from 20mm to 160mm and the complete fitting range (elbow
   },
   {
     slug: 'ppr-blue-pipe',
-    name: 'PPR Blue Pipe & Fittings (GREENFIT Blue)',
+    name: 'PPR Blue Pipe & Fittings',
     category: 'PPR Pipes',
     tagline: 'Prince GREENFIT Blue — glass-fibre reinforced PP-R for compressed air, vacuum & industrial lines',
     shortDescription:
@@ -814,29 +814,42 @@ Pneumatic fittings are used throughout factory compressed air systems — from t
   },
   {
     slug: 'pu-frl-airgun',
-    name: 'PU/FRL Airgun',
-    category: 'Air Tools',
-    tagline: 'PU tubing, FRL units, and airguns for complete compressed air tool setups',
+    name: 'PU/FRL/Airgun',
+    category: 'Air Tools & Accessories',
+    tagline: 'Complete compressed air accessories — PU tubing, FRL units, pneumatic airguns, coiled hoses and quick-connect fittings for industrial compressed air setups',
     shortDescription:
-      'PU tubing, FRL units (Filter-Regulator-Lubricator), and airguns for complete compressed air tool setups in factories and workshops.',
-    fullDescription: `A well-functioning compressed air tool setup requires more than just pipes and fittings — it needs the right PU tubing for flexible hose runs, FRL (Filter-Regulator-Lubricator) units for air treatment and pressure control, and quality airguns for cleaning and blowing applications. LBow Network Solutions supplies the complete range.
+      'PU tubing (straight & coiled), FRL units (Filter-Regulator-Lubricator), pneumatic airguns, and quick-connect fittings for complete compressed air tool setups. Multi-colour PU tubes 4mm–16mm OD, self-retracting coiled hoses, and ergonomic safety airguns for factories and workshops across Bangalore.',
+    fullDescription: `A high-performance compressed air tool setup requires more than pipes — it needs quality PU tubing for flexible connections, FRL units for air treatment and pressure control, airguns for cleaning and blowing, and the right quick-connect fittings throughout. LBow Network Solutions supplies the complete range of compressed air accessories to factories, workshops, and industrial plants across Bangalore and Karnataka.
 
-**PU Tubing (Polyurethane Tubing):** Flexible, lightweight, and kink-resistant, PU tubing is the standard flexible hose for machine pneumatic circuits and air tool connections. Available in multiple colours for circuit identification, in sizes from 4mm to 16mm OD. Higher burst pressure than standard nylon tubing.
+**PU Tubing (Polyurethane Tubing) — Straight & Coiled:**
+Flexible, lightweight, and kink-resistant PU tubing is the industry standard for pneumatic machine circuits and air tool connections. We supply PU tubing in multiple colours — blue, red, yellow, black, transparent, green, and white — for easy circuit identification and colour-coding. Available in straight lengths for fixed machine circuit connections, and as self-retracting coiled hoses that extend and retract automatically. Sizes from 4mm to 16mm OD.
 
-**FRL Units (Filter-Regulator-Lubricator):** FRL units condition the compressed air at each tool drop point. The filter removes moisture and particulates that damage air tools. The regulator sets the working pressure for the downstream tool. The lubricator injects a fine mist of oil to lubricate air-powered tools, extending their service life. FRL units are the critical interface between the compressed air distribution system and air-powered equipment.
+**Coiled Hoses with Quick-Connect Fittings:**
+Our coiled PU hoses come pre-fitted with brass push-to-connect quick couplers at both ends. The coiled design eliminates tripping hazards, reduces floor clutter, and provides self-retraction — extending up to 3–5m and compressing to approximately 1m. Available in blue, yellow, and transparent.
 
-**Airguns:** Industrial airguns for cleaning, blowing, and drying applications — used on production lines for part cleaning, mould blowing, and chip removal. Available in ergonomic pistol-grip designs with adjustable flow and safety nozzles compliant with occupational safety requirements.
+**FRL Units (Filter-Regulator-Lubricator):**
+FRL units condition compressed air at each tool drop point. The filter bowl removes moisture, compressor oil carry-over, and particulates that damage air tools and clog solenoid valves. The regulator controls downstream working pressure with precision — typically 4–6 bar for most pneumatic tools. The lubricator injects an adjustable fine oil mist to protect air tools with moving parts (motors, cylinders, grinders, impact tools), extending their service life. We supply modular FRL units as a combined assembly or as individual components. Port sizes from ¼" to 1" BSP.
 
-We supply FRL units as individual components (filter, regulator, lubricator separately) or as pre-assembled modular units. Contact us for sizing recommendations based on your tool air consumption and working pressure requirements.`,
+**Pneumatic Airguns:**
+Industrial ergonomic pistol-grip airguns for cleaning, blowing, cooling, and drying on production lines. Our airguns feature a comfortable rubber grip, a lever trigger for easy one-handed operation, and a precision nozzle for directed airflow. Available with safety nozzles meeting occupational health standards — reducing noise and preventing skin contact with high-pressure air.
+
+**Quick-Connect Fittings:**
+Brass push-in quick-connect couplers and adaptors compatible with standard BSP thread fittings, for connecting PU tubing directly to solenoid valves, manifolds, and air tools.
+
+We supply these accessories to automotive plants, electronics assembly, plastics processors, textile units, and packaging lines across Bangalore.`,
     specifications: [
-      { label: 'PU Tubing Material', value: 'Polyurethane (PU) — multi-colour available' },
-      { label: 'PU Tubing Sizes', value: '4mm to 16mm OD' },
-      { label: 'PU Tubing Pressure', value: 'Up to 10 bar working pressure' },
-      { label: 'FRL Pressure Range', value: '0.05 to 1.0 MPa (0.5 to 10 bar)' },
+      { label: 'PU Tubing Material', value: 'Polyurethane (PU) — food-grade option available' },
+      { label: 'PU Tubing Sizes', value: '4mm to 16mm OD (standard range)' },
+      { label: 'PU Tubing Colours', value: 'Blue, Red, Yellow, Black, Transparent, Green, White' },
+      { label: 'PU Tubing Working Pressure', value: 'Up to 10 bar' },
+      { label: 'Coiled Hose Extended Length', value: '3m to 5m (self-retracting)' },
+      { label: 'Coiled Hose Retracted Length', value: 'Approx. 0.9m to 1.2m' },
+      { label: 'FRL Filter Rating', value: '5 micron standard; 0.01 micron high-efficiency option' },
+      { label: 'FRL Pressure Range', value: '0.05 – 1.0 MPa (0.5 – 10 bar)' },
       { label: 'FRL Port Sizes', value: '¼ inch to 1 inch BSP' },
-      { label: 'Filtration Grade', value: '5 micron (standard filter element)' },
       { label: 'Airgun Operating Pressure', value: '4 to 8 bar' },
-      { label: 'Airgun Design', value: 'Ergonomic pistol grip — safety nozzle available' },
+      { label: 'Airgun Trigger', value: 'Ergonomic pistol-grip lever trigger — safety nozzle available' },
+      { label: 'Quick-Connect Fittings', value: 'Brass push-in couplers — BSP compatible' },
     ],
     applications: [
       'Machine pneumatic circuit flexible connections',
@@ -855,7 +868,7 @@ We supply FRL units as individual components (filter, regulator, lubricator sepa
       'Packaging and bottling plants',
     ],
     relatedProducts: ['pneumatic-fittings', 'brass-fittings', 'brass-ball-valve'],
-    image: '/images/product-pu-frl-airgun.webp',
+    image: '/images/Pu,Frl,Airgun.webp',
     metaTitle: 'PU Tubing, FRL Units & Airguns Supplier Bangalore | LBow Network Solutions',
     metaDescription:
       'PU tubing, FRL (Filter-Regulator-Lubricator) units, and industrial airguns for compressed air systems in Bangalore. Call +91 8123501407.',
@@ -870,27 +883,142 @@ We supply FRL units as individual components (filter, regulator, lubricator sepa
       {
         question: 'What does FRL stand for in compressed air systems?',
         answer:
-          'FRL stands for Filter-Regulator-Lubricator. The filter removes moisture and particulates, the regulator controls downstream pressure, and the lubricator adds a fine oil mist to lubricate air-powered tools.',
+          'FRL stands for Filter-Regulator-Lubricator. The filter removes moisture and particulates that damage tools and valves. The regulator controls downstream working pressure (typically 4–6 bar). The lubricator injects a fine oil mist to protect air-powered tools with moving parts, extending service life significantly.',
       },
       {
-        question: 'Is an FRL unit necessary for every air tool?',
+        question: 'Do I need an FRL unit for every compressed air tool?',
         answer:
-          'For air tools with moving parts (impact wrenches, grinders, drills), an FRL unit significantly extends tool life by providing filtered, regulated, and lubricated air. For blowing applications (airguns), only a filter and regulator are typically needed.',
+          'For air tools with moving parts (grinders, drills, impact wrenches, cylinders), an FRL unit significantly extends tool life. For blowing and cleaning with an airgun, at minimum a filter and regulator are recommended. We can advise on the right configuration for your setup.',
       },
       {
-        question: 'What size FRL unit do I need?',
+        question: 'What is the difference between straight PU tubing and coiled hose?',
         answer:
-          'FRL sizing depends on the air consumption of your tool and the working pressure. We can recommend the correct port size and flow capacity based on your tool specifications. Contact us for sizing guidance.',
+          'Straight PU tubing is used for fixed machine circuit connections where the hose does not move. Coiled hoses are self-retracting — they extend to reach the work area and retract automatically, keeping the workspace tidy and reducing tripping hazards on assembly lines and maintenance stations.',
       },
       {
         question: 'What colours of PU tubing are available?',
         answer:
-          'PU tubing is available in blue, red, black, transparent, and yellow — useful for colour-coding different circuits in a machine.',
+          'We supply PU tubing in blue, red, yellow, black, transparent, green, and white. Using different colours for different circuits (supply, exhaust, signal lines) makes troubleshooting and maintenance significantly easier.',
+      },
+      {
+        question: 'What size FRL unit do I need?',
+        answer:
+          'FRL sizing depends on the air flow (consumption) of your tools and working pressure. Port sizes range from ¼” BSP for small tools to 1” BSP for high-flow applications. Contact us with your tool air consumption in Nl/min or CFM and we will recommend the right unit.',
       },
       {
         question: 'Are your airguns safe for industrial use?',
         answer:
-          'Yes. Our industrial airguns comply with occupational safety requirements and are available with safety nozzles that reduce noise and prevent direct high-pressure air contact with skin.',
+          'Yes. Our industrial airguns are available with safety nozzles that comply with occupational health and safety standards. Safety nozzles prevent direct high-pressure air contact with skin and reduce noise levels for prolonged workshop use.',
+      },
+    ],
+  },
+
+  {
+    slug: 'ppr-fusion-equipment',
+    name: 'PPR Fusion Equipment',
+    category: 'Fusion Equipment',
+    tagline: 'Prince PPR Fusion Equipment — 20–63mm socket fusion welding kit with dies, clamp, and all accessories for PPR/PPRC/PPCH piping systems',
+    shortDescription:
+      'Prince PPR Fusion Equipment for pipe diameters 20mm to 63mm. Complete socket fusion kit includes heating unit, Teflon-coated socket dies (20–63mm), pipe alignment clamp, hardware set, and power cable. 220–420V, 50–60Hz. The professional tool for permanent, leak-free PPR pipe jointing.',
+    fullDescription: `Prince PPR Fusion Equipment is the essential professional tool for creating leak-proof, permanent socket-fusion joints in PPR, PPRC, and PP-R piping systems. At LBow Network Solutions, we supply Prince PPR Fusion Equipment along with the complete Prince PPR pipe and fitting range — giving our customers a single-source solution for both piping materials and installation tools.
+
+**What is Socket Fusion (Polyfusion) Welding?**
+Socket fusion joins PPR pipes and fittings by simultaneously heating both the pipe end and the fitting socket to 260°C using Teflon-coated socket dies mounted on the machine's heating plate. The heated surfaces are then pushed together, where the molten polymer cools and forms a homogeneous, monolithic bond that is actually stronger than the pipe body. There are no adhesives, solvents, O-rings, or mechanical connectors involved.
+
+**Complete Kit Includes:**
+This machine is supplied as a full working kit, ready to use out of the box. The kit includes the main heating unit with temperature indicator, a full set of Teflon-coated socket dies for sizes 20mm, 25mm, 32mm, 40mm, 50mm, and 63mm, a pipe clamping/alignment vice, mounting screws and hardware, and a 3-pin power cable rated for Indian 220V supply.
+
+**Machine Features:**
+The machine uses a robust aluminium heating plate with precision-machined die sockets. The thermostat maintains a consistent welding temperature of 260°C (±10°C) — the exact temperature required for reliable PP-R fusion. The heating element reaches working temperature in approximately 5–6 minutes and is ready to use. The ergonomic handle design allows one-person operation for pipe diameters up to 63mm.
+
+**Why Correct Fusion Equipment Matters:**
+Poor-quality or incorrect tools lead to cold welds, over-heated joints, misaligned connections, and eventually leaks — especially under the high temperatures and pressures of industrial piping. Using Prince genuine fusion equipment with Prince PPR pipes and fittings ensures consistent, factory-standard joint quality throughout your installation.
+
+**Installation at a Glance:**
+- Cut pipe square using a pipe cutter or guillotine shears
+- Clean pipe end and fitting socket
+- Heat pipe end and fitting socket simultaneously on the correct-size die (typically 5–10 seconds heating time depending on size)
+- Remove and push together immediately with firm, steady pressure
+- Hold still for 15–30 seconds while the joint sets
+- Allow full cooling time before pressure testing
+
+We supply this machine to plumbers, MEP contractors, industrial maintenance teams, and facility managers across Bangalore and Karnataka who install Prince GREENFIT, PPRC, or PPCH piping systems.`,
+    specifications: [
+      { label: 'Brand', value: 'Prince Piping Systems' },
+      { label: 'Pipe Size Range', value: '20mm to 63mm (socket dies included for all sizes)' },
+      { label: 'Supply Voltage', value: '220V – 420V AC' },
+      { label: 'Frequency', value: '50Hz – 60Hz' },
+      { label: 'Welding Temperature', value: '260°C ± 20°C (thermostat controlled)' },
+      { label: 'Heating Plate', value: 'Aluminium alloy with Teflon-coated die sockets' },
+      { label: 'Socket Dies Included', value: '20mm, 25mm, 32mm, 40mm, 50mm, 63mm — full set' },
+      { label: 'Accessories', value: 'Pipe alignment clamp, mounting bolts, hardware set, power cable (3-pin Indian plug)' },
+      { label: 'Suitable Pipe Types', value: 'PPR (PP-R), PPRC, PPCH — polypropylene piping systems' },
+      { label: 'Warm-Up Time', value: 'Approx. 5–6 minutes to reach working temperature' },
+      { label: 'Application', value: 'Socket fusion (polyfusion) heat welding of PPR/PPRC pipes and fittings' },
+    ],
+    applications: [
+      'Socket fusion jointing of PPR/PPRC/PPCH pipes and fittings (20mm–63mm)',
+      'Residential and commercial hot and cold water plumbing installations',
+      'HVAC chilled water and heating circuit piping',
+      'Industrial process water and fluid transport line installation',
+      'Compressed air piping installation using PPCH pipes',
+      'Solar water heater feed and return pipe jointing',
+      'Pharmaceutical and food-grade water piping systems',
+      'Repair and maintenance of existing PPR piping networks',
+    ],
+    industries: [
+      'Plumbing and MEP contractors',
+      'Construction and real estate',
+      'HVAC and facilities management',
+      'Manufacturing and industrial plants',
+      'Food and beverage processing',
+      'Pharmaceuticals and biotech',
+      'Hospitals and healthcare',
+    ],
+    relatedProducts: ['ppr-green-pipe', 'pprc-chemical-pipe', 'ppch-industrial-pipe'],
+    image: '/images/product-ppr-fusion-equipment.webp',
+    metaTitle: 'PPR Fusion Equipment — Prince 20–63mm Socket Fusion Kit | LBow Network Solutions Bangalore',
+    metaDescription:
+      'Buy Prince PPR Fusion Equipment (20–63mm) in Bangalore. Complete socket fusion kit with dies, clamp, and accessories for PPR/PPRC/PPCH pipe jointing. Authorised Prince dealer. Call +91 8123501407.',
+    keywords: [
+      'PPR fusion equipment Bangalore',
+      'PPR fusion machine 20-63mm',
+      'socket fusion equipment Bangalore',
+      'Prince PPR fusion kit',
+      'PPR pipe jointing equipment Bangalore',
+      'polyfusion equipment Bangalore',
+      'PPR welding equipment Bangalore',
+    ],
+    faqs: [
+      {
+        question: 'What pipe sizes does this fusion machine handle?',
+        answer:
+          'The machine comes with a full set of Teflon-coated socket dies for 20mm, 25mm, 32mm, 40mm, 50mm, and 63mm — covering the most common residential and commercial PPR pipe sizes. For larger sizes (75mm and above), a separate heavy-duty fusion machine is required.',
+      },
+      {
+        question: 'Can I use this machine with any brand of PPR pipe?',
+        answer:
+          'Yes — the machine is compatible with all standard PPR, PPRC, and PP-R pipes and fittings conforming to IS:15801 or DIN 8077/8078. However, we recommend using it with Prince pipes and fittings for the best results, as we are an authorised Prince dealer and can guarantee material consistency.',
+      },
+      {
+        question: 'How long does it take to make a fusion joint?',
+        answer:
+          'For 20mm pipe, the heating time is approximately 5 seconds, with a 4-second push and 15-second cooling hold. For 63mm pipe, heating time increases to around 12 seconds, with a 6-second push and 30-second cooling hold. Always follow the manufacturer\'s temperature and time chart for the specific size being welded.',
+      },
+      {
+        question: 'What voltage is the machine rated for?',
+        answer:
+          'The machine is rated for 220V–420V AC, 50–60Hz. It is suitable for standard Indian single-phase 230V supply. A standard 15A socket is sufficient for operation.',
+      },
+      {
+        question: 'Do I need separate training to use this machine?',
+        answer:
+          'The machine is straightforward to use, but we strongly recommend that installation is carried out by trained plumbers or MEP technicians who understand polyfusion welding procedures — including correct heating times, fusion pressures, and cooling periods. Incorrect technique leads to weak joints that can fail under pressure.',
+      },
+      {
+        question: 'Is this machine available with a demo?',
+        answer:
+          'Yes. We offer a free product demonstration for bulk purchasers and MEP contractors. Contact us at +91 81235 01407 or WhatsApp us to schedule a demo at our Bangalore store.',
       },
     ],
   },

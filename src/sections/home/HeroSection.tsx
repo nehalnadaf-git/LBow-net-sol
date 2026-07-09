@@ -392,13 +392,13 @@ const HeroSection = () => {
             <div ref={dCtaRef} className="flex flex-row gap-4 mt-8">
               <Link
                 href="/products"
-                className="inline-flex items-center justify-center bg-[#0A0A0B] hover:bg-[#1a1a1b] text-[#EEEEEE] font-body font-semibold rounded-lg px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-base shadow-[0_4px_14px_rgba(30,32,33,0.14)]"
+                className="inline-flex items-center justify-center bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold rounded-lg px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-base shadow-[0_4px_14px_rgba(15,23,42,0.18)]"
               >
                 Explore Products
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-transparent border border-[#0A0A0B] text-[#0A0A0B] hover:bg-[#0A0A0B] hover:text-[#EEEEEE] font-body font-semibold rounded-lg px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-base"
+                className="inline-flex items-center justify-center bg-transparent border border-[#0A0F1E] text-[#0A0F1E] hover:bg-[#0A0F1E] hover:text-white font-body font-semibold rounded-lg px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-base"
               >
                 Get a Free Quote
               </Link>

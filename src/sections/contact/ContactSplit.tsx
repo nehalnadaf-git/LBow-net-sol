@@ -173,7 +173,7 @@ const ContactSplit = () => {
   const labelClass = 'block font-body font-medium text-sm text-[#0A0A0B] mb-1.5';
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
       {/* Premium Background Graphics */}
       <PipeFlowBg isLight={true} />
 
@@ -230,7 +230,7 @@ const ContactSplit = () => {
             <div className="animate-left flex flex-col sm:flex-row lg:flex-col gap-3 mt-8 sm:mt-10">
               <a
                 href="tel:+918123501407"
-                className="inline-flex items-center justify-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm"
               >
                 <Phone size={16} />
                 Call Now
@@ -343,7 +343,7 @@ const ContactSplit = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-8 py-3.5 transition-all duration-300 text-sm sm:text-base mt-1"
+                  className="w-full bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold rounded-md px-8 py-3.5 transition-all duration-300 text-sm sm:text-base mt-1"
                 >
                   Send Enquiry via WhatsApp
                 </button>

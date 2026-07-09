@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -9,9 +9,24 @@ import { PipeCrossSectionBg } from '../../components/backgrounds/PipeCrossSectio
 gsap.registerPlugin(ScrollTrigger);
 
 const items = [
-  { icon: ShieldCheck, text: '10 Year Warranty on All Products' },
-  { icon: Truck, text: 'Free Demo Available — Call to Schedule' },
-  { icon: Phone, text: 'Call: +91 8123501407' },
+  {
+    icon: ShieldCheck,
+    title: '10-Year Warranty',
+    text: 'On all pipe products — manufacturer backed',
+    color: '#2E7D32',
+  },
+  {
+    icon: Truck,
+    title: 'Free Demo Available',
+    text: 'Call to schedule a no-obligation product demo',
+    color: '#1565C0',
+  },
+  {
+    icon: Phone,
+    title: 'Direct Line',
+    text: '+91 81235 01407 — Mon–Sat, 9am–6pm',
+    color: '#2E7D32',
+  },
 ];
 
 const ProductBanner = () => {
@@ -30,7 +45,7 @@ const ProductBanner = () => {
         opacity: 1,
         y: 0,
         duration: 0.38,
-        stagger: 0.06,
+        stagger: 0.08,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
@@ -48,23 +63,32 @@ const ProductBanner = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-10 sm:py-14 lg:py-16">
-      {/* Premium Background Graphics */}
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-10 sm:py-14 lg:py-16">
       <PipeCrossSectionBg isLight={true} />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-        <div className="flex flex-col sm:flex-row flex-wrap gap-5 sm:gap-8 md:gap-12 justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {items.map((item, index) => {
             const Icon = item.icon;
             return (
               <div
                 key={index}
-                className="banner-item flex items-center gap-3"
+                className="banner-item flex items-start gap-4 bg-white rounded-2xl border border-[rgba(15,23,42,0.08)] p-5 sm:p-6 lg:p-7 shadow-sm"
               >
-                <Icon size={28} className="text-[#0A0A0B] flex-shrink-0 sm:w-8 sm:h-8" />
-                <span className="font-body font-semibold text-sm md:text-base text-[#0A0A0B]">
-                  {item.text}
-                </span>
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
+                  style={{ background: `${item.color}14` }}
+                >
+                  <Icon size={22} style={{ color: item.color }} />
+                </div>
+                <div>
+                  <div className="font-heading font-bold text-sm sm:text-base text-[#0A0F1E] mb-1">
+                    {item.title}
+                  </div>
+                  <div className="font-body text-xs sm:text-sm text-[#374151] leading-relaxed">
+                    {item.text}
+                  </div>
+                </div>
               </div>
             );
           })}

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { blogPosts, getBlogBySlug } from '@/lib/blogs';
 import { BASE_URL, localBusinessSchemaBase } from '@/lib/seo';
-import { Calendar, Clock, ArrowLeft } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import { generalWhatsAppUrl } from '@/lib/whatsapp';
 
 interface Props {
@@ -71,6 +71,9 @@ export default async function BlogPostPage({ params }: Props) {
   // Convert markdown-like content to sections
   const sections = post.content.split(/\n---\n/).map((sec) => sec.trim()).filter(Boolean);
 
+  // Other posts for "More Articles" sidebar
+  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
+
   function renderSection(text: string, index: number) {
     const lines = text.split('\n').filter((l) => l.trim().length > 0);
     const elements: React.ReactNode[] = [];
@@ -79,13 +82,13 @@ export default async function BlogPostPage({ params }: Props) {
       const line = lines[i];
       if (line.startsWith('## ')) {
         elements.push(
-          <h2 key={`h2-${i}`} className="font-heading font-bold text-xl sm:text-2xl text-[#0A0A0B] mt-10 mb-4 first:mt-0">
+          <h2 key={`h2-${i}`} className="font-heading font-bold text-xl sm:text-2xl lg:text-[1.625rem] text-[#0A0F1E] mt-10 mb-4 first:mt-0 leading-snug">
             {line.slice(3)}
           </h2>
         );
       } else if (line.startsWith('### ')) {
         elements.push(
-          <h3 key={`h3-${i}`} className="font-heading font-semibold text-lg text-[#0A0A0B] mt-6 mb-3">
+          <h3 key={`h3-${i}`} className="font-heading font-semibold text-lg text-[#0A0F1E] mt-6 mb-3 leading-snug">
             {line.slice(4)}
           </h3>
         );
@@ -96,17 +99,17 @@ export default async function BlogPostPage({ params }: Props) {
           tableLines.push(lines[i]);
           i++;
         }
-        i--; // will be incremented at end of loop
+        i--;
         const rows = tableLines.filter((l) => !l.match(/^\|[-\s|]+\|$/));
         const [headerRow, ...bodyRows] = rows;
         const headerCells = headerRow?.split('|').filter((c) => c.trim() !== '') ?? [];
         elements.push(
-          <div key={`table-${i}`} className="overflow-x-auto my-6">
+          <div key={`table-${i}`} className="overflow-x-auto my-6 rounded-xl border border-[rgba(15,23,42,0.08)] shadow-sm">
             <table className="w-full text-sm font-body border-collapse">
               <thead>
-                <tr className="bg-[#F0F0F0] font-semibold">
+                <tr className="bg-[#F0F4F8]">
                   {headerCells.map((cell, ci) => (
-                    <th key={ci} className="px-4 py-2.5 border border-[rgba(30,32,33,0.12)] text-[#0A0A0B] text-left font-semibold">
+                    <th key={ci} className="px-5 py-3.5 border-b border-[rgba(15,23,42,0.08)] text-[#0A0F1E] text-left font-semibold text-sm">
                       {cell.trim()}
                     </th>
                   ))}
@@ -116,9 +119,9 @@ export default async function BlogPostPage({ params }: Props) {
                 {bodyRows.map((row, ri) => {
                   const cells = row.split('|').filter((c) => c.trim() !== '');
                   return (
-                    <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-[#FAFAF9]'}>
+                    <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-[#F8F9FA]'}>
                       {cells.map((cell, ci) => (
-                        <td key={ci} className="px-4 py-2.5 border border-[rgba(30,32,33,0.12)] text-[#0A0A0B]">
+                        <td key={ci} className="px-5 py-3 border-b border-[rgba(15,23,42,0.06)] text-[#374151] text-sm">
                           {cell.trim()}
                         </td>
                       ))}
@@ -138,10 +141,14 @@ export default async function BlogPostPage({ params }: Props) {
         }
         i--;
         elements.push(
-          <ul key={`ul-${i}`} className="space-y-2 my-4 pl-4">
+          <ul key={`ul-${i}`} className="space-y-2.5 my-5 pl-1">
             {listLines.map((item, li) => (
-              <li key={li} className="font-body text-sm sm:text-base text-[#434343] leading-relaxed flex items-start gap-2">
-                <span className="mt-0.5">{item.startsWith('✅') ? '✅' : item.startsWith('❌') ? '❌' : '•'}</span>
+              <li key={li} className="font-body text-sm sm:text-base text-[#374151] leading-relaxed flex items-start gap-3">
+                <span className="mt-0.5 flex-shrink-0 text-base">
+                  {item.startsWith('✅') ? '✅' : item.startsWith('❌') ? '❌' : (
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2E7D32] mt-2" />
+                  )}
+                </span>
                 <span dangerouslySetInnerHTML={{ __html: item.replace(/^[-✅❌•✓]\s/, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
               </li>
             ))}
@@ -149,16 +156,16 @@ export default async function BlogPostPage({ params }: Props) {
         );
       } else if (line.startsWith('**') && line.endsWith('**')) {
         elements.push(
-          <p key={`bold-${i}`} className="font-body font-semibold text-sm sm:text-base text-[#0A0A0B] mt-4 mb-1">
+          <p key={`bold-${i}`} className="font-body font-semibold text-sm sm:text-base text-[#0A0F1E] mt-5 mb-2">
             {line.slice(2, -2)}
           </p>
         );
       } else if (line.trim().length > 0) {
         const processed = line
           .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-[#2E7D32] hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
+          .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-[#2E7D32] hover:underline font-medium" target="_blank" rel="noopener noreferrer">$1</a>');
         elements.push(
-          <p key={`p-${i}`} className="font-body text-sm sm:text-base text-[#434343] leading-[1.8] my-3"
+          <p key={`p-${i}`} className="font-body text-sm sm:text-base text-[#374151] leading-[1.85] my-3"
             dangerouslySetInnerHTML={{ __html: processed }}
           />
         );
@@ -174,113 +181,170 @@ export default async function BlogPostPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero */}
-      <section className="relative w-full bg-[#0A0A0B] pt-28 sm:pt-36 md:pt-44 pb-8 sm:pb-12">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
-          <nav className="font-body text-xs text-white/60 flex gap-2 items-center mb-8">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden w-full pt-28 sm:pt-36 md:pt-44 pb-10 sm:pb-14"
+        style={{ background: 'linear-gradient(160deg, #F0F7F1 0%, #FAFFFE 35%, #EDF4FF 70%, #F4FBF5 100%)' }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)' }} />
+        <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+          {/* Breadcrumb */}
+          <nav className="font-body text-xs text-[#6B7280] flex gap-2 items-center mb-8">
+            <Link href="/" className="hover:text-[#0A0F1E] transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/blog" className="hover:text-[#0A0F1E] transition-colors">Blog</Link>
             <span>/</span>
-            <span className="text-white line-clamp-1">{post.title}</span>
+            <span className="text-[#0A0F1E] line-clamp-1 max-w-[280px]">{post.title}</span>
           </nav>
-          <div className="flex items-center gap-4 font-body text-xs text-[#A6A6A6] mb-4">
-            <span className="flex items-center gap-1.5"><Calendar size={12} /> {post.publishedAt}</span>
-            <span className="flex items-center gap-1.5"><Clock size={12} /> {post.readTime}</span>
-          </div>
-          <h1 className="font-heading font-bold text-2xl sm:text-3xl md:text-[2.5rem] text-white leading-tight mb-5">
-            {post.title}
-          </h1>
-          <p className="font-body text-sm sm:text-base text-[#A6A6A6] leading-relaxed max-w-3xl mb-6">
-            {post.excerpt}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag, i) => (
-              <span key={i} className="bg-white/5 text-white rounded-full px-3 py-1 font-body text-xs">
-                {tag}
-              </span>
-            ))}
+
+          <div className="max-w-4xl">
+            <div className="flex flex-wrap items-center gap-3 font-body text-xs text-[#9CA3AF] mb-5">
+              <span className="flex items-center gap-1.5"><Calendar size={12} /> {post.publishedAt}</span>
+              <span className="flex items-center gap-1.5"><Clock size={12} /> {post.readTime}</span>
+            </div>
+            <h1
+              className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl leading-[1.1] mb-6"
+              style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+            >
+              {post.title}
+            </h1>
+            <p className="font-body text-base sm:text-lg text-[#374151] leading-relaxed mb-6 max-w-3xl">
+              {post.excerpt}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag, i) => (
+                <span key={i} className="bg-[rgba(46,125,50,0.08)] text-[#2E7D32] rounded-full px-3 py-1 font-body text-xs font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Image — full bleed */}
-      <div className="w-full bg-[#0A0A0B]">
-        <div className="relative w-full aspect-video sm:aspect-[2/1] lg:aspect-auto lg:h-[400px] overflow-hidden">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Gradient fade into content below */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FAFAF9]/30 pointer-events-none" />
+      {/* ── Featured Image ───────────────────────────────────────────────── */}
+      <div className="w-full bg-[#F0F4F8]">
+        <div className="max-w-[1700px] mx-auto">
+          <div className="relative w-full h-[280px] sm:h-[380px] md:h-[480px] lg:h-[540px] overflow-hidden">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F8F9FA]/40 pointer-events-none" />
+          </div>
         </div>
       </div>
 
-      {/* Article Content */}
-      <section className="relative w-full bg-[#FAFAF9] py-12 sm:py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-10 lg:gap-16">
-            {/* Content */}
-            <article className="min-w-0">
+      {/* ── Article Content ──────────────────────────────────────────────── */}
+      <section className="relative w-full bg-[#F8F9FA] py-14 sm:py-18 lg:py-24">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-10 lg:gap-16 xl:gap-20">
+
+            {/* ── Main Article ─────────────────────────────────────────── */}
+            <article className="min-w-0 bg-white rounded-2xl border border-[rgba(15,23,42,0.07)] shadow-sm p-7 sm:p-10 lg:p-12">
               {sections.map((section, i) => renderSection(section, i))}
+
+              {/* Back link */}
+              <div className="mt-14 pt-7 border-t border-[rgba(15,23,42,0.08)] flex items-center justify-between flex-wrap gap-4">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 font-body font-semibold text-sm text-[#374151] hover:text-[#0A0F1E] transition-colors"
+                >
+                  <ArrowLeft size={16} />
+                  Back to Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 font-body font-semibold text-sm bg-[#2E7D32] hover:bg-[#256428] text-white px-5 py-2.5 rounded-xl transition-all duration-200 hover:scale-[1.02]"
+                >
+                  Get a Free Quote <ArrowRight size={14} />
+                </Link>
+              </div>
             </article>
 
-            {/* Sidebar */}
-            <aside className="space-y-5">
-              {/* CTA */}
-              <div className="bg-[#0A0A0B] rounded-xl p-5 text-center sticky top-24">
-                <h3 className="font-heading font-semibold text-base text-white mb-2">
+            {/* ── Sidebar ──────────────────────────────────────────────── */}
+            <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+
+              {/* CTA Card */}
+              <div className="bg-gradient-to-br from-[#EDF7EE] to-[#E8F4FD] rounded-2xl border border-[#2E7D32]/15 p-6 text-center shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-[#2E7D32]/10 flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-5 h-5 text-[#2E7D32]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <h3 className="font-heading font-bold text-lg text-[#0A0F1E] mb-2">
                   Get a Quote
                 </h3>
-                <p className="font-body text-xs text-[#A6A6A6] mb-4">
-                  No minimum order quantity. Free demo available — call to schedule.
+                <p className="font-body text-sm text-[#374151] mb-5 leading-relaxed">
+                  No minimum order. Free demo available — call or WhatsApp us.
                 </p>
                 <a
                   href="tel:+918123501407"
-                  className="block w-full text-center bg-[#EEEEEE] hover:bg-[#434343] hover:text-[#EEEEEE] text-[#0A0A0B] font-body font-semibold text-sm rounded-md px-4 py-2.5 transition-all duration-300 mb-3"
+                  className="block w-full text-center bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-bold text-sm rounded-xl px-4 py-3 transition-all duration-300 mb-3 shadow-sm hover:shadow-md"
                 >
-                  +91 8123501407
+                  +91 81235 01407
                 </a>
                 <a
                   href={generalWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-semibold text-sm rounded-md px-4 py-2.5 transition-all duration-300"
+                  className="block w-full text-center bg-[#25D366] hover:bg-[#128C7E] text-white font-body font-bold text-sm rounded-xl px-4 py-3 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                   WhatsApp Us
                 </a>
               </div>
 
               {/* Related Products */}
-              <div className="bg-white rounded-xl border border-[rgba(30,32,33,0.12)] p-5">
-                <h3 className="font-heading font-semibold text-sm text-[#0A0A0B] mb-3">
+              <div className="bg-white rounded-2xl border border-[rgba(15,23,42,0.07)] shadow-sm p-6">
+                <h3 className="font-heading font-bold text-base text-[#0A0F1E] mb-4 pb-3 border-b border-[rgba(15,23,42,0.07)]">
                   Related Products
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {post.relatedProducts.map((slug) => (
                     <Link
                       key={slug}
                       href={`/products/${slug}`}
-                      className="block font-body text-sm text-[#434343] hover:text-[#2E7D32] transition-colors py-1.5 border-b border-[rgba(30,32,33,0.06)] last:border-0"
+                      className="flex items-center gap-2.5 font-body text-sm text-[#374151] hover:text-[#2E7D32] transition-colors py-2.5 border-b border-[rgba(15,23,42,0.05)] last:border-0 group"
                     >
-                      → {slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+                      <ArrowRight size={13} className="text-[#9CA3AF] group-hover:text-[#2E7D32] transition-colors flex-shrink-0" />
+                      {slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
                     </Link>
                   ))}
                 </div>
               </div>
-            </aside>
-          </div>
 
-          {/* Back Link */}
-          <div className="mt-12 pt-6 border-t border-[rgba(30,32,33,0.1)]">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 font-body font-semibold text-sm text-[#434343] hover:text-[#0A0A0B] transition-colors"
-            >
-              <ArrowLeft size={16} />
-              Back to Blog
-            </Link>
+              {/* More Articles */}
+              {otherPosts.length > 0 && (
+                <div className="bg-white rounded-2xl border border-[rgba(15,23,42,0.07)] shadow-sm p-6">
+                  <h3 className="font-heading font-bold text-base text-[#0A0F1E] mb-4 pb-3 border-b border-[rgba(15,23,42,0.07)]">
+                    More Articles
+                  </h3>
+                  <div className="space-y-4">
+                    {otherPosts.map((p) => (
+                      <Link
+                        key={p.slug}
+                        href={`/blog/${p.slug}`}
+                        className="flex gap-3 group"
+                      >
+                        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                          <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-body font-semibold text-xs text-[#0A0F1E] leading-snug line-clamp-2 group-hover:text-[#2E7D32] transition-colors mb-1">
+                            {p.title}
+                          </p>
+                          <span className="font-body text-[0.65rem] text-[#9CA3AF] flex items-center gap-1">
+                            <Clock size={10} /> {p.readTime}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </aside>
           </div>
         </div>
       </section>

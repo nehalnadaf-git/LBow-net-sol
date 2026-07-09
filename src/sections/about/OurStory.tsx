@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
@@ -66,7 +66,7 @@ const OurStory = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
       {/* Premium Background Graphics */}
       <DotMatrixBg isLight={true} />
 
@@ -86,19 +86,19 @@ const OurStory = () => {
 
           {/* Right - Text */}
           <div>
-            <div className="animate-right font-body font-medium text-sm uppercase tracking-[0.1em] text-[#434343] mb-4">
+            <div className="animate-right font-body font-medium text-sm uppercase tracking-[0.1em] text-[#6B7280] mb-4">
               Our Story
             </div>
-            <h2 className="animate-right font-heading font-semibold text-2xl sm:text-[1.9rem] md:text-[2.2rem] text-[#0A0A0B] leading-[1.2] mb-6">
+            <h2 className="animate-right font-heading font-semibold text-2xl sm:text-[1.9rem] md:text-[2.2rem] text-[#0A0F1E] leading-[1.2] mb-6">
               From a Small Shop to Bangalore&apos;s Leading Pipe Dealer
             </h2>
-            <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-4">
+            <p className="animate-right font-body text-base text-[#374151] leading-[1.7] mb-4">
               Established in 2018 in Peenya, Bengaluru, LBow Network Solutions started as a small pipe fitting shop with a big vision — to provide premium quality piping solutions at competitive prices. Our founder&apos;s commitment to quality and customer satisfaction quickly earned us a reputation as a reliable supplier in the local industrial community.
             </p>
-            <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-4">
+            <p className="animate-right font-body text-base text-[#374151] leading-[1.7] mb-4">
               Over the years, we&apos;ve expanded our product range to include PPR green and blue pipes, PPRC chemical pipes, PPCH industrial pipe lines, PPR and PPCH pipe fittings, brass ball valves, butterfly valves, SS fittings, pneumatic fittings, and PU/FRL airguns. Today, we serve over 200 industrial clients across India, from small workshops to large manufacturing facilities. We are an <strong>Authorized Prince Pipes Dealer</strong>, an <strong>MSME Certified</strong> business (Udyam No: UDYAM-KR-03-0717969), and a GST registered enterprise (GSTIN: 29AUIPV4726C2ZB).
             </p>
-            <p className="animate-right font-body text-base text-[#434343] leading-[1.7] mb-8">
+            <p className="animate-right font-body text-base text-[#374151] leading-[1.7] mb-8">
               Our mission is simple: to provide the best piping solutions with unmatched service. Every PPR product we sell comes with a 10-year warranty, and our expert team ensures proper installation. We offer free demo for all our product ranges — call us to schedule one.
             </p>
 
@@ -106,8 +106,8 @@ const OurStory = () => {
             <div className="animate-right flex flex-col gap-4">
               {values.map((value, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle size={20} className="text-[#0A0A0B] flex-shrink-0" />
-                  <span className="font-body text-sm text-[#434343]">{value}</span>
+                  <CheckCircle size={20} className="text-[#2E7D32] flex-shrink-0" />
+                  <span className="font-body text-sm text-[#374151]">{value}</span>
                 </div>
               ))}
             </div>

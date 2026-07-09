@@ -110,7 +110,7 @@ const AboutIntro = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
       <PipeTopologyBg isLight={true} />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
@@ -121,13 +121,13 @@ const AboutIntro = () => {
             {/* Vertical decorator line */}
             <div className="about-decorator w-[2px] h-16 bg-gradient-to-b from-[#2E7D32] to-[#2E7D32]/0 mb-6 rounded-full" />
 
-            <div className="about-label font-body font-medium text-sm uppercase tracking-[0.1em] text-[#434343] mb-4 will-change-transform">
+            <div className="about-label font-body font-medium text-sm uppercase tracking-[0.1em] text-[#6B7280] mb-4 will-change-transform">
               About LBow Network Solutions
             </div>
-            <h2 className="about-heading font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0A0B] leading-[1.15] mb-5 sm:mb-6 will-change-transform">
+            <h2 className="about-heading font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0F1E] leading-[1.15] mb-5 sm:mb-6 will-change-transform">
               Your Trusted Partner for Industrial Piping in Bangalore
             </h2>
-            <p className="about-para-1 font-body text-base text-[#434343] leading-[1.7] mb-4 will-change-transform">
+            <p className="about-para-1 font-body text-base text-[#374151] leading-[1.7] mb-4 will-change-transform">
               Established in 2018, LBow Network Solutions has grown to become
               one of Bangalore&apos;s leading PPR pipe fitting dealers and
               industrial piping solution providers. From small scale industry to
@@ -136,7 +136,7 @@ const AboutIntro = () => {
               commitment to customer satisfaction has helped us build a vast base
               of loyal clients across India.
             </p>
-            <p className="about-para-2 font-body text-base text-[#434343] leading-[1.7] mb-8 will-change-transform">
+            <p className="about-para-2 font-body text-base text-[#374151] leading-[1.7] mb-8 will-change-transform">
               We specialize in air compressor pipelines, Cooling Tower, Chiller
               Line, Chemical Line, Vacuum Line and more. Our focus industries
               include Pharmaceutical, Sugar Factories, Automobile Industries,
@@ -161,14 +161,14 @@ const AboutIntro = () => {
                       className="metallic-shimmer-text"
                     />
                   </div>
-                  <div className="font-body text-sm text-[#434343]">{stat.label}</div>
+                  <div className="font-body text-sm text-[#6B7280]">{stat.label}</div>
                 </div>
               ))}
             </div>
 
             <Link
               href="/about"
-              className="about-cta inline-flex items-center gap-2 mt-8 font-body font-semibold text-sm text-[#0A0A0B] hover:text-[#434343] hover:underline group will-change-transform"
+              className="about-cta inline-flex items-center gap-2 mt-8 font-body font-semibold text-sm text-[#0A0F1E] hover:text-[#374151] hover:underline group will-change-transform"
             >
               Learn More About Us
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

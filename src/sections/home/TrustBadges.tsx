@@ -69,12 +69,13 @@ const TrustBadges = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full py-14 sm:py-16 lg:py-20" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
-      <DotMatrixBg isLight={false} />
-      <PipeCrossSectionBg isLight={false} />
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-14 sm:py-16 lg:py-20 bg-[#EDF7EE]">
+      <DotMatrixBg isLight={true} />
+      <PipeCrossSectionBg isLight={true} />
 
-      {/* Subtle top divider line */}
-      <div className="divider-line absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/50 to-transparent" />
+      {/* Subtle top/bottom divider lines */}
+      <div className="divider-line absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/20 to-transparent" />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-6 lg:gap-8">
@@ -85,13 +86,13 @@ const TrustBadges = () => {
                 key={index}
                 className="badge-card group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1 will-change-transform"
               >
-                {/* Icon Wrapper — CSS float animation (lighter than GSAP yoyo) */}
-                <div className="badge-icon-float w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/25 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#4ADE80]/50 transition-all duration-300 shadow-sm">
-                  <Icon size={24} className="text-[#4ADE80]" />
+                {/* Icon Wrapper — CSS float animation */}
+                <div className="badge-icon-float w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:bg-[#2E7D32]/18 group-hover:border-[#2E7D32]/40 transition-all duration-300 shadow-sm">
+                  <Icon size={24} className="text-[#2E7D32]" />
                 </div>
 
                 {/* Stat/Highlight Value */}
-                <div className="font-heading font-bold text-base sm:text-xl lg:text-2xl text-[#EEEEEE] mb-1.5 sm:mb-2 leading-tight">
+                <div className="font-heading font-bold text-base sm:text-xl lg:text-2xl text-[#0A0F1E] mb-1.5 sm:mb-2 leading-tight">
                   {badge.countTo !== undefined ? (
                     <AnimatedCounter
                       to={badge.countTo}
@@ -105,7 +106,7 @@ const TrustBadges = () => {
                 </div>
 
                 {/* Stat Subtitle */}
-                <div className="font-body text-[0.65rem] sm:text-xs text-[#A6A6A6] uppercase tracking-[0.1em] leading-normal max-w-[180px]">
+                <div className="font-body text-[0.65rem] sm:text-xs text-[#6B7280] uppercase tracking-[0.1em] leading-normal max-w-[180px]">
                   {badge.label}
                 </div>
               </div>

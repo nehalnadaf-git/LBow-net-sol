@@ -74,20 +74,20 @@ const ServiceArea = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28 bg-[#EDF7EE]">
       {/* Premium Background Graphics */}
-      <DotMatrixBg isLight={false} />
+      <DotMatrixBg isLight={true} />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#A6A6A6] mb-3 sm:mb-4">
+          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#2E7D32] mb-3 sm:mb-4">
             Service Area
           </div>
-          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.5rem] text-[#EEEEEE] mb-4 sm:mb-6">
+          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.5rem] text-[#0A0F1E] mb-4 sm:mb-6">
             Serving Across India
           </h2>
-          <p className="font-body text-sm sm:text-base text-[#A6A6A6] max-w-2xl mx-auto">
+          <p className="font-body text-sm sm:text-base text-[#6B7280] max-w-2xl mx-auto">
             Based in T Dasarahalli, Bangalore — we supply and install across India. Free demo available on request.
           </p>
         </div>
@@ -99,7 +99,7 @@ const ServiceArea = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0665828826434!2d77.5184732!3d13.0461059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d9fc3dcf213%3A0xec0a5df81eedd4dd!2sLBow%20Network%20Solutions!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin"
             width="100%"
             height="100%"
-            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+            style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -111,7 +111,7 @@ const ServiceArea = () => {
           {areas.map((area, index) => (
             <span
               key={index}
-              className="area-pill bg-[#121315] rounded-full px-4 sm:px-5 py-1.5 sm:py-2 border border-white/5 font-body text-xs sm:text-sm text-[#EEEEEE]"
+              className="area-pill bg-white rounded-full px-4 sm:px-5 py-1.5 sm:py-2 border border-[rgba(15,23,42,0.10)] font-body text-xs sm:text-sm text-[#374151] shadow-sm hover:border-[#2E7D32]/40 hover:text-[#2E7D32] transition-colors duration-200"
             >
               {area}
             </span>

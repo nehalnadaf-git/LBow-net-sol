@@ -33,23 +33,23 @@ export default function PrivacyPolicy() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <section className="relative w-full pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24" style={{ background: 'linear-gradient(160deg, #0D1118 0%, #111827 40%, #0F1923 70%, #0A0F17 100%)' }}>
+      <section className="relative w-full pt-28 sm:pt-36 md:pt-44 pb-16 sm:pb-24 bg-[#F8F9FA]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-          <nav className="font-body text-xs text-[#A6A6A6] mb-8 flex gap-2 items-center">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <nav className="font-body text-xs text-[#6B7280] mb-8 flex gap-2 items-center">
+            <Link href="/" className="hover:text-[#0A0F1E] transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-white">Privacy Policy</span>
+            <span className="text-[#0A0F1E]">Privacy Policy</span>
           </nav>
-          <h1 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-4">
+          <h1 className="font-heading font-bold text-3xl sm:text-4xl text-[#0A0F1E] mb-4">
             Privacy Policy
           </h1>
-          <p className="font-body text-sm text-[#A6A6A6] mb-12">
+          <p className="font-body text-sm text-[#6B7280] mb-12">
             Last updated: June 2026
           </p>
 
-          <div className="prose prose-invert prose-sm sm:prose-base max-w-none font-body text-[#A6A6A6] space-y-8">
+          <div className="font-body text-[#374151] space-y-8">
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">1. Introduction</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">1. Introduction</h2>
               <p>
                 LBow Network Solutions (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting your personal
                 information. This Privacy Policy explains how we collect, use, disclose, and safeguard
@@ -60,17 +60,17 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">2. Information We Collect</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">2. Information We Collect</h2>
               <p>We may collect the following types of information:</p>
               <ul className="list-disc pl-5 space-y-2 mt-3">
-                <li><strong className="text-white">Contact Information:</strong> Name, phone number, email address, and business name when you submit an enquiry form or contact us directly.</li>
-                <li><strong className="text-white">Usage Data:</strong> Browser type, IP address, pages visited, and time spent on pages — collected automatically via standard web server logs.</li>
-                <li><strong className="text-white">Communication Records:</strong> Records of calls, WhatsApp messages, and email correspondence related to product enquiries and orders.</li>
+                <li><strong className="text-[#0A0F1E]">Contact Information:</strong> Name, phone number, email address, and business name when you submit an enquiry form or contact us directly.</li>
+                <li><strong className="text-[#0A0F1E]">Usage Data:</strong> Browser type, IP address, pages visited, and time spent on pages — collected automatically via standard web server logs.</li>
+                <li><strong className="text-[#0A0F1E]">Communication Records:</strong> Records of calls, WhatsApp messages, and email correspondence related to product enquiries and orders.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">3. How We Use Your Information</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">3. How We Use Your Information</h2>
               <p>We use the information we collect to:</p>
               <ul className="list-disc pl-5 space-y-2 mt-3">
                 <li>Respond to enquiries and provide quotations for products and services</li>
@@ -85,28 +85,28 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">4. Information Sharing</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">4. Information Sharing</h2>
               <p>
                 We may share your information with logistics and courier partners solely for the purpose of delivering your orders. We may also disclose information when required by Indian law or legal process.
               </p>
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">5. Data Security</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">5. Data Security</h2>
               <p>
                 We implement reasonable security measures to protect your information from unauthorised access, alteration, or disclosure. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
               </p>
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">6. Cookies</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">6. Cookies</h2>
               <p>
                 Our website may use cookies and similar technologies for basic functionality and analytics. You can control cookie settings through your browser settings.
               </p>
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">7. Your Rights</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">7. Your Rights</h2>
               <p>
                 You have the right to access, correct, or request deletion of your personal information that we hold. To exercise these rights, contact us at{' '}
                 <a href="mailto:lbownetwork9solutions@gmail.com" className="text-[#2E7D32] hover:underline">
@@ -116,14 +116,14 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">8. Business Authorization</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">8. Business Authorization</h2>
               <p>
                 LBow Network Solutions is an officially certified Authorised Dealer of Prince Pipes and Fittings
                 Limited, Bangalore, Karnataka. Our dealership certificate is valid from 2025 to 2027 and is issued
                 by the manufacturer. You may verify our credentials by viewing the certificate below.
               </p>
-              <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 sm:p-5 border border-white/10 rounded-xl bg-white/3">
-                <div className="w-full sm:w-40 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+              <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 sm:p-5 border border-[rgba(15,23,42,0.10)] rounded-xl bg-white">
+                <div className="w-full sm:w-40 flex-shrink-0 rounded-lg overflow-hidden border border-[rgba(15,23,42,0.10)]">
                   <Image
                     src="/images/dealer-certificate.jpeg"
                     alt="Prince Pipes Authorised Dealer Certificate — LBow Network Solutions 2025–2027"
@@ -133,8 +133,8 @@ export default function PrivacyPolicy() {
                   />
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-sm mb-1">Prince Pipes Dealership Certificate</p>
-                  <p className="text-[#A6A6A6] text-sm mb-3">
+                  <p className="text-[#0A0F1E] font-semibold text-sm mb-1">Prince Pipes Dealership Certificate</p>
+                  <p className="text-[#6B7280] text-sm mb-3">
                     Authorised Dealer · 2025–2027 · Issued by Prince Pipes and Fittings Limited
                   </p>
                   <Link
@@ -148,12 +148,12 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="font-heading font-semibold text-xl text-white mb-3">9. Contact Us</h2>
+              <h2 className="font-heading font-semibold text-xl text-[#0A0F1E] mb-3">9. Contact Us</h2>
               <p>
                 If you have any questions about this Privacy Policy, contact us at:
               </p>
-              <div className="mt-4 p-4 border border-white/10 rounded-lg">
-                <p className="text-white font-semibold">LBow Network Solutions</p>
+              <div className="mt-4 p-4 border border-[rgba(15,23,42,0.10)] rounded-lg bg-white">
+                <p className="text-[#0A0F1E] font-semibold">LBow Network Solutions</p>
                 <p>51/3, Officers Model Colony, T Dasarahalli, Bangalore – 560057</p>
                 <p>Phone: <a href="tel:+918123501407" className="text-[#2E7D32] hover:underline">+91 8123501407</a></p>
                 <p>Email: <a href="mailto:lbownetwork9solutions@gmail.com" className="text-[#2E7D32] hover:underline">lbownetwork9solutions@gmail.com</a></p>

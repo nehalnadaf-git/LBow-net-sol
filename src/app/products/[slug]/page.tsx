@@ -101,12 +101,12 @@ export default async function ProductDetailPage({ params }: Props) {
         name={product.name}
         tagline={product.tagline}
         breadcrumb={
-          <nav className="font-body text-xs text-white/60 flex gap-2 items-center">
+          <nav className="font-body text-xs text-[#6B7280] flex gap-2 items-center">
             <Link href="/">Home</Link>
             <span>/</span>
-            <Link href="/products" className="hover:text-white transition-colors">Products</Link>
+            <Link href="/products" className="hover:text-[#0A0F1E] transition-colors">Products</Link>
             <span>/</span>
-            <span className="text-white">{product.name}</span>
+            <span className="text-[#0A0F1E]">{product.name}</span>
           </nav>
         }
       />

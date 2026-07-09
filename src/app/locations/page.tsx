@@ -33,15 +33,15 @@ function LocationCard({ location }: { location: { slug: string; displayName: str
   return (
     <Link
       href={`/locations/${location.slug}`}
-      className="group bg-white rounded-xl overflow-hidden border border-[rgba(30,32,33,0.12)] transition-all duration-300 hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)] p-5 sm:p-6 flex flex-col"
+      className="group bg-white rounded-xl overflow-hidden border border-[rgba(15,23,42,0.08)] transition-all duration-300 hover:border-[#2E7D32]/30 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(15,23,42,0.08)] p-5 sm:p-6 flex flex-col"
     >
       <div className="flex items-center gap-2 mb-3">
         <MapPin size={16} className="text-[#2E7D32]" />
-        <span className="font-heading font-semibold text-base sm:text-lg text-[#0A0A0B]">
+        <span className="font-heading font-semibold text-base sm:text-lg text-[#0A0F1E]">
           {location.displayName}
         </span>
       </div>
-      <p className="font-body text-sm text-[#434343] leading-relaxed mb-4 flex-1">
+      <p className="font-body text-sm text-[#374151] leading-relaxed mb-4 flex-1">
         {location.tagline}
       </p>
       <div className="flex flex-wrap gap-1.5 mb-4">
@@ -51,7 +51,7 @@ function LocationCard({ location }: { location: { slug: string; displayName: str
           </span>
         ))}
       </div>
-      <span className="font-body font-semibold text-sm text-[#0A0A0B] group-hover:text-[#2E7D32] transition-colors">
+      <span className="font-body font-semibold text-sm text-[#6B7280] group-hover:text-[#2E7D32] transition-colors">
         View Details →
       </span>
     </Link>
@@ -85,13 +85,13 @@ export default function LocationsIndex() {
       </section>
 
       {/* Tier 1: Bangalore Industrial Zones */}
-      <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+      <section className="relative w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
               Free Demo Available
             </div>
-            <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#0A0A0B]">
+            <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#0A0F1E]">
               Bangalore Industrial Zones
             </h2>
           </div>
@@ -104,13 +104,13 @@ export default function LocationsIndex() {
       </section>
 
       {/* Tier 2: Karnataka Cities */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-28" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
+      <section className="relative w-full py-16 sm:py-20 lg:py-28 bg-[#F0F4F8]">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="mb-10">
-            <div className="inline-flex items-center gap-2 bg-white/5 text-[#A6A6A6] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-[rgba(21,101,192,0.08)] text-[#1565C0] px-4 py-1.5 rounded-full font-body text-xs font-medium mb-4">
               Courier &amp; Freight Delivery
             </div>
-            <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-white">
+            <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-[#0A0F1E]">
               Karnataka Cities
             </h2>
           </div>
@@ -118,23 +118,22 @@ export default function LocationsIndex() {
             {tier2Cities.map((loc) => (
               <div
                 key={loc.slug}
-                className="rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6"
-                style={{ background: 'linear-gradient(135deg, #0D1118 0%, #131c2e 100%)' }}
+                className="rounded-xl border border-[rgba(15,23,42,0.08)] hover:border-[#2E7D32]/30 hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] transition-all duration-300 p-5 sm:p-6 bg-white"
               >
                 <Link href={`/locations/${loc.slug}`} className="group block">
                   <div className="flex items-center gap-2 mb-3">
                     <MapPin size={16} className="text-[#2E7D32]" />
-                    <span className="font-heading font-semibold text-base text-white">{loc.displayName}</span>
+                    <span className="font-heading font-semibold text-base text-[#0A0F1E]">{loc.displayName}</span>
                   </div>
-                  <p className="font-body text-sm text-[#A6A6A6] leading-relaxed mb-4">{loc.tagline}</p>
+                  <p className="font-body text-sm text-[#374151] leading-relaxed mb-4">{loc.tagline}</p>
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {loc.dominantIndustries.slice(0, 3).map((ind, i) => (
-                      <span key={i} className="bg-[rgba(46,125,50,0.1)] text-[#2E7D32] rounded-full px-2.5 py-0.5 font-body text-[0.65rem] font-medium">
+                      <span key={i} className="bg-[rgba(46,125,50,0.08)] text-[#2E7D32] rounded-full px-2.5 py-0.5 font-body text-[0.65rem] font-medium">
                         {ind}
                       </span>
                     ))}
                   </div>
-                  <span className="font-body font-semibold text-sm text-[#A6A6A6] group-hover:text-white transition-colors">
+                  <span className="font-body font-semibold text-sm text-[#6B7280] group-hover:text-[#2E7D32] transition-colors">
                     View Details →
                   </span>
                 </Link>
@@ -144,18 +143,17 @@ export default function LocationsIndex() {
             {/* Combined Karnataka page */}
             {combined && (
               <div
-                className="rounded-xl border border-white/5 hover:border-white/15 transition-all duration-300 p-5 sm:p-6"
-                style={{ background: 'linear-gradient(135deg, #0D1118 0%, #131c2e 100%)' }}
+                className="rounded-xl border border-[rgba(15,23,42,0.08)] hover:border-[#2E7D32]/30 hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] transition-all duration-300 p-5 sm:p-6 bg-white"
               >
                 <Link href={`/locations/${combined.slug}`} className="group block">
                   <div className="flex items-center gap-2 mb-3">
                     <MapPin size={16} className="text-[#2E7D32]" />
-                    <span className="font-heading font-semibold text-base text-white">{combined.displayName}</span>
+                    <span className="font-heading font-semibold text-base text-[#0A0F1E]">{combined.displayName}</span>
                   </div>
-                  <p className="font-body text-sm text-[#A6A6A6] leading-relaxed mb-4">
+                  <p className="font-body text-sm text-[#374151] leading-relaxed mb-4">
                     Tumakuru, Davanagere, Hassan &amp; Raichur — courier and freight supply.
                   </p>
-                  <span className="font-body font-semibold text-sm text-[#A6A6A6] group-hover:text-white transition-colors">
+                  <span className="font-body font-semibold text-sm text-[#6B7280] group-hover:text-[#2E7D32] transition-colors">
                     View Details →
                   </span>
                 </Link>
@@ -167,23 +165,23 @@ export default function LocationsIndex() {
 
       {/* Tier 3: Pan-India */}
       {panIndia && (
-        <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20">
+        <section className="relative w-full bg-[#F8F9FA] py-16 sm:py-20">
           <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-            <div className="bg-white rounded-xl border border-[rgba(30,32,33,0.12)] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="bg-white rounded-xl border border-[rgba(15,23,42,0.08)] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-3 py-1 rounded-full font-body text-xs font-medium mb-3">
                   Pan-India Delivery
                 </div>
-                <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#0A0A0B] mb-2">
+                <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#0A0F1E] mb-2">
                   We Also Deliver Across India
                 </h2>
-                <p className="font-body text-sm text-[#434343] max-w-xl">
+                <p className="font-body text-sm text-[#374151] max-w-xl">
                   Courier (small orders) and freight truck (bulk) to Gujarat, Maharashtra, Tamil Nadu, Telangana, and all states. No minimum order quantity.
                 </p>
               </div>
               <Link
                 href={`/locations/${panIndia.slug}`}
-                className="inline-flex items-center gap-2 bg-[#0A0A0B] hover:bg-[#434343] text-[#EEEEEE] font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm whitespace-nowrap"
+                className="inline-flex items-center gap-2 bg-[#0A0F1E] hover:bg-[#1a2035] text-white font-body font-semibold rounded-md px-6 py-3 transition-all duration-300 text-sm whitespace-nowrap"
               >
                 Pan-India Supply Details →
               </Link>

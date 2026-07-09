@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -56,17 +56,17 @@ const Categories = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
       {/* Premium Background Graphics */}
       <PipeCrossSectionBg isLight={true} />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#434343] mb-3 sm:mb-4">
+          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#6B7280] mb-3 sm:mb-4">
             What We Deal In
           </div>
-          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.5rem] text-[#0A0A0B]">
+          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.5rem] text-[#0A0F1E]">
             Our Product Categories
           </h2>
         </div>
@@ -76,7 +76,7 @@ const Categories = () => {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="category-pill bg-white rounded-lg px-6 py-3 border border-[rgba(10,10,11,0.15)] font-body font-medium text-sm text-[#0A0A0B] text-center transition-all duration-300 hover:border-[#0A0A0B] hover:bg-[#0A0A0B] hover:text-[#EEEEEE] hover:-translate-y-0.5 cursor-default"
+              className="category-pill bg-white rounded-lg px-6 py-3 border border-[rgba(15,23,42,0.08)] font-body font-medium text-sm text-[#374151] text-center transition-all duration-300 hover:border-[#0A0F1E] hover:bg-[#0A0F1E] hover:text-white hover:-translate-y-0.5 cursor-default"
             >
               {category}
             </div>

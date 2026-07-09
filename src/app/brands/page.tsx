@@ -20,7 +20,7 @@ export default function BrandsIndex() {
 
       {/* Hero */}
       <section
-        className="relative overflow-hidden w-full bg-[#0A0A0B] pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 md:pb-16 text-center"
+        className="relative overflow-hidden w-full pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 md:pb-16 text-center"
         style={{ background: 'linear-gradient(160deg, #F0F7F1 0%, #FAFFFE 35%, #EDF4FF 70%, #F4FBF5 100%)' }}
       >
         <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: 'linear-gradient(90deg, #2E7D32 0%, #1565C0 100%)' }} />
@@ -39,14 +39,14 @@ export default function BrandsIndex() {
       </section>
 
       {/* Brands Grid */}
-      <section className="relative w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+      <section className="relative w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {brands.map((brand) => (
               <Link
                 key={brand.slug}
                 href={`/brands/${brand.slug}`}
-                className="group bg-white rounded-xl border border-[rgba(30,32,33,0.12)] hover:border-[#0A0A0B] hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col overflow-hidden"
+                className="group bg-white rounded-xl border border-[rgba(15,23,42,0.08)] hover:border-[#2E7D32]/30 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col overflow-hidden"
               >
                 {/* Certificate thumbnail — Prince Pipes only */}
                 {brand.slug === 'prince-pipes' && (
@@ -71,13 +71,13 @@ export default function BrandsIndex() {
                       Authorized Dealer
                     </span>
                   </div>
-                  <h2 className="font-heading font-bold text-xl text-[#0A0A0B] mb-2">{brand.name}</h2>
-                  <p className="font-body text-sm text-[#434343] mb-4 flex-1">{brand.tagline}</p>
-                  <div className="flex items-center justify-between pt-4 border-t border-[rgba(30,32,33,0.08)]">
-                    <span className="font-body text-xs text-[#434343]">
+                  <h2 className="font-heading font-bold text-xl text-[#0A0F1E] mb-2">{brand.name}</h2>
+                  <p className="font-body text-sm text-[#374151] mb-4 flex-1">{brand.tagline}</p>
+                  <div className="flex items-center justify-between pt-4 border-t border-[rgba(15,23,42,0.08)]">
+                    <span className="font-body text-xs text-[#6B7280]">
                       Certificate: {brand.dealershipDetails.certificateValidFrom}–{brand.dealershipDetails.certificateValidTo}
                     </span>
-                    <span className="font-body font-semibold text-sm text-[#0A0A0B] group-hover:text-[#2E7D32] transition-colors">
+                    <span className="font-body font-semibold text-sm text-[#6B7280] group-hover:text-[#2E7D32] transition-colors">
                       View Details →
                     </span>
                   </div>

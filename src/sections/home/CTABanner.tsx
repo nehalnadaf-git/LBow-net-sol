@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -36,7 +36,7 @@ const CTABanner = () => {
   return (
     <section
       ref={sectionRef}
-      className="cta-section relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28"
+      className="cta-section relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28"
     >
       <PipeFlowBg isLight={true} />
 
@@ -45,11 +45,11 @@ const CTABanner = () => {
           Let&apos;s Work Together
         </p>
 
-        <h2 className="cta-heading font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0A0B] max-w-3xl mx-auto mb-4 sm:mb-6 leading-[1.15]">
+        <h2 className="cta-heading font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0F1E] max-w-3xl mx-auto mb-4 sm:mb-6 leading-[1.15]">
           Ready to Upgrade Your Piping Infrastructure?
         </h2>
 
-        <p className="cta-subtext font-body text-sm sm:text-base md:text-lg text-[#434343] max-w-2xl mx-auto mb-8 sm:mb-10">
+        <p className="cta-subtext font-body text-sm sm:text-base md:text-lg text-[#374151] max-w-2xl mx-auto mb-8 sm:mb-10">
           Get a free consultation and quote for your industrial piping needs. We respond within 24 hours.
         </p>
 
@@ -62,7 +62,7 @@ const CTABanner = () => {
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-transparent border-2 border-[#0A0A0B] text-[#0A0A0B] hover:bg-[#0A0A0B] hover:text-[#EEEEEE] font-body font-semibold rounded-md px-8 py-3.5 transition-colors duration-200 text-sm sm:text-base"
+            className="inline-flex items-center justify-center bg-transparent border-2 border-[#0A0F1E] text-[#0A0F1E] hover:bg-[#0A0F1E] hover:text-white font-body font-semibold rounded-md px-8 py-3.5 transition-colors duration-200 text-sm sm:text-base"
           >
             Send Enquiry
             <ArrowRight size={14} className="ml-2" />

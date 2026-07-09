@@ -84,19 +84,19 @@ const ServicesOverview = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#FAFAF9] py-16 sm:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative overflow-hidden w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-28">
       <PipeFlowBg isLight={true} />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         {/* Header */}
         <div className="services-header text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#434343] mb-3 sm:mb-4">
+          <div className="font-body font-medium text-xs sm:text-sm uppercase tracking-[0.1em] text-[#6B7280] mb-3 sm:mb-4">
             Our Services
           </div>
-          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0A0B] mb-4 sm:mb-6">
+          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.8rem] text-[#0A0F1E] mb-4 sm:mb-6">
             Industrial Pipeline Solutions
           </h2>
-          <p className="font-body text-sm sm:text-base text-[#434343] max-w-2xl mx-auto">
+          <p className="font-body text-sm sm:text-base text-[#374151] max-w-2xl mx-auto">
             From air compressor pipelines and cooling towers to chiller lines, chemical lines, vacuum lines, and water lines — we design, supply, and install complete pipeline systems for every industry.
           </p>
         </div>
@@ -140,10 +140,10 @@ const ServicesOverview = () => {
 
                 {/* Card content */}
                 <div className="p-5 sm:p-7">
-                  <h3 className="font-heading font-semibold text-lg sm:text-xl text-[#0A0A0B] mb-2 sm:mb-3">
+                  <h3 className="font-heading font-semibold text-lg sm:text-xl text-[#0A0F1E] mb-2 sm:mb-3">
                     {service.title}
                   </h3>
-                  <p className="font-body text-sm text-[#434343] leading-relaxed mb-4 sm:mb-5">
+                  <p className="font-body text-sm text-[#374151] leading-relaxed mb-4 sm:mb-5">
                     {service.description}
                   </p>
                   <Link
@@ -165,8 +165,8 @@ const ServicesOverview = () => {
         <div className="mt-10 sm:mt-12 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 justify-center bg-[#0A0A0B] text-[#EEEEEE]
-                       hover:bg-[#434343] font-body font-semibold rounded-lg px-8 sm:px-10 py-3 sm:py-3.5
+            className="inline-flex items-center gap-2 justify-center bg-[#0A0F1E] text-white
+                       hover:bg-[#1a2035] font-body font-semibold rounded-lg px-8 sm:px-10 py-3 sm:py-3.5
                        text-sm sm:text-base transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
                        shadow-sm"
           >

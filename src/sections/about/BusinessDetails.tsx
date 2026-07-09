@@ -67,9 +67,13 @@ const BusinessDetails = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden w-full py-12 sm:py-14 lg:py-20" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-12 sm:py-14 lg:py-20 bg-[#EDF7EE]">
       {/* Premium Background Graphics */}
-      <HexGridBg isLight={false} />
+      <HexGridBg isLight={true} />
+
+      {/* Top + bottom divider lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/25 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2E7D32]/15 to-transparent" />
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
@@ -77,8 +81,10 @@ const BusinessDetails = () => {
             const Icon = detail.icon;
             return (
               <div key={index} className="detail-card flex flex-col items-center">
-                <Icon size={32} className="text-[#EEEEEE] mb-2 sm:mb-3 sm:w-10 sm:h-10" />
-                <div className="font-heading font-bold text-sm sm:text-lg md:text-xl lg:text-[1.75rem] text-white mb-1 sm:mb-2 leading-tight">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center mb-3 sm:mb-4">
+                  <Icon size={20} className="text-[#2E7D32]" />
+                </div>
+                <div className="font-heading font-bold text-sm sm:text-lg md:text-xl lg:text-[1.75rem] text-[#0A0F1E] mb-1 sm:mb-2 leading-tight">
                   {detail.countTo !== undefined ? (
                     <AnimatedCounter
                       to={detail.countTo}
@@ -90,7 +96,7 @@ const BusinessDetails = () => {
                     detail.value
                   )}
                 </div>
-                <div className="font-body text-xs sm:text-sm text-[#A6A6A6]">{detail.label}</div>
+                <div className="font-body text-xs sm:text-sm text-[#6B7280]">{detail.label}</div>
               </div>
             );
           })}

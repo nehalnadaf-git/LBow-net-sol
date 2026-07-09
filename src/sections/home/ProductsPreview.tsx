@@ -45,12 +45,12 @@ interface Product { slug: string; image: string; category: string; name: string;
 
 const ProductCard = ({ product, width }: { product: Product; width: number }) => (
   <div
-    className="product-card flex-shrink-0 bg-[#131822] rounded-2xl overflow-hidden border border-white/8
-               group shadow-md hover:shadow-[0_20px_60px_rgba(0,0,0,0.7)] transition-shadow duration-500"
+    className="product-card flex-shrink-0 bg-white rounded-2xl overflow-hidden border border-[rgba(15,23,42,0.08)]
+               group shadow-sm hover:shadow-[0_20px_48px_rgba(15,23,42,0.12)] transition-all duration-500 hover:border-[#2E7D32]/30"
     style={{ width }}
   >
     {/* Image area */}
-    <div className="relative w-full aspect-[4/3] overflow-hidden pointer-events-none">
+    <div className="relative w-full aspect-[4/3] overflow-hidden pointer-events-none bg-[#F0F4F8]">
       <Image
         src={product.image}
         alt={product.name}
@@ -60,13 +60,13 @@ const ProductCard = ({ product, width }: { product: Product; width: number }) =>
         sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 320px"
       />
       {/* Green shimmer accent on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#4ADE80] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      {/* Category badge — responsive, overflow-safe, single line guaranteed */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2E7D32] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Category badge */}
       <div className="absolute bottom-3 left-3 right-3 flex">
-        <div className="flex items-center gap-1.5 px-2 py-1 sm:px-2.5 sm:py-1 rounded-full bg-black/80 border border-white/10 max-w-full min-w-0">
+        <div className="flex items-center gap-1.5 px-2 py-1 sm:px-2.5 sm:py-1 rounded-full bg-white/90 border border-[rgba(15,23,42,0.12)] max-w-full min-w-0 shadow-sm">
           {/* Green accent dot */}
-          <span className="flex-shrink-0 w-1 h-1 rounded-full bg-[#4ADE80]" />
-          <span className="font-body font-semibold text-[0.58rem] sm:text-[0.62rem] uppercase text-[#CCCCCC] tracking-[0.07em] truncate whitespace-nowrap leading-none">
+          <span className="flex-shrink-0 w-1 h-1 rounded-full bg-[#2E7D32]" />
+          <span className="font-body font-semibold text-[0.58rem] sm:text-[0.62rem] uppercase text-[#374151] tracking-[0.07em] truncate whitespace-nowrap leading-none">
             {product.category}
           </span>
         </div>
@@ -75,17 +75,17 @@ const ProductCard = ({ product, width }: { product: Product; width: number }) =>
 
     {/* Body */}
     <div className="px-4 py-4 sm:px-5 sm:py-5">
-      <h3 className="font-heading font-semibold text-[0.95rem] sm:text-lg text-[#EEEEEE] leading-snug">
+      <h3 className="font-heading font-semibold text-[0.95rem] sm:text-lg text-[#0A0F1E] leading-snug">
         {product.name}
       </h3>
-      <p className="font-body text-xs sm:text-sm text-[#A6A6A6] mt-1.5 leading-relaxed line-clamp-2">
+      <p className="font-body text-xs sm:text-sm text-[#6B7280] mt-1.5 leading-relaxed line-clamp-2">
         {product.description}
       </p>
       <Link
         href={`/products/${product.slug}`}
         onClick={e => e.stopPropagation()}
-        className="inline-flex items-center gap-1.5 mt-3 sm:mt-4 font-body font-semibold text-xs sm:text-sm text-[#4ADE80]
-                   hover:text-[#2E7D32] transition-colors duration-200 group/link pointer-events-auto"
+        className="inline-flex items-center gap-1.5 mt-3 sm:mt-4 font-body font-semibold text-xs sm:text-sm text-[#2E7D32]
+                   hover:text-[#1B5E20] transition-colors duration-200 group/link pointer-events-auto"
       >
         View Details
         <ChevronRight size={13} className="transition-transform duration-300 group-hover/link:translate-x-0.5" />
@@ -265,8 +265,8 @@ const ProductsPreview = () => {
 
   /* ── Render ───────────────────────────────────────────────────────────── */
   return (
-    <section className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-24" style={{ background: 'linear-gradient(180deg, #0D1118 0%, #0F1520 50%, #0D1118 100%)' }}>
-      <HexGridBg isLight={false} isMinimal={true} />
+    <section className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-24 bg-[#F0F4F8]">
+      <HexGridBg isLight={true} isMinimal={true} />
 
       <div className="relative z-10">
 
@@ -277,16 +277,16 @@ const ProductsPreview = () => {
         >
           {/* Label */}
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="block w-6 h-px bg-[#4ADE80]/60" />
-            <span className="font-body font-medium text-xs uppercase tracking-[0.12em] text-[#4ADE80]/80">
+            <span className="block w-6 h-px bg-[#2E7D32]/50" />
+            <span className="font-body font-medium text-xs uppercase tracking-[0.12em] text-[#2E7D32]">
               Our Products
             </span>
-            <span className="block w-6 h-px bg-[#4ADE80]/60" />
+            <span className="block w-6 h-px bg-[#2E7D32]/50" />
           </div>
-          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.6rem] text-[#EEEEEE] mb-3 leading-tight">
+          <h2 className="font-heading font-semibold text-2xl sm:text-3xl md:text-[2.6rem] text-[#0A0F1E] mb-3 leading-tight">
             PPR Pipes, Fittings<br className="sm:hidden" /> &amp; Industrial Valves
           </h2>
-          <p className="font-body text-sm sm:text-base text-[#A6A6A6] max-w-lg sm:max-w-2xl mx-auto leading-relaxed">
+          <p className="font-body text-sm sm:text-base text-[#6B7280] max-w-lg sm:max-w-2xl mx-auto leading-relaxed">
             From PPR pipes and fittings to valves, pneumatic fittings, and air tools — everything your industry needs.
           </p>
         </div>
@@ -325,9 +325,9 @@ const ProductsPreview = () => {
           <button
             onClick={() => arrowSlide(1)}
             className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10
-                       w-10 h-10 rounded-full bg-[#0D1118]/90 border border-white/10
-                       items-center justify-center text-[#EEEEEE]
-                       hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
+                       w-10 h-10 rounded-full bg-white/90 border border-[rgba(15,23,42,0.12)]
+                       items-center justify-center text-[#374151] shadow-sm
+                       hover:bg-[#2E7D32] hover:border-[#2E7D32] hover:text-white
                        transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"
             aria-label="Previous product"
           >
@@ -336,9 +336,9 @@ const ProductsPreview = () => {
           <button
             onClick={() => arrowSlide(-1)}
             className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10
-                       w-10 h-10 rounded-full bg-[#0D1118]/90 border border-white/10
-                       items-center justify-center text-[#EEEEEE]
-                       hover:bg-[#2E7D32]/80 hover:border-[#4ADE80]/30
+                       w-10 h-10 rounded-full bg-white/90 border border-[rgba(15,23,42,0.12)]
+                       items-center justify-center text-[#374151] shadow-sm
+                       hover:bg-[#2E7D32] hover:border-[#2E7D32] hover:text-white
                        transition-all duration-200 opacity-0 group-hover/carousel:opacity-100"
             aria-label="Next product"
           >
@@ -348,19 +348,19 @@ const ProductsPreview = () => {
 
         {/* ── Swipe hint — mobile only ───────────────────────────────── */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <span className="block w-4 h-px bg-[#A6A6A6]/20" />
-          <p className="font-body text-[0.6rem] uppercase tracking-widest text-[#A6A6A6]/30">
+          <span className="block w-4 h-px bg-[#9CA3AF]/40" />
+          <p className="font-body text-[0.6rem] uppercase tracking-widest text-[#9CA3AF]/60">
             Swipe to explore
           </p>
-          <span className="block w-4 h-px bg-[#A6A6A6]/20" />
+          <span className="block w-4 h-px bg-[#9CA3AF]/40" />
         </div>
 
         {/* ── View All Button ────────────────────────────────────────── */}
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 mt-8 sm:mt-10 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 justify-center bg-[#EEEEEE] text-[#0A0A0B]
-                       hover:bg-[#A6A6A6] font-body font-semibold rounded-lg px-8 sm:px-10 py-3 sm:py-3.5
+            className="inline-flex items-center gap-2 justify-center bg-[#0A0F1E] text-white
+                       hover:bg-[#1a2035] font-body font-semibold rounded-lg px-8 sm:px-10 py-3 sm:py-3.5
                        text-sm sm:text-base transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
                        shadow-sm"
           >

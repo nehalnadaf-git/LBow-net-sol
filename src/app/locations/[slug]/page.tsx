@@ -77,12 +77,12 @@ export default async function LocationPage({ params }: Props) {
         tagline={location.tagline}
         tier={location.tier}
         breadcrumb={
-          <nav className="font-body text-xs text-white/60 flex gap-2 items-center">
+          <nav className="font-body text-xs text-[#6B7280] flex gap-2 items-center">
             <Link href="/">Home</Link>
             <span>/</span>
-            <Link href="/locations" className="hover:text-white transition-colors">Locations</Link>
+            <Link href="/locations" className="hover:text-[#0A0F1E] transition-colors">Locations</Link>
             <span>/</span>
-            <span className="text-white">{location.displayName}</span>
+            <span className="text-[#0A0F1E]">{location.displayName}</span>
           </nav>
         }
       />
