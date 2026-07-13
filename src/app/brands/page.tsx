@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   description:
     'LBow Network Solutions is an Authorized Dealer for Prince Pipes and Fittings Limited in Bangalore (certificate 2025–2027). Call +91 8123501407.',
   alternates: { canonical: `${BASE_URL}/brands` },
+  openGraph: {
+    title: 'Brands We Carry — Prince Pipes Authorized Dealer | LBow Bangalore',
+    description: 'Authorized dealer for Prince Pipes in Bangalore. Certificate valid 2025–2027. Genuine products with full warranty.',
+    url: `${BASE_URL}/brands`,
+    images: [{ url: `${BASE_URL}/og-image.jpg`, width: 1200, height: 630, alt: 'LBow Network Solutions — Authorized Dealer Brands' }],
+  },
 };
 
 export default function BrandsIndex() {

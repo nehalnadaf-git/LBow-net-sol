@@ -32,7 +32,7 @@ export const localBusinessSchemaBase = {
   url: BASE_URL,
   telephone: '+91-8123501407',
   email: 'lbownetwork9solutions@gmail.com',
-  logo: `${BASE_URL}/icon-512x512.png`,
+  logo: `${BASE_URL}/web-app-manifest-512x512.png`,
   image: `${BASE_URL}/og-image.jpg`,
   hasMap: `https://www.google.com/maps/place/?q=place_id:${PLACE_ID}`,
   sameAs: [`https://www.google.com/maps/place/?q=place_id:${PLACE_ID}`],

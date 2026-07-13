@@ -59,6 +59,8 @@ export default function BlogIndex() {
                     src={featured.image}
                     alt={featured.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="eager"
+                    fetchPriority="high"
                   />
                 </div>
                 {/* Content */}

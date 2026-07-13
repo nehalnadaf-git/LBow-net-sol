@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${BASE_URL}/locations`,
   },
+  openGraph: {
+    title: 'Supply Locations — Bangalore, Karnataka & Pan-India | LBow',
+    description: 'PPR & PPCH pipe supply across Bangalore industrial zones, Karnataka cities, and pan-India. Free demo available.',
+    url: `${BASE_URL}/locations`,
+    images: [{ url: `${BASE_URL}/og-image.jpg`, width: 1200, height: 630, alt: 'LBow Network Solutions — Supply Locations' }],
+  },
 };
 
 const breadcrumbSchema = {

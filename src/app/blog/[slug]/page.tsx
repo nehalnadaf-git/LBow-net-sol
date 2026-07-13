@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.excerpt,
     image: `${BASE_URL}${post.image}`,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: (post as typeof post & { updatedAt?: string }).updatedAt ?? post.publishedAt,
     author: {
       '@type': 'Organization',
       name: 'LBow Network Solutions',
@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'LBow Network Solutions',
-      logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon-512x512.png` },
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/web-app-manifest-512x512.png` },
     },
   };
 
@@ -230,6 +230,8 @@ export default async function BlogPostPage({ params }: Props) {
               src={post.image}
               alt={post.title}
               className="w-full h-full object-cover object-center"
+              loading="eager"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F8F9FA]/40 pointer-events-none" />
           </div>

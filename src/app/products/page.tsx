@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lbownetworksolutions.com/products',
   },
+  openGraph: {
+    title: 'PPR Pipes, PPCH & PPRC Pipe Fittings | LBow Network Solutions',
+    description: 'Full range of PPR, PPRC, PPCH industrial pipes & fittings. 10-year warranty. Authorized Prince Pipes dealer in Bangalore.',
+    url: 'https://lbownetworksolutions.com/products',
+    images: [{ url: 'https://lbownetworksolutions.com/og-image.jpg', width: 1200, height: 630, alt: 'LBow Network Solutions — PPR Pipe Products' }],
+  },
 };
 
 export default function Products() {

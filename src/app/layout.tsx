@@ -59,59 +59,13 @@ export const viewport: Viewport = {
   // maximumScale intentionally omitted — pinch-zoom must remain accessible on iOS
 };
 
-const BASE_URL = 'https://lbownetworksolutions.com';
-
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'LBow Network Solutions',
-  description: 'PPR Pipe Fitting Dealers and Industrial Piping Solution Provider in Bangalore',
-  url: BASE_URL,
-  telephone: '+91-8123501407',
-  email: 'lbownetwork9solutions@gmail.com',
-  logo: `${BASE_URL}/web-app-manifest-512x512.png`,
-  image: `${BASE_URL}/og-image.jpg`,
-  hasMap: 'https://www.google.com/maps/place/?q=place_id:0x3bae3d9fc3dcf213:0xec0a5df81eedd4dd',
-  sameAs: [
-    'https://www.google.com/maps/place/?q=place_id:0x3bae3d9fc3dcf213:0xec0a5df81eedd4dd',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '51/3, Officers Model Colony, T Dasarahalli, Opposite Eco Fresh Mart',
-    addressLocality: 'Bangalore',
-    postalCode: '560057',
-    addressRegion: 'Karnataka',
-    addressCountry: 'IN',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 13.0461059,
-    longitude: 77.5210481,
-  },
-  areaServed: [
-    'T Dasarahalli', 'Peenya', 'Nelamangala', 'Hesaraghatta',
-    'Yeshwanthpur', 'Rajajinagar', 'Vijayanagar', 'Magadi Road',
-    'Koramangala', 'Electronic City', 'Whitefield', 'Hosur Road', 'Bangalore',
-  ],
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    opens: '09:00',
-    closes: '19:00',
-  },
-  paymentAccepted: 'Net Banking, Cheque, Demand Draft, UPI, Cash',
-  currenciesAccepted: 'INR',
-  priceRange: '$$',
-  foundingDate: '2018',
-  vatID: '29AUIPV4726C2ZB',
-};
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'LBow Network Solutions',
-  url: BASE_URL,
-  logo: `${BASE_URL}/web-app-manifest-512x512.png`,
+  url: 'https://lbownetworksolutions.com',
+  logo: 'https://lbownetworksolutions.com/web-app-manifest-512x512.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+91-8123501407',
@@ -128,7 +82,7 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'LBow Network Solutions',
-  url: BASE_URL,
+  url: 'https://lbownetworksolutions.com',
   description: 'PPR Pipe Fitting Dealers and Industrial Piping Solution Provider in Bangalore',
 };
 
@@ -154,10 +108,6 @@ export default function RootLayout({
         <meta name="geo.placename" content="Bangalore" />
         <meta name="geo.position" content="13.0461059;77.5210481" />
         <meta name="ICBM" content="13.0461059, 77.5210481" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

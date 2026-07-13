@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lbownetworksolutions.com/contact',
   },
+  openGraph: {
+    title: 'Contact LBow Network Solutions — Get a Free Quote',
+    description: 'PPR pipe fittings & industrial piping. Call +91 8123501407. Free demo available. T Dasarahalli, Bangalore.',
+    url: 'https://lbownetworksolutions.com/contact',
+    images: [{ url: 'https://lbownetworksolutions.com/og-image.jpg', width: 1200, height: 630, alt: 'Contact LBow Network Solutions Bangalore' }],
+  },
 };
 
 export default function Contact() {

@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lbownetworksolutions.com/services',
   },
+  openGraph: {
+    title: 'Industrial Piping Services — LBow Network Solutions Bangalore',
+    description: 'Pipe supply, installation, FRP lining, cooling tower pipelines & air compressor piping across Bangalore.',
+    url: 'https://lbownetworksolutions.com/services',
+    images: [{ url: 'https://lbownetworksolutions.com/og-image.jpg', width: 1200, height: 630, alt: 'LBow Network Solutions — Industrial Piping Services' }],
+  },
 };
 
 export default function Services() {

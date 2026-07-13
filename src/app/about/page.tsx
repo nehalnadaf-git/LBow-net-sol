@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lbownetworksolutions.com/about',
   },
+  openGraph: {
+    title: 'About LBow Network Solutions | PPR Pipe Dealers Bangalore',
+    description: "Established in 2018. Bangalore's trusted PPR pipe fitting dealer and industrial piping solution provider.",
+    url: 'https://lbownetworksolutions.com/about',
+    images: [{ url: 'https://lbownetworksolutions.com/og-image.jpg', width: 1200, height: 630, alt: 'LBow Network Solutions — About Us' }],
+  },
 };
 
 export default function About() {

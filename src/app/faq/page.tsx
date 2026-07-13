@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   description:
     'Frequently asked questions about PPR, PPRC, PPCH pipes, delivery, ordering, and Prince Pipes dealership at LBow Network Solutions, Bangalore. Call +91 8123501407.',
   alternates: { canonical: `${BASE_URL}/faq` },
+  openGraph: {
+    title: 'FAQ — PPR & PPCH Pipe Supplier Bangalore | LBow Network Solutions',
+    description: 'Answers about PPR, PPRC, PPCH pipes, delivery, ordering, and Prince Pipes dealership in Bangalore.',
+    url: `${BASE_URL}/faq`,
+    images: [{ url: `${BASE_URL}/og-image.jpg`, width: 1200, height: 630, alt: 'LBow Network Solutions FAQ' }],
+  },
 };
 
 const faqSchema = {
