@@ -245,12 +245,12 @@ const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="font-heading font-bold text-white leading-[1.08] tracking-tight text-left">
-            <div ref={mLine1Ref} className="text-[2rem] sm:text-[2.5rem]">PPR Pipes &amp; Fittings</div>
+            <div ref={mLine1Ref} className="text-[2rem] sm:text-[2.5rem]">Piping Solutions</div>
             <div ref={mLine2Ref} className="text-[2rem] sm:text-[2.5rem] mt-0.5">
               for <span className="font-editorial">Industrial</span>
             </div>
             <div ref={mLine3Ref} className="text-[2rem] sm:text-[2.5rem] mt-0.5">
-              <span className="font-editorial">Bangalore</span>
+              <span className="font-editorial">Applications</span>
             </div>
           </h1>
 
@@ -313,12 +313,12 @@ const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="font-heading font-bold text-white leading-[1.07] tracking-tight text-left">
-            <div ref={tLine1Ref} className="text-[2.6rem]">PPR Pipes &amp; Fittings</div>
+            <div ref={tLine1Ref} className="text-[2.6rem]">Piping Solutions</div>
             <div ref={tLine2Ref} className="text-[2.6rem] mt-0.5">
               for <span className="font-editorial">Industrial</span>
             </div>
             <div ref={tLine3Ref} className="text-[2.6rem] mt-0.5">
-              <span className="font-editorial">Bangalore</span>
+              <span className="font-editorial">Applications</span>
             </div>
           </h1>
 
@@ -370,13 +370,13 @@ const HeroSection = () => {
             {/* Headline */}
             <h1 className="font-heading font-bold text-[#0A0A0B] leading-[1.07] tracking-tight text-left">
               <div ref={dLine1Ref} style={{ fontSize: 'clamp(3rem, 4.8vw, 5.5rem)' }}>
-                <span className="metallic-shimmer-text">PPR Pipes &amp; Fittings</span>
+                <span className="metallic-shimmer-text">Piping Solutions</span>
               </div>
               <div ref={dLine2Ref} style={{ fontSize: 'clamp(3rem, 4.8vw, 5.5rem)' }}>
                 for <span className="font-editorial text-[#0A0A0B]">Industrial</span>
               </div>
               <div ref={dLine3Ref} style={{ fontSize: 'clamp(3rem, 4.8vw, 5.5rem)' }}>
-                <span className="font-editorial">Bangalore</span>
+                <span className="font-editorial">Applications</span>
               </div>
             </h1>
 
