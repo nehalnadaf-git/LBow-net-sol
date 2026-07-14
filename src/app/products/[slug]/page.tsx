@@ -54,13 +54,6 @@ export default async function ProductDetailPage({ params }: Props) {
       '@type': 'Brand',
       name: 'LBow Network Solutions',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '47',
-      bestRating: '5',
-      worstRating: '1',
-    },
     offers: {
       '@type': 'Offer',
       url: `${BASE_URL}/contact`,
