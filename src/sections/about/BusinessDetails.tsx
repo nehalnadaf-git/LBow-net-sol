@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Building2, TrendingUp, Users, FileText, Shield, Briefcase, Award, BadgeCheck, Hash, User } from 'lucide-react';
+import { Building2, FileText, Shield, Briefcase, Award, BadgeCheck, Hash, User } from 'lucide-react';
 import { HexGridBg } from '../../components/backgrounds/HexGridBg';
 import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
@@ -23,8 +23,6 @@ interface DetailItem {
 
 const details: DetailItem[] = [
   { icon: Building2,    value: '2018',                               label: 'Year Established',            countTo: 2018, countDelay: 0 },
-  { icon: TrendingUp,   value: '₹1–5 Crores',                          label: 'Annual Turnover' },
-  { icon: Users,        value: '< 10',                               label: 'Team Size' },
   { icon: User,         value: 'Neeladhar Naick Vadithe',             label: 'Proprietor' },
   { icon: FileText,     value: '29AUIPV4726C2ZB',                    label: 'GST Number' },
   { icon: Shield,       value: '10 Years',                           label: 'Product Warranty',            countTo: 10, countSuffix: ' Years', countDelay: 0.1 },
