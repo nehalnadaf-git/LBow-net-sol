@@ -93,7 +93,7 @@ const OurStory = () => {
               From a Small Shop to Bangalore&apos;s Leading Pipe Dealer
             </h2>
             <p className="animate-right font-body text-base text-[#374151] leading-[1.7] mb-4">
-              Established in 2018 in Peenya, Bengaluru, LBow Network Solutions started as a small pipe fitting shop with a big vision — to provide premium quality piping solutions at competitive prices. Our founder&apos;s commitment to quality and customer satisfaction quickly earned us a reputation as a reliable supplier in the local industrial community.
+              Established in 2018 in Peenya, Bengaluru, LBow Network Solutions started as a small pipe fitting shop with a big vision — to provide premium quality piping solutions at competitive prices. Founded by <strong>Neeladhar Naick Vadithe</strong>, the business was built on an unwavering commitment to quality and customer satisfaction, which quickly earned a reputation as a reliable supplier in the local industrial community.
             </p>
             <p className="animate-right font-body text-base text-[#374151] leading-[1.7] mb-4">
               Over the years, we&apos;ve expanded our product range to include PPR green and blue pipes, PPRC chemical pipes, PPCH industrial pipe lines, PPR and PPCH pipe fittings, brass ball valves, butterfly valves, SS fittings, pneumatic fittings, and PU/FRL airguns. Today, we serve over 200 industrial clients across India, from small workshops to large manufacturing facilities. We are an <strong>Authorized Prince Pipes Dealer</strong>, an <strong>MSME Certified</strong> business (Udyam No: UDYAM-KR-03-0717969), and a GST registered enterprise (GSTIN: 29AUIPV4726C2ZB).

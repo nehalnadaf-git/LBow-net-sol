@@ -59,6 +59,11 @@ export const localBusinessSchemaBase = {
   currenciesAccepted: 'INR',
   priceRange: '$$',
   foundingDate: '2018',
+  founder: {
+    '@type': 'Person',
+    name: 'Neeladhar Naick Vadithe',
+    jobTitle: 'Proprietor',
+  },
   vatID: '29AUIPV4726C2ZB',
   identifier: [
     { '@type': 'PropertyValue', name: 'GSTIN', value: '29AUIPV4726C2ZB' },
