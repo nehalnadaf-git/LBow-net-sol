@@ -219,7 +219,7 @@ const Navbar = () => {
             }}
           >
             <p className="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#9CA3AF]">
-              T Dasarahalli, Bangalore
+              Peenya, Bengaluru
             </p>
             <a
               href="tel:+918123501407"

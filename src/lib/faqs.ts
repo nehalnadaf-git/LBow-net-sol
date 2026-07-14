@@ -16,7 +16,7 @@ export const faqs: FAQItem[] = [
     category: 'General',
     question: 'Where is LBow Network Solutions located?',
     answer:
-      '51/3, Officers Model Colony, T Dasarahalli, Bangalore – 560057, Opposite Eco Fresh Mart. We are open Monday to Saturday, 9:00 AM to 7:00 PM.',
+      'No.273/2, ST No.20/20/1, 8th Main 8th Cross, Opp. RTO Track, Peenya 1st Stage, Peenya, Bengaluru – 560058. We are open Monday to Saturday, 9:00 AM to 7:00 PM.',
   },
   {
     category: 'General',

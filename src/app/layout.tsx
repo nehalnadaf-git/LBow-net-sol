@@ -6,11 +6,11 @@ import ScrollToTop from '@/components/ScrollToTop';
 import ClientProviders from '@/components/ClientProviders';
 
 export const metadata: Metadata = {
-  title: 'LBow Network Solutions — PPR Pipe Fitting Dealers in Bangalore | T Dasarahalli',
+  title: 'LBow Network Solutions — PPR Pipe Fitting Dealers in Bangalore | Peenya',
   description:
     "LBow Network Solutions is Bangalore's trusted PPR pipe fitting dealer and industrial piping solution provider. 10 year warranty. Free demo available. Call +91 8123501407.",
   keywords:
-    'PPR pipe fittings, PPCH pipe, PPRC chemical pipe, cooling tower pipeline, pipe dealers Bangalore, T Dasarahalli, industrial piping solutions',
+    'PPR pipe fittings, PPCH pipe, PPRC chemical pipe, cooling tower pipeline, pipe dealers Bangalore, Peenya, industrial piping solutions',
   authors: [{ name: 'LBow Network Solutions' }],
   alternates: {
     canonical: 'https://lbownetworksolutions.com',

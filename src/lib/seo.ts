@@ -20,7 +20,7 @@ export const defaultKeywords = [
   'cooling tower pipeline Bangalore',
   'FRP lining chiller pipes',
   'air compressor pipeline',
-  'T Dasarahalli pipe supplier',
+  'Peenya pipe supplier',
 ];
 
 export const localBusinessSchemaBase = {

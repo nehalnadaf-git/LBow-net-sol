@@ -85,7 +85,7 @@ export default function LocationsIndex() {
             Where We Supply — Bangalore, Karnataka &amp; Pan-India
           </h1>
           <p className="font-body text-sm sm:text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#3D5040' }}>
-            From our base in T Dasarahalli, Bangalore — serving industrial zones across the city, Karnataka, and nationwide.
+            From our base in Peenya, Bengaluru — serving industrial zones across the city, Karnataka, and nationwide.
           </p>
         </div>
       </section>

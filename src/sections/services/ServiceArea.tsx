@@ -8,8 +8,8 @@ import { DotMatrixBg } from '../../components/backgrounds/DotMatrixBg';
 gsap.registerPlugin(ScrollTrigger);
 
 const areas = [
-  'T Dasarahalli',
   'Peenya',
+  'T Dasarahalli',
   'Nelamangala',
   'Hesaraghatta',
   'Yeshwanthpur',
@@ -88,14 +88,14 @@ const ServiceArea = () => {
             Serving Across India
           </h2>
           <p className="font-body text-sm sm:text-base text-[#6B7280] max-w-2xl mx-auto">
-            Based in T Dasarahalli, Bangalore — we supply and install across India. Free demo available on request.
+            Based in Peenya, Bengaluru — we supply and install across India. Free demo available on request.
           </p>
         </div>
 
         {/* Map Embed */}
         <div className="map-placeholder w-full h-[280px] sm:h-[360px] lg:h-[420px] rounded-xl overflow-hidden border border-white/5">
           <iframe
-            title="LBow Network Solutions — T Dasarahalli, Bangalore"
+            title="LBow Network Solutions — Peenya, Bengaluru"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0665828826434!2d77.5184732!3d13.0461059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d9fc3dcf213%3A0xec0a5df81eedd4dd!2sLBow%20Network%20Solutions!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin"
             width="100%"
             height="100%"

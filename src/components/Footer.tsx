@@ -24,7 +24,7 @@ const Footer = () => {
             </Link>
           </div>
           <div className="md:text-right leading-relaxed">
-            T Dasarahalli, Bangalore<br />
+            Peenya, Bengaluru<br />
             Est. 2018
           </div>
         </div>

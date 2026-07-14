@@ -50,7 +50,7 @@ const MapSection = () => {
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="LBow Network Solutions Location — T Dasarahalli, Bangalore"
+        title="LBow Network Solutions Location — Peenya, Bengaluru"
       />
     </section>
   );

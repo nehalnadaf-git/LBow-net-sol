@@ -292,7 +292,7 @@ LBow Network Solutions supplies PPR, PPRC, and PPCH piping to manufacturing cont
       {
         question: 'Do you deliver PPR and PPCH pipes to Bidadi?',
         answer:
-          'Yes. We deliver to Bidadi. Note that Bidadi is approximately 35km from our T Dasarahalli base, so delivery may fall outside our free 22km zone — please contact us with your delivery address to confirm delivery cost and arrangement. We also handle bulk freight orders for large project requirements.',
+          'Yes. We deliver to Bidadi. Note that Bidadi is approximately 35km from our Peenya base, so delivery may fall outside our free 22km zone — please contact us with your delivery address to confirm delivery cost and arrangement. We also handle bulk freight orders for large project requirements.',
       },
       {
         question: 'What piping is suitable for automotive manufacturing facilities in Bidadi?',
@@ -563,7 +563,7 @@ All supply to these cities is from our industrial, unbranded range — manufactu
     displayName: 'Pan-India Delivery',
     h1Suffix: 'Pan-India',
     tagline: 'Industrial PPR, PPRC & PPCH pipe supply across India — courier for small orders, freight for bulk',
-    description: `LBow Network Solutions supplies industrial PPR, PPRC, and PPCH pipes and fittings across India. From our base in T Dasarahalli, Bangalore, we dispatch to industrial customers across the country — courier delivery for smaller orders, freight truck for bulk requirements. There is no minimum order quantity for pan-India supply.
+    description: `LBow Network Solutions supplies industrial PPR, PPRC, and PPCH pipes and fittings across India. From our base in Peenya, Bengaluru, we dispatch to industrial customers across the country — courier delivery for smaller orders, freight truck for bulk requirements. There is no minimum order quantity for pan-India supply.
 
 Our pan-India supply capability is particularly valuable for industrial facilities that specify our product range for a specific application and need supply beyond Karnataka. We serve industrial customers across India's major manufacturing states, ensuring that quality PPR, PPRC, and PPCH piping is available wherever your project is located.
 

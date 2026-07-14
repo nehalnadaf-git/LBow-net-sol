@@ -154,7 +154,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="mt-4 p-4 border border-[rgba(15,23,42,0.10)] rounded-lg bg-white">
                 <p className="text-[#0A0F1E] font-semibold">LBow Network Solutions</p>
-                <p>51/3, Officers Model Colony, T Dasarahalli, Bangalore – 560057</p>
+                <p>No.273/2, ST No.20/20/1, 8th Main 8th Cross, Opp. RTO Track, Peenya 1st Stage, Peenya, Bengaluru – 560058</p>
                 <p>Phone: <a href="tel:+918123501407" className="text-[#2E7D32] hover:underline">+91 8123501407</a></p>
                 <p>Email: <a href="mailto:lbownetwork9solutions@gmail.com" className="text-[#2E7D32] hover:underline">lbownetwork9solutions@gmail.com</a></p>
               </div>

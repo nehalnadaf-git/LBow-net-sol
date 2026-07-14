@@ -193,7 +193,7 @@ Small leaks or clogs can often be handled by in-house maintenance. However, **co
 
 LBow Network Solutions in Bangalore has been solving complex industrial pipe problems since 2018. With a **10-year product warranty**, expert installation teams, and a full range of PPR, PPCH, PPRC, FRP, and compressed air pipeline products and services, LBow is the trusted choice for factories and industrial facilities across Bangalore.
 
-For any pipe problem — big or small — **contact LBow Network Solutions today**. Call or WhatsApp **+91 8123501407**, or visit us at **51/3 Officers Model Colony, T Dasarahalli, Bangalore 560057**. Free demo available on request.
+For any pipe problem — big or small — **contact LBow Network Solutions today**. Call or WhatsApp **+91 8123501407**, or visit us at **No.273/2, ST No.20/20/1, 8th Main 8th Cross, Peenya 1st Stage, Bengaluru 560058**. Free demo available on request.
 
 ---
 

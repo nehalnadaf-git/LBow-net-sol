@@ -20,7 +20,7 @@ const contactItems = [
   {
     icon: MapPin,
     label: 'Address',
-    value: 'No.273/2, 8th Main Road, Opp. RTO Track, T Dasarahalli, Bengaluru — 560057',
+    value: 'No.273/2, ST No.20/20/1, 8th Main 8th Cross, Opp. RTO Track, Peenya 1st Stage, Bengaluru — 560058',
     href: null,
   },
   {
