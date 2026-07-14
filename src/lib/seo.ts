@@ -1,11 +1,11 @@
 export const BASE_URL = 'https://lbownetworksolutions.com';
 
 export const geoCoordinates = {
-  latitude: 13.0461059,
-  longitude: 77.5210481,
+  latitude: 13.0366151,
+  longitude: 77.5284327,
 };
 
-export const PLACE_ID = '0x3bae3d9fc3dcf213:0xec0a5df81eedd4dd';
+export const PLACE_ID = '0x3bae3d3b529b6b31:0x2146b1eb2fa96ce7';
 
 export const defaultMetaTitle = 'PPR & PPCH Pipe Dealer in Bangalore | LBow Network Solutions';
 export const defaultMetaDescription =

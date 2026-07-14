@@ -96,7 +96,7 @@ const ServiceArea = () => {
         <div className="map-placeholder w-full h-[280px] sm:h-[360px] lg:h-[420px] rounded-xl overflow-hidden border border-white/5">
           <iframe
             title="LBow Network Solutions — Peenya, Bengaluru"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0665828826434!2d77.5184732!3d13.0461059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d9fc3dcf213%3A0xec0a5df81eedd4dd!2sLBow%20Network%20Solutions!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4782.813797719785!2d77.5284327!3d13.036615099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d3b529b6b31%3A0x2146b1eb2fa96ce7!2sLBow%20Network%20Solutions!5e1!3m2!1sen!2sin!4v1784014577507!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

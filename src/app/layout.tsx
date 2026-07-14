@@ -74,7 +74,7 @@ const organizationSchema = {
   },
   foundingDate: '2018',
   sameAs: [
-    'https://www.google.com/maps/place/?q=place_id:0x3bae3d9fc3dcf213:0xec0a5df81eedd4dd',
+    'https://www.google.com/maps/place/?q=place_id:0x3bae3d3b529b6b31:0x2146b1eb2fa96ce7',
   ],
 };
 
