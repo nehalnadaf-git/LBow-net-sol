@@ -368,7 +368,7 @@ const PPRPipes3D = () => {
     if (!isMobile) {
       const shadowPlane = new THREE.Mesh(
         geo(new THREE.PlaneGeometry(14, 14)),
-        mat(new THREE.ShadowMaterial({ opacity: 0.045 }))
+        mat(new THREE.ShadowMaterial({ opacity: 0.055 }))
       );
       shadowPlane.position.set(0, 0, -2);
       shadowPlane.receiveShadow = true;
@@ -376,80 +376,150 @@ const PPRPipes3D = () => {
     }
 
     // ── Lights ─────────────────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 1.4));
+    // Ambient: soft base fill so nothing is pitch-black
+    scene.add(new THREE.AmbientLight(0xffffff, isMobile ? 1.6 : 1.2));
 
-    const key = new THREE.DirectionalLight(0xffffff, 2.5);
+    // Key: strong top-left cool light + shadow on desktop
+    const key = new THREE.DirectionalLight(0xfff5e4, isMobile ? 2.2 : 2.8);
     key.position.set(-5, 8, 6);
     if (!isMobile) {
       key.castShadow = true;
       key.shadow.mapSize.width  = 1024;
       key.shadow.mapSize.height = 1024;
-      key.shadow.camera.left   = -6; key.shadow.camera.right  = 6;
-      key.shadow.camera.top    =  6; key.shadow.camera.bottom = -6;
-      key.shadow.camera.near   = 0.5; key.shadow.camera.far   = 25;
-      key.shadow.bias = -0.0005;
+      key.shadow.camera.left   = -7; key.shadow.camera.right  = 7;
+      key.shadow.camera.top    =  7; key.shadow.camera.bottom = -7;
+      key.shadow.camera.near   = 0.5; key.shadow.camera.far   = 28;
+      key.shadow.bias = -0.0004;
     }
     scene.add(key);
-    const rimLight = new THREE.DirectionalLight(0xffffff, 1.5);
-    rimLight.position.set(5, -5, -3);
+
+    // Rim: bottom-right back edge light (separates pipes from background)
+    const rimLight = new THREE.DirectionalLight(0xe8f4fd, 1.8);
+    rimLight.position.set(6, -4, -4);
     scene.add(rimLight);
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    fillLight.position.set(4, 5, 2);
+
+    // Fill: soft top-right warm fill
+    const fillLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    fillLight.position.set(5, 6, 3);
     scene.add(fillLight);
 
-    // ── Mouse parallax (desktop/mouse only) ────────────────────────────────
-    let targetPX = 0, targetPY = 0, currPX = 0, currPY = 0;
+    // Accent: warm golden point light — desktop only (adds specular pop on metal)
+    if (!isMobile) {
+      const accent = new THREE.PointLight(0xffd080, 2.2, 18, 2);
+      accent.position.set(2, 2, 5);
+      scene.add(accent);
+    }
+
+    // ── Entrance animation — single lightweight GSAP tween ─────────────────
+    // Rise-up from below + fade-in. No timeline, no ScrollTrigger.
+    // The canvas is already fading via CSS opacity transition.
+    const entranceFrom = baseY - (isMobile ? 1.2 : 2.0);
+    rootGroup.position.y = entranceFrom;
+    gsap.to(rootGroup.position, {
+      y: baseY,
+      duration: isMobile ? 0.9 : 1.1,
+      ease: 'power3.out',
+      delay: 0.1,
+    });
+
+    // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
+    // Passive scroll listener reads native position every frame.
+    // Works identically on iOS Safari, Android Chrome, macOS Safari, desktop.
+    // Mobile amplitude is half of desktop to avoid over-movement on small screens.
+    let scrollY = 0;
+    const onScroll = () => { scrollY = window.scrollY; };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ── Mouse parallax ─────────────────────────────────────────────────────
+    // Main group + elbow parents tilt independently = real 3D depth perception.
+    let tPX = 0, tPY = 0, cPX = 0, cPY = 0;   // main group
+    let ePX = 0, ePY = 0, cEX = 0, cEY = 0;   // elbows (opposite, smaller)
     const onMouseMove = (e: MouseEvent) => {
-      targetPX = (e.clientX / window.innerWidth  - 0.5) * 0.10;
-      targetPY = (e.clientY / window.innerHeight - 0.5) * 0.07;
+      const nx = e.clientX / window.innerWidth  - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      tPX = nx * 0.12;  tPY = ny * 0.08;
+      ePX = nx * -0.06; ePY = ny * -0.04; // counter-rotate for parallax depth
     };
     if (!isTouch) window.addEventListener('mousemove', onMouseMove, { passive: true });
 
-    // ── Visibility gate — pause render when hero is off-screen ─────────────
+    // ── Visibility gate — zero GPU when hero is off-screen ─────────────────
     let isVisible = true;
     const heroSection = container.closest('section') as HTMLElement | null;
     let visObs: IntersectionObserver | null = null;
     if (heroSection) {
-      visObs = new IntersectionObserver(([e]) => { isVisible = e.isIntersecting; }, { threshold: 0 });
+      visObs = new IntersectionObserver(
+        ([e]) => { isVisible = e.isIntersecting; },
+        { threshold: 0 }
+      );
       visObs.observe(heroSection);
     }
 
-    // ── Render loop — via GSAP ticker (shared rAF with rest of site) ────────
-    // Simple sin/cos idle animation only — no GSAP tweens, no ScrollTrigger.
+    // ── Render loop ────────────────────────────────────────────────────────
+    // Shared with GSAP ticker — single rAF for the whole page.
+    // All transforms are pure math — no GSAP tweens inside the loop.
     const t0 = performance.now();
 
     const animate = () => {
       if (!isVisible) return;
-      const t = (performance.now() - t0) / 1000; // seconds
+      const t = (performance.now() - t0) / 1000;
 
-      // Gentle idle float + slow rotation on main pipe group
-      mainGroup.position.y = Math.sin(t * 0.55) * 0.055;
-      mainGroup.rotation.x = Math.sin(t * 0.18) * 0.028;
-      mainGroup.rotation.y = Math.cos(t * 0.22) * 0.028;
+      // ── Scroll parallax ──────────────────────────────────────────────────
+      // As user scrolls through the hero, pipes drift up + rotate + recede.
+      const heroH    = heroSection?.offsetHeight || window.innerHeight;
+      const sp       = Math.min(scrollY / heroH, 1.0);            // 0→1
+      const slideAmt = isMobile ? 2.2 : 3.8;
+      const zAmt     = isMobile ? 0.8 : 1.6;
+      const rotAmt   = isMobile ? 0.28 : 0.45;
 
-      // Mouse parallax (desktop) — smooth interpolation, clamped influence
+      // ── Idle animation (layered on top of scroll offset) ─────────────────
+      // Multi-axis: float + slow twist gives organic alive feel
+      const idleY  = Math.sin(t * 0.55) * 0.06;
+      const idleRX = Math.sin(t * 0.18) * 0.032;
+      const idleRY = Math.cos(t * 0.22) * 0.032;
+      const idleRZ = Math.sin(t * 0.09) * 0.012; // very slow z twist
+
+      // Apply combined scroll + idle to main group
+      mainGroup.position.y = idleY;
+      mainGroup.rotation.x = idleRX;
+      mainGroup.rotation.y = idleRY;
+      mainGroup.rotation.z = idleRZ;
+
+      // Scroll offset lives on rootGroup (separate from idle on mainGroup)
+      rootGroup.position.y = baseY - sp * slideAmt;
+      rootGroup.position.z = -sp * zAmt;
+      rootGroup.rotation.y =  sp * rotAmt;
+
+      // ── Mouse parallax ───────────────────────────────────────────────────
       if (!isTouch) {
-        currPX += (targetPX - currPX) * 0.04;
-        currPY += (targetPY - currPY) * 0.04;
-        mainGroup.rotation.y += currPX;
-        mainGroup.rotation.x += currPY;
+        cPX += (tPX - cPX) * 0.045;
+        cPY += (tPY - cPY) * 0.045;
+        mainGroup.rotation.y += cPX;
+        mainGroup.rotation.x += cPY;
+
+        // Independent elbow tilt for 3D depth
+        cEX += (ePX - cEX) * 0.03;
+        cEY += (ePY - cEY) * 0.03;
+        elbowParent1.rotation.y = cEX;
+        elbowParent1.rotation.x = cEY;
+        elbowParent2.rotation.y = cEX * 0.7;
+        elbowParent2.rotation.x = cEY * 0.7;
       }
 
-      // Floating elbows — slightly different frequencies = organic, alive feel
-      elbowFitting.rotation.y  =  Math.sin(t * 0.42) * 0.11;
-      elbowFitting.rotation.x  =  Math.cos(t * 0.36) * 0.07;
-      elbowFitting.position.y  =  Math.sin(t * 0.50) * 0.065;
+      // ── Floating elbows — different frequencies = organic depth ──────────
+      elbowFitting.rotation.y  =  Math.sin(t * 0.42) * 0.13;
+      elbowFitting.rotation.x  =  Math.cos(t * 0.36) * 0.08;
+      elbowFitting.position.y  =  Math.sin(t * 0.50) * 0.07;
 
-      elbowFitting2.rotation.y =  Math.cos(t * 0.48) * 0.11;
-      elbowFitting2.rotation.x =  Math.sin(t * 0.40) * 0.07;
-      elbowFitting2.position.y =  Math.cos(t * 0.44) * 0.065;
+      elbowFitting2.rotation.y =  Math.cos(t * 0.48) * 0.13;
+      elbowFitting2.rotation.x =  Math.sin(t * 0.40) * 0.08;
+      elbowFitting2.position.y =  Math.cos(t * 0.44) * 0.07;
 
       renderer.render(scene, camera);
     };
 
     gsap.ticker.add(animate);
 
-    // ── Resize handler ─────────────────────────────────────────────────────
+    // ── Resize ─────────────────────────────────────────────────────────────
     let resizeTimer: ReturnType<typeof setTimeout>;
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -463,6 +533,7 @@ const PPRPipes3D = () => {
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
       gsap.ticker.remove(animate);
+      window.removeEventListener('scroll', onScroll);
       if (!isTouch) window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
       clearTimeout(resizeTimer);
