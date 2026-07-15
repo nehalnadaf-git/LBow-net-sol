@@ -16,12 +16,14 @@ export function prefersReducedMotion(): boolean {
 }
 
 /**
- * Returns true on touch/pointer:coarse devices (iOS, Android).
- * Use to skip heavy parallax effects that waste GPU on mobile.
+ * Returns true on touch-primary devices (phones/tablets — pointer:coarse).
+ * Uses CSS pointer media query instead of navigator.maxTouchPoints because
+ * Safari on macOS reports maxTouchPoints=5 for trackpad (false positive).
+ * pointer:coarse = finger input only. pointer:fine = mouse/trackpad (desktop).
  */
 export function isMobileDevice(): boolean {
   if (typeof window === 'undefined') return false;
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  return window.matchMedia('(pointer: coarse)').matches;
 }
 
 /**

@@ -23,7 +23,12 @@ const PPRPipes3D = () => {
 
     // ── Device tier detection (computed once at mount) ──────────────────
     const isMobile = window.innerWidth < 768;
-    const isTouchScrollDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Use CSS pointer media query, NOT maxTouchPoints, to detect true touch devices.
+    // Safari on macOS reports maxTouchPoints=5 for trackpad — that would falsely
+    // treat desktop Mac as a touch device, skipping smooth scrub and using
+    // raw 1:1 scroll which feels mechanical on desktop Safari.
+    // pointer:coarse = finger (phone/tablet). pointer:fine = mouse/trackpad.
+    const isTouchScrollDevice = window.matchMedia('(pointer: coarse)').matches;
 
     // ── Performance-tier constants ─────────────────────────────────────
     // Mobile: fewer segments, no shadows, no clearcoat, skip micro-detail
@@ -443,6 +448,12 @@ const PPRPipes3D = () => {
     // If user scrolls during intro, fast-forward intro to end first.
     const heroEl = container.closest('section') as HTMLElement | null;
     let scrollTl: gsap.core.Timeline;
+    // Guard flag: prevents introTl.then() Promise callback from firing after
+    // the component has unmounted. JS Promises cannot be cancelled — calling
+    // introTl.kill() in cleanup stops the animation but NOT the .then().
+    // Without this guard, navigating away during the 2s intro creates orphaned
+    // ScrollTriggers attached to removed DOM nodes (causes errors on Safari).
+    let mounted = true;
 
     const createScrollTimeline = () => {
       scrollTl = gsap.timeline({
@@ -495,8 +506,11 @@ const PPRPipes3D = () => {
       }, 0);
     };
 
-    // Wait for intro to finish before enabling scroll-linked animation
+    // Wait for intro to finish before enabling scroll-linked animation.
+    // Guard with `mounted` flag — Promise callbacks cannot be cancelled, so
+    // introTl.kill() in cleanup won't stop .then() from firing after unmount.
     introTl.then(() => {
+      if (!mounted) return;
       createScrollTimeline();
     });
 
@@ -504,7 +518,7 @@ const PPRPipes3D = () => {
     const earlyScrollHandler = () => {
       if (introTl.isActive()) {
         introTl.progress(1).kill();
-        createScrollTimeline();
+        if (mounted) createScrollTimeline();
         window.removeEventListener('scroll', earlyScrollHandler);
       }
     };
@@ -1048,6 +1062,7 @@ const PPRPipes3D = () => {
 
     // 10. Cleanup (Comprehensive WebGL disposal to prevent memory leaks)
     return () => {
+      mounted = false; // Prevent any pending introTl.then() from firing
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', earlyScrollHandler);

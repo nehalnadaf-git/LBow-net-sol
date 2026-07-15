@@ -24,8 +24,12 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     // ── Reduced-motion preference ─────────────────────────────────────────
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ── Touch device detection ────────────────────────────────────────────
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Use CSS pointer media query, NOT navigator.maxTouchPoints, to detect
+    // true touch-primary devices. Safari on macOS reports maxTouchPoints=5
+    // for the trackpad — that falsely skips Lenis on desktop Mac Safari,
+    // removing smooth scroll entirely. pointer:coarse = finger (phone/tablet).
+    // pointer:fine = mouse or trackpad (desktop Safari gets Lenis correctly).
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
     // ── Lenis: desktop-only smooth scroll ─────────────────────────────────
     // FIX: On touch devices, skip Lenis entirely. Native mobile scroll is
