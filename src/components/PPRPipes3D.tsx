@@ -415,16 +415,24 @@ const PPRPipes3D = () => {
     fillLight.position.set(4, 5, 2);
     scene.add(fillLight);
 
-
-    // ── Cinematic intro — original reveal sequence ─────────────────────────
-    // 1. Main group starts: far below (y -4.5), receded (z -3), tilted 45°
-    //    Sweeps to rest in 2.0s with power4.out (fast arc, smooth landing)
-    // 2. Floating elbows pop in from scale 0 with elastic spring (sequential)
+    // ── Cinematic intro — device-tiered reveal sequence ───────────────────
+    // Mobile:  shorter sweep (2.5u), lighter tilt (30°), faster (1.3s)
+    // Desktop: full sweep (4.5u), 45° tilt, 2.0s — more dramatic on large screen
     //
-    // Uses entranceGroup proxy for position/rotation (animate loop never
-    // touches entranceGroup — only rootGroup/mainGroup — so zero conflict).
-    // Elbow scale is safe to tween directly — animate loop never sets scale.
-    const ep = { y: -4.5, z: -3, rz: -Math.PI / 4, ry: -0.4 };
+    // Early-scroll handler: if user scrolls during the intro (very common on
+    // iOS swipe), fast-forward intro to 100% so pipes settle immediately before
+    // the scroll parallax in the animate loop takes over. Without this, the
+    // pipes animate while scrolling — looks jarring on any device.
+    const introY  = isMobile ? -2.5 : -4.5;
+    const introZ  = isMobile ? -1.5 : -3.0;
+    const introRZ = isMobile ? -Math.PI / 6 : -Math.PI / 4;
+    const introRY = isMobile ? -0.2 : -0.4;
+    const introDur       = isMobile ? 1.3  : 2.0;
+    const elbowDur       = isMobile ? 1.2  : 1.6;
+    const elbow1Delay    = isMobile ? 0.25 : 0.4;
+    const elbow2Delay    = isMobile ? 0.4  : 0.65;
+
+    const ep = { y: introY, z: introZ, rz: introRZ, ry: introRY };
     entranceGroup.position.set(0, ep.y, ep.z);
     entranceGroup.rotation.set(0, ep.ry, ep.rz);
     elbowParent1.scale.setScalar(0);
@@ -434,7 +442,7 @@ const PPRPipes3D = () => {
     introTl
       .to(ep, {
         y: 0, z: 0, rz: 0, ry: 0,
-        duration: 2.0,
+        duration: introDur,
         ease: 'power4.out',
         onUpdate() {
           entranceGroup.position.y = ep.y;
@@ -447,17 +455,30 @@ const PPRPipes3D = () => {
           entranceGroup.rotation.set(0, 0, 0);
         },
       }, 0)
-      // Elbows pop in sequentially with elastic spring
       .to(elbowParent1.scale, {
         x: eb1Scale, y: eb1Scale, z: eb1Scale,
         ease: 'elastic.out(1.0, 0.65)',
-        duration: 1.6,
-      }, 0.4)
+        duration: elbowDur,
+      }, elbow1Delay)
       .to(elbowParent2.scale, {
         x: eb2Scale, y: eb2Scale, z: eb2Scale,
         ease: 'elastic.out(1.0, 0.65)',
-        duration: 1.6,
-      }, 0.65);
+        duration: elbowDur,
+      }, elbow2Delay);
+
+    // Early-scroll handler: fast-forward intro if user scrolls before it ends.
+    // Ensures clean handoff to the scroll-parallax system in the animate loop.
+    const earlyScrollHandler = () => {
+      if (introTl.isActive()) {
+        introTl.progress(1).kill();
+        entranceGroup.position.set(0, 0, 0);
+        entranceGroup.rotation.set(0, 0, 0);
+        elbowParent1.scale.setScalar(eb1Scale);
+        elbowParent2.scale.setScalar(eb2Scale);
+      }
+      window.removeEventListener('scroll', earlyScrollHandler);
+    };
+    window.addEventListener('scroll', earlyScrollHandler, { passive: true });
 
 
     // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
@@ -573,6 +594,7 @@ const PPRPipes3D = () => {
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
       introTl.kill();
+      window.removeEventListener('scroll', earlyScrollHandler);
       gsap.ticker.remove(animate);
       window.removeEventListener('scroll', onScroll);
       if (!isTouch) window.removeEventListener('mousemove', onMouseMove);
