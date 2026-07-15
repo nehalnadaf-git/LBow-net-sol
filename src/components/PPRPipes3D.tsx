@@ -390,8 +390,12 @@ const PPRPipes3D = () => {
       key.shadow.bias = -0.0005;
     }
     scene.add(key);
-    scene.add(Object.assign(new THREE.DirectionalLight(0xffffff, 1.5), { position: new THREE.Vector3(5, -5, -3) }));
-    scene.add(Object.assign(new THREE.DirectionalLight(0xffffff, 0.8), { position: new THREE.Vector3(4,  5,  2) }));
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    rimLight.position.set(5, -5, -3);
+    scene.add(rimLight);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    fillLight.position.set(4, 5, 2);
+    scene.add(fillLight);
 
     // ── Mouse parallax (desktop/mouse only) ────────────────────────────────
     let targetPX = 0, targetPY = 0, currPX = 0, currPY = 0;
