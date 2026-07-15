@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MapPin, Phone, CheckCircle, Truck, ArrowRight, Wrench } from 'lucide-react';
@@ -187,55 +188,66 @@ const LocationContent = ({ location }: LocationContentProps) => {
       </section>
 
       {/* Relevant Products */}
-      <section className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28 bg-[#0A0F1E]">
-        <PipeTopologyBg isLight={false} />
+      <section className="relative overflow-hidden w-full py-16 sm:py-20 lg:py-28 bg-[#F0F4F8]">
+        <DotMatrixBg isLight={true} />
         <div className="relative z-10 max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
 
           {/* Section Header */}
-          <div className="mb-10 sm:mb-14">
-            <div className="font-body font-medium text-xs uppercase tracking-[0.12em] text-[#4CAF50] mb-3">
+          <div className="mb-10 sm:mb-12">
+            <div className="font-body font-medium text-xs uppercase tracking-[0.12em] text-[#2E7D32] mb-3">
               Products We Supply
             </div>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#0A0F1E] leading-tight">
               Piping Solutions for {location.displayName}
             </h2>
-            <p className="font-body text-sm text-white/50 mt-3 max-w-xl leading-relaxed">
-              Quality-certified industrial piping systems — PPR, compressed air lines, valves &amp; fittings, all in stock in Bangalore.
+            <p className="font-body text-sm text-[#6B7280] mt-3 max-w-xl leading-relaxed">
+              Quality-certified industrial piping systems — PPR pipes, compressed air lines, valves &amp; fittings, all in stock in Bangalore.
             </p>
           </div>
 
           {/* Product Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {featuredProducts.map((product) => (
               <Link
                 key={product.slug}
                 href={`/products/${product.slug}`}
-                className="group relative flex flex-col bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 hover:border-[#2E7D32]/60 rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(46,125,50,0.12)]"
+                className="group flex flex-col bg-white rounded-2xl border border-[rgba(15,23,42,0.08)] overflow-hidden hover:border-[#2E7D32]/40 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(15,23,42,0.10)] transition-all duration-300"
               >
-                {/* Category badge */}
-                <span className="inline-flex items-center gap-1.5 font-body font-semibold text-[0.6rem] uppercase tracking-wider bg-[rgba(46,125,50,0.18)] text-[#4CAF50] px-3 py-1 rounded-full mb-4 w-fit">
-                  <Wrench size={9} />
-                  {product.category}
-                </span>
-
-                {/* Product name */}
-                <h3 className="font-heading font-semibold text-white text-sm sm:text-[0.95rem] leading-snug mb-3">
-                  {product.name}
-                </h3>
-
-                {/* Tagline */}
-                <p className="font-body text-[0.72rem] sm:text-xs text-white/45 leading-relaxed mb-5 flex-1 line-clamp-3">
-                  {product.tagline}
-                </p>
-
-                {/* View Details arrow */}
-                <div className="mt-auto flex items-center gap-1.5 font-body font-semibold text-[0.78rem] text-[#4CAF50] group-hover:text-white transition-colors duration-300">
-                  View Details
-                  <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                {/* Product image */}
+                <div className="relative w-full h-44 sm:h-48 bg-[#F8F9FA] overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-4 group-hover:scale-[1.04] transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
                 </div>
 
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-5 right-5 h-[2px] rounded-full bg-gradient-to-r from-[#2E7D32] to-[#1565C0] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Card body */}
+                <div className="flex flex-col flex-1 p-5">
+                  {/* Category badge */}
+                  <span className="inline-flex items-center gap-1.5 font-body font-semibold text-[0.6rem] uppercase tracking-wider bg-[rgba(46,125,50,0.08)] text-[#2E7D32] px-3 py-1 rounded-full mb-3 w-fit">
+                    <Wrench size={9} />
+                    {product.category}
+                  </span>
+
+                  {/* Product name */}
+                  <h3 className="font-heading font-semibold text-[#0A0F1E] text-sm sm:text-[0.95rem] leading-snug mb-2">
+                    {product.name}
+                  </h3>
+
+                  {/* Tagline */}
+                  <p className="font-body text-xs text-[#6B7280] leading-relaxed flex-1 line-clamp-2 mb-4">
+                    {product.tagline}
+                  </p>
+
+                  {/* View Details */}
+                  <div className="flex items-center gap-1.5 font-body font-semibold text-xs text-[#2E7D32] group-hover:text-[#1B5E20] transition-colors duration-300 mt-auto">
+                    View Details
+                    <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
@@ -244,7 +256,7 @@ const LocationContent = ({ location }: LocationContentProps) => {
           <div className="mt-10 sm:mt-12 flex justify-center">
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2.5 bg-[#2E7D32] hover:bg-[#256427] text-white font-body font-semibold text-sm rounded-xl px-8 py-3.5 transition-all duration-300 shadow-[0_4px_20px_rgba(46,125,50,0.3)] hover:shadow-[0_8px_32px_rgba(46,125,50,0.45)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 bg-[#2E7D32] hover:bg-[#256427] text-white font-body font-semibold text-sm rounded-xl px-8 py-3.5 transition-all duration-300 shadow-[0_4px_20px_rgba(46,125,50,0.25)] hover:shadow-[0_8px_32px_rgba(46,125,50,0.40)] hover:-translate-y-0.5"
             >
               View All Products
               <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
