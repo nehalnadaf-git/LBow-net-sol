@@ -128,11 +128,29 @@ export default function QuickEnquiry() {
   /* ── Scroll lock (Lenis-compatible) ──────────────────────────────── */
   useEffect(() => {
     if (open) {
+      // Measure the scrollbar width BEFORE hiding it.
+      // On Windows, removing the scrollbar widens the layout by ~15-17px.
+      // That width change fires the ResizeObserver in ClientProviders →
+      // ScrollTrigger.refresh() → hero / VideoReveal sections re-animate.
+      // Compensating with equal padding-right keeps offsetWidth stable,
+      // so the ResizeObserver sees no change and never calls refresh().
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      if (scrollbarWidth > 0) {
+        document.documentElement.style.setProperty(
+          '--qe-scrollbar-width',
+          `${scrollbarWidth}px`
+        );
+      }
       document.documentElement.classList.add('qe-scroll-locked');
     } else {
       document.documentElement.classList.remove('qe-scroll-locked');
+      document.documentElement.style.removeProperty('--qe-scrollbar-width');
     }
-    return () => document.documentElement.classList.remove('qe-scroll-locked');
+    return () => {
+      document.documentElement.classList.remove('qe-scroll-locked');
+      document.documentElement.style.removeProperty('--qe-scrollbar-width');
+    };
   }, [open]);
 
   /* ── Focus management ────────────────────────────────────────────── */
@@ -530,11 +548,20 @@ export default function QuickEnquiry() {
       {/* ── Injected styles ─────────────────────────────────────────── */}
       <style>{`
         /* ── Scroll lock (Lenis-compatible) ─────────────────────────── */
+        /*
+         * padding-right compensates for the scrollbar width so that
+         * document.body.offsetWidth stays the same after overflow:hidden.
+         * Without this, the ResizeObserver in ClientProviders fires,
+         * calls ScrollTrigger.refresh(), and causes the hero / VideoReveal
+         * sections to visually re-animate whenever the panel opens/closes.
+         */
         html.qe-scroll-locked {
           overflow: hidden;
+          padding-right: var(--qe-scrollbar-width, 0px);
         }
         html.lenis.qe-scroll-locked {
           overflow: hidden !important;
+          padding-right: var(--qe-scrollbar-width, 0px) !important;
         }
 
         /* ── Panel: desktop geometry ─────────────────────────────────
