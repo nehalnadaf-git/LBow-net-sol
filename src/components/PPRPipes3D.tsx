@@ -207,7 +207,12 @@ const PPRPipes3D = () => {
     elbowParent2.add(elbowFitting2);
     mainGroup.add(elbowParent1, elbowParent2);
     rootGroup.add(mainGroup);
-    scene.add(rootGroup);
+
+    // entranceGroup — exclusive target of the entrance tween.
+    // animate loop only touches rootGroup/mainGroup → zero conflict.
+    const entranceGroup = new THREE.Group();
+    entranceGroup.add(rootGroup);
+    scene.add(entranceGroup);
 
     // ── Breakpoint layout ─────────────────────────────────────────────────
     let baseX = 0, baseY = 0, mainScale = 1;
@@ -410,6 +415,29 @@ const PPRPipes3D = () => {
     fillLight.position.set(4, 5, 2);
     scene.add(fillLight);
 
+    // ── Entrance — rise from below + scale in, expo.out ─────────────────────
+    // CSS opacity (0→1, 0.7s) handles the fade simultaneously.
+    // Proxy pattern is mandatory: direct gsap.to(group.position) would conflict
+    // with the animate loop. Plain object tween + onUpdate = safe.
+    const entranceStartY = isMobile ? -1.5 : -2.6;
+    entranceGroup.position.y = entranceStartY;
+    entranceGroup.scale.setScalar(0.88);
+    const entranceProxy = { y: entranceStartY, s: 0.88 };
+    const entranceTween = gsap.to(entranceProxy, {
+      y: 0, s: 1.0,
+      duration: isMobile ? 0.85 : 1.05,
+      ease: 'expo.out',
+      delay: 0.15,
+      onUpdate() {
+        entranceGroup.position.y = entranceProxy.y;
+        entranceGroup.scale.setScalar(entranceProxy.s);
+      },
+      onComplete() {
+        entranceGroup.position.y = 0;
+        entranceGroup.scale.setScalar(1.0);
+      },
+    });
+
     // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
     // Passive scroll listener reads native position every frame.
     // Works identically on iOS Safari, Android Chrome, macOS Safari, desktop.
@@ -522,6 +550,7 @@ const PPRPipes3D = () => {
 
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
+      entranceTween.kill();
       gsap.ticker.remove(animate);
       window.removeEventListener('scroll', onScroll);
       if (!isTouch) window.removeEventListener('mousemove', onMouseMove);
