@@ -58,64 +58,111 @@ const HeroSection = () => {
       scrollIndicatorRef.current, scrollIndicatorDesktopRef.current,
     ];
 
-    // Grab all floating spec tags for intro reveal & scroll animations
     const specTags = gsap.utils.toArray('.floating-spec-tag');
 
+    // ── Reduced-motion: instant reveal, no animation ──────────────────────
     if (prefersReducedMotion()) {
-      // Instantly reveal everything — no animation for reduced-motion users.
-      // Without this, scroll indicators (opacity:0 inline) and all GSAP-controlled
-      // elements stay invisible forever when the animation is skipped.
       gsap.set(allEls, { opacity: 1, y: 0, scale: 1 });
-      // Restore divider to its design opacity (70%) rather than fully opaque
-      gsap.set(dDividerRef.current, { opacity: 0.7 });
+      gsap.set(dDividerRef.current, { opacity: 0.7, scaleX: 1 });
       gsap.set(specTags, { opacity: 1, scale: 1 });
       return;
     }
 
-    gsap.set(allEls, { opacity: 0 });
-    gsap.set(specTags, { opacity: 0, scale: 0.5 });
+    // ── Initial hidden states ─────────────────────────────────────────────
+    // Badge: scale down + fade
     gsap.set([
       mLabelRef.current, tLabelRef.current, dLabelRef.current,
-      mSubtitleRef.current, tSubtitleRef.current, dSubtitleRef.current,
-      mCtaRef.current, tCtaRef.current, dCtaRef.current,
-    ], { y: 16 });
-    gsap.set([scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], { y: 16 });
+    ], { opacity: 0, y: 18, scale: 0.88 });
+
+    // Headlines: large y offset for dramatic sweep (expo.out)
     gsap.set([
       mLine1Ref.current, mLine2Ref.current, mLine3Ref.current,
       tLine1Ref.current, tLine2Ref.current, tLine3Ref.current,
       dLine1Ref.current, dLine2Ref.current, dLine3Ref.current,
-    ], { y: 28 });
+    ], { opacity: 0, y: 52 });
 
-    const tl = gsap.timeline({ delay: 0.3 });
+    // Divider: collapse to zero width, then draw in from left
+    gsap.set(dDividerRef.current, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
+
+    // Subtitle, CTA, scroll indicators
+    gsap.set([
+      mSubtitleRef.current, tSubtitleRef.current, dSubtitleRef.current,
+    ], { opacity: 0, y: 22 });
+    gsap.set([
+      mCtaRef.current, tCtaRef.current, dCtaRef.current,
+    ], { opacity: 0, y: 18, scale: 0.96 });
+    gsap.set([scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], { opacity: 0, y: 14 });
+
+    // Spec tags: scale down + fade
+    gsap.set(specTags, { opacity: 0, scale: 0.6, y: 8 });
+
+    // ── Premium reveal timeline ───────────────────────────────────────────
+    // Philosophy: fast cascade that lands in ~0.9s, feels immediate & confident.
+    // Each layer uses the easing best suited to its role:
+    //   expo.out  — headlines (dramatic deceleration, "lands" with authority)
+    //   power3.out — text + indicators (clean, smooth)
+    //   back.out  — interactive elements + tags (subtle spring = alive)
+    const tl = gsap.timeline({ delay: 0.1 });
 
     tl
-      .to([mLabelRef.current, tLabelRef.current, dLabelRef.current], { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' })
-      .to([mLine1Ref.current, tLine1Ref.current, dLine1Ref.current], { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 0.2)
-      .to([mLine2Ref.current, tLine2Ref.current, dLine2Ref.current], { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 0.3)
-      .to([mLine3Ref.current, tLine3Ref.current, dLine3Ref.current], { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 0.4)
-      // Divider fades in right after the last headline line, at its design opacity
-      .to(dDividerRef.current, { opacity: 0.7, duration: 0.35, ease: 'power3.out' }, 0.5)
-      .to([mSubtitleRef.current, tSubtitleRef.current, dSubtitleRef.current], { opacity: 1, y: 0, duration: 0.38, ease: 'power3.out' }, 0.55)
-      .to([mCtaRef.current, tCtaRef.current, dCtaRef.current], { opacity: 1, y: 0, duration: 0.38, ease: 'power3.out' }, 0.65)
-      .to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, 0.75)
-      .to(scrollIndicatorDesktopRef.current, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, 0.75)
-      .to(specTags, {
-        opacity: 1,
-        scale: 1,
-        duration: 1.5,
-        stagger: 0.12,
-        ease: 'elastic.out(1.0, 0.7)'
-      }, 0.5);
+      // 1. Badge pops in — sets brand voice, first thing seen
+      .to([mLabelRef.current, tLabelRef.current, dLabelRef.current], {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.5, ease: 'expo.out',
+      }, 0)
 
-    // Fade and scroll tags upwards as hero scrolls away
-    // FIX: scrub value aligned with PPRPipes3D — prevents desync on desktop
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      // 2. Headline cascade — each line sweeps up from below, staggered
+      //    expo.out gives a "landing" feel that is instantly premium
+      .to([mLine1Ref.current, tLine1Ref.current, dLine1Ref.current], {
+        opacity: 1, y: 0, duration: 0.6, ease: 'expo.out',
+      }, 0.14)
+      .to([mLine2Ref.current, tLine2Ref.current, dLine2Ref.current], {
+        opacity: 1, y: 0, duration: 0.6, ease: 'expo.out',
+      }, 0.22)
+      .to([mLine3Ref.current, tLine3Ref.current, dLine3Ref.current], {
+        opacity: 1, y: 0, duration: 0.6, ease: 'expo.out',
+      }, 0.30)
+
+      // 3. Green divider draws from left — like underlining a signature
+      .to(dDividerRef.current, {
+        opacity: 0.7, scaleX: 1,
+        duration: 0.45, ease: 'power3.out',
+      }, 0.44)
+
+      // 4. Subtitle fades up cleanly
+      .to([mSubtitleRef.current, tSubtitleRef.current, dSubtitleRef.current], {
+        opacity: 1, y: 0, duration: 0.45, ease: 'power3.out',
+      }, 0.5)
+
+      // 5. CTAs spring in — back.out gives the buttons a confident "settle"
+      .to([mCtaRef.current, tCtaRef.current, dCtaRef.current], {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.45, ease: 'back.out(1.4)',
+      }, 0.62)
+
+      // 6. Scroll indicators drift in last — after content is established
+      .to([scrollIndicatorRef.current, scrollIndicatorDesktopRef.current], {
+        opacity: 1, y: 0, duration: 0.4, ease: 'power3.out',
+      }, 0.74)
+
+      // 7. Floating spec tags pop in with spring — staggered, decorative
+      //    back.out(1.8) is snappy and alive (vs old elastic 1.5s = too bouncy)
+      .to(specTags, {
+        opacity: 1, scale: 1, y: 0,
+        duration: 0.45,
+        stagger: { amount: 0.28, from: 'start' },
+        ease: 'back.out(1.8)',
+      }, 0.46);
+
+    // ── Spec tags fade on scroll — passive window.scrollY approach ────────
+    // Replaced maxTouchPoints (false-positive on macOS Safari) with pointer:coarse.
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSectionRef.current,
         start: 'top top',
         end: 'bottom 40%',
-        scrub: isTouchDevice ? true : 0.15,
+        scrub: isTouch ? true : 0.15,
       }
     });
     scrollTl.to(specTags, {
@@ -125,11 +172,12 @@ const HeroSection = () => {
       ease: 'power1.in',
     });
 
-    return () => { 
-      tl.kill(); 
+    return () => {
+      tl.kill();
       scrollTl.kill();
     };
   }, []);
+
 
   return (
     <section
