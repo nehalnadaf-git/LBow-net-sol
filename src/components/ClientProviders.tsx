@@ -39,6 +39,12 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     let lenis: Lenis | null = null;
     let updateTicker: ((time: number) => void) | null = null;
 
+    // ── Always disable GSAP lag smoothing ─────────────────────────────────
+    // GSAP's default lag smoothing (250ms) freezes scrub animations during
+    // frame spikes. On iOS with WebGL running, spikes are common. Disabling
+    // this ensures scrub progress always advances even after a heavy frame.
+    gsap.ticker.lagSmoothing(0);
+
     if (!isTouchDevice && !reducedMotion) {
       lenis = new Lenis({
         lerp: 0.082,                // Premium "velvet" smooth scroll
@@ -62,11 +68,20 @@ export default function ClientProviders({ children }: { children: React.ReactNod
 
       // Add Lenis to GSAP ticker so they share the same rAF loop
       gsap.ticker.add(updateTicker);
-      // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
-      gsap.ticker.lagSmoothing(0);
     } else {
-      // Touch/reduced-motion: no Lenis, no smooth scroll, no extra overhead.
-      // ScrollTrigger works directly with native scroll events.
+      // ── Touch / reduced-motion: no Lenis, but keep ScrollTrigger in sync ──
+      // Without Lenis, ScrollTrigger.update() is only called from native scroll
+      // events, which on iOS fire asynchronously (not every rAF frame). This
+      // causes the scrub timeline to desync from the Three.js render — pipes
+      // appear to freeze or not respond to scroll.
+      //
+      // Fix: add a minimal GSAP ticker callback that calls ScrollTrigger.update()
+      // every frame. This replicates exactly what Lenis was providing, at zero
+      // cost (no scroll virtualisation, no lerp, just a one-line update call).
+      const touchSTUpdate = () => ScrollTrigger.update();
+      gsap.ticker.add(touchSTUpdate);
+      // Store as updateTicker so cleanup removes it
+      updateTicker = touchSTUpdate;
       lenisRef.current = null;
     }
 
