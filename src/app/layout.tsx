@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import QuickEnquiry from '@/components/QuickEnquiry';
 import ClientProviders from '@/components/ClientProviders';
 
 export const metadata: Metadata = {
@@ -123,6 +124,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <ScrollToTop />
+          <QuickEnquiry />
         </ClientProviders>
       </body>
     </html>

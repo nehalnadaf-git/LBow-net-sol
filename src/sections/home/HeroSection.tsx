@@ -108,12 +108,14 @@ const HeroSection = () => {
       }, 0.5);
 
     // Fade and scroll tags upwards as hero scrolls away
+    // FIX: scrub value aligned with PPRPipes3D — prevents desync on desktop
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSectionRef.current,
         start: 'top top',
         end: 'bottom 40%',
-        scrub: true,
+        scrub: isTouchDevice ? true : 0.15,
       }
     });
     scrollTl.to(specTags, {
@@ -131,6 +133,7 @@ const HeroSection = () => {
 
   return (
     <section
+      id="hero"
       ref={heroSectionRef}
       className="relative w-full overflow-hidden bg-gradient-to-br from-[#FAFAF9] via-[#FFFFFF] to-[#F5F5F4]"
       style={{ minHeight: '100svh' }}

@@ -24,14 +24,19 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={handleClick}
-      className={`fixed bottom-24 right-6 z-40 w-10 h-10 rounded-full border border-[#434343] bg-[#2E7D32] flex items-center justify-center transition-all duration-300 hover:bg-[#1b5e20] group ${
+      className={`fixed z-40 flex items-center justify-center w-11 h-11 rounded-full border border-[#434343] bg-[#2E7D32] text-white transition-all duration-300 hover:bg-[#1b5e20] group ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
+      style={{
+        /* Sit above the Enquiry FAB (44px) + 24px gap + safe-area */
+        bottom: 'calc(44px + 1.5rem + 16px + env(safe-area-inset-bottom, 0px))',
+        right: '1.5rem',
+      }}
       aria-label="Scroll to top"
     >
       <ArrowUp
         size={18}
-        className="text-[#EEEEEE] group-hover:text-white transition-colors duration-300"
+        className="group-hover:text-white transition-colors duration-300"
       />
     </button>
   );

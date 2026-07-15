@@ -11,7 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 const PPRPipes3D = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const frameRef = useRef<number>(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -21,6 +20,18 @@ const PPRPipes3D = () => {
     // users with vestibular disorders. The hero still renders (no blank space)
     // but the 3D pipes are not shown.
     if (prefersReducedMotion()) return;
+
+    // ── Device tier detection (computed once at mount) ──────────────────
+    const isMobile = window.innerWidth < 768;
+    const isTouchScrollDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // ── Performance-tier constants ─────────────────────────────────────
+    // Mobile: fewer segments, no shadows, no clearcoat, skip micro-detail
+    const SEG = isMobile ? 16 : 32;           // Cylinder radial segments
+    const TORUS_SEG = isMobile ? 16 : 32;     // Torus tubular & radial segments
+    const DETAIL_SEG = isMobile ? 8 : 16;     // Small details (thread ridges)
+    const SKIP_DETAIL = isMobile;              // Skip invisible micro-detail meshes
+    const DPR_CAP = isMobile ? 1.5 : 2;       // Pixel ratio cap
 
     // Track WebGL resources for proper garbage collection (memory leak prevention)
     const geometriesToDispose: THREE.BufferGeometry[] = [];
@@ -36,19 +47,24 @@ const PPRPipes3D = () => {
       return mat;
     };
 
-    // 1. Renderer Setup (High-performance WebGL settings)
+    // 1. Renderer Setup (Performance-tiered WebGL settings)
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
+      antialias: !isMobile,  // MSAA disabled on mobile — expensive, barely visible at high DPR
       alpha: true,
-      powerPreference: "high-performance" // requests high-performance GPU on dual-GPU systems/mobiles
+      powerPreference: isMobile ? 'default' : 'high-performance',
     });
     renderer.setClearColor(0x000000, 0); // Transparent background clear color
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // cap at 2 for performance on mobile
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap; // PCFSoftShadowMap deprecated in r169+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, DPR_CAP));
+
+    if (!isMobile) {
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFShadowMap;
+    }
+    // Mobile: no tone mapping, no shadows — significant GPU savings
+
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -62,53 +78,91 @@ const PPRPipes3D = () => {
     );
     camera.position.set(0, 0, 11); // pulled back slightly to show brass end fittings completely
 
-    // 3. Materials Setup (High-quality physical plastic & silver metal)
-    const solidGreenPlasticMat = new THREE.MeshPhysicalMaterial({
-      color: 0x1fb542, // Vibrant grass green matching the image standard
-      roughness: 0.22, // Satin/matte plastic texture
-      metalness: 0.01,
-      clearcoat: 0.28, // soft outer glossy lacquer look
-      clearcoatRoughness: 0.18,
-    });
+    // 3. Materials Setup — tiered by device capability
+    // Desktop: MeshPhysicalMaterial with clearcoat (premium look)
+    // Mobile:  MeshStandardMaterial (no clearcoat pass, ~2× faster)
 
-    // PPR Blue material — matches standard blue PPR pipe colour (royal/deep blue)
-    const solidBluePlasticMat = new THREE.MeshPhysicalMaterial({
-      color: 0x1565C0, // Deep royal blue — authentic PPR pipe blue
-      roughness: 0.20,
-      metalness: 0.01,
-      clearcoat: 0.32,
-      clearcoatRoughness: 0.16,
-    });
+    const solidGreenPlasticMat = trackMaterial(isMobile
+      ? new THREE.MeshStandardMaterial({
+          color: 0x1fb542,
+          roughness: 0.22,
+          metalness: 0.01,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0x1fb542,
+          roughness: 0.22,
+          metalness: 0.01,
+          clearcoat: 0.28,
+          clearcoatRoughness: 0.18,
+        })
+    );
 
+    const solidBluePlasticMat = trackMaterial(isMobile
+      ? new THREE.MeshStandardMaterial({
+          color: 0x1565C0,
+          roughness: 0.20,
+          metalness: 0.01,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0x1565C0,
+          roughness: 0.20,
+          metalness: 0.01,
+          clearcoat: 0.32,
+          clearcoatRoughness: 0.16,
+        })
+    );
 
-    // Material A: Silver plus gold champagne alloy mixture (for fittings hex collars)
-    const metalMat = new THREE.MeshPhysicalMaterial({
-      color: 0xe2d6b5, // Silver plus gold alloy mix (champagne metallic)
-      roughness: 0.26, // diffuse scattering to reveal shape without mirroring black skybox
-      metalness: 0.82, // strong metal reflectivity
-      clearcoat: 0.4, // polished outer layer
-      clearcoatRoughness: 0.15,
-    });
+    const metalMat = trackMaterial(isMobile
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe2d6b5,
+          roughness: 0.26,
+          metalness: 0.82,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe2d6b5,
+          roughness: 0.26,
+          metalness: 0.82,
+          clearcoat: 0.4,
+          clearcoatRoughness: 0.15,
+        })
+    );
 
-    // Material B: Full realistic golden metal color (for threaded cylinders & ridges)
-    const goldMetalMat = new THREE.MeshPhysicalMaterial({
-      color: 0xe5b83b, // Deep rich realistic gold/brass metal color
-      roughness: 0.24, // diffuse roughness to prevent black reflection pools
-      metalness: 0.85, // strong metallic luster
-      clearcoat: 0.35, // polished outer layer
-      clearcoatRoughness: 0.15,
-    });
+    const goldMetalMat = trackMaterial(isMobile
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe5b83b,
+          roughness: 0.24,
+          metalness: 0.85,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe5b83b,
+          roughness: 0.24,
+          metalness: 0.85,
+          clearcoat: 0.35,
+          clearcoatRoughness: 0.15,
+        })
+    );
 
-    // Material C: Polished chrome/silver steel for threads and inserts (mirror finish)
-    const shinySilverMetalMat = new THREE.MeshPhysicalMaterial({
-      color: 0xf5f5f5, // Bright mirror silver
-      roughness: 0.01, // Near zero roughness for mirror reflection
-      metalness: 1.0,  // 100% metallic mirror surface
-      clearcoat: 1.0,  // Fully polished clearcoat
-      clearcoatRoughness: 0.0,
-    });
+    const shinySilverMetalMat = trackMaterial(isMobile
+      ? new THREE.MeshStandardMaterial({
+          color: 0xf5f5f5,
+          roughness: 0.05,
+          metalness: 1.0,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xf5f5f5,
+          roughness: 0.01,
+          metalness: 1.0,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.0,
+        })
+    );
 
-    // Helper to create a metal transition fitting (highly realistic hex collar, 3D threads & grip flutes)
+    // FIX #3: Single shared dark-hole material (was duplicated 5 times)
+    const darkHoleMat = trackMaterial(
+      new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 })
+    );
+
+    // Helper to create a metal transition fitting (hex collar, threads & grip flutes)
     const createBrassFitting = (isMale: boolean, pipeRadius: number, plasticMat = solidGreenPlasticMat) => {
       const group = new THREE.Group();
       const rSleeve = pipeRadius + 0.13;
@@ -117,31 +171,33 @@ const PPRPipes3D = () => {
 
       // 1. Plastic socket sleeve main body
       const plasticSleeve = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rSleeve, rSleeve, 0.7, 24)),
+        trackGeometry(new THREE.CylinderGeometry(rSleeve, rSleeve, 0.7, SEG)),
         plasticMat
       );
       plasticSleeve.position.y = 0.65;
       
       // 2. Plastic sleeve taper to pipe
       const plasticTaper = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rSleeve, pipeRadius, 0.3, 24)),
+        trackGeometry(new THREE.CylinderGeometry(rSleeve, pipeRadius, 0.3, SEG)),
         plasticMat
       );
       plasticTaper.position.y = 0.15;
       group.add(plasticSleeve, plasticTaper);
 
-      // 3. Molded vertical flutes (wrench-grip ridges) around the plastic sleeve base
-      const ridgeGeom = trackGeometry(new THREE.BoxGeometry(0.04, 0.5, 0.04));
-      for (let i = 0; i < 8; i++) {
-        const angle = (i / 8) * Math.PI * 2;
-        const ridgeMesh = new THREE.Mesh(ridgeGeom, plasticMat);
-        ridgeMesh.position.set(
-          Math.cos(angle) * (rSleeve + 0.02),
-          0.6,
-          Math.sin(angle) * (rSleeve + 0.02)
-        );
-        ridgeMesh.rotation.y = -angle;
-        group.add(ridgeMesh);
+      // 3. Molded vertical flutes (wrench-grip ridges) — skip on mobile (invisible)
+      if (!SKIP_DETAIL) {
+        const ridgeGeom = trackGeometry(new THREE.BoxGeometry(0.04, 0.5, 0.04));
+        for (let i = 0; i < 8; i++) {
+          const angle = (i / 8) * Math.PI * 2;
+          const ridgeMesh = new THREE.Mesh(ridgeGeom, plasticMat);
+          ridgeMesh.position.set(
+            Math.cos(angle) * (rSleeve + 0.02),
+            0.6,
+            Math.sin(angle) * (rSleeve + 0.02)
+          );
+          ridgeMesh.rotation.y = -angle;
+          group.add(ridgeMesh);
+        }
       }
 
       // 4. Metal insert Hex Nut collar
@@ -153,48 +209,52 @@ const PPRPipes3D = () => {
       group.add(brassHex);
 
       if (isMale) {
-        // Male thread body (full realistic gold metal)
+        // Male thread body
         const threadBody = new THREE.Mesh(
-          trackGeometry(new THREE.CylinderGeometry(rThread, rThread, 0.5, 24)),
+          trackGeometry(new THREE.CylinderGeometry(rThread, rThread, 0.5, SEG)),
           goldMetalMat
         );
         threadBody.position.y = 1.6;
         group.add(threadBody);
 
-        // Male thread ridges (real 3D spiral-threads using toruses in full realistic gold)
-        for (let i = 0; i < 4; i++) {
-          const ridge = new THREE.Mesh(
-            trackGeometry(new THREE.TorusGeometry(rThread, 0.025, 8, 16)),
-            goldMetalMat
-          );
-          ridge.rotation.x = Math.PI / 2;
-          ridge.position.y = 1.4 + i * 0.12;
-          group.add(ridge);
+        // Male thread ridges — skip on mobile (invisible at scale)
+        if (!SKIP_DETAIL) {
+          for (let i = 0; i < 4; i++) {
+            const ridge = new THREE.Mesh(
+              trackGeometry(new THREE.TorusGeometry(rThread, 0.025, 8, DETAIL_SEG)),
+              goldMetalMat
+            );
+            ridge.rotation.x = Math.PI / 2;
+            ridge.position.y = 1.4 + i * 0.12;
+            group.add(ridge);
+          }
         }
       } else {
-        // Female collar (silver-gold mix)
+        // Female collar
         const femaleCollar = new THREE.Mesh(
-          trackGeometry(new THREE.CylinderGeometry(rHex - 0.02, rHex - 0.02, 0.4, 24)),
+          trackGeometry(new THREE.CylinderGeometry(rHex - 0.02, rHex - 0.02, 0.4, SEG)),
           metalMat
         );
         femaleCollar.position.y = 1.4;
         group.add(femaleCollar);
 
-        // Dark inner hole lined with gold metal threads on the sides
+        // Dark inner hole — uses shared darkHoleMat (FIX #3)
         const innerHole = new THREE.Mesh(
-          trackGeometry(new THREE.CylinderGeometry(rThread, rThread, 0.41, 24)),
-          trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
+          trackGeometry(new THREE.CylinderGeometry(rThread, rThread, 0.41, SEG)),
+          darkHoleMat
         );
         innerHole.position.y = 1.41;
         group.add(innerHole);
       }
 
-      group.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
+      if (!isMobile) {
+        group.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+      }
 
       return group;
     };
@@ -207,50 +267,52 @@ const PPRPipes3D = () => {
 
       // Main coupling socket
       const main = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rSleeve, rSleeve, 0.6, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(rSleeve, rSleeve, 0.6, SEG)), 
         plasticMat
       );
       main.position.y = 0;
 
       // Mold-seam central ridge
       const band = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rSleeve + 0.05, rSleeve + 0.05, 0.15, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(rSleeve + 0.05, rSleeve + 0.05, 0.15, SEG)), 
         plasticMat
       );
       band.position.y = 0;
 
       // Entry rims (reinforcements at socket edges)
       const topRim = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rRim, rRim, 0.1, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(rRim, rRim, 0.1, SEG)), 
         plasticMat
       );
       topRim.position.y = 0.35;
       const bottomRim = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rRim, rRim, 0.1, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(rRim, rRim, 0.1, SEG)), 
         plasticMat
       );
       bottomRim.position.y = -0.35;
 
       // Tapers to meet the pipe surface smoothly
       const topTaper = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(pipeRadius, rRim, 0.2, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(pipeRadius, rRim, 0.2, SEG)), 
         plasticMat
       );
       topTaper.position.y = 0.5;
       const bottomTaper = new THREE.Mesh(
-        trackGeometry(new THREE.CylinderGeometry(rRim, pipeRadius, 0.2, 24)), 
+        trackGeometry(new THREE.CylinderGeometry(rRim, pipeRadius, 0.2, SEG)), 
         plasticMat
       );
       bottomTaper.position.y = -0.5;
 
       group.add(main, band, topRim, bottomRim, topTaper, bottomTaper);
       
-      group.traverse(child => {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
+      if (!isMobile) {
+        group.traverse(child => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+      }
       return group;
     };
 
@@ -288,8 +350,6 @@ const PPRPipes3D = () => {
     let baseX = 0;
     let baseY = 0;
     let targetMainScale = 1.0;
-    // Declared BEFORE updateLayoutPosition() so the function can safely assign them
-    // (let is not hoisted with a value — using them before declaration = TDZ ReferenceError)
     let targetElbowScale = 0.68;
     let targetElbow2Scale = 0.68;
 
@@ -336,32 +396,30 @@ const PPRPipes3D = () => {
         elbow2BaseY = -0.9;
         targetElbow2Scale = 0.58;
       } else {
-        // Mobile (< 768px): move pipes UP into transparent upper portion of gradient
-        // The dark gradient covers the bottom 55% (where text is) — pipes must be in the clear top half
+        // Mobile (< 768px): FIX #9 — tightened positions for better viewport coverage
         baseX = 0.2;
         baseY = 0.4;
         targetMainScale = 0.46;
 
-        elbowBaseX = -0.7;
-        elbowBaseY = 2.5;
+        elbowBaseX = -0.5;
+        elbowBaseY = 2.0;
         targetElbowScale = 0.68;
 
-        elbow2BaseX = -1.3;
-        elbow2BaseY = 4.0;
+        elbow2BaseX = -1.0;
+        elbow2BaseY = 3.2;
         targetElbow2Scale = 0.68;
       }
-
-      scrollGroup.position.set(baseX, baseY, 0);
-      scrollGroup.scale.set(targetMainScale, targetMainScale, targetMainScale);
-
-      elbowFittingParent.position.set(elbowBaseX, elbowBaseY, 1.3);
-      elbowFittingParent.scale.set(targetElbowScale, targetElbowScale, targetElbowScale);
-
-      elbowFitting2Parent.position.set(elbow2BaseX, elbow2BaseY, 1.1);
-      elbowFitting2Parent.scale.set(targetElbow2Scale, targetElbow2Scale, targetElbow2Scale);
     };
 
     updateLayoutPosition();
+
+    // Apply initial layout positions (before intro animation overrides them)
+    scrollGroup.position.set(baseX, baseY, 0);
+    scrollGroup.scale.set(targetMainScale, targetMainScale, targetMainScale);
+    elbowFittingParent.position.set(elbowBaseX, elbowBaseY, 1.3);
+    elbowFittingParent.scale.set(targetElbowScale, targetElbowScale, targetElbowScale);
+    elbowFitting2Parent.position.set(elbow2BaseX, elbow2BaseY, 1.1);
+    elbowFitting2Parent.scale.set(targetElbow2Scale, targetElbow2Scale, targetElbow2Scale);
 
     // 10. GSAP Intro Reveal & Scroll Animations
     // Set initial off-screen / scaled-down values for the intro reveal
@@ -380,78 +438,77 @@ const PPRPipes3D = () => {
     introTl.to(elbowFittingParent.scale, { x: targetElbowScale, y: targetElbowScale, z: targetElbowScale, ease: 'elastic.out(1.0, 0.65)', duration: 1.6 }, 0.4);
     introTl.to(elbowFitting2Parent.scale, { x: targetElbow2Scale, y: targetElbow2Scale, z: targetElbow2Scale, ease: 'elastic.out(1.0, 0.65)', duration: 1.6 }, 0.65);
 
-    // Create scroll-linked timeline.
-    // ──────────────────────────────────────────────────────────────────────────
-    // KEY FIX: trigger = heroSection (not document.body)
-    //   - Ties the pipe exit ONLY to the hero scrolling away.
-    //   - On mobile, document.body is very long → the pipes used to fade over
-    //     the entire page length, so they were still visible in later sections.
-    //   - With heroSection trigger: pipes fully exit exactly when the hero
-    //     scrolls offscreen — perfect on every screen size.
-    //
-    // Mobile scroll values are tuned separately:
-    //   - Main pipe y: -=2.8 (mobile) vs -=4.5 (desktop) — mobile baseY is 0.4,
-    //     camera at z=11, so shorter travel is enough to exit the viewport.
-    //   - Elbow y offsets reduced proportionally.
-    // ──────────────────────────────────────────────────────────────────────────
-    const isMobileDevice = window.matchMedia('(max-width: 767px)').matches;
-    // Touch-device check is separate from size — tablets (768px+) are also touch.
-    // Touch devices use native scroll with no Lenis, so scrub:true gives direct
-    // 1:1 mapping with no added lag. Desktop uses Lenis (already buttery smooth),
-    // so scrub:0.15 is just enough to smooth Three.js frame deltas without the
-    // sluggish double-dampening that 0.45 + Lenis caused.
-    const isTouchScrollDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
+    // FIX #2: Create scroll timeline AFTER intro completes to prevent
+    // both timelines fighting over scrollGroup.position.y simultaneously.
+    // If user scrolls during intro, fast-forward intro to end first.
     const heroEl = container.closest('section') as HTMLElement | null;
+    let scrollTl: gsap.core.Timeline;
 
-    const scrollTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: heroEl || document.body,
-        start: 'top top',
-        end: 'bottom top',          // hero fully exited = animation complete
-        scrub: isTouchScrollDevice ? true : 0.15,
-        invalidateOnRefresh: false, // locked: do NOT recalculate positions on resize/refresh
-      }
+    const createScrollTimeline = () => {
+      scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroEl || document.body,
+          start: 'top top',
+          end: 'bottom top',          // hero fully exited = animation complete
+          scrub: isTouchScrollDevice ? true : 0.15,
+          invalidateOnRefresh: true,  // FIX #6: recalculate on viewport change
+        }
+      });
+
+      // Rotate main group as we scroll
+      scrollTl.to(scrollGroup.rotation, {
+        y: isMobile ? 0.5 : 0.75,
+        x: isMobile ? -0.1 : -0.2,
+        ease: 'none'
+      }, 0);
+
+      // Slide out and pull into background
+      scrollTl.to(scrollGroup.position, {
+        y: isMobile ? '-=2.8' : '-=4.5',
+        z: isMobile ? -1.5 : -3,
+        ease: 'none'
+      }, 0);
+
+      // Carry away the floating elbow fittings as we scroll
+      scrollTl.to(elbowFittingParent.position, {
+        y: isMobile ? '-=2.0' : '-=3.0',
+        x: isMobile ? '-=0.8' : '-=1.2',
+        z: isMobile ? '+=0.5' : '+=0.8',
+        ease: 'none'
+      }, 0);
+      scrollTl.to(elbowFittingParent.rotation, {
+        z: '+=1.2',
+        x: '+=0.8',
+        ease: 'none'
+      }, 0);
+
+      scrollTl.to(elbowFitting2Parent.position, {
+        y: isMobile ? '-=1.8' : '-=2.5',
+        x: isMobile ? '-=0.7' : '-=1.0',
+        z: isMobile ? '+=0.6' : '+=1.0',
+        ease: 'none'
+      }, 0);
+      scrollTl.to(elbowFitting2Parent.rotation, {
+        z: '-=1.2',
+        y: `+=${Math.PI * 0.5}`,
+        ease: 'none'
+      }, 0);
+    };
+
+    // Wait for intro to finish before enabling scroll-linked animation
+    introTl.then(() => {
+      createScrollTimeline();
     });
 
-    // Rotate main group as we scroll
-    scrollTl.to(scrollGroup.rotation, {
-      y: isMobileDevice ? 0.5 : 0.75,
-      x: isMobileDevice ? -0.1 : -0.2,
-      ease: 'none'
-    }, 0);
-
-    // Slide out and pull into background
-    scrollTl.to(scrollGroup.position, {
-      y: isMobileDevice ? '-=2.8' : '-=4.5',
-      z: isMobileDevice ? -1.5 : -3,
-      ease: 'none'
-    }, 0);
-
-    // Carry away the floating elbow fittings as we scroll
-    scrollTl.to(elbowFittingParent.position, {
-      y: isMobileDevice ? '-=2.0' : '-=3.0',
-      x: isMobileDevice ? '-=0.8' : '-=1.2',
-      z: isMobileDevice ? '+=0.5' : '+=0.8',
-      ease: 'none'
-    }, 0);
-    scrollTl.to(elbowFittingParent.rotation, {
-      z: '+=1.2',
-      x: '+=0.8',
-      ease: 'none'
-    }, 0);
-
-    scrollTl.to(elbowFitting2Parent.position, {
-      y: isMobileDevice ? '-=1.8' : '-=2.5',
-      x: isMobileDevice ? '-=0.7' : '-=1.0',
-      z: isMobileDevice ? '+=0.6' : '+=1.0',
-      ease: 'none'
-    }, 0);
-    scrollTl.to(elbowFitting2Parent.rotation, {
-      z: '-=1.2',
-      y: `+=${Math.PI * 0.5}`,
-      ease: 'none'
-    }, 0);
+    // If user starts scrolling before intro ends, fast-forward intro
+    const earlyScrollHandler = () => {
+      if (introTl.isActive()) {
+        introTl.progress(1).kill();
+        createScrollTimeline();
+        window.removeEventListener('scroll', earlyScrollHandler);
+      }
+    };
+    window.addEventListener('scroll', earlyScrollHandler, { passive: true });
 
     // ----------------------------------------------------
     // PIPE 1: Straight PPR Pipe (Blue — matches blue PPR pipe product)
@@ -460,7 +517,7 @@ const PPRPipes3D = () => {
     
     // Main tube body (Fat radius: 0.55, length: 6.5)
     const body1 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 6.5, 32)), 
+      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 6.5, SEG)), 
       solidBluePlasticMat
     );
     pipe1.add(body1);
@@ -469,18 +526,18 @@ const PPRPipes3D = () => {
     const teeGroup = new THREE.Group();
     
     const teeMain = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 1.4, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 1.4, SEG)),
       solidBluePlasticMat
     );
     const teeBranch = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 0.6, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.68, 0.68, 0.6, SEG)),
       solidBluePlasticMat
     );
     teeBranch.rotation.z = -Math.PI / 2;
     teeBranch.position.set(0.4, 0, 0); // pointing outwards (right)
     
     const teeTaper = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.55, 0.68, 0.2, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.55, 0.68, 0.2, SEG)),
       solidBluePlasticMat
     );
     teeTaper.rotation.z = -Math.PI / 2;
@@ -495,7 +552,7 @@ const PPRPipes3D = () => {
     teeHex.position.set(1.05, 0, 0);
 
     const teeThread = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.46, 0.46, 0.4, 24)),
+      trackGeometry(new THREE.CylinderGeometry(0.46, 0.46, 0.4, SEG)),
       goldMetalMat
     );
     teeThread.rotation.z = -Math.PI / 2;
@@ -503,15 +560,17 @@ const PPRPipes3D = () => {
 
     teeGroup.add(teeMain, teeBranch, teeTaper, teeHex, teeThread);
 
-    // 3D threads around the Tee branch (full realistic gold)
-    for (let i = 0; i < 3; i++) {
-      const ridge = new THREE.Mesh(
-        trackGeometry(new THREE.TorusGeometry(0.46, 0.025, 8, 16)),
-        goldMetalMat
-      );
-      ridge.rotation.y = Math.PI / 2;
-      ridge.position.set(1.25 + i * 0.1, 0, 0);
-      teeGroup.add(ridge);
+    // 3D threads around the Tee branch — skip on mobile (invisible)
+    if (!SKIP_DETAIL) {
+      for (let i = 0; i < 3; i++) {
+        const ridge = new THREE.Mesh(
+          trackGeometry(new THREE.TorusGeometry(0.46, 0.025, 8, DETAIL_SEG)),
+          goldMetalMat
+        );
+        ridge.rotation.y = Math.PI / 2;
+        ridge.position.set(1.25 + i * 0.1, 0, 0);
+        teeGroup.add(ridge);
+      }
     }
     
     teeGroup.position.y = -0.5; // positioned off-center
@@ -536,7 +595,7 @@ const PPRPipes3D = () => {
 
     // Main tube body (Fat radius: 0.46, length: 6.5)
     const body2 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.46, 0.46, 6.5, 32)), 
+      trackGeometry(new THREE.CylinderGeometry(0.46, 0.46, 6.5, SEG)), 
       solidGreenPlasticMat
     );
     pipe2.add(body2);
@@ -566,25 +625,24 @@ const PPRPipes3D = () => {
     // ----------------------------------------------------
 
     // 1. Vertical socket part (pointing up)
-    // Axis: x = -0.55, goes from y = 0 to y = 0.9 (length 0.9)
     const vertSocket = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, SEG)),
       solidBluePlasticMat
     );
     vertSocket.position.set(-0.55, 0.45, 0);
     elbowFitting.add(vertSocket);
 
-    // Dark inner hole at the top of the vertical socket
+    // Dark inner hole at the top of the vertical socket — uses shared darkHoleMat
     const vertHole = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
+      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, SEG)),
+      darkHoleMat
     );
     vertHole.position.set(-0.55, 0.46, 0);
     elbowFitting.add(vertHole);
 
     // Rounded lip torus at the top edge of the vertical socket for realistic molded finish
     const vertLip = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, 16, 32)),
+      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, TORUS_SEG, TORUS_SEG)),
       solidBluePlasticMat
     );
     vertLip.rotation.x = Math.PI / 2;
@@ -592,19 +650,16 @@ const PPRPipes3D = () => {
     elbowFitting.add(vertLip);
 
     // 2. Corner bend (molded 90° elbow)
-    // Torus centered at (0, 0, 0) curving from (-0.55, 0) to (0, -0.55)
     const cornerElbow = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.55, 0.55, 32, 32, Math.PI / 2)),
+      trackGeometry(new THREE.TorusGeometry(0.55, 0.55, TORUS_SEG, TORUS_SEG, Math.PI / 2)),
       solidBluePlasticMat
     );
-    cornerElbow.rotation.z = Math.PI; // Rotates to start at 9 o'clock and curve to 6 o'clock
+    cornerElbow.rotation.z = Math.PI;
     elbowFitting.add(cornerElbow);
 
     // 3. Horizontal molded fluted sleeve (pointing right)
-    // Axis: y = -0.55, extends from x = 0 to x = 0.7 (length 0.7)
-    // In the image, the fluted collar is wider than the vertical socket.
     const horizSocket = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.64, 0.64, 0.7, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.64, 0.64, 0.7, SEG)),
       solidBluePlasticMat
     );
     horizSocket.rotation.z = -Math.PI / 2;
@@ -613,30 +668,31 @@ const PPRPipes3D = () => {
 
     // Rounded shoulder torus at the horizontal socket end
     const horizShoulder = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.575, 0.065, 16, 32)),
+      trackGeometry(new THREE.TorusGeometry(0.575, 0.065, TORUS_SEG, TORUS_SEG)),
       solidBluePlasticMat
     );
     horizShoulder.rotation.y = Math.PI / 2;
     horizShoulder.position.set(0.7, -0.55, 0);
     elbowFitting.add(horizShoulder);
 
-    // 12 Semi-circular flutes (grip ridges) on horizontal sleeve (matching the image)
-    const fluteGeom = trackGeometry(new THREE.CylinderGeometry(0.045, 0.045, 0.7, 12));
-    for (let i = 0; i < 12; i++) {
-      const angle = (i / 12) * Math.PI * 2;
-      const flute = new THREE.Mesh(fluteGeom, solidBluePlasticMat);
-      flute.rotation.z = -Math.PI / 2; // parallel to X axis
-      flute.rotation.x = angle;
-      flute.position.set(
-        0.35,
-        -0.55 + Math.cos(angle) * 0.63,
-        Math.sin(angle) * 0.63
-      );
-      elbowFitting.add(flute);
+    // 12 Semi-circular flutes (grip ridges) on horizontal sleeve — skip on mobile
+    if (!SKIP_DETAIL) {
+      const fluteGeom = trackGeometry(new THREE.CylinderGeometry(0.045, 0.045, 0.7, 12));
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const flute = new THREE.Mesh(fluteGeom, solidBluePlasticMat);
+        flute.rotation.z = -Math.PI / 2;
+        flute.rotation.x = angle;
+        flute.position.set(
+          0.35,
+          -0.55 + Math.cos(angle) * 0.63,
+          Math.sin(angle) * 0.63
+        );
+        elbowFitting.add(flute);
+      }
     }
 
     // 4. Threaded metal insert (silver-plated chrome matching the image)
-    // Silver hex collar (wrench flats)
     const metalHex = new THREE.Mesh(
       trackGeometry(new THREE.CylinderGeometry(0.48, 0.48, 0.22, 6)),
       shinySilverMetalMat
@@ -647,241 +703,234 @@ const PPRPipes3D = () => {
 
     // Silver threaded body cylinder
     const metalThreadBody = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.39, 0.39, 0.45, 24)),
+      trackGeometry(new THREE.CylinderGeometry(0.39, 0.39, 0.45, SEG)),
       shinySilverMetalMat
     );
     metalThreadBody.rotation.z = -Math.PI / 2;
     metalThreadBody.position.set(1.125, -0.55, 0);
     elbowFitting.add(metalThreadBody);
 
-    // 5 spiral thread ridges (toruses) in silver metal
-    for (let i = 0; i < 5; i++) {
-      const threadRidge = new THREE.Mesh(
-        trackGeometry(new THREE.TorusGeometry(0.39, 0.026, 12, 24)),
-        shinySilverMetalMat
-      );
-      threadRidge.rotation.y = Math.PI / 2;
-      threadRidge.position.set(0.96 + i * 0.08, -0.55, 0);
-      elbowFitting.add(threadRidge);
+    // 5 spiral thread ridges (toruses) in silver metal — skip on mobile
+    if (!SKIP_DETAIL) {
+      for (let i = 0; i < 5; i++) {
+        const threadRidge = new THREE.Mesh(
+          trackGeometry(new THREE.TorusGeometry(0.39, 0.026, 12, DETAIL_SEG)),
+          shinySilverMetalMat
+        );
+        threadRidge.rotation.y = Math.PI / 2;
+        threadRidge.position.set(0.96 + i * 0.08, -0.55, 0);
+        elbowFitting.add(threadRidge);
+      }
     }
 
-    // Dark bore hole inside the threaded metal insert
+    // Dark bore hole inside the threaded metal insert — uses shared darkHoleMat
     const metalBoreHole = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.28, 0.28, 0.47, 24)),
-      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
+      trackGeometry(new THREE.CylinderGeometry(0.28, 0.28, 0.47, SEG)),
+      darkHoleMat
     );
     metalBoreHole.rotation.z = -Math.PI / 2;
     metalBoreHole.position.set(1.14, -0.55, 0);
     elbowFitting.add(metalBoreHole);
 
-    // 5. Mold parting line seam for elbow fitting 1 (blue)
-    const seamColorMat = solidBluePlasticMat;
+    // 5. Mold parting line seams for elbow fitting 1 (blue) — skip on mobile
+    if (!SKIP_DETAIL) {
+      const seamColorMat = solidBluePlasticMat;
 
-    // Seam on vertical socket (outer side)
-    const vertSeamOuter = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat
-    );
-    vertSeamOuter.position.set(-1.105, 0.45, 0);
-    elbowFitting.add(vertSeamOuter);
+      const vertSeamOuter = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
+        seamColorMat
+      );
+      vertSeamOuter.position.set(-1.105, 0.45, 0);
+      elbowFitting.add(vertSeamOuter);
 
-    // Seam on vertical socket (inner side)
-    const vertSeamInner = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat
-    );
-    vertSeamInner.position.set(0.005, 0.45, 0);
-    elbowFitting.add(vertSeamInner);
+      const vertSeamInner = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
+        seamColorMat
+      );
+      vertSeamInner.position.set(0.005, 0.45, 0);
+      elbowFitting.add(vertSeamInner);
 
-    // Seam on corner elbow (outer curve)
-    const cornerSeamOuter = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(1.105, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat
-    );
-    cornerSeamOuter.rotation.z = Math.PI;
-    elbowFitting.add(cornerSeamOuter);
+      const cornerSeamOuter = new THREE.Mesh(
+        trackGeometry(new THREE.TorusGeometry(1.105, 0.012, 8, TORUS_SEG, Math.PI / 2)),
+        seamColorMat
+      );
+      cornerSeamOuter.rotation.z = Math.PI;
+      elbowFitting.add(cornerSeamOuter);
 
-    // Seam on corner elbow (inner curve)
-    const cornerSeamInner = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.005, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat
-    );
-    cornerSeamInner.rotation.z = Math.PI;
-    elbowFitting.add(cornerSeamInner);
+      const cornerSeamInner = new THREE.Mesh(
+        trackGeometry(new THREE.TorusGeometry(0.005, 0.012, 8, TORUS_SEG, Math.PI / 2)),
+        seamColorMat
+      );
+      cornerSeamInner.rotation.z = Math.PI;
+      elbowFitting.add(cornerSeamInner);
 
-    // Seam on horizontal socket (outer bottom side)
-    const horizSeamOuter = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.7, 0.015, 0.015)),
-      seamColorMat
-    );
-    horizSeamOuter.position.set(0.35, -1.195, 0);
-    elbowFitting.add(horizSeamOuter);
+      const horizSeamOuter = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.7, 0.015, 0.015)),
+        seamColorMat
+      );
+      horizSeamOuter.position.set(0.35, -1.195, 0);
+      elbowFitting.add(horizSeamOuter);
 
-    // Seam on horizontal socket (inner top side)
-    const horizSeamInner = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.7, 0.015, 0.015)),
-      seamColorMat
-    );
-    horizSeamInner.position.set(0.35, 0.095, 0);
-    elbowFitting.add(horizSeamInner);
-
-    // Note: elbowFitting position and scale are responsively updated in updateLayoutPosition()
+      const horizSeamInner = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.7, 0.015, 0.015)),
+        seamColorMat
+      );
+      horizSeamInner.position.set(0.35, 0.095, 0);
+      elbowFitting.add(horizSeamInner);
+    }
 
     // ----------------------------------------------------
     // FITTING 2: Floating Green 90° All-Plastic Elbow (standard green)
     // ----------------------------------------------------
 
-    // 1. Vertical socket part (pointing up)
-    // Axis: x = -0.55, goes from y = 0 to y = 0.9 (length 0.9)
+    // 1. Vertical socket part
     const vertSocket2 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, SEG)),
       solidGreenPlasticMat
     );
     vertSocket2.position.set(-0.55, 0.45, 0);
     elbowFitting2.add(vertSocket2);
 
-    // Dark inner hole at the top of the vertical socket
+    // Dark inner hole — uses shared darkHoleMat
     const vertHole2 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
+      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, SEG)),
+      darkHoleMat
     );
     vertHole2.position.set(-0.55, 0.46, 0);
     elbowFitting2.add(vertHole2);
 
-    // Rounded lip torus at the top edge of the vertical socket
+    // Rounded lip torus
     const vertLip2 = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, 16, 32)),
+      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, TORUS_SEG, TORUS_SEG)),
       solidGreenPlasticMat
     );
     vertLip2.rotation.x = Math.PI / 2;
     vertLip2.position.set(-0.55, 0.9, 0);
     elbowFitting2.add(vertLip2);
 
-    // 2. Corner bend (molded 90° elbow)
+    // 2. Corner bend
     const cornerElbow2 = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.55, 0.55, 32, 32, Math.PI / 2)),
+      trackGeometry(new THREE.TorusGeometry(0.55, 0.55, TORUS_SEG, TORUS_SEG, Math.PI / 2)),
       solidGreenPlasticMat
     );
-    cornerElbow2.rotation.z = Math.PI; // Rotates to start at 9 o'clock and curve to 6 o'clock
+    cornerElbow2.rotation.z = Math.PI;
     elbowFitting2.add(cornerElbow2);
 
-    // 3. Horizontal socket part (pointing right)
-    // Axis: y = -0.55, extends from x = 0 to x = 0.9 (length 0.9)
+    // 3. Horizontal socket part
     const horizSocket2 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 32)),
+      trackGeometry(new THREE.CylinderGeometry(0.55, 0.55, 0.9, SEG)),
       solidGreenPlasticMat
     );
     horizSocket2.rotation.z = -Math.PI / 2;
     horizSocket2.position.set(0.45, -0.55, 0);
     elbowFitting2.add(horizSocket2);
 
-    // Dark inner hole at the end of the horizontal socket
+    // Dark inner hole — uses shared darkHoleMat
     const horizHole2 = new THREE.Mesh(
-      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, 32)),
-      trackMaterial(new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 }))
+      trackGeometry(new THREE.CylinderGeometry(0.42, 0.42, 0.91, SEG)),
+      darkHoleMat
     );
     horizHole2.rotation.z = -Math.PI / 2;
     horizHole2.position.set(0.46, -0.55, 0);
     elbowFitting2.add(horizHole2);
 
-    // Rounded lip torus at the end of the horizontal socket
+    // Rounded lip torus
     const horizLip2 = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, 16, 32)),
+      trackGeometry(new THREE.TorusGeometry(0.485, 0.065, TORUS_SEG, TORUS_SEG)),
       solidGreenPlasticMat
     );
     horizLip2.rotation.y = Math.PI / 2;
     horizLip2.position.set(0.9, -0.55, 0);
     elbowFitting2.add(horizLip2);
 
-    // 4. Mold parting line seam (thin raised parting lines at z = 0 plane)
-    const seamColorMat2 = solidGreenPlasticMat; // Green elbow — all seams are green
-    // Seam on vertical socket (outer side)
-    const vertSeamOuter2 = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat2
-    );
-    vertSeamOuter2.position.set(-1.105, 0.45, 0);
-    elbowFitting2.add(vertSeamOuter2);
+    // 4. Mold parting line seams (green) — skip on mobile
+    if (!SKIP_DETAIL) {
+      const seamColorMat2 = solidGreenPlasticMat;
 
-    // Seam on vertical socket (inner side)
-    const vertSeamInner2 = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
-      seamColorMat2
-    );
-    vertSeamInner2.position.set(0.005, 0.45, 0);
-    elbowFitting2.add(vertSeamInner2);
+      const vertSeamOuter2 = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
+        seamColorMat2
+      );
+      vertSeamOuter2.position.set(-1.105, 0.45, 0);
+      elbowFitting2.add(vertSeamOuter2);
 
-    // Seam on corner elbow (outer curve)
-    const cornerSeamOuter2 = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(1.105, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat2
-    );
-    cornerSeamOuter2.rotation.z = Math.PI;
-    elbowFitting2.add(cornerSeamOuter2);
+      const vertSeamInner2 = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.015, 0.9, 0.015)),
+        seamColorMat2
+      );
+      vertSeamInner2.position.set(0.005, 0.45, 0);
+      elbowFitting2.add(vertSeamInner2);
 
-    // Seam on corner elbow (inner curve)
-    const cornerSeamInner2 = new THREE.Mesh(
-      trackGeometry(new THREE.TorusGeometry(0.005, 0.012, 8, 32, Math.PI / 2)),
-      seamColorMat2
-    );
-    cornerSeamInner2.rotation.z = Math.PI;
-    elbowFitting2.add(cornerSeamInner2);
+      const cornerSeamOuter2 = new THREE.Mesh(
+        trackGeometry(new THREE.TorusGeometry(1.105, 0.012, 8, TORUS_SEG, Math.PI / 2)),
+        seamColorMat2
+      );
+      cornerSeamOuter2.rotation.z = Math.PI;
+      elbowFitting2.add(cornerSeamOuter2);
 
-    // Seam on horizontal socket (outer bottom side)
-    const horizSeamOuter2 = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
-      seamColorMat2
-    );
-    horizSeamOuter2.position.set(0.45, -1.105, 0);
-    elbowFitting2.add(horizSeamOuter2);
+      const cornerSeamInner2 = new THREE.Mesh(
+        trackGeometry(new THREE.TorusGeometry(0.005, 0.012, 8, TORUS_SEG, Math.PI / 2)),
+        seamColorMat2
+      );
+      cornerSeamInner2.rotation.z = Math.PI;
+      elbowFitting2.add(cornerSeamInner2);
 
-    // Seam on horizontal socket (inner top side)
-    const horizSeamInner2 = new THREE.Mesh(
-      trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
-      seamColorMat2
-    );
-    horizSeamInner2.position.set(0.45, 0.005, 0);
-    elbowFitting2.add(horizSeamInner2);
+      const horizSeamOuter2 = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
+        seamColorMat2
+      );
+      horizSeamOuter2.position.set(0.45, -1.105, 0);
+      elbowFitting2.add(horizSeamOuter2);
 
-    // Note: elbowFitting position and scale are responsively updated in updateLayoutPosition()
+      const horizSeamInner2 = new THREE.Mesh(
+        trackGeometry(new THREE.BoxGeometry(0.9, 0.015, 0.015)),
+        seamColorMat2
+      );
+      horizSeamInner2.position.set(0.45, 0.005, 0);
+      elbowFitting2.add(horizSeamInner2);
+    }
 
 
+    // Enable shadows on all meshes recursively — desktop only
+    if (!isMobile) {
+      mainGroup.traverse((object) => {
+        if (object instanceof THREE.Mesh) {
+          object.castShadow = true;
+          object.receiveShadow = true;
+        }
+      });
+    }
 
-    // Enable shadows on all meshes recursively
-    mainGroup.traverse((object) => {
-      if (object instanceof THREE.Mesh) {
-        object.castShadow = true;
-        object.receiveShadow = true;
-      }
-    });
-
-    // Shadow receiver plane behind the pipes (for soft, beautiful contact shadows)
-    const shadowPlane = new THREE.Mesh(
-      trackGeometry(new THREE.PlaneGeometry(30, 30)),
-      new THREE.ShadowMaterial({ opacity: 0.045 })
-    );
-    shadowPlane.position.set(0, 0, -2);
-    shadowPlane.receiveShadow = true;
-    scene.add(shadowPlane);
+    // Shadow receiver plane behind the pipes — desktop only
+    if (!isMobile) {
+      const shadowPlane = new THREE.Mesh(
+        trackGeometry(new THREE.PlaneGeometry(14, 14)),  // FIX #11: reduced from 30×30
+        trackMaterial(new THREE.ShadowMaterial({ opacity: 0.045 }))  // FIX #4: tracked material
+      );
+      shadowPlane.position.set(0, 0, -2);
+      shadowPlane.receiveShadow = true;
+      scene.add(shadowPlane);
+    }
 
     // 6. Lighting Setup (Soft studio setup)
     scene.add(new THREE.AmbientLight(0xffffff, 1.4));
 
-    // Warm Key Light (casts soft shadows, optimized for mobile)
-    // Shadow map size: 1024 desktop / 512 mobile — sufficient quality, better GPU perf
-    const shadowSize = window.innerWidth > 768 ? 1024 : 512;
+    // Warm Key Light (casts soft shadows on desktop only)
     const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.5);
     dirLight1.position.set(-5, 8, 6);
-    dirLight1.castShadow = true;
-    dirLight1.shadow.mapSize.width = shadowSize;
-    dirLight1.shadow.mapSize.height = shadowSize;
-    dirLight1.shadow.camera.near = 0.5;
-    dirLight1.shadow.camera.far = 25;
-    dirLight1.shadow.camera.left = -6;
-    dirLight1.shadow.camera.right = 6;
-    dirLight1.shadow.camera.top = 6;
-    dirLight1.shadow.camera.bottom = -6;
-    dirLight1.shadow.bias = -0.0005;
+    if (!isMobile) {
+      const shadowSize = window.innerWidth > 768 ? 1024 : 512;
+      dirLight1.castShadow = true;
+      dirLight1.shadow.mapSize.width = shadowSize;
+      dirLight1.shadow.mapSize.height = shadowSize;
+      dirLight1.shadow.camera.near = 0.5;
+      dirLight1.shadow.camera.far = 25;
+      dirLight1.shadow.camera.left = -6;
+      dirLight1.shadow.camera.right = 6;
+      dirLight1.shadow.camera.top = 6;
+      dirLight1.shadow.camera.bottom = -6;
+      dirLight1.shadow.bias = -0.0005;
+    }
     scene.add(dirLight1);
 
     // Soft neutral rim light
@@ -901,8 +950,6 @@ const PPRPipes3D = () => {
     let targetY = 0;
 
     // ── Visibility guard — toggle isAnimating when hero enters/leaves viewport ──
-    // With GSAP ticker we don’t start/stop RAF — the animate function returns
-    // early when isAnimating is false, spending negligible CPU while off-screen.
     let isHeroVisible = true;
     let isAnimating = true;
     const heroSection = container.closest('section') as HTMLElement | null;
@@ -933,34 +980,10 @@ const PPRPipes3D = () => {
       mouseY = (event.clientY / window.innerHeight) - 0.5;
     };
 
-    const onTouchMove = (event: TouchEvent) => {
-      if (!isHeroVisible) return;  // Hero is off-screen — ignore all touch input
-      if (event.touches.length > 0) {
-        mouseX = (event.touches[0].clientX / window.innerWidth) - 0.5;
-        mouseY = (event.touches[0].clientY / window.innerHeight) - 0.5;
-      }
-    };
-
     window.addEventListener('mousemove', onMouseMove);
-    // On touch devices, touchmove fires during scroll and is misread as parallax
-    // intent — the finger’s live Y coordinate tilts the pipes while the scroll
-    // animation is also moving them, causing erratic twitching. On mobile the
-    // idle float animation (sin/cos oscillations) provides enough visual life.
-    if (!isTouchScrollDevice) {
-      window.addEventListener('touchmove', onTouchMove, { passive: true });
-    }
+    // Touch parallax disabled on touch devices — conflicts with scroll (see original comments)
 
     // 8. Render loop — driven by GSAP ticker (same RAF as Lenis + ScrollTrigger).
-    // ─────────────────────────────────────────────────────────────────────────
-    // WHY gsap.ticker INSTEAD OF A STANDALONE requestAnimationFrame:
-    //   A separate rAF loop is async from GSAP’s tick — GSAP updates scrollGroup
-    //   positions in its frame, Three.js reads them ONE FRAME LATER (desync).
-    //   With gsap.ticker.add(), our render runs in the SAME frame, AFTER:
-    //     1. Lenis calculates scroll position
-    //     2. ScrollTrigger.update() fires
-    //     3. Scroll tweens update scrollGroup
-    //     4. Our render ← always sees current positions, zero stutter.
-    // ─────────────────────────────────────────────────────────────────────────
     const startMs = performance.now();
     const animate = () => {
       if (!isAnimating) return; // hero off-screen — skip render, save GPU
@@ -1000,29 +1023,37 @@ const PPRPipes3D = () => {
     // Register with GSAP ticker — no standalone rAF loop needed
     gsap.ticker.add(animate);
 
-    // 9. Resize Handling
-    // NOTE: updateLayoutPosition() is intentionally NOT called here.
-    // The pipe positions/scales are locked to the values set at mount time
-    // based on the initial viewport. Calling it on resize would cause the
-    // pipes to jump to different coordinates on orientation change or resize.
+    // 9. Resize Handling — FIX #5: smooth animated reposition on orientation change
+    let resizeDebounce: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+
+      clearTimeout(resizeDebounce);
+      resizeDebounce = setTimeout(() => {
+        updateLayoutPosition();
+        // Smoothly animate to new positions (no jarring jump)
+        gsap.to(scrollGroup.position, { x: baseX, y: baseY, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(scrollGroup.scale, { x: targetMainScale, y: targetMainScale, z: targetMainScale, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(elbowFittingParent.position, { x: elbowBaseX, y: elbowBaseY, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(elbowFittingParent.scale, { x: targetElbowScale, y: targetElbowScale, z: targetElbowScale, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(elbowFitting2Parent.position, { x: elbow2BaseX, y: elbow2BaseY, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(elbowFitting2Parent.scale, { x: targetElbow2Scale, y: targetElbow2Scale, z: targetElbow2Scale, duration: 0.6, ease: 'power2.out', overwrite: 'auto' });
+      }, 150);
     };
     window.addEventListener('resize', handleResize);
 
     // 10. Cleanup (Comprehensive WebGL disposal to prevent memory leaks)
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      if (!isTouchScrollDevice) {
-        window.removeEventListener('touchmove', onTouchMove);
-      }
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', earlyScrollHandler);
+      clearTimeout(resizeDebounce);
       gsap.ticker.remove(animate); // Remove from shared GSAP ticker
-      cancelAnimationFrame(frameRef.current); // Safety: cancel any lingering rAF
+      // FIX #8: removed dead cancelAnimationFrame(frameRef.current)
       // Disconnect visibility observer
       if (visibilityObserver) visibilityObserver.disconnect();
       renderer.dispose();
@@ -1033,8 +1064,10 @@ const PPRPipes3D = () => {
 
       // Kill GSAP timelines and ScrollTriggers
       introTl.kill();
-      scrollTl.scrollTrigger?.kill();
-      scrollTl.kill();
+      if (scrollTl) {
+        scrollTl.scrollTrigger?.kill();
+        scrollTl.kill();
+      }
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -1059,4 +1092,3 @@ const PPRPipes3D = () => {
 };
 
 export default PPRPipes3D;
-
