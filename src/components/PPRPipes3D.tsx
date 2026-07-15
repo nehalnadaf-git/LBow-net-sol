@@ -415,28 +415,50 @@ const PPRPipes3D = () => {
     fillLight.position.set(4, 5, 2);
     scene.add(fillLight);
 
-    // ── Entrance — rise from below + scale in, expo.out ─────────────────────
-    // CSS opacity (0→1, 0.7s) handles the fade simultaneously.
-    // Proxy pattern is mandatory: direct gsap.to(group.position) would conflict
-    // with the animate loop. Plain object tween + onUpdate = safe.
-    const entranceStartY = isMobile ? -1.5 : -2.6;
-    entranceGroup.position.y = entranceStartY;
-    entranceGroup.scale.setScalar(0.88);
-    const entranceProxy = { y: entranceStartY, s: 0.88 };
-    const entranceTween = gsap.to(entranceProxy, {
-      y: 0, s: 1.0,
-      duration: isMobile ? 0.85 : 1.05,
-      ease: 'expo.out',
-      delay: 0.15,
-      onUpdate() {
-        entranceGroup.position.y = entranceProxy.y;
-        entranceGroup.scale.setScalar(entranceProxy.s);
-      },
-      onComplete() {
-        entranceGroup.position.y = 0;
-        entranceGroup.scale.setScalar(1.0);
-      },
-    });
+
+    // ── Cinematic intro — original reveal sequence ─────────────────────────
+    // 1. Main group starts: far below (y -4.5), receded (z -3), tilted 45°
+    //    Sweeps to rest in 2.0s with power4.out (fast arc, smooth landing)
+    // 2. Floating elbows pop in from scale 0 with elastic spring (sequential)
+    //
+    // Uses entranceGroup proxy for position/rotation (animate loop never
+    // touches entranceGroup — only rootGroup/mainGroup — so zero conflict).
+    // Elbow scale is safe to tween directly — animate loop never sets scale.
+    const ep = { y: -4.5, z: -3, rz: -Math.PI / 4, ry: -0.4 };
+    entranceGroup.position.set(0, ep.y, ep.z);
+    entranceGroup.rotation.set(0, ep.ry, ep.rz);
+    elbowParent1.scale.setScalar(0);
+    elbowParent2.scale.setScalar(0);
+
+    const introTl = gsap.timeline();
+    introTl
+      .to(ep, {
+        y: 0, z: 0, rz: 0, ry: 0,
+        duration: 2.0,
+        ease: 'power4.out',
+        onUpdate() {
+          entranceGroup.position.y = ep.y;
+          entranceGroup.position.z = ep.z;
+          entranceGroup.rotation.z = ep.rz;
+          entranceGroup.rotation.y = ep.ry;
+        },
+        onComplete() {
+          entranceGroup.position.set(0, 0, 0);
+          entranceGroup.rotation.set(0, 0, 0);
+        },
+      }, 0)
+      // Elbows pop in sequentially with elastic spring
+      .to(elbowParent1.scale, {
+        x: eb1Scale, y: eb1Scale, z: eb1Scale,
+        ease: 'elastic.out(1.0, 0.65)',
+        duration: 1.6,
+      }, 0.4)
+      .to(elbowParent2.scale, {
+        x: eb2Scale, y: eb2Scale, z: eb2Scale,
+        ease: 'elastic.out(1.0, 0.65)',
+        duration: 1.6,
+      }, 0.65);
+
 
     // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
     // Passive scroll listener reads native position every frame.
@@ -550,7 +572,7 @@ const PPRPipes3D = () => {
 
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
-      entranceTween.kill();
+      introTl.kill();
       gsap.ticker.remove(animate);
       window.removeEventListener('scroll', onScroll);
       if (!isTouch) window.removeEventListener('mousemove', onMouseMove);
