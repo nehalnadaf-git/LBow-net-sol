@@ -207,7 +207,13 @@ const PPRPipes3D = () => {
     elbowParent2.add(elbowFitting2);
     mainGroup.add(elbowParent1, elbowParent2);
     rootGroup.add(mainGroup);
-    scene.add(rootGroup);
+
+    // ── entranceGroup: thin wrapper exclusively for the entrance animation ──
+    // The animate loop touches rootGroup (scroll/idle) and mainGroup (float).
+    // entranceGroup is ONLY moved by the entrance tween — zero conflict.
+    const entranceGroup = new THREE.Group();
+    entranceGroup.add(rootGroup);
+    scene.add(entranceGroup);
 
     // ── Breakpoint layout ─────────────────────────────────────────────────
     let baseX = 0, baseY = 0, mainScale = 1;
@@ -410,6 +416,36 @@ const PPRPipes3D = () => {
     fillLight.position.set(4, 5, 2);
     scene.add(fillLight);
 
+    // ── Cinematic entrance — rise + scale ─────────────────────────────────
+    // entranceGroup starts below + scaled down, then rises with expo.out.
+    // CSS opacity fade (0→1, 0.7s) handles the fade — no GSAP opacity needed.
+    // delay: 0.15s matches the hero text reveal (delay: 0.1s) for full sync.
+    //
+    // Proxy pattern: GSAP animates a plain object, onUpdate applies to Three.js.
+    // This is mandatory — direct gsap.to(group.position) conflicts if the group
+    // is also written to by the animate loop.
+    const entranceStartY = isMobile ? -1.5 : -2.6;
+    entranceGroup.position.y = entranceStartY;
+    entranceGroup.scale.setScalar(0.88);
+
+    const entranceProxy = { y: entranceStartY, s: 0.88 };
+    const entranceTween = gsap.to(entranceProxy, {
+      y: 0,
+      s: 1.0,
+      duration: isMobile ? 0.85 : 1.05,
+      ease: 'expo.out',
+      delay: 0.15,
+      onUpdate() {
+        entranceGroup.position.y = entranceProxy.y;
+        entranceGroup.scale.setScalar(entranceProxy.s);
+      },
+      onComplete() {
+        // Snap to exact final state to avoid floating-point residue
+        entranceGroup.position.y = 0;
+        entranceGroup.scale.setScalar(1.0);
+      },
+    });
+
     // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
     // Passive scroll listener reads native position every frame.
     // Works identically on iOS Safari, Android Chrome, macOS Safari, desktop.
@@ -522,6 +558,7 @@ const PPRPipes3D = () => {
 
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
+      entranceTween.kill();
       gsap.ticker.remove(animate);
       window.removeEventListener('scroll', onScroll);
       if (!isTouch) window.removeEventListener('mousemove', onMouseMove);
