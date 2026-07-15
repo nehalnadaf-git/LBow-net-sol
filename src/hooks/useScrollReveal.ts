@@ -36,7 +36,8 @@ export const REVEAL_TRIGGER_DEFAULTS = {
 
 /**
  * Returns parallax ScrollTrigger defaults, evaluated lazily at call time.
- * scrub: 1 on desktop = silky lag that feels premium.
+ * scrub: 0.3 on desktop = responsive lag that feels premium without double-smoothing
+ *        (Lenis already adds lerp:0.082 — scrub:1 + Lenis = sluggish).
  * scrub: true on touch = direct 1:1 mapping, no added lag (native momentum).
  * Called as a function so isMobileDevice() is evaluated fresh each time
  * (not frozen at module-load time, which breaks DevTools device switching).
@@ -45,7 +46,7 @@ export function getParallaxTriggerDefaults() {
   return {
     start: 'top bottom',
     end: 'bottom top',
-    scrub: isMobileDevice() ? true : 1,
+    scrub: isMobileDevice() ? true : 0.3,
   };
 }
 

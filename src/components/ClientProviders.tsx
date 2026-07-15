@@ -8,9 +8,13 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ignoreMobileResize disabled — we handle this ourselves with a width-only debounce
-// (iOS address-bar height changes are filtered out; real viewport switches are not)
-ScrollTrigger.config({ ignoreMobileResize: false });
+// ── ignoreMobileResize: true ─────────────────────────────────────────────────
+// FIX: On iOS Safari, the address bar shows/hides during scrolling, changing
+// window.innerHeight by ~50–88px. With false, every address-bar toggle triggers
+// ScrollTrigger.refresh() → all triggers recalculate → content jumps mid-scroll.
+// true = GSAP ignores height-only viewport changes on mobile. Real orientation
+// changes are handled by our width-only ResizeObserver + window resize handler.
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
@@ -21,46 +25,50 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ── Touch device detection ────────────────────────────────────────────
-    // On touch devices, native scroll is already buttery smooth and works
-    // perfectly with ScrollTrigger pin. Lenis smooth scroll on touch adds
-    // a virtual scroll layer that conflicts with ScrollTrigger's pin
-    // position calculations, causing jitter, wrong spacer heights, and
-    // sections bleeding over pinned content.
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    // ── Lenis configuration ───────────────────────────────────────────────
-    const lenis = new Lenis({
-      // Desktop: lerp 0.082 = premium "velvet" smooth scroll (0.1 was slightly slow)
-      // Touch/Mobile: lerp 1 = no smoothing (native scroll pass-through)
-      // Reduced motion: lerp 1 = instant
-      lerp: (reducedMotion || isTouchDevice) ? 1 : 0.082,
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      // Desktop only: smooth wheel. On touch devices, disable entirely
-      // so native momentum scroll works unimpeded with ScrollTrigger pins.
-      smoothWheel: !(reducedMotion || isTouchDevice),
-      // 1:1 finger-to-scroll on mobile — prevents overshoot
-      touchMultiplier: 1.0,
-      // Natural wheel speed (0.85 was slightly sluggish)
-      wheelMultiplier: 1.0,
-      infinite: false,
-      // We drive RAF via GSAP ticker — prevents double rAF loop
-      autoRaf: false,
-    });
+    // ── Lenis: desktop-only smooth scroll ─────────────────────────────────
+    // FIX: On touch devices, skip Lenis entirely. Native mobile scroll is
+    // already butter-smooth and works perfectly with ScrollTrigger. Lenis on
+    // touch adds a JS middle-man (touchstart/move/end listeners, virtualised
+    // scroll position, per-frame RAF updates) that costs 1-2 frames of lag
+    // and can conflict with ScrollTrigger's position calculations.
+    //
+    // Without Lenis on touch, ScrollTrigger reads the native scroll position
+    // directly — zero overhead, zero lag, zero conflicts.
+    let lenis: Lenis | null = null;
+    let updateTicker: ((time: number) => void) | null = null;
 
-    lenisRef.current = lenis;
+    if (!isTouchDevice && !reducedMotion) {
+      lenis = new Lenis({
+        lerp: 0.082,                // Premium "velvet" smooth scroll
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        touchMultiplier: 1.0,
+        wheelMultiplier: 1.0,
+        infinite: false,
+        autoRaf: false,             // We drive RAF via GSAP ticker
+      });
 
-    // Keep ScrollTrigger in sync with every Lenis frame
-    lenis.on('scroll', ScrollTrigger.update);
+      lenisRef.current = lenis;
 
-    const updateTicker = (time: number) => {
-      lenis.raf(time * 1000);
-    };
+      // Keep ScrollTrigger in sync with every Lenis frame
+      lenis.on('scroll', ScrollTrigger.update);
 
-    // Add Lenis to GSAP ticker so they share the same rAF loop
-    gsap.ticker.add(updateTicker);
-    // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
-    gsap.ticker.lagSmoothing(0);
+      updateTicker = (time: number) => {
+        lenis!.raf(time * 1000);
+      };
+
+      // Add Lenis to GSAP ticker so they share the same rAF loop
+      gsap.ticker.add(updateTicker);
+      // Disable GSAP's own lag smoothing — Lenis handles frame smoothing
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      // Touch/reduced-motion: no Lenis, no smooth scroll, no extra overhead.
+      // ScrollTrigger works directly with native scroll events.
+      lenisRef.current = null;
+    }
 
     // ── Refresh ScrollTrigger after fonts/images/layout settle ─────────────
     ScrollTrigger.refresh();
@@ -123,9 +131,13 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     }
 
     return () => {
-      lenis.destroy();
+      if (lenis) {
+        lenis.destroy();
+      }
       lenisRef.current = null;
-      gsap.ticker.remove(updateTicker);
+      if (updateTicker) {
+        gsap.ticker.remove(updateTicker);
+      }
       ro.disconnect();
       window.removeEventListener('resize', onViewportResize);
     };
