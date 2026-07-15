@@ -368,59 +368,36 @@ const PPRPipes3D = () => {
     if (!isMobile) {
       const shadowPlane = new THREE.Mesh(
         geo(new THREE.PlaneGeometry(14, 14)),
-        mat(new THREE.ShadowMaterial({ opacity: 0.055 }))
+        mat(new THREE.ShadowMaterial({ opacity: 0.045 }))
       );
       shadowPlane.position.set(0, 0, -2);
       shadowPlane.receiveShadow = true;
       scene.add(shadowPlane);
     }
 
-    // ── Lights ─────────────────────────────────────────────────────────────
-    // Ambient: soft base fill so nothing is pitch-black
-    scene.add(new THREE.AmbientLight(0xffffff, isMobile ? 1.6 : 1.2));
+    // ── Lights (original setup — unchanged for consistent visual appearance) ───
+    scene.add(new THREE.AmbientLight(0xffffff, 1.4));
 
-    // Key: strong top-left cool light + shadow on desktop
-    const key = new THREE.DirectionalLight(0xfff5e4, isMobile ? 2.2 : 2.8);
+    const key = new THREE.DirectionalLight(0xffffff, 2.5);
     key.position.set(-5, 8, 6);
     if (!isMobile) {
       key.castShadow = true;
       key.shadow.mapSize.width  = 1024;
       key.shadow.mapSize.height = 1024;
-      key.shadow.camera.left   = -7; key.shadow.camera.right  = 7;
-      key.shadow.camera.top    =  7; key.shadow.camera.bottom = -7;
-      key.shadow.camera.near   = 0.5; key.shadow.camera.far   = 28;
-      key.shadow.bias = -0.0004;
+      key.shadow.camera.left   = -6; key.shadow.camera.right  = 6;
+      key.shadow.camera.top    =  6; key.shadow.camera.bottom = -6;
+      key.shadow.camera.near   = 0.5; key.shadow.camera.far   = 25;
+      key.shadow.bias = -0.0005;
     }
     scene.add(key);
 
-    // Rim: bottom-right back edge light (separates pipes from background)
-    const rimLight = new THREE.DirectionalLight(0xe8f4fd, 1.8);
-    rimLight.position.set(6, -4, -4);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    rimLight.position.set(5, -5, -3);
     scene.add(rimLight);
 
-    // Fill: soft top-right warm fill
-    const fillLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    fillLight.position.set(5, 6, 3);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    fillLight.position.set(4, 5, 2);
     scene.add(fillLight);
-
-    // Accent: warm golden point light — desktop only (adds specular pop on metal)
-    if (!isMobile) {
-      const accent = new THREE.PointLight(0xffd080, 2.2, 18, 2);
-      accent.position.set(2, 2, 5);
-      scene.add(accent);
-    }
-
-    // ── Entrance animation — single lightweight GSAP tween ─────────────────
-    // Rise-up from below + fade-in. No timeline, no ScrollTrigger.
-    // The canvas is already fading via CSS opacity transition.
-    const entranceFrom = baseY - (isMobile ? 1.2 : 2.0);
-    rootGroup.position.y = entranceFrom;
-    gsap.to(rootGroup.position, {
-      y: baseY,
-      duration: isMobile ? 0.9 : 1.1,
-      ease: 'power3.out',
-      delay: 0.1,
-    });
 
     // ── Scroll parallax — zero ScrollTrigger, pure window.scrollY ──────────
     // Passive scroll listener reads native position every frame.
