@@ -53,11 +53,22 @@ const PPRPipes3D = () => {
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, DPR_CAP));
+
+    // ── Consistent color pipeline on ALL devices ───────────────────────────
+    // Three.js r152+ requires outputColorSpace for physically correct output.
+    // Without it, browsers apply their own gamma correction differently,
+    // making the pipes look different on iOS vs Android vs desktop.
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    // Tone mapping on ALL devices — makes color temperature and exposure
+    // identical everywhere. The only per-device difference is shadow quality.
+    renderer.toneMapping        = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = isMobile ? 1.15 : 1.25; // mobile: slightly less (no clearcoat boost)
+
+    // Shadows: desktop only (shadow map = expensive fill-rate, skipped on mobile)
     if (!isMobile) {
-      renderer.toneMapping        = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.25;
-      renderer.shadowMap.enabled  = true;
-      renderer.shadowMap.type     = THREE.PCFShadowMap;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type    = THREE.PCFSoftShadowMap; // softer edges, same cost
     }
 
     // Fade canvas in via CSS — zero animation overhead
@@ -448,12 +459,14 @@ const PPRPipes3D = () => {
       const zAmt     = isMobile ? 0.8 : 1.6;
       const rotAmt   = isMobile ? 0.28 : 0.45;
 
-      // ── Idle animation (layered on top of scroll offset) ─────────────────
-      // Multi-axis: float + slow twist gives organic alive feel
-      const idleY  = Math.sin(t * 0.55) * 0.06;
-      const idleRX = Math.sin(t * 0.18) * 0.032;
-      const idleRY = Math.cos(t * 0.22) * 0.032;
-      const idleRZ = Math.sin(t * 0.09) * 0.012; // very slow z twist
+      // ── Idle animation — tuned amplitude per device tier ─────────────────
+      // Mobile: smaller amplitude = less perceived shakiness on handheld
+      // Desktop: slightly more expressive, leverages mouse parallax too
+      const idleScale = isMobile ? 0.7 : 1.0;
+      const idleY  = Math.sin(t * 0.55) * 0.06  * idleScale;
+      const idleRX = Math.sin(t * 0.18) * 0.032 * idleScale;
+      const idleRY = Math.cos(t * 0.22) * 0.032 * idleScale;
+      const idleRZ = Math.sin(t * 0.09) * 0.012 * idleScale;
 
       // Apply combined scroll + idle to main group
       mainGroup.position.y = idleY;
