@@ -523,6 +523,7 @@ html.lenis, html.lenis body {
 .cta-section.cta-revealed .cta-subtext  { opacity: 1; transform: none; transition-delay: 0.22s; }
 .cta-section.cta-revealed .cta-buttons  { opacity: 1; transform: none; transition-delay: 0.32s; }
 
+
 @media (prefers-reduced-motion: reduce) {
   .cta-section .cta-eyebrow,
   .cta-section .cta-heading,
@@ -531,5 +532,57 @@ html.lenis, html.lenis body {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+}
+
+/* ─── ReviewsSection — infinite CSS marquee ticker ─────────────────────── */
+/* Two identical card-rows are placed side-by-side (total width = 2×).
+   The animation slides the whole track left by exactly half its width,
+   then loops — perfectly seamless, zero JS state.                         */
+@keyframes reviewsMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.reviews-track {
+  animation: reviewsMarquee 52s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover/touch is handled via JS (animationPlayState toggle).
+   No CSS :hover pause here — it would resume the wrong way on mobile. */
+
+/* Reduced motion: disable ticker, let cards be static */
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track {
+    animation: none !important;
+  }
+}
+
+/* ─── Review card text — thin branded scrollbar ────────────────────────── */
+.review-text-scroll {
+  scrollbar-width: thin;                              /* Firefox */
+  scrollbar-color: rgba(46,125,50,0.25) transparent; /* Firefox */
+}
+.review-text-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+.review-text-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.review-text-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(46,125,50,0.25);
+  border-radius: 99px;
+}
+.review-text-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(46,125,50,0.5);
+}
+/* Touch devices — OS renders its own scroll indicator, hide ours */
+@media (pointer: coarse) {
+  .review-text-scroll {
+    scrollbar-width: none;
+  }
+  .review-text-scroll::-webkit-scrollbar {
+    display: none;
   }
 }

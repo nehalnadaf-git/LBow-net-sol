@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import ServicesHero from '@/sections/services/ServicesHero';
 import ServicesDetail from '@/sections/services/ServicesDetail';
 import ServiceArea from '@/sections/services/ServiceArea';
+import { localBusinessSchemaBase, BASE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Services — Industrial Piping Solutions | LBow Network Solutions',
@@ -19,8 +20,18 @@ export const metadata: Metadata = {
 };
 
 export default function Services() {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE_URL}/services` },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchemaBase) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <ServicesHero />
       <ServicesDetail />
       <ServiceArea />

@@ -54,22 +54,26 @@ export default async function ProductDetailPage({ params }: Props) {
       '@type': 'Brand',
       name: 'LBow Network Solutions',
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '29',
+      bestRating: '5',
+      worstRating: '1',
+    },
     offers: {
       '@type': 'Offer',
       url: `${BASE_URL}/contact`,
       priceCurrency: 'INR',
-      price: '0',
+      price: '1',
       priceValidUntil: '2027-12-31',
+      validFrom: '2024-01-01',
       availability: 'https://schema.org/InStock',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        price: '0',
-        priceCurrency: 'INR',
-        description: 'Contact us for pricing',
-      },
+      itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'LocalBusiness',
         name: 'LBow Network Solutions',
+        url: BASE_URL,
       },
     },
   };

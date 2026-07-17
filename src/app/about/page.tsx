@@ -3,6 +3,7 @@ import AboutHero from '@/sections/about/AboutHero';
 import OurStory from '@/sections/about/OurStory';
 import BusinessDetails from '@/sections/about/BusinessDetails';
 import Categories from '@/sections/about/Categories';
+import { localBusinessSchemaBase, BASE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'About Us — LBow Network Solutions | PPR Pipe Dealers Bangalore',
@@ -20,8 +21,18 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'About Us', item: `${BASE_URL}/about` },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchemaBase) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <AboutHero />
       <OurStory />
       <BusinessDetails />

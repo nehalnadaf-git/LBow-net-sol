@@ -106,9 +106,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="LBow" />
         <meta name="geo.region" content="IN-KA" />
-        <meta name="geo.placename" content="Bangalore" />
-        <meta name="geo.position" content="13.0461059;77.5210481" />
-        <meta name="ICBM" content="13.0461059, 77.5210481" />
+        <meta name="geo.placename" content="Bengaluru" />
+        <meta name="geo.position" content="13.0366151;77.5284327" />
+        <meta name="ICBM" content="13.0366151, 77.5284327" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

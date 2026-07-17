@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import ContactHero from '@/sections/contact/ContactHero';
 import ContactSplit from '@/sections/contact/ContactSplit';
 import MapSection from '@/sections/contact/MapSection';
+import { localBusinessSchemaBase, BASE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Get a Free Quote | LBow Network Solutions Bangalore',
@@ -20,8 +21,18 @@ export const metadata: Metadata = {
 };
 
 export default function Contact() {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: `${BASE_URL}/contact` },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchemaBase) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <ContactHero />
       <Suspense fallback={null}>
         <ContactSplit />

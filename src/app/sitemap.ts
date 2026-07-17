@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const home: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: '2025-06-01',
+      lastModified: '2026-07-17',
       changeFrequency: 'weekly',
       priority: 1.0,
     },
@@ -34,8 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // ── 2. Primary conversion pages ──────────────────────────────────────────
   const coreConversion: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/products`, lastModified: '2025-06-01', changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE_URL}/contact`,  lastModified: '2025-06-01', changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/products`, lastModified: '2026-07-17', changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/contact`,  lastModified: '2026-07-17', changeFrequency: 'monthly', priority: 0.9 },
   ];
 
   // ── 3. Location pages (Tier-1: Bangalore zones = highest local SEO value) ─
@@ -49,15 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // ── 4. Secondary core pages ───────────────────────────────────────────────
   const coreSupporting: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/about`,     lastModified: '2025-06-01', changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/services`,  lastModified: '2025-06-01', changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/about`,     lastModified: '2026-07-17', changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/services`,  lastModified: '2026-07-17', changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/locations`, lastModified: '2025-06-01', changeFrequency: 'monthly', priority: 0.8 },
   ];
 
   // ── 5. Individual product pages ───────────────────────────────────────────
   const productPages: MetadataRoute.Sitemap = products.map((p) => ({
     url: `${BASE_URL}/products/${p.slug}`,
-    lastModified: '2025-06-01',
+    lastModified: '2026-07-17',
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
